@@ -17,11 +17,11 @@ define(function () {
     };
 
     DatasetDropdown.prototype.attachServer = function () {
-        var serverAddress = location.protocol + "//neowms.sci.gsfc.nasa.gov/wms/wms";
+        var serverAddress = "https://nowcoast.noaa.gov/arcgis/services/nowcoast/guidance_model_greatlakes_lsofs_time/MapServer/WMSServer";
 
         var self = this,
             request = new XMLHttpRequest(),
-            url = serverAddress + "?service=WMS&request=GetCapabilities&version=1.3.0";
+            url = serverAddress + "?request=GetCapabilities&service=WMS&version=1.3.0";
 
         request.open("GET", url, true);
         request.onreadystatechange = function () {
@@ -75,4 +75,5 @@ define(function () {
     };
 
     return DatasetDropdown;
+
 });

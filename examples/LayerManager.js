@@ -15,7 +15,7 @@ define(function () {
      * @classdesc Provides a layer manager to interactively control layer visibility for a World Window.
      * @param {WorldWindow} worldWindow The World Window to associated this layer manager with.
      */
-    var LayerManager = function (worldWindow) {
+    var LayerManager = function (worldWindow, worldWindowDuplicated) {
         var thisExplorer = this;
 
         this.wwd = worldWindow;

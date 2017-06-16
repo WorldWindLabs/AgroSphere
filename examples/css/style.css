@@ -1,0 +1,74 @@
+h1,h2,h3,h4, div {
+    color:white !important;
+}
+
+.jumbotron {
+    text-align:center;
+    background:none;
+    color:white;
+    animation: 1.5s ease-out 0s 1 slideInFromLeft;
+}
+
+#canvasOne {
+    width: 100%;
+    height: auto;
+}
+
+body, html {
+    height: 100%;
+}
+
+@font-face {
+    font-family: CrayonCrumble;
+    src: url(../font/CrayonCrumble.ttf);
+}
+
+div {
+    font-family: CrayonCrumble;
+}
+
+.bg {
+    /* The image used */
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../images/bg.jpg");
+
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.focustext {
+    font-family: "Helvetica Neue";
+}
+
+.btn-block, .btn-primary {
+    background-color:royalblue !important;
+}
+
+.btn-block:hover, .btn-primary.hover, .btn-danger:hover {
+    background-color:lightblue !important;
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    animation: jiggle 0.5s infinite linear;
+}
+
+@keyframes jiggle {
+    /* start at 0deg and this scale size.
+       scale size is repeated here to maintain smooth scaling */
+    0% {transform: rotate(0deg) scale(1.15,1.15);}
+    /* midway rotate 2deg right */
+    50% {transform: rotate(2deg) scale(1.15,1.15);}
+    /* end rotate -2deg left */
+    100% {transform: rotate(-2deg) scale(1.15,1.15)}
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
