@@ -186,7 +186,17 @@ requirejs(['../src/WorldWind',
             size: 256
         };
 
-        wwd.addLayer(new WorldWind.WmsLayer(config, null));
+        // new instance of layer created
+        var dataLayer = new WorldWind.WmsLayer(config, null);
+
+        // data layer named
+        dataLayer.displayName = "Data layer";
+
+        //disable layer by default
+        dataLayer.enabled = false;
+
+        // layer added to globe
+        wwd.addLayer(dataLayer);
 
         // Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(wwd);
@@ -194,25 +204,44 @@ requirejs(['../src/WorldWind',
         // Web Map Service information from NASA's Near Earth Observations WMS
         var serviceAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
         // Named layer displaying Average Temperature data
-        var layerName = "popdynamics:popdynamics-global-est-net-migration-grids-1970-2000_1970-1980";
+        var layerName = ["povmap:povmap-global-subnational-infant-mortality-rates_2000", 'povmap:povmap-global-subnational-prevalence-child-malnutrition',
+            'gpw-v4:gpw-v4-population-count_2000', 'gpw-v4:gpw-v4-population-count_2005', 'gpw-v4:gpw-v4-population-count_2010', 'gpw-v4:gpw-v4-population-count_2015',
+            'gpw-v4:gpw-v4-population-count_2020'];
 
         // Called asynchronously to parse and create the WMS layer
         var createLayer = function (xmlDom) {
             // Create a WmsCapabilities object from the XML DOM
             var wms = new WorldWind.WmsCapabilities(xmlDom);
-            // Retrieve a WmsLayerCapabilities object by the desired layer name
-            var wmsLayerCapabilities = wms.getNamedLayer(layerName);
-            // Form a configuration object from the WmsLayerCapability object
-            var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
-            // Modify the configuration objects title property to a more user friendly title
-            wmsConfig.title = "BOOOOOO";
-            // Create the WMS Layer from the configuration object
-            var wmsLayer = new WorldWind.WmsLayer(wmsConfig);
 
-            // Add the layers to World Wind and update the layer manager
-            wwd.addLayer(wmsLayer);
-            layerManager.synchronizeLayerList();
+
+            // using for loop to add multiple layers to layer manager; SUCCESS!!!!
+            for (i = 0; i < layerName.length; i++) {
+                // Retrieve a WmsLayerCapabilities object by the desired layer name
+                var wmsLayerCapabilities = wms.getNamedLayer(layerName[i]);
+
+                // Form a configuration object from the WmsLayerCapability object
+                var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
+                // Modify the configuration objects title property to a more user friendly title
+                wmsConfig.title = "Data layer " + i;
+
+                // Create the WMS Layer from the configuration object
+                var wmsLayer = new WorldWind.WmsLayer(wmsConfig);
+
+                // diable layer by default
+                wmsLayer.enabled = false;
+
+                // Add the layers to World Wind and update the layer manager
+                wwd.addLayer(wmsLayer);
+                layerManager.synchronizeLayerList();
+            }
         };
+
+        // Called if an error occurs during WMS Capabilities document retrieval
+        var logError = function (jqXhr, text, exception) {
+            console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
+        };
+
+        $.get(serviceAddress).done(createLayer).fail(logError);
     });
 
 $(document).ready(function(){
