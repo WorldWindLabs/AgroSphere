@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>NASA WORLD WIND</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <script data-main="BasicExample" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="loading_modal" style="position: fixed; z-index: 1100; width: 1000%; height: 1000%; background: rgba(0,0,0,1)">
+    <img src="../images/space.gif"
+         style="position: fixed; z-index: 1100;     margin-left: 35%;   margin-top: 15%; border-radius:100px;" />
+</div>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>NASA WEB WORLD WIND 2017</h3>
+        </div>
+        <ul class="list-unstyled components">
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"><h3>Layers</h3></a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <div class="list-group" id="layerList"></div>
+                </ul>
+            </li>
+            <li>
+                <a href="#Submenu1" data-toggle="collapse" aria-expanded="false"><h3>View Options</h3></a>
+                <ul class="collapse list-unstyled" id="Submenu1">
+                    <div class="dropdown" id="projectionDropdown"></div>
+                    <div class="input-group" id="searchBox">
+                        <input type="text" class="form-control" placeholder="GoTo" id="searchText"/>
+                        <span class="input-group-btn">
+                        <button id="searchButton" class="btn btn-primary" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                    </div>
+                    <div>
+                    <label for="stars-simulation"><h4>Simulate Stars!</h4></label>
+                    <input id="stars-simulation" type="checkbox"/>
+                    </div>
+                </ul>
+            </li>
+            <li>
+                <a href="#Submenu2" data-toggle="collapse" aria-expanded="false"><h3>Learn Events</h3></a>
+                <ul class="collapse list-unstyled" id="Submenu2">
+                    <button class="btn btn-block togglebutton">WORLD FACTS</button>
+                    <div class="focustext">
+                        <h4>From Compassion.com</h4>
+                        <p>The world population reached 7.3 billion as of July 2015.</p>
+                        <p>Even with the high death rates of those living in poverty, the world population is still expanding at an incredible rate.</p>
+                        <p>The world’s population is growing by 1.18 percent per year, or approximately an additional 83 million people annually.</p>
+                        <p>The global population is expected to reach 8.5 billion in 2030, 9.7 billion in 2050 and 11.2 billion in 2100.</p>
+                        <p>50.4 percent of the world’s population is male and 49.6 percent is female.</p>
+                    </div>
+                    <button class="btn btn-block togglebutton2">MORE FACTS</button>
+                    <div class="focustext2">
+                        <h4>Boom!</h4>
+                    </div>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+        <div class="navbar-header">
+            <button type="button" id="sidebarCollapse" class="btn btn-danger navbar-btn">
+                <i class="glyphicon glyphicon-menu-hamburger"></i>
+            </button>
+        </div>
+        <div id="globe">
+            <canvas id="canvasOne" width="1000" height="1000">
+                Your browser does not support HTML5 Canvas.
+            </canvas>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap Js CDN -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+</body>
+</html>
