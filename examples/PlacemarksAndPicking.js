@@ -7,7 +7,11 @@
  *
  * @version $Id: PlacemarksAndPicking.js 3320 2015-07-15 20:53:05Z dcollins $
  */
+<<<<<<< HEAD
 var mode = 0;
+=======
+var mode
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
 requirejs({paths:{
     "jquery":"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min",
     "jqueryui": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min",
@@ -80,6 +84,10 @@ requirejs({paths:{
                 pickList = wwd.pick(wwd.canvasCoordinates(x, y));
 
             } else if(mode == 1) {
+<<<<<<< HEAD
+=======
+                
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
                 //Create the rectangle
                 var rectRadius = 50,
                 pickPoint = wwd.canvasCoordinates(x, y),
@@ -87,7 +95,11 @@ requirejs({paths:{
                         rectRadius, pickPoint[1] + rectRadius,
                         2 * rectRadius, 2 * rectRadius);
                 pickList = wwd.pickShapesInRegion(pickRectangle);
+<<<<<<< HEAD
                 console.log(pickList.objects);
+=======
+                console.log(pickList);
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
             }
             if (pickList.objects.length > 0) {
                 redrawRequired = true;
@@ -119,12 +131,18 @@ requirejs({paths:{
                                 pickList.objects[p].userObject.position.latitude;
                         var placeLon = 
                                 pickList.objects[p].userObject.position.longitude;
+<<<<<<< HEAD
                         console.log(pickList.objects[p].userObject);
+=======
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
                         if(pickList.objects[p].userObject.type == 'Tsunami') {
                             //Find the tsunami data
                             var dataPoint = findDataPoint(csvData[0], 
                                     placeLat, placeLon);
+<<<<<<< HEAD
                             console.log(dataPoint);
+=======
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
                             //Modify the details section
                             var details = $('#details');
                             var detailsHTML = '<p>Disaster Type: Tsunami</p>'; 

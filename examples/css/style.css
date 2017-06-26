@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 a, div, h1, h2, h3, h4, h5, p {
+=======
+a {
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
     color:white !important;
 }
 
@@ -19,6 +23,7 @@ body, html {
 }
 
 @font-face {
+<<<<<<< HEAD
     font-family: SFDisplay;
     src: url(../font/SFDisplayRegular.ttf);
 }
@@ -28,17 +33,39 @@ div {
 }
 
 
+=======
+    font-family: Lato;
+    src: url(../font/Lato-Regular.ttf);
+}
+
+div {
+    font-family: Lato;
+}
+
+.focustext {
+    font-family: "Helvetica Neue";
+}
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
 input[type=checkbox] {
     transform: scale(1.5);
 }
 
+<<<<<<< HEAD
 
 .btn {
     background-color:#0077be !important;
+=======
+.btn {
+    background-color:royalblue !important;
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
     text-align:center !important;
     color:white !important;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
 .btn:hover{
     background-color:darkblue !important;
     -moz-transform: scale(1.1);
@@ -66,9 +93,12 @@ input[type=checkbox] {
     }
 }
 
+<<<<<<< HEAD
 .focustext {
     padding:20px 20px;
 }
+=======
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
 /* sidebar */
 
 body {
@@ -82,6 +112,7 @@ body {
     background-size: cover;
 }
 
+<<<<<<< HEAD
 
 
 .badge {
@@ -143,3 +174,171 @@ body {
     line-height: 11px;
 }
 
+=======
+p {
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+}
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: black;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+/* moves button to top left */
+.navbar-header {
+    position:absolute;
+    top:0;
+    left:10px;
+}
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 300px;
+    max-width: 300px;
+    background: #000033;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -300px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #1D2951;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #000;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #000033;
+}
+
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\e259';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+}
+a[aria-expanded="true"]::before {
+    content: '\e260';
+}
+
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #1D2951;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: #7386D5;
+}
+
+a.article, a.article:hover {
+    background: #6d7fcc !important;
+    color: #fff !important;
+}
+
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+#content {
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -300px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+
+.ui-slider{
+	z-index: 10;
+}
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441

@@ -502,6 +502,7 @@ setTimeout(function () {
     $("#loading_modal").fadeOut();
 }, 3500);
 
+<<<<<<< HEAD
 
 
 var tabsFn = (function() {
@@ -521,3 +522,5 @@ var tabsFn = (function() {
 
     $(init);
 })();
+=======
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441

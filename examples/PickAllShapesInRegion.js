@@ -122,7 +122,10 @@ requirejs(['../src/WorldWind',
             // Highlight the items picked.
             if (pickList.objects.length > 0) {
                 for (var p = 0; p < pickList.objects.length; p++) {
+<<<<<<< HEAD
                     console.log(pickList.objects[p]);
+=======
+>>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
                     if (pickList.objects[p].isOnTop) {
                         pickList.objects[p].userObject.highlighted = true;
                         highlightedItems.push(pickList.objects[p].userObject);
