@@ -100,6 +100,8 @@ define(function () {
                 continue;
             }
 
+			
+			//DESIGN DECISION: 
             if (layer.displayName === layerName) {
                 layer.enabled = !layer.enabled;
                 if (layer.enabled) {

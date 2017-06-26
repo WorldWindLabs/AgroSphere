@@ -1,4 +1,4 @@
-h1,h2,h3,h4, div {
+a, div, h1, h2, h3, h4, h5, p {
     color:white !important;
 }
 
@@ -19,35 +19,28 @@ body, html {
 }
 
 @font-face {
-    font-family: CrayonCrumble;
-    src: url(../font/CrayonCrumble.ttf);
+    font-family: SFDisplay;
+    src: url(../font/SFDisplayRegular.ttf);
 }
 
 div {
-    font-family: CrayonCrumble;
+    font-family: SFDisplay;
 }
 
-.bg {
-    /* The image used */
-    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../images/bg.jpg");
 
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+input[type=checkbox] {
+    transform: scale(1.5);
 }
 
-.focustext {
-    font-family: "Helvetica Neue";
+
+.btn {
+    background-color:#0077be !important;
+    text-align:center !important;
+    color:white !important;
 }
 
-.btn-block, .btn-primary {
-    background-color:royalblue !important;
-}
-
-.btn-block:hover, .btn-primary.hover, .btn-danger:hover {
-    background-color:lightblue !important;
+.btn:hover{
+    background-color:darkblue !important;
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
@@ -72,3 +65,81 @@ div {
         transform: translateX(0);
     }
 }
+
+.focustext {
+    padding:20px 20px;
+}
+/* sidebar */
+
+body {
+
+    /* The image used */
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../images/bg.jpg");
+
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+.badge {
+    background-color: #777;
+}
+
+.tabs-left {
+    margin-top: 3rem;
+}
+
+.nav-tabs {
+    float: left;
+    border-bottom: 0;
+}
+.nav-tabs li {
+    float: none;
+    margin: 0;
+}
+.nav-tabs li a {
+    margin-right: 0;
+    border: 0;
+    background-color: #313A7D;
+}
+.nav-tabs li a:hover {
+    background-color: #444;
+}
+.nav-tabs .glyphicon {
+    color: #fff;
+}
+.nav-tabs .active .glyphicon {
+    color: #333;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border: 0;
+}
+
+.tab-content {
+    margin-left: 45px;
+}
+.tab-content .tab-pane {
+    display: none;
+    background-color: #313A7D;
+    padding: 1.6rem;
+    overflow-y: auto;
+    border-radius:10px;
+}
+.tab-content .active {
+    display: block;
+}
+
+.list-group {
+    width: 100%;
+}
+.list-group .list-group-item {
+    height: 50px;
+}
+.list-group .list-group-item h4, .list-group .list-group-item span {
+    line-height: 11px;
+}
+

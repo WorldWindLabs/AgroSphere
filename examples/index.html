@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>NASA WORLD WIND</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <script data-main="BasicExample" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+
+    <script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+
+</head>
+<body>
+
+<div id="loading_modal" style="position: fixed; z-index: 1100; width: 100%; height: 100%; background: rgba(0,0,0,1)">
+    <img src="../images/dancingearth.gif"
+         style=" position:absolute; z-index: 1100;  margin-left: 35%; margin-top: 6%; border-radius:100px;" />
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="tabs-left">
+                <ul class="nav nav-tabs">
+                    <li><a href="#a" data-toggle="tab"><span class="glyphicon glyphicon-globe"></span></a></li>
+                    <li><a href="#b" data-toggle="tab"><span class="glyphicon glyphicon-pencil"></span></a></li>
+                    <li><a href="#c" data-toggle="tab"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+                    <li><a href="#d" data-toggle="tab"><span class="glyphicon glyphicon-question-sign"></span></a></li>
+                    <li><a href="#e" data-toggle="tab"><span class="glyphicon glyphicon-wrench"></span></a></li>
+                    <li><a href="#f" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="a"><h4>Available Layers</h4><div class="list-group" id="layerList"></div></div>
+                    <div class="tab-pane" id="b"><h4>Layer Controls</h4></div>
+                    <div class="tab-pane" id="c">
+                        <h4>View Options</h4>
+                        <h5>Projections</h5>
+                        <div class="dropdown" id="projectionDropdown"></div>
+                        <h5>Search</h5>
+                        <div class="input-group" id="searchBox">
+                            <input type="text" class="form-control" placeholder="GoTo" id="searchText"/>
+                            <span class="input-group-btn">
+                        <button id="searchButton" class="btn btn-primary" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                        </div>
+                        <div>
+                            <label for="stars-simulation"><h5>Simulate Stars!</h5></label>
+                            <input id="stars-simulation" type="checkbox"/>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="d">
+                        <h4>Learn Events</h4>
+                        <button class="btn btn-block togglebutton">WORLD FACTS</button>
+                        <div class="focustext">
+                            <h4>From Compassion.com</h4>
+                            <p>The world population reached 7.3 billion as of July 2015.</p>
+                            <p>Even with the high death rates of those living in poverty, the world population is still expanding at an incredible rate.</p>
+                            <p>The world’s population is growing by 1.18 percent per year, or approximately an additional 83 million people annually.</p>
+                            <p>The global population is expected to reach 8.5 billion in 2030, 9.7 billion in 2050 and 11.2 billion in 2100.</p>
+                            <p>50.4 percent of the world’s population is male and 49.6 percent is female.</p>
+                        </div>
+                        <button class="btn btn-block togglebutton2">MORE FACTS</button>
+                        <div class="focustext2">
+                            <h4>Boom!</h4>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="e"><h2>5</h2></div>
+                    <div class="tab-pane" id="f"><h1>boom!!!!</h1></div>
+                </div><!-- /tab-content -->
+            </div><!-- /tabbable -->
+        </div><!-- /col -->
+        <div class="col-md-8" id="globe">
+            <canvas id="canvasOne" width="1000" height="1000">
+                Your browser does not support HTML5 Canvas.
+            </canvas>
+        </div>
+    </div><!-- /row -->
+</div><!-- /container -->
+
+<!--
+<div class="wrapper">
+    <!-- Sidebar Holder -->-->
+<!--
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>NASA Web World Wind - Summer 2017</h3>
+        </div>
+        <div id="myTab"></div>
+    </nav>
+
+    <!-- Page Content Holder -->-->
+<!--
+    <div id="content">
+        <div class="navbar-header">
+            <button type="button" id="sidebarCollapse" class="navbar-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        <div id="globe">
+            <canvas id="canvasOne" width="1000" height="1000">
+                Your browser does not support HTML5 Canvas.
+            </canvas>
+        </div>
+    </div>
+</div>
+-->
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap Js CDN -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
