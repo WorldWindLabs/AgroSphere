@@ -98,7 +98,7 @@ body {
 
 /* z-index added to make draggable appear correctly */
 .tabs-left {
-    margin-top:3rem;
+    margin-top:6rem;
     z-index:1000;
 }
 
@@ -107,6 +107,7 @@ body {
     border-bottom: 0;
     height:600px;
 }
+
 .nav-tabs li {
     float: none;
     margin: 0;
@@ -145,6 +146,7 @@ body {
     overflow-y: auto;
     border-radius:10px;
 }
+
 .tab-content .active {
     display: block;
 }
