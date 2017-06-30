@@ -1,87 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a3d7908-10f0-49f9-af5f-452bb9a679b5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/AnnotationController.js" afterPath="$PROJECT_DIR$/examples/AnnotationController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Annotations.html" afterPath="$PROJECT_DIR$/examples/Annotations.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Annotations.js" afterPath="$PROJECT_DIR$/examples/Annotations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Atmosphere.html" afterPath="$PROJECT_DIR$/examples/Atmosphere.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Atmosphere.js" afterPath="$PROJECT_DIR$/examples/Atmosphere.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/BasicExample.html" afterPath="$PROJECT_DIR$/examples/BasicExample.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/BasicExample.js" afterPath="$PROJECT_DIR$/examples/BasicExample.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/BlueMarbleTimeSeries.html" afterPath="$PROJECT_DIR$/examples/BlueMarbleTimeSeries.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/BlueMarbleTimeSeries.js" afterPath="$PROJECT_DIR$/examples/BlueMarbleTimeSeries.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/CanvasWorker.js" afterPath="$PROJECT_DIR$/examples/CanvasWorker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Collada.html" afterPath="$PROJECT_DIR$/examples/Collada.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Collada.js" afterPath="$PROJECT_DIR$/examples/Collada.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Configuration.html" afterPath="$PROJECT_DIR$/examples/Configuration.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Configuration.js" afterPath="$PROJECT_DIR$/examples/Configuration.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/CoordinateController.css" afterPath="$PROJECT_DIR$/examples/CoordinateController.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/CoordinateController.js" afterPath="$PROJECT_DIR$/examples/CoordinateController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/CustomPlacemark.html" afterPath="$PROJECT_DIR$/examples/CustomPlacemark.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/CustomPlacemark.js" afterPath="$PROJECT_DIR$/examples/CustomPlacemark.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/DeepPIcking.html" afterPath="$PROJECT_DIR$/examples/DeepPIcking.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/DeepPicking.js" afterPath="$PROJECT_DIR$/examples/DeepPicking.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/DigitalGlobe.html" afterPath="$PROJECT_DIR$/examples/DigitalGlobe.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/DigitalGlobe.js" afterPath="$PROJECT_DIR$/examples/DigitalGlobe.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GeoJSON.html" afterPath="$PROJECT_DIR$/examples/GeoJSON.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GeoJSON.js" afterPath="$PROJECT_DIR$/examples/GeoJSON.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GeoTiffExample.html" afterPath="$PROJECT_DIR$/examples/GeoTiffExample.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GeoTiffExample.js" afterPath="$PROJECT_DIR$/examples/GeoTiffExample.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GeographicMeshes.html" afterPath="$PROJECT_DIR$/examples/GeographicMeshes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GeographicMeshes.js" afterPath="$PROJECT_DIR$/examples/GeographicMeshes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GeographicText.html" afterPath="$PROJECT_DIR$/examples/GeographicText.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GeographicText.js" afterPath="$PROJECT_DIR$/examples/GeographicText.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GoToLocation.html" afterPath="$PROJECT_DIR$/examples/GoToLocation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/GoToLocation.js" afterPath="$PROJECT_DIR$/examples/GoToLocation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/KmlExample.html" afterPath="$PROJECT_DIR$/examples/KmlExample.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/KmlExample.js" afterPath="$PROJECT_DIR$/examples/KmlExample.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/LayerManager.js" afterPath="$PROJECT_DIR$/examples/LayerManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Measurements.html" afterPath="$PROJECT_DIR$/examples/Measurements.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Measurements.js" afterPath="$PROJECT_DIR$/examples/Measurements.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/MultiWindow.html" afterPath="$PROJECT_DIR$/examples/MultiWindow.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/MultiWindow.js" afterPath="$PROJECT_DIR$/examples/MultiWindow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/NDVIViewer.html" afterPath="$PROJECT_DIR$/examples/NDVIViewer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/NDVIViewer.js" afterPath="$PROJECT_DIR$/examples/NDVIViewer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/ParseUrlArguments.html" afterPath="$PROJECT_DIR$/examples/ParseUrlArguments.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/ParseUrlArguments.js" afterPath="$PROJECT_DIR$/examples/ParseUrlArguments.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Paths.html" afterPath="$PROJECT_DIR$/examples/Paths.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Paths.js" afterPath="$PROJECT_DIR$/examples/Paths.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/PickAllShapesInRegion.html" afterPath="$PROJECT_DIR$/examples/PickAllShapesInRegion.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/PickAllShapesInRegion.js" afterPath="$PROJECT_DIR$/examples/PickAllShapesInRegion.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/PlacemarksAndPicking.html" afterPath="$PROJECT_DIR$/examples/PlacemarksAndPicking.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/PlacemarksAndPicking.js" afterPath="$PROJECT_DIR$/examples/PlacemarksAndPicking.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Polygons.html" afterPath="$PROJECT_DIR$/examples/Polygons.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Polygons.js" afterPath="$PROJECT_DIR$/examples/Polygons.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/RefreshImagery.html" afterPath="$PROJECT_DIR$/examples/RefreshImagery.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/RefreshImagery.js" afterPath="$PROJECT_DIR$/examples/RefreshImagery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/ScreenImage.html" afterPath="$PROJECT_DIR$/examples/ScreenImage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/ScreenImage.js" afterPath="$PROJECT_DIR$/examples/ScreenImage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/ScreenText.html" afterPath="$PROJECT_DIR$/examples/ScreenText.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/ScreenText.js" afterPath="$PROJECT_DIR$/examples/ScreenText.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Shapefiles.html" afterPath="$PROJECT_DIR$/examples/Shapefiles.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Shapefiles.js" afterPath="$PROJECT_DIR$/examples/Shapefiles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/SimplestExample.html" afterPath="$PROJECT_DIR$/examples/SimplestExample.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/Standalone.html" afterPath="$PROJECT_DIR$/examples/Standalone.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/StarField.html" afterPath="$PROJECT_DIR$/examples/StarField.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/StarField.js" afterPath="$PROJECT_DIR$/examples/StarField.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/SurfaceImage.html" afterPath="$PROJECT_DIR$/examples/SurfaceImage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/SurfaceImage.js" afterPath="$PROJECT_DIR$/examples/SurfaceImage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/SurfaceShapes.html" afterPath="$PROJECT_DIR$/examples/SurfaceShapes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/SurfaceShapes.js" afterPath="$PROJECT_DIR$/examples/SurfaceShapes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/TriangleMeshes.html" afterPath="$PROJECT_DIR$/examples/TriangleMeshes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/TriangleMeshes.js" afterPath="$PROJECT_DIR$/examples/TriangleMeshes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/WMS.html" afterPath="$PROJECT_DIR$/examples/WMS.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/WMS.js" afterPath="$PROJECT_DIR$/examples/WMS.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/WMTS.html" afterPath="$PROJECT_DIR$/examples/WMTS.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/WMTS.js" afterPath="$PROJECT_DIR$/examples/WMTS.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/collada_models/duck/duck.dae" afterPath="$PROJECT_DIR$/examples/collada_models/duck/duck.dae" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/css/style.css" afterPath="$PROJECT_DIR$/examples/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/data/KML_Samples.kml" afterPath="$PROJECT_DIR$/examples/data/KML_Samples.kml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/data/analyticalSurfaces.json" afterPath="$PROJECT_DIR$/examples/data/analyticalSurfaces.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/data/etnaOverlay.kml" afterPath="$PROJECT_DIR$/examples/data/etnaOverlay.kml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/index.html" afterPath="$PROJECT_DIR$/examples/index.html" />
-    </list>
+    <list default="true" id="5a3d7908-10f0-49f9-af5f-452bb9a679b5" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,8 +15,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="75" column="10" lean-forward="false" selection-start-line="75" selection-start-column="1" selection-end-line="75" selection-end-column="10" />
+            <state relative-caret-position="224">
+              <caret line="76" column="10" lean-forward="false" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -105,9 +25,12 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="501" column="25" lean-forward="false" selection-start-line="501" selection-start-column="16" selection-end-line="501" selection-end-column="25" />
-              <folding />
+            <state relative-caret-position="-638">
+              <caret line="444" column="1" lean-forward="false" selection-start-line="444" selection-start-column="1" selection-end-line="444" selection-end-column="1" />
+              <folding>
+                <marker date="1498804924000" expanded="true" signature="291:304" ph="{...}" />
+                <marker date="1498804924000" expanded="true" signature="298:304" ph="{&quot;jquery&quot;: &quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min&quot;...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,8 +38,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/examples/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
+            <state relative-caret-position="54">
+              <caret line="87" column="12" lean-forward="false" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -233,56 +156,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="WebWorldWind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebWorldWind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebWorldWind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebWorldWind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebWorldWind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebWorldWind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebWorldWind" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -440,18 +313,17 @@
       <updated>1497995810064</updated>
       <workItem from="1497995812799" duration="447000" />
       <workItem from="1497998294083" duration="17988000" />
-      <workItem from="1498145095181" duration="80532000" />
+      <workItem from="1498145095181" duration="80797000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98967000" />
+    <option name="totallyTimeSpent" value="99232000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="31" width="1400" height="775" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="31" width="1400" height="775" extended-state="1" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Grunt " active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -711,24 +583,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="75" column="10" lean-forward="false" selection-start-line="75" selection-start-column="1" selection-end-line="75" selection-end-column="10" />
+        <state relative-caret-position="224">
+          <caret line="76" column="10" lean-forward="false" selection-start-line="76" selection-start-column="10" selection-end-line="76" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="501" column="25" lean-forward="false" selection-start-line="501" selection-start-column="16" selection-end-line="501" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="-638">
+          <caret line="444" column="1" lean-forward="false" selection-start-line="444" selection-start-column="1" selection-end-line="444" selection-end-column="1" />
+          <folding>
+            <marker date="1498804924000" expanded="true" signature="291:304" ph="{...}" />
+            <marker date="1498804924000" expanded="true" signature="298:304" ph="{&quot;jquery&quot;: &quot;https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min&quot;...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
+        <state relative-caret-position="54">
+          <caret line="87" column="12" lean-forward="false" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
           <folding>
             <element signature="n#style#0;n#img#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
