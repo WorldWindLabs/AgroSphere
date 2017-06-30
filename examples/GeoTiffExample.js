@@ -26,7 +26,7 @@ requirejs(['../src/WorldWind',
             wwd.addLayer(layers[l].layer);
         }
 
-        var resourcesUrl = "http://worldwindserver.net/webworldwind/data/black_sea_rgb.tif";
+        var resourcesUrl = "./wind/w1.tif";
 
         var geotiffObject = new WorldWind.GeoTiffReader(resourcesUrl);
 
@@ -40,7 +40,6 @@ requirejs(['../src/WorldWind',
             geotiffLayer.addRenderable(surfaceGeoTiff);
             wwd.addLayer(geotiffLayer);
 
-            wwd.goTo(new WorldWind.Position(43.69, 28.54, 55000));
 
             // Create a layer manager for controlling layer visibility.
             var layerManger = new LayerManager(wwd);

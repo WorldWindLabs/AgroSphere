@@ -96,6 +96,7 @@ requirejs(['../src/WorldWind',
         var handlePick = function (o) {
             // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
             // the mouse or tap location.
+            if(mode != 2) {
             var x = o.clientX,
                 y = o.clientY;
 
@@ -121,11 +122,9 @@ requirejs(['../src/WorldWind',
 
             // Highlight the items picked.
             if (pickList.objects.length > 0) {
+                console.log(pickList.objects);
                 for (var p = 0; p < pickList.objects.length; p++) {
-<<<<<<< HEAD
-                    console.log(pickList.objects[p]);
-=======
->>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
+                    
                     if (pickList.objects[p].isOnTop) {
                         pickList.objects[p].userObject.highlighted = true;
                         highlightedItems.push(pickList.objects[p].userObject);
@@ -136,6 +135,7 @@ requirejs(['../src/WorldWind',
             // Update the window if we changed anything.
             if (redrawRequired) {
                 wwd.redraw();
+            }
             }
         };
 

@@ -169,7 +169,7 @@ requirejs(['../src/WorldWind',
         screenText.attributes = textAttributesTwo;
         textLayerTwo.addRenderable(screenText);
 
-        wwd.addLayer(textLayerTwo);
+        //wwd.addLayer(textLayerTwo);
 
         // Define the images we'll use for the placemarks.
         var images = [
@@ -323,6 +323,8 @@ requirejs(['../src/WorldWind',
 //Key Notes: This function generates the HTML first then supplies 
 //functionality
 function generateLayerControl(wwd, wmsLayerCapabilities, layerName, layerNumber) {
+    
+    console.log(wmsLayerCapabilities);
 	//Generate the div tags
 	var layerControlHTML = '<div id="' + layerNumber + '">';
 	
@@ -336,13 +338,21 @@ function generateLayerControl(wwd, wmsLayerCapabilities, layerName, layerNumber)
 	layerControlHTML += generateLegend(wwd, 
 	        wmsLayerCapabilities, layerName, layerNumber);
 	
+	//Spawn the time control
+	
+	//Check if the time can be made
+	
+	/*layerControlHTML += generateTimeControl(wwd, wmsLayerCapabilities, 
+	        layerName, layerNumber);*/
+	
 	//Place the HTML somewhere
 	$('#layerControl').append(layerControlHTML);
 	
 
 	//Add functionality to opacity slider
 	giveOpacitySliderFunctionality(wwd, layerName, layerNumber);
-	console.log(wmsLayerCapabilities);
+	
+	
 }
 
 //Finds the layer based on the name in the wwd
@@ -364,7 +374,6 @@ function getLayerFromName(wwd, layerName) {
 function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
     
     //Check if a legend exists for a given layer this
-    console.log(wmsLayerCapabilities.styles[0].legendUrls[0].url);
     var legendHTML = '<h2> Legend for ' + layerName + '</h2>';
     if(typeof(wmsLayerCapabilities.styles[0].legendUrls[0].url) 
             != 'undefined') {
@@ -458,8 +467,9 @@ function generateTimeControl(wwd, layerName, layerNumber) {
 	var timeHTML = '<h2>Time for ' + layerName +'</h2>';
 	
 	//Create the slider
-	timeHTML += '<div id="time_slider_' + layerNumber + '"></div>';
-	
+	//timeHTML += '<div id="time_slider_' + layerNumber + '"></div>';
+	timeHTML += '<button id="time_left_' + layerNumber + '">Left</button>';
+	timeHTML += '<button id="time_right_' + layerNumber + '">Right</button>';
 	//Create the output
 	timeHTML += '<div id="time_date_' + layerNumber + '">INITIAL DATE</div>';
 	
@@ -469,10 +479,6 @@ function generateTimeControl(wwd, layerName, layerNumber) {
 	
 
 	return timeHTML;
-	
-	//var gibs_url = 'https://map1.vis.earthdata.nasa.gov/wmts-webmerc/wmts.cgi?SERVICE=WorldWeather&request=GetCapabilities';
-    //var esa_url = 'http://services.sentinel-hub.com/v1/wmts/56748ba2-4a88-4854-beea-86f9afc63e35?REQUEST=GetCapabilities&SERVICE=WorldWeather';
-    //var dlr_wmts_url = 'https://tiles.geoservice.dlr.de/service/wmts?SERVICE=WMTS&REQUEST=GetCapabilities';
 }
 	
 $(document).ready(function(){
@@ -502,7 +508,7 @@ setTimeout(function () {
     $("#loading_modal").fadeOut();
 }, 3500);
 
-<<<<<<< HEAD
+
 
 
 var tabsFn = (function() {
@@ -522,5 +528,14 @@ var tabsFn = (function() {
 
     $(init);
 })();
-=======
->>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
+
+$(document).ready(function() {
+    $("nav-tabs").draggable();
+});
+
+
+$(document).ready(function() {
+    $( ".resizable" ).resizable({
+        animate: true
+    });
+} );

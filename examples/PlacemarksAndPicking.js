@@ -7,20 +7,20 @@
  *
  * @version $Id: PlacemarksAndPicking.js 3320 2015-07-15 20:53:05Z dcollins $
  */
-<<<<<<< HEAD
 var mode = 0;
-=======
-var mode
->>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
+var drawMode = 0;
+var initialCoOrds = [];
+var finalPoints = [];
+var stopPoints = [];
 requirejs({paths:{
     "jquery":"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min",
     "jqueryui": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min",
-    "jquery-csv": "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/jquery.csv"
+    "jquery-csv": "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/jquery.csv",
 }
 },['../src/WorldWind',
-        './LayerManager',  './Pin', 'jquery', 'jqueryui', 'jquery-csv', './Pin'],
+        './LayerManager',  './Pin', 'jquery', 'jqueryui', 'jquery-csv'],
     function (ww,
-              LayerManager, Pin) {
+              LayerManager) {
         "use strict";
 
         // Tell World Wind to log only warnings.
@@ -54,7 +54,14 @@ requirejs({paths:{
         //Generate the layers
         generatePlacemarkLayer(wwd, csvData);
         // Create a layer manager for controlling layer visibility.
+        //Set up the polygon handler
+        // Create a layer to hold the polygons.
+        var polygonsLayer = new WorldWind.RenderableLayer();
+        polygonsLayer.displayName = "Polygons";
+        wwd.addLayer(polygonsLayer);
         var layerManger = new LayerManager(wwd);
+
+
 
         // Now set up to handle picking.
 
@@ -62,6 +69,7 @@ requirejs({paths:{
 
         // The common pick-handling function.
         var handlePick = function (o) {
+            if(mode != 2) {
             // The input argument is either an Event or a TapRecognizer. Both have the same properties for determining
             // the mouse or tap location.
             var x = o.clientX,
@@ -84,31 +92,22 @@ requirejs({paths:{
                 pickList = wwd.pick(wwd.canvasCoordinates(x, y));
 
             } else if(mode == 1) {
-<<<<<<< HEAD
-=======
-                
->>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
                 //Create the rectangle
-                var rectRadius = 50,
-                pickPoint = wwd.canvasCoordinates(x, y),
-                pickRectangle = new WorldWind.Rectangle(pickPoint[0] - 
+                var rectRadius = 50;
+                var pickPoint = wwd.canvasCoordinates(x, y);
+                var pickRectangle = new WorldWind.Rectangle(pickPoint[0] - 
                         rectRadius, pickPoint[1] + rectRadius,
                         2 * rectRadius, 2 * rectRadius);
+                console.log(pickRectangle);        
                 pickList = wwd.pickShapesInRegion(pickRectangle);
-<<<<<<< HEAD
                 console.log(pickList.objects);
-=======
-                console.log(pickList);
->>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
             }
             if (pickList.objects.length > 0) {
                 redrawRequired = true;
             }
             // Highlight the items picked by simply setting their highlight flag to true.
             if (pickList.objects.length > 0) {
-                if(mode) {
-                    console.log("Get Rekt");
-                }
+                var dataLook = [];
                 for (var p = 0; p < pickList.objects.length; p++) {
                     pickList.objects[p].userObject.highlighted = true;
 
@@ -126,24 +125,17 @@ requirejs({paths:{
                     if(typeof(pickList.objects[p].userObject.type) != 'undefined'){
                         //It's most likely a placemark
                         //"most likely"
-                        //Grab the co-ordaintes
+                        //Grab the co-ordinates
                         var placeLat = 
                                 pickList.objects[p].userObject.position.latitude;
                         var placeLon = 
                                 pickList.objects[p].userObject.position.longitude;
-<<<<<<< HEAD
                         console.log(pickList.objects[p].userObject);
-=======
->>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
                         if(pickList.objects[p].userObject.type == 'Tsunami') {
                             //Find the tsunami data
                             var dataPoint = findDataPoint(csvData[0], 
                                     placeLat, placeLon);
-<<<<<<< HEAD
-                            console.log(dataPoint);
-=======
->>>>>>> 1ddf03fdf3fc55aaabb76fa533c0bb84e9f4c441
-                            //Modify the details section
+                            //Modify the details secon
                             var details = $('#details');
                             var detailsHTML = '<p>Disaster Type: Tsunami</p>'; 
                             detailsHTML += '<p>Country:' + dataPoint.COUNTRY + 
@@ -164,7 +156,24 @@ requirejs({paths:{
                                     '<p>Volcano Name:' + dataPoint.Name + '</p>';
                             detailsHTML += 
                                     '<p>Year: ' + dataPoint.year + '</p>';
-                            details.html(detailsHTML);                        }
+                            details.html(detailsHTML);                        
+                            
+                            if(mode == 1) {
+                                //Push the data
+                                dataLook.push(dataPoint.year);
+                            }
+                        }
+                    }
+                    //Do some data analysis
+                    if(mode ==1) {
+                        var graph = {
+                            x: dataLook,
+                            type: 'histogram',
+                            marker: {
+                                color: 'rgba(100,250,100,0.7)',
+	                        }
+                        }
+                        Plotly.newPlot('plotArea', [graph]);
                     }
                 }
             }
@@ -173,11 +182,131 @@ requirejs({paths:{
             if (redrawRequired) {
                 wwd.redraw(); // redraw to make the highlighting changes take effect on the screen
             }
+            } else {
+                if(drawMode == 1) {
+                    //Drawing time
+                    //Assuming we have initial-cords, draw the rectangle everytime
+                    //we move
+
+                    if(typeof(polygonsLayer.polygon != 'undefined')) {
+                        polygonsLayer.removeRenderable(polygonsLayer.polygon);
+                    }
+
+                    var boundaries = [];
+                    boundaries[0] = [];
+                    finalPoints = [];
+                    finalPoints.push(o.clientX);
+                    finalPoints.push(o.clientY);
+                    var finalPositions = convert2Dto3D(wwd, finalPoints[0],
+                            finalPoints[1]);
+                    var stepNumbers = 100;
+                    if(finalPositions) {
+                    var i = 0;
+                    var stepSizeLonLon = 
+                            (finalPositions[1] - initialCoOrds[1])/stepNumbers;
+                    for(i = 1; i < stepNumbers; i++) {
+                        //Go from one side to another
+                        boundaries[0].push(new WorldWind.Position(
+                                initialCoOrds[0], 
+                                initialCoOrds[1] + stepSizeLonLon*i, 1e5));
+                    }
+                    var stepSizeLatLat = 
+                            (finalPositions[0] - initialCoOrds[0])/stepNumbers;
+                    for(i = 1; i < stepNumbers; i++) {
+                        boundaries[0].push(new WorldWind.Position(
+                                initialCoOrds[0] + stepSizeLatLat*i,
+                                finalPositions[1], 1e5));
+                    }
+                    
+                    for(i = 1; i < stepNumbers; i++) {
+                        boundaries[0].push(new WorldWind.Position(
+                                finalPositions[0], 
+                                finalPositions[1] - stepSizeLonLon*i, 1e5))
+                    }
+                    console.log(boundaries);
+                    var polygon = new WorldWind.Polygon(boundaries, null);
+                    polygon.altitudeMode = WorldWind.ABSOLUTE;
+                    polygon.extrude = true; // extrude the polygon edges to the ground
+                    polygon.textureCoordinates = [
+                    [new WorldWind.Vec2(0, 0), new WorldWind.Vec2(1, 0), new WorldWind.Vec2(1, 1), new WorldWind.Vec2(0, 1)]
+                            ];
+                    var polygonAttributes = new WorldWind.ShapeAttributes(null);
+                    polygonAttributes.drawInterior = true;
+                    polygonAttributes.drawOutline = true;
+                    polygonAttributes.outlineColor = WorldWind.Color.BLUE;
+                    polygonAttributes.interiorColor = new WorldWind.Color(0, 1, 1, 0.5);
+                    polygonAttributes.drawVerticals = polygon.extrude;
+                    polygonAttributes.applyLighting = true;
+                    polygon.attributes = polygonAttributes;
+            
+                    // Create and assign the polygon's highlight attributes.
+                    var highlightAttributes = new WorldWind.ShapeAttributes(polygonAttributes);
+                    highlightAttributes.outlineColor = WorldWind.Color.RED;
+                    highlightAttributes.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
+                    polygon.highlightAttributes = highlightAttributes;
+            
+                    // Add the polygon to the layer and the layer to the World Window's layer list.
+                    polygon.highlighted = true;
+                    polygonsLayer.addRenderable(polygon);
+                    
+                    //Quick way to kill the previous polygon
+                    polygonsLayer.polygon = polygon;
+                    console.log(polygon);
+                    }
+                }
+            }
         };
 
         // Listen for mouse moves and highlight the placemarks that the cursor rolls over.
         wwd.addEventListener("mousemove", handlePick);
+        
+        //Function handles a click draw event
+        //What we need is the mode. This is the mode and the co-ordinates
+        var mouseDraw = function (mode, x, y){
+            if(mode == 1) {
+                //We have a simple rectangle
+            } else if(mode == 2) {
+                //Store the co-ordintes
+                if(drawMode == 0) {
+                    //We are now in draw mode
+                    initialCoOrds = convert2Dto3D(wwd, x, y);
+                    drawMode = 1;
+                } else {
+                    stopPoints = [];
+                    stopPoints.push(x);
+                    stopPoints.push(y);
+                }
+            }
+        }
 
+        //Wrapper function
+        var mouseDrawWrapper = function(o) {
+            var x = o.clientX;
+            var y = o.clientY;
+            mouseDraw(mode, x, y);
+        }
+        
+        wwd.addEventListener("mousedown", mouseDrawWrapper);
+        //Handles the segment
+        var handleReleaseWrapper = function (o) {
+            var x = o.clientX;
+            var y = o.clientY;
+            
+            handleRelease(mode, x, y);
+        }
+        
+        var handleRelease = function (mode, x, y) {
+            if((mode == 2) && (drawMode == 1)){
+                //Check if the x and y are the same as the final
+                console.log(x, stopPoints[0], y, stopPoints[1]);
+                if((x == stopPoints[0]) && (y == stopPoints[1])) {
+                    //It is done
+                    drawMode = 0;
+                    initialCoOrds = [];
+                }
+            }
+        }
+        wwd.addEventListener("mouseup", handleReleaseWrapper);
         // Listen for taps on mobile devices and highlight the placemarks that the user taps.
         var tapRecognizer = new WorldWind.TapRecognizer(wwd, handlePick);
         var sliderDiv = $("#slider");
@@ -200,7 +329,8 @@ requirejs({paths:{
 		    var i = 0;
 		    while(i < wwd.layers.length) {
 		        if(wwd.layers[i].displayName.includes('Tsunami') 
-		                || wwd.layers[i].displayName.includes('Volcano')) {
+		                || wwd.layers[i].displayName.includes('Volcano') ||
+		                wwd.layers[i].displayName.includes('Precip')) {
 		            wwd.removeLayer(wwd.layers[i]);
 		            i--;
 		        }
@@ -212,7 +342,8 @@ requirejs({paths:{
 		    
 		    //Simply recreate the layer again
 		    generatePlacemarkLayer(wwd, newData);
-		})
+		});
+		console.log(wwd);
     });
     
 //Given the lon and lat, find the data
@@ -228,7 +359,7 @@ function findDataPoint(dataSet, lat, lon) {
 //Loads all the data
 //Essentially all the data is loaded before hand if it is part of the CSV lit
 function loadCSVData(){
-    var csvList = ['tsevent.csv', 'volcano.csv'];
+    var csvList = ['tsevent.csv', 'volcano.csv', 'test2.csv'];
     //Find the file
     var csvString = "";
 
@@ -280,7 +411,7 @@ function filterCSVData(csvData, parameterType, thresholdValue) {
 //This assumes the CSV data is loaded in order too obviously
 function generatePlacemarkLayer(wwd, csvData){
     //Data type list
-    var dataTypes = ['Tsunami', 'Volcano'];
+    var dataTypes = ['Tsunami', 'Volcano', 'Precip'];
     
     //Common features
     var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/",
@@ -367,7 +498,18 @@ function setMode(modeNumber) {
     mode = modeNumber;
 }
 
-//Handles a point pick
-function pointPick(wwd, x, y) {
-    
+//Converts 2d to 3d
+function convert2Dto3D(wwd, x, y) {
+     var pickList = wwd.pickTerrain(wwd.canvasCoordinates(x, y));
+     
+     var threeDetails = [];
+     console.log(pickList.objects[0]);
+     if(typeof(pickList.objects[0]) != 'undefined') {
+         threeDetails.push(pickList.objects[0].position.latitude);
+         threeDetails.push(pickList.objects[0].position.longitude);
+         threeDetails.push(pickList.objects[0].position.altitude);
+         return threeDetails;
+     } else {
+         return false;
+     }
 }
