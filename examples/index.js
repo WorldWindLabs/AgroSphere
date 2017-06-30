@@ -945,7 +945,6 @@ function filterOutBlanks(inputData) {
 function plotScatter(titleName, inputData, htmlID) {
     //Filter the input data, we may get some blanks
     var filteredData = filterOutBlanks(inputData);
-    console.log(filteredData);
     //Blank years gone, create the x-y axis
     var xValues = [];
     var yValues = [];
