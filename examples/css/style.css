@@ -344,35 +344,29 @@ li{
 
 @media (max-width: 767px) {
     .fullscreen-bg {
-        background: url('../video/videoframe.png') center center / cover no-repeat;
+        background: url('../../video/videoframe.png') center center / cover no-repeat;
     }
 
     .fullscreen-bg__video {
         display: none;
     }
+}
 
 /* audio effects */
-audio:hover, audio:focus, audio:active
+.audio:hover, .audio:focus, .audio:active
 {
     -webkit-box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
     -moz-box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
     box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
-    -webkit-transform: scale(1.02);
-    -moz-transform: scale(1.02);
-    transform: scale(1.02);
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    transform: scale(1.03);
 }
-audio
+.audio
 {
     width:100%;
     -webkit-transition:all 0.5s linear;
     -moz-transition:all 0.5s linear;
     -o-transition:all 0.5s linear;
     transition:all 0.5s linear;
-    -moz-box-shadow: 2px 2px 4px 0px darkblue;
-    -webkit-box-shadow:  2px 2px 4px 0px darkblue;
-    box-shadow: 2px 2px 4px 0px #006773;
-    -moz-border-radius:7px 7px 7px 7px ;
-    -webkit-border-radius:7px 7px 7px 7px ;
-    border-radius:7px 7px 7px 7px ;
-}
 }
