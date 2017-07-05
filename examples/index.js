@@ -501,7 +501,7 @@ $(document).ready(function(){
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 5000);
+}, 7000);
 
 
 /*
@@ -1087,6 +1087,7 @@ var tabsFn = (function() {
 
 $(document).ready(function() {
     $( ".resizable" ).resizable({
+        handles: 'e, w',
         animate: true,
         maxHeight: 800,
         maxWidth: 1380,
