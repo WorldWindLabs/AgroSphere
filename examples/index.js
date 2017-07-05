@@ -232,7 +232,7 @@ requirejs({paths:{
                             var dataPoint = 
                                     findDataPoint(csvData[0], placeLat, placeLon);
                             var details = $('#c');
-                            var detailsHTML = '<p>Country Details</p>';
+                            var detailsHTML = '<h4>Country Details</h4>';
                             detailsHTML += 
                                     '<p>Country: ' + dataPoint.country + '</p>';
                             detailsHTML += 
@@ -240,7 +240,7 @@ requirejs({paths:{
                             //We have the country code, we can do whatever we want
                             //like 
                             //Perhaps show everything? lol
-                            detailsHTML +=  '<p>Agriculture Data</p><div id="graphPoint"></div>';
+                            detailsHTML +=  '<h4>Agriculture Data</h4><div id="graphPoint"></div>';
                             
                             details.html(detailsHTML); 
                             

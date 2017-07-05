@@ -353,7 +353,7 @@ li{
 }
 
 /* audio effects */
-.audio:hover, .audio:focus, .audio:active
+audio:hover, audio:focus, audio:active
 {
     -webkit-box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
     -moz-box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
@@ -362,7 +362,7 @@ li{
     -moz-transform: scale(1.03);
     transform: scale(1.03);
 }
-.audio
+audio
 {
     width:100%;
     -webkit-transition:all 0.5s linear;
