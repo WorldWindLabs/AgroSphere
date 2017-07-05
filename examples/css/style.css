@@ -41,38 +41,20 @@ input[type=checkbox] {
 
 
 .btn {
-    background-color:#0145BB !important;
+    background-color:#323232 !important;
     text-align:center !important;
     color:white !important;
+    font-size:12px !important;
 }
 
 .btn:hover{
     background-color:#16006D !important;
-    -moz-transform: scale(1.0.5);
-    -webkit-transform: scale(1.0.5);
-    transform: scale(1.05);
-    animation: jiggle 1.3s infinite linear;
+    -moz-transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+    font-size:15px !important;
 }
 
-
-@keyframes jiggle {
-    /* start at 0deg and this scale size.
-       scale size is repeated here to maintain smooth scaling */
-    0% {transform: rotate(0deg) scale(1.15,1.15);}
-    /* midway rotate 2deg right */
-    50% {transform: rotate(2deg) scale(1.15,1.15);}
-    /* end rotate -2deg left */
-    100% {transform: rotate(-2deg) scale(1.15,1.15)}
-}
-
-@keyframes slideInFromLeft {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
 
 .focustext {
     padding:20px 20px;
@@ -163,7 +145,7 @@ body {
 
 /* selected layers */
 .list-group .active {
-    border:3px solid lightgreen !important;
+    border:2px solid lightgreen !important;
 }
 
 .list-group .list-group-item h4, .list-group .list-group-item span {
