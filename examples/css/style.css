@@ -352,3 +352,10 @@ audio
     -o-transition:all 0.5s linear;
     transition:all 0.5s linear;
 }
+
+#tutorial {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index:99;
+}
