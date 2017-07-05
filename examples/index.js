@@ -1107,7 +1107,7 @@ $(document).ready(function() {
             });
         });
         $(document).ready(function() {
-            $(".toggle7").click(function () {
+            $(".toggle8").click(function () {
                 $(".tab8").toggle();
                 $(".tab1").hide();
                 $(".tab2").hide();
