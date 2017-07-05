@@ -232,7 +232,7 @@ requirejs({paths:{
                             var dataPoint = 
                                     findDataPoint(csvData[0], placeLat, placeLon);
                             var details = $('#c');
-                            var detailsHTML = '<p>Country Details</p>';
+                            var detailsHTML = '<h4>Country Details</h4>';
                             detailsHTML += 
                                     '<p>Country: ' + dataPoint.country + '</p>';
                             detailsHTML += 
@@ -343,7 +343,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
     //console.log(wmsLayerCapabilities.styles[0].legendUrls[0].url);
-    var legendHTML = '<h2> Legend for ' + layerName + '</h2>';
+    var legendHTML = '<h5> Legend for ' + layerName + '</h5>';
     if(typeof(wmsLayerCapabilities.styles[0].legendUrls[0].url)
         != 'undefined') {
         //Create the legend tag
@@ -361,7 +361,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 //Given the HTML of the layerControl, generate the appropiate layer
 function generateOpacityControl(wwd, layerName, layerNumber) {
     //Create the general box
-    var opacityHTML = '<h2>Opacity for ' + layerName +'</h2>';
+    var opacityHTML = '<h5>Opacity for ' + layerName +'</h5>';
 
     //Create the slider
     opacityHTML += '<div id="opacity_slider_' + layerNumber + '"></div>';
@@ -433,7 +433,7 @@ function giveOpacitySliderFunctionality(wwd, layerName, layerNumber) {
 
 function generateTimeControl(wwd, layerName, layerNumber) {
     //Create the general box
-    var timeHTML = '<h2>Time for ' + layerName +'</h2>';
+    var timeHTML = '<h5>Time for ' + layerName +'</h5>';
 
     //Create the output
     timeHTML += '<div id="time_date_' + layerNumber + '">INITIAL DATE</div>';
@@ -502,55 +502,6 @@ $(document).ready(function(){
 setTimeout(function () {
     $("#loading_modal").fadeOut();
 }, 7000);
-
-
-/*
-YUI().use(
-    'aui-tabview',
-    function(Y) {
-        new Y.TabView(
-            {
-                children: [
-                    {
-                        content: '<div class="list-group" id="layerList"></div>',
-                        label: 'Layers'
-                    },
-                    {
-                        content: '<h5>Soon to be implemented</h5>',
-                        label: 'Layer Controls'
-                    },
-                    {
-                        content: '<div class="dropdown" id="projectionDropdown">' +
-                        '</div><div class="input-group" id="searchBox"><input type="text"' +
-                        'class="form-control" placeholder="GoTo" id="searchText"/><span ' +
-                        'class="input-group-btn"><button id="searchButton" class="btn btn-primary"' +
-                        'type="button"><span class="glyphicon glyphicon-search"></span></button></span>' +
-                        '</div><div><label for="stars-simulation"><h4>Simulate Stars!</h4></label>' +
-                        '<input id="stars-simulation" type="checkbox"/></div>',
-                        label: 'View Options'
-                    },
-                    {
-                        content: '<button class="btn btn-block togglebutton">WORLD FACTS</button>' +
-                        '<div class="focustext"><h4>From Compassion.com</h4><p>The world population ' +
-                        'reached 7.3 billion as of July 2015.</p><p>Even with the high death rates of' +
-                        ' those living in poverty, the world population is still expanding at an incredible rate.</p>' +
-                        '<p>The world’s population is growing by 1.18 percent per year, or approximately an' +
-                        'additional 83 million people annually.</p>' +
-                        '<p>The global population is expected to reach 8.5 billion in 2030, 9.7 billion in 2050' +
-                        'and 11.2 billion in 2100.</p><p>50.4 percent of the world’s population is male' +
-                        'and 49.6 percent is female.</p></div><button class="btn btn-block' +
-                        'togglebutton2">MORE FACTS</button><div class="focustext2"><h4>Boom!</h4></div>',
-                        label: 'Learn Events'
-                    }
-                ],
-                srcNode: '#myTab',
-                type: 'pills'
-            }
-        ).render();
-    }
-);
-
-*/
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
@@ -995,7 +946,7 @@ function generateAgriCultureButtons(inputData, codeName) {
         var i = 0;
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
-            agriHTML += '<h4>' + dataPoint.dataValues[i].typeName; + '</h4>';
+            agriHTML += '<p>' + dataPoint.dataValues[i].typeName; + '</p>';
             agriHTML += '<div id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
                     + ' id="plotButton' + i + '">Plot Graph</button>';
