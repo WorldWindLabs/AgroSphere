@@ -1010,10 +1010,11 @@ var tabsFn = (function() {
 $(document).ready(function() {
     $( ".resizable" ).resizable({
         animate: true,
-        maxHeight: 250,
+        maxHeight: 800,
         maxWidth: 1380,
         minHeight: 150,
-        minWidth: 280
+        minWidth: 280,
+        ghost: true
     });
 } );
     
