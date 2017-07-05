@@ -27,10 +27,10 @@ requirejs({paths:{
         var wwd = new WorldWind.WorldWindow("canvasOne");
 
         var layers = [
-            {layer: new WorldWind.BMNGLayer(), enabled: true},
+            {layer: new WorldWind.BMNGLayer(), enabled: false},
             {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},
             {layer: new WorldWind.BingAerialLayer(null), enabled: false},
-            {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},
+            {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: true},
             {layer: new WorldWind.BingRoadsLayer(null), enabled: false},
             {layer: new WorldWind.CompassLayer(), enabled: false},
             {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
@@ -141,7 +141,7 @@ requirejs({paths:{
         //Load the WMTS layers
         loadWMTSLayers(wwd, layerManager);
         loadWMSLayers(wwd, layerManager);
-        loadKMLLayers(wwd, layerManager);
+        //loadKMLLayers(wwd, layerManager);
         //Load the WMS layers
         
         //Load the data
@@ -158,7 +158,7 @@ requirejs({paths:{
         
         //$.get(serviceAddress2).done(createLayer).fail(logError);
         //Automatically zoom into NASA Ames
-        wwd.goTo(new WorldWind.Position(37.4089, -122.0644));
+        wwd.goTo(new WorldWind.Position(37.4089, -122.0644, 500));
 
         var starFieldLayer = new WorldWind.StarFieldLayer();
         var atmosphereLayer = new WorldWind.AtmosphereLayer();
@@ -232,7 +232,7 @@ requirejs({paths:{
                             var dataPoint = 
                                     findDataPoint(csvData[0], placeLat, placeLon);
                             var details = $('#c');
-                            var detailsHTML = '<h4>Country Details</h4>';
+                            var detailsHTML = '<p>Country Details</p>';
                             detailsHTML += 
                                     '<p>Country: ' + dataPoint.country + '</p>';
                             detailsHTML += 
@@ -240,12 +240,18 @@ requirejs({paths:{
                             //We have the country code, we can do whatever we want
                             //like 
                             //Perhaps show everything? lol
-                            detailsHTML +=  '<h4>Agriculture Data</h4><div id="graphPoint"></div>';
+                            //What we need to do is generate a button which plots the graph
                             
-                            details.html(detailsHTML); 
+                            //Generate the agri buttons
                             
-                            //Load the data
-                            getAgriData(agriData, dataPoint.code3);
+                            
+                            //Get the agriculture data
+                            detailsHTML += generateAgriCultureButtons(agriData, dataPoint.code3);
+                            details.html(detailsHTML);
+                            
+                            //Give functionality for the buttons generated
+                            giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
+                            
                             
                             
                         }
@@ -940,9 +946,69 @@ function filterOutBlanks(inputData) {
     return tempArray;
 }
 
+//Gives the buttons funcitonality
+function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
+    //Do a search for all the buttons based on the data
+    var dataPoint = findDataPointCountry(inputData, codeName, 3);
+    if(dataPoint != 0) {
+        var i = 0;
+        for(i = 0; i < dataPoint.dataValues.length; i++) {
+            var buttonHTML = $('#plotButton' + i).button();
+            buttonHTML.click(function(event) {
+                //Generate the plot based on things
+                var buttonID = this.id;
+                var buttonNumber = buttonID.slice('plotButton'.length);
+                var plotID = 'graphPoint' + buttonNumber;
+                
+                //Do we already have a plot?
+                var plotHTML = $('#' + plotID);
+                console.log($(plotHTML).html());
+                if(plotHTML.html() == '') {
+                    plotScatter(dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName, 
+                            dataPoint.dataValues[buttonNumber].timeValues, 
+                            plotID, 0);
+                } else {
+                    plotHTML.html('');
+                }
+            })
+            var addButtonHTML = $('#addButton' + i).button();
+            addButtonHTML.click(function(event) {
+                var buttonID = this.id;
+                var buttonNumber = buttonID.slice('addButton'.length);
+                //Add to the graph
+                plotScatter(dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName,
+                        dataPoint.dataValues[buttonNumber].timeValues,
+                        'multiGraph', 1);
+            })
+        }
+    }
+    
+}
+
+
+//Generates the button
+function generateAgriCultureButtons(inputData, codeName) {
+    //Based on the input data, generate the buttons/html
+    var agriHTML = '';
+    var dataPoint = findDataPointCountry(inputData, codeName,3);
+    if(dataPoint != 0) {
+        var i = 0;
+        for(i = 0; i < dataPoint.dataValues.length; i++) {
+            //Generate the HTML
+            agriHTML += '<h4>' + dataPoint.dataValues[i].typeName; + '</h4>';
+            agriHTML += '<div id="graphPoint' + i + '"></div>';
+            agriHTML += '<button'
+                    + ' id="plotButton' + i + '">Plot Graph</button>';
+            agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
+            agriHTML += '<br>';
+        }
+    }
+    return agriHTML;
+}
+
 //Creates a scatter plot based on the input data
 //It is assumed that the input data is an array of timeValue pair
-function plotScatter(titleName, inputData, htmlID) {
+function plotScatter(countryCode, titleName, inputData, htmlID, mode) {
     //Filter the input data, we may get some blanks
     var filteredData = filterOutBlanks(inputData);
     //Blank years gone, create the x-y axis
@@ -956,34 +1022,46 @@ function plotScatter(titleName, inputData, htmlID) {
     
     //Create the plotly graph
     var graph = {
+        name: titleName + ' ' + countryCode,
         x: xValues,
         y: yValues,
         mode: 'markers',
         type: 'scatter'
     };
     
-    var layout = {
-        title: titleName
-    };
-    Plotly.newPlot(htmlID, [graph], layout);
-}
-
-//Loads the agriculture data of a particular country
-function getAgriData(entireData, desiredDataCode) {
-    //Find the data we are looking for
-    var dataPoint = findDataPointCountry(entireData, desiredDataCode,3);
-    
-    //Once we have the data we want plot the entirity of it???
-    var i = 0;
-    var agriHTML = '';
-    if(dataPoint != 0) {
-        //We have the agriculture data of the country
-        //Generate a sample plot
-        console.log(dataPoint);
-        plotScatter(dataPoint.dataValues[0].typeName, dataPoint.dataValues[0].timeValues, 'graphPoint');
+    var xAxis = {
+        title: 'Year'
     }
     
+    var yAxis = {
+        title: 'Unitless'
+    }
+    
+    var layout = {
+        xaxis: xAxis,
+        yaxis: yAxis,
+        title: 'Legend vs year'
+    };
+    
+    //Check if the htmlID is empty
+    var plotHTML = $('#'+ htmlID);
+    console.log(plotHTML.html());
+    if((mode == 0) || ((mode == 1) && plotHTML.html() == '')){
+        //Indicates new plot
+        Plotly.newPlot(htmlID, [graph], layout);
+    } else if(mode == 1) {
+        Plotly.addTraces(htmlID, [graph]);
+        var dimensions = {
+            width: '80%'
+        }
+        var multiGraphUpdate = {
+            title: 'Multiple Graphs'
+        }
+        Plotly.update(htmlID, multiGraphUpdate);
+        Plotly.relayout(htmlID, dimensions);
+    }
 }
+
 var tabsFn = (function() {
 
     function init() {
