@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a3d7908-10f0-49f9-af5f-452bb9a679b5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/css/style.css" afterPath="$PROJECT_DIR$/examples/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/index.html" afterPath="$PROJECT_DIR$/examples/index.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,14 +37,14 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/examples/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="57" column="66" lean-forward="false" selection-start-line="57" selection-start-column="66" selection-end-line="57" selection-end-column="66" />
+            <state relative-caret-position="490">
+              <caret line="68" column="21" lean-forward="false" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
               <folding>
                 <element signature="n#style#0;n#img#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="e#2030#2037#1" expanded="true" />
-                <element signature="e#3370#3377#1" expanded="true" />
-                <marker date="1499372180000" expanded="false" signature="1183:1267" ph="..." />
-                <marker date="1499372180000" expanded="false" signature="7714:7765" ph="..." />
+                <element signature="e#4623#4630#1" expanded="true" />
+                <marker date="1499372670000" expanded="false" signature="1183:1267" ph="..." />
+                <marker date="1499372670000" expanded="false" signature="8967:9018" ph="..." />
               </folding>
             </state>
           </provider>
@@ -334,12 +332,12 @@
       <workItem from="1497995812799" duration="447000" />
       <workItem from="1497998294083" duration="17988000" />
       <workItem from="1498145095181" duration="83135000" />
-      <workItem from="1499268589719" duration="16964000" />
+      <workItem from="1499268589719" duration="17333000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118534000" />
+    <option name="totallyTimeSpent" value="118903000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="31" width="1400" height="775" extended-state="0" />
@@ -399,9 +397,9 @@
           <folding>
             <element signature="n#style#0;n#img#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#2030#2037#1" expanded="true" />
-            <element signature="e#3370#3377#1" expanded="true" />
-            <marker date="1499372180000" expanded="false" signature="1183:1267" ph="..." />
-            <marker date="1499372180000" expanded="false" signature="7714:7765" ph="..." />
+            <element signature="e#4623#4630#1" expanded="true" />
+            <marker date="1499372670000" expanded="false" signature="1183:1267" ph="..." />
+            <marker date="1499372670000" expanded="false" signature="8967:9018" ph="..." />
           </folding>
         </state>
       </provider>
@@ -557,14 +555,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="57" column="66" lean-forward="false" selection-start-line="57" selection-start-column="66" selection-end-line="57" selection-end-column="66" />
+        <state relative-caret-position="490">
+          <caret line="68" column="21" lean-forward="false" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
           <folding>
             <element signature="n#style#0;n#img#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#2030#2037#1" expanded="true" />
-            <element signature="e#3370#3377#1" expanded="true" />
-            <marker date="1499372180000" expanded="false" signature="1183:1267" ph="..." />
-            <marker date="1499372180000" expanded="false" signature="7714:7765" ph="..." />
+            <element signature="e#4623#4630#1" expanded="true" />
+            <marker date="1499372670000" expanded="false" signature="1183:1267" ph="..." />
+            <marker date="1499372670000" expanded="false" signature="8967:9018" ph="..." />
           </folding>
         </state>
       </provider>
