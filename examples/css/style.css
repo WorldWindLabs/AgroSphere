@@ -412,6 +412,6 @@ audio
     background-color: #eee; /* Add a hover effect to all links, except for headers */
 }
 
-#myModal p, #myModal2 p, #myModal h4, #myModal2 h4 {
+#myModal p, #myModal2 p, #myModal h4, #myModal2 h4,#myModal a, #myModal2 a {
     color:black !important;
 }
