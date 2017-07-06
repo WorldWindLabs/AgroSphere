@@ -940,22 +940,42 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 //Generates the button
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
-    var agriHTML = '';
+    var agriHTML = '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for layers.." title="Type in a layer">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
+        agriHTML += '<ul id="myUL">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
-            agriHTML += '<p>' + dataPoint.dataValues[i].typeName; + '</p>';
+            agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '<li>';
             agriHTML += '<div id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
                     + ' id="plotButton' + i + '">Plot Graph</button>';
             agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
             agriHTML += '<br>';
         }
+        agriHTML += '</ul>';
     }
     return agriHTML;
 }
+
+//Search layer data
+function myFunction() {
+            var input, filter, ul, li, a, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+
+                }
+            }
+        }
 
 //Creates a scatter plot based on the input data
 //It is assumed that the input data is an array of timeValue pair
