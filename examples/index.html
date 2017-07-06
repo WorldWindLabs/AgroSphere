@@ -39,10 +39,7 @@
     </video>
 </div>
 
-<img id="nasalogo" src="../images/nasalogo.png">
-
-<!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-info btn-lg" id="tutorial" data-toggle="modal" data-target="#myModal">Tutorials</button>
+<img id="nasalogo" src="../images/nasa.gif" data-toggle="modal" data-target="#myModal">
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -52,7 +49,32 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Application Information</h4>
+            </div>
+            <div class="modal-body">
+                <img id="info-img" src="../images/ames.jpg">
+                <p>This app is created by the 2017 NASA Web World Wind Intern Team at NASA Ames Research Center, which consists of...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" id="tutorial" data-toggle="modal" data-target="#myModal2">Tutorials</button>
+
+<!-- Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tutorial!</h4>
             </div>
             <div class="modal-body">
                 <p>Some text in the modal.</p>
@@ -74,7 +96,6 @@
             <li><a href="#d" data-toggle="tab" data-tooltip="More Data Details" class="toggle4"><span class="glyphicon glyphicon-plus-sign"></span></a></li>
             <li><a href="#e" data-toggle="tab" data-tooltip="View Options" class="toggle5"><span class="glyphicon glyphicon-eye-open"></span></a></li>
             <li><a href="#f" data-toggle="tab" data-tooltip="Learn Events" class="toggle6"><span class="glyphicon glyphicon-book"></span></a></li>
-            <li><a href="#g" data-toggle="tab" data-tooltip="Application Information" class="toggle7"><span class="glyphicon glyphicon-info-sign"></span></a></li>
         </ul>
         <div class="tab-content show">
             <div class="tab1 tab-pane" id="a"><h4>Available Layers</h4><div class="list-group" id="layerList"></div></div>
@@ -127,10 +148,6 @@
                 <div class="focustext2">
                     <h4>boo</h4>
                 </div>
-            </div>
-            <div class="tab7 tab-pane" id="g">
-                <img id="info-img" src="../images/ames.jpg">
-                <p>This app is created by the 2017 NASA Web World Wind Intern Team at NASA Ames Research Center, which consists of...</p>
             </div>
         </div><!-- /tab-content -->
     </div><!-- /tabbable -->

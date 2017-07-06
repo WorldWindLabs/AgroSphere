@@ -1067,10 +1067,7 @@ $(document).ready(function() {
         ghost: true
     });
 } );
-    
-    
-    //alert("HOWDY!! HAW HAW HAW");
-    
+
     //sidebar toggle
         $(document).ready(function() {
             $(".toggle2").click(function () {
@@ -1080,7 +1077,6 @@ $(document).ready(function() {
                 $(".tab4").hide();
                 $(".tab5").hide();
                 $(".tab6").hide();
-                $(".tab7").hide();
             });
         });
 
@@ -1092,7 +1088,6 @@ $(document).ready(function() {
                 $(".tab4").hide();
                 $(".tab5").hide();
                 $(".tab6").hide();
-                $(".tab7").hide();
             });
         });
         $(document).ready(function() {
@@ -1103,7 +1098,6 @@ $(document).ready(function() {
                 $(".tab3").hide();
                 $(".tab5").hide();
                 $(".tab6").hide();
-                $(".tab7").hide();
             });
         });
         $(document).ready(function() {
@@ -1114,7 +1108,6 @@ $(document).ready(function() {
                 $(".tab3").hide();
                 $(".tab4").hide();
                 $(".tab6").hide();
-                $(".tab7").hide();
             });
         });
         $(document).ready(function() {
@@ -1125,24 +1118,11 @@ $(document).ready(function() {
                 $(".tab3").hide();
                 $(".tab4").hide();
                 $(".tab5").hide();
-                $(".tab7").hide();
             });
         });
         $(document).ready(function() {
             $(".toggle1").click(function () {
                 $(".tab1").toggle();
-                $(".tab2").hide();
-                $(".tab3").hide();
-                $(".tab4").hide();
-                $(".tab5").hide();
-                $(".tab6").hide();
-                $(".tab7").hide();
-            });
-        });
-        $(document).ready(function() {
-            $(".toggle7").click(function () {
-                $(".tab7").toggle();
-                $(".tab1").hide();
                 $(".tab2").hide();
                 $(".tab3").hide();
                 $(".tab4").hide();
