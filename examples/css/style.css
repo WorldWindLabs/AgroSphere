@@ -1,5 +1,9 @@
-a, div, h1, h2, h3, h4, h5, p {
+div, h1, h2, h3, h4, h5, p {
     color:white !important;
+}
+
+a {
+    color:black !important;
 }
 
 #info-img {
@@ -383,6 +387,7 @@ audio
     padding: 12px 20px 12px 40px; /* Add some padding */
     border: 1px solid #ddd; /* Add a grey border */
     margin-bottom: 12px; /* Add some space below the input */
+    color:black !important;
 }
 
 #myUL {

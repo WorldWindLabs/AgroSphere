@@ -947,7 +947,7 @@ function generateAgriCultureButtons(inputData, codeName) {
         agriHTML += '<ul id="myUL">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
-            agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '<li>';
+            agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '</li>';
             agriHTML += '<div id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
                     + ' id="plotButton' + i + '">Plot Graph</button>';
