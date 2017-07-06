@@ -404,5 +404,4 @@ audio
 
 #myUL li a:hover:not(.header) {
     background-color: #eee; /* Add a hover effect to all links, except for headers */
->>>>>>> acb8a8f657a7a7c372d1d0ee9be303b05db30298
 }
