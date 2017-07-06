@@ -1061,7 +1061,6 @@ $(document).ready(function() {
                 $(".tab5").hide();
                 $(".tab6").hide();
                 $(".tab7").hide();
-                $(".tab8").hide();
             });
         });
 
@@ -1074,7 +1073,6 @@ $(document).ready(function() {
                 $(".tab5").hide();
                 $(".tab6").hide();
                 $(".tab7").hide();
-                $(".tab8").hide();
             });
         });
         $(document).ready(function() {
@@ -1086,7 +1084,6 @@ $(document).ready(function() {
                 $(".tab5").hide();
                 $(".tab6").hide();
                 $(".tab7").hide();
-                $(".tab8").hide();
             });
         });
         $(document).ready(function() {
@@ -1098,7 +1095,6 @@ $(document).ready(function() {
                 $(".tab4").hide();
                 $(".tab6").hide();
                 $(".tab7").hide();
-                $(".tab8").hide();
             });
         });
         $(document).ready(function() {
@@ -1110,7 +1106,6 @@ $(document).ready(function() {
                 $(".tab4").hide();
                 $(".tab5").hide();
                 $(".tab7").hide();
-                $(".tab8").hide();
             });
         });
         $(document).ready(function() {
@@ -1122,7 +1117,6 @@ $(document).ready(function() {
                 $(".tab5").hide();
                 $(".tab6").hide();
                 $(".tab7").hide();
-                $(".tab8").hide();
             });
         });
         $(document).ready(function() {
@@ -1134,19 +1128,6 @@ $(document).ready(function() {
                 $(".tab4").hide();
                 $(".tab5").hide();
                 $(".tab6").hide();
-                $(".tab8").hide();
-            });
-        });
-        $(document).ready(function() {
-            $(".toggle8").click(function () {
-                $(".tab8").toggle();
-                $(".tab1").hide();
-                $(".tab2").hide();
-                $(".tab3").hide();
-                $(".tab4").hide();
-                $(".tab5").hide();
-                $(".tab6").hide();
-                $(".tab7").hide();
             });
         });
 });

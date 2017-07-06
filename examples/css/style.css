@@ -359,3 +359,11 @@ audio
     right: 20px;
     z-index:99;
 }
+
+#nasalogo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index:99;
+    width:55px;
+}
