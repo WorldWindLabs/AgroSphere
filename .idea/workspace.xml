@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5a3d7908-10f0-49f9-af5f-452bb9a679b5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/index.html" afterPath="$PROJECT_DIR$/examples/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/css/style.css" afterPath="$PROJECT_DIR$/examples/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/index.js" afterPath="$PROJECT_DIR$/examples/index.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,11 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/examples/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="423" column="0" lean-forward="false" selection-start-line="423" selection-start-column="0" selection-end-line="423" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="29" lean-forward="false" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -30,13 +29,13 @@
         <entry file="file://$PROJECT_DIR$/examples/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="217">
-              <caret line="451" column="4" lean-forward="false" selection-start-line="451" selection-start-column="4" selection-end-line="451" selection-end-column="4" />
+              <caret line="1161" column="37" lean-forward="false" selection-start-line="1161" selection-start-column="37" selection-end-line="1161" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
@@ -57,7 +56,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fade</find>
       <find>dialog</find>
       <find>timeout</find>
       <find>600</find>
@@ -73,7 +71,6 @@
       <find>boots</find>
       <find>img-</find>
       <find>multi</find>
-      <find>search for layers</find>
       <find>h4</find>
       <find>h5</find>
       <find>country det</find>
@@ -87,6 +84,8 @@
       <find>year sele</find>
       <find>tab</find>
       <find>agrihtml</find>
+      <find>search for layers</find>
+      <find>&lt;a</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -110,9 +109,9 @@
         <option value="$PROJECT_DIR$/examples/css/jquery-ui.css" />
         <option value="$PROJECT_DIR$/examples/Pins.js" />
         <option value="$PROJECT_DIR$/examples/LayerManager.js" />
-        <option value="$PROJECT_DIR$/examples/css/style.css" />
-        <option value="$PROJECT_DIR$/examples/index.js" />
         <option value="$PROJECT_DIR$/examples/index.html" />
+        <option value="$PROJECT_DIR$/examples/index.js" />
+        <option value="$PROJECT_DIR$/examples/css/style.css" />
       </list>
     </option>
   </component>
@@ -333,7 +332,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125990000" />
+    <option name="totallyTimeSpent" value="126597000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="31" width="1400" height="775" extended-state="0" />
@@ -636,15 +635,7 @@
     <entry file="file://$PROJECT_DIR$/examples/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
-          <caret line="451" column="4" lean-forward="false" selection-start-line="451" selection-start-column="4" selection-end-line="451" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="543">
-          <caret line="423" column="0" lean-forward="false" selection-start-line="423" selection-start-column="0" selection-end-line="423" selection-end-column="0" />
+          <caret line="1161" column="37" lean-forward="false" selection-start-line="1161" selection-start-column="37" selection-end-line="1161" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -653,6 +644,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="61" column="111" lean-forward="false" selection-start-line="61" selection-start-column="111" selection-end-line="61" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="29" lean-forward="false" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
           <folding />
         </state>
       </provider>
