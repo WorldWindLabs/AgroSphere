@@ -199,7 +199,9 @@ requirejs({paths:{
                             //Give functionality for the buttons generated
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
                             
-                            
+                            //Pop the tab out
+							var popTab = $('#c');
+							popTab.show();
                             
                         }
                     }
