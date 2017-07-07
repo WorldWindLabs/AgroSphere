@@ -14,14 +14,16 @@ requirejs({paths:{
     "jquery":"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min",
     "jqueryui": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min",
     "jquery-csv": "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/jquery.csv",
+    "simple-stats": "https://unpkg.com/simple-statistics@4.1.0/dist/simple-statistics.min"
 }
 },['../src/WorldWind',
         './LayerManager', '../src/formats/kml/KmlFile',
-        '../src/formats/kml/controls/KmlTreeVisibility', './Pin', 'jquery', 'jqueryui', 'jquery-csv'],
+        '../src/formats/kml/controls/KmlTreeVisibility', './Pin', 'jquery', 'jqueryui', 'jquery-csv',
+        'simple-stats'],
     function (ww,
               LayerManager, KmlFile, KmlTreeVisibility) {
         "use strict";
-
+        
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 
         var wwd = new WorldWind.WorldWindow("canvasOne");
@@ -41,71 +43,6 @@ requirejs({paths:{
             layers[l].layer.enabled = layers[l].enabled;
             wwd.addLayer(layers[l].layer);
         }
-
-        var cities = [
-            {
-                'name': "NASA Ames Research Center",
-                'state': "California",
-                'elevation': 0,
-                'latitude': 37.4089,
-                'longitude': -122.0644
-            }
-        ];
-
-        var textAttributes = new WorldWind.TextAttributes(null),
-            textLayer = new WorldWind.RenderableLayer("NASA Ames Geographic Text");
-
-        // Set up the common text attributes.
-        textAttributes.color = WorldWind.Color.WHITE;
-
-        // Set the depth test property such that the terrain does not obscure the text.
-        textAttributes.depthTest = false;
-
-        // For each city, create a text shape.
-        for (var i = 0; i < cities.length; i++) {
-            var city = cities[i],
-                cityPosition = new WorldWind.Position(city.latitude, city.longitude, city.elevation);
-
-            var text = new WorldWind.GeographicText(cityPosition, city.name + ",\n" + city.state);
-
-            // Set the text attributes for this shape.
-            text.attributes = textAttributes;
-
-            // Add the text to the layer.
-            textLayer.addRenderable(text);
-        }
-
-        // Add the text layer to the World Window's layer list.
-        //wwd.addLayer(textLayer);
-
-        // Create a surface image using a static image.
-        var surfaceImage1 = new WorldWind.SurfaceImage(new WorldWind.Sector(30, 50, -160, -130),
-            "../images/ames.jpg");
-
-        // Add the surface images to a layer and the layer to the World Window's layer list.
-        var surfaceImageLayer = new WorldWind.RenderableLayer();
-        surfaceImageLayer.displayName = "Surface Image - NASA Ames";
-        surfaceImageLayer.addRenderable(surfaceImage1);
-
-        //wwd.addLayer(surfaceImageLayer);
-
-
-        var screenText,
-            textAttributesTwo = new WorldWind.TextAttributes(null),
-            textLayerTwo = new WorldWind.RenderableLayer("Screen Text");
-
-        // Set up the common text attributes.
-        textAttributesTwo.color = WorldWind.Color.WHITE;
-
-        screenText = new WorldWind.ScreenText(
-            new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.5, WorldWind.OFFSET_FRACTION, 1), "Web World Wind - SUMMER 2017");
-        textAttributesTwo = new WorldWind.TextAttributes(textAttributesTwo);
-
-        textAttributesTwo.offset = new WorldWind.Offset(WorldWind.OFFSET_FRACTION, 0.5, WorldWind.OFFSET_FRACTION, 1);
-        screenText.attributes = textAttributesTwo;
-        textLayerTwo.addRenderable(screenText);
-
-        //wwd.addLayer(textLayerTwo);
 
         var config = {
             service: "http://sedac.ciesin.columbia.edu/geoserver/wms",
@@ -141,24 +78,35 @@ requirejs({paths:{
         //Load the WMTS layers
         loadWMTSLayers(wwd, layerManager);
         loadWMSLayers(wwd, layerManager);
-        //loadKMLLayers(wwd, layerManager);
-        //Load the WMS layers
+        console.time('First');
+        var geoJSONData = loadGEOJsonData();
+        var sampleGradCount = 
+                '[{"gradient": 0.5, "code3": "AFG"}, {"gradient": 7, "code3": "AUS"},' +
+                '{"gradient": -2, "code3": "JPN"}, {"gradient": -1, "code3": "USA"},' +
+                '{"gradient": -3, "code3": "JOR"}, {"gradient": 1, "code3": "NZL"},' +
+                '{"gradient": 0, "code3": "ESP"}]';
+        //var tempData = JSON.parse(sampleGradCount);
+        //var countryLayers = colourizeCountries(tempData, geoJSONData);
+        //wwd.addLayer(countryLayers);
         
-        //Load the data
+        
+        //Load the country data
         var csvData = loadCSVData();
         var csvData2 = loadCSVDataArray();
-        var entireArrayData = [];
-        //entireArrayData.push(convertArrayToDataSet(csvData2[0]));
         var agriData = convertArrayToDataSet(csvData2[0]);
         //console.log(csvData);        
         //Generate the layers
         generatePlacemarkLayer(wwd, csvData);
 
-
+        //Generate the remove button
+        generateRemoveButton();
         
-        //$.get(serviceAddress2).done(createLayer).fail(logError);
+        //Generate regression comparison and the provide functionality
+        generateGeoComparisonButton(agriData);
+        giveGeoComaprisonFunctionality(agriData, geoJSONData, wwd, layerManager);
+        
         //Automatically zoom into NASA Ames
-        wwd.goTo(new WorldWind.Position(37.4089, -122.0644, 500));
+        wwd.goTo(new WorldWind.Position(37.4089, -122.0644, 10e5));
 
         var starFieldLayer = new WorldWind.StarFieldLayer();
         var atmosphereLayer = new WorldWind.AtmosphereLayer();
@@ -194,7 +142,6 @@ requirejs({paths:{
                 wwd.redraw();
             }
         }
-
 
         //Handle a pick (only placemarks shall be)
         var highlightedItems = []
@@ -232,7 +179,7 @@ requirejs({paths:{
                             var dataPoint = 
                                     findDataPoint(csvData[0], placeLat, placeLon);
                             var details = $('#c');
-                            var detailsHTML = '<h4>Country Details</h4>';
+                            var detailsHTML = '<p>Country Details</p>';
                             detailsHTML += 
                                     '<p>Country: ' + dataPoint.country + '</p>';
                             detailsHTML += 
@@ -285,7 +232,8 @@ requirejs({paths:{
 
         // Listen for taps on mobile devices.
         var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
-
+        
+        console.timeEnd('First');
         
 //Given a layerName and its layernumber, generate a layer control block
 
@@ -343,7 +291,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
     //console.log(wmsLayerCapabilities.styles[0].legendUrls[0].url);
-    var legendHTML = '<h5> Legend for ' + layerName + '</h5>';
+    var legendHTML = '<h2> Legend for ' + layerName + '</h2>';
     if(typeof(wmsLayerCapabilities.styles[0].legendUrls[0].url)
         != 'undefined') {
         //Create the legend tag
@@ -361,7 +309,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 //Given the HTML of the layerControl, generate the appropiate layer
 function generateOpacityControl(wwd, layerName, layerNumber) {
     //Create the general box
-    var opacityHTML = '<h5>Opacity for ' + layerName +'</h5>';
+    var opacityHTML = '<h2>Opacity for ' + layerName +'</h2>';
 
     //Create the slider
     opacityHTML += '<div id="opacity_slider_' + layerNumber + '"></div>';
@@ -433,7 +381,7 @@ function giveOpacitySliderFunctionality(wwd, layerName, layerNumber) {
 
 function generateTimeControl(wwd, layerName, layerNumber) {
     //Create the general box
-    var timeHTML = '<h5>Time for ' + layerName +'</h5>';
+    var timeHTML = '<h2>Time for ' + layerName +'</h2>';
 
     //Create the output
     timeHTML += '<div id="time_date_' + layerNumber + '">INITIAL DATE</div>';
@@ -501,7 +449,56 @@ $(document).ready(function(){
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 7000);
+}, 5000);
+
+
+/*
+YUI().use(
+    'aui-tabview',
+    function(Y) {
+        new Y.TabView(
+            {
+                children: [
+                    {
+                        content: '<div class="list-group" id="layerList"></div>',
+                        label: 'Layers'
+                    },
+                    {
+                        content: '<h5>Soon to be implemented</h5>',
+                        label: 'Layer Controls'
+                    },
+                    {
+                        content: '<div class="dropdown" id="projectionDropdown">' +
+                        '</div><div class="input-group" id="searchBox"><input type="text"' +
+                        'class="form-control" placeholder="GoTo" id="searchText"/><span ' +
+                        'class="input-group-btn"><button id="searchButton" class="btn btn-primary"' +
+                        'type="button"><span class="glyphicon glyphicon-search"></span></button></span>' +
+                        '</div><div><label for="stars-simulation"><h4>Simulate Stars!</h4></label>' +
+                        '<input id="stars-simulation" type="checkbox"/></div>',
+                        label: 'View Options'
+                    },
+                    {
+                        content: '<button class="btn btn-block togglebutton">WORLD FACTS</button>' +
+                        '<div class="focustext"><h4>From Compassion.com</h4><p>The world population ' +
+                        'reached 7.3 billion as of July 2015.</p><p>Even with the high death rates of' +
+                        ' those living in poverty, the world population is still expanding at an incredible rate.</p>' +
+                        '<p>The world’s population is growing by 1.18 percent per year, or approximately an' +
+                        'additional 83 million people annually.</p>' +
+                        '<p>The global population is expected to reach 8.5 billion in 2030, 9.7 billion in 2050' +
+                        'and 11.2 billion in 2100.</p><p>50.4 percent of the world’s population is male' +
+                        'and 49.6 percent is female.</p></div><button class="btn btn-block' +
+                        'togglebutton2">MORE FACTS</button><div class="focustext2"><h4>Boom!</h4></div>',
+                        label: 'Learn Events'
+                    }
+                ],
+                srcNode: '#myTab',
+                type: 'pills'
+            }
+        ).render();
+    }
+);
+
+*/
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
@@ -522,7 +519,7 @@ function generatePlacemarkLayer(wwd, csvData){
         placemark,
         placemarkAttributes = new WorldWind.PlacemarkAttributes(null),
         highlightAttributes;
-    placemarkAttributes.imageScale = 4;
+    placemarkAttributes.imageScale = 1;
     placemarkAttributes.imageOffset = new WorldWind.Offset(
         WorldWind.OFFSET_FRACTION, 0.3,
         WorldWind.OFFSET_FRACTION, 0.0);
@@ -563,10 +560,7 @@ function generatePlacemarkLayer(wwd, csvData){
             }
             
             
-            placemark.label = labelString + ' ' + i.toString() + "\n"
-            + "Lat " + placemark.position.latitude.toPrecision(4).toString() 
-            + "\n" + "Lon " 
-            + placemark.position.longitude.toPrecision(5).toString();
+            placemark.label = labelString;
             placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 
             // Create the placemark attributes for this placemark. Note that 
@@ -591,11 +585,15 @@ function generatePlacemarkLayer(wwd, csvData){
             //the highlight representation.
             highlightAttributes = new 
                     WorldWind.PlacemarkAttributes(placemarkAttributes);
-            highlightAttributes.imageScale = 8;
+            highlightAttributes.imageScale = 4;
             placemark.highlightAttributes = highlightAttributes;
 
             //Attach the type to it
             placemark.type = dataTypes[i];
+            
+            //Make it so the labels are visible from 10e6
+            placemark.eyeDistanceScalingLabelThreshold = 10e6;
+            placemark.eyeDistanceScalingThreshold = 5e6;
 
             // Add the placemark to the layer.
             placemarkLayer.addRenderable(placemark);            
@@ -799,6 +797,7 @@ function loadWMTSLayers(wwd, layerManager) {
     var createWMTSLayer = function (xmlDom) {
         // Create a WmsCapabilities object from the XML DOM
         var wms = new WorldWind.WmsCapabilities(xmlDom);
+        var i = 0;
         // using for loop to add multiple layers to layer manager; SUCCESS!!!!
         for (i = 0; i < layerName.length; i++) {
             // Retrieve a WmsLayerCapabilities object by the desired layer name
@@ -842,6 +841,36 @@ function loadKMLLayers(wwd, layerManager) {
     });
 }
 
+//The link is hardcoded
+function loadGEOJsonData() {
+    //Load GEOJSON
+    var data;
+    $.ajax({
+        dataType: 'json',
+        async: false,
+        url: './geo/data/countries.geojson',
+        success: function(file_content) {
+            data = file_content;
+            console.log(data);
+        },
+        fail: function() {
+            console.log('fail');
+        }
+    });
+    
+    //Change the ISO name to code3
+    var i = 0;
+    for(i = 0; i < data.features.length; i++) {
+        data.features[i].properties.code3 = 
+                data.features[i].properties.ISO_A3;
+        delete data.features[i].properties.ISO_A3;
+        data.features[i].properties.name =
+                data.features[i].properties.ADMIN;
+        delete data.features[i].properties.ADMIN;
+    }
+    return data;
+}
+
 function loadWMSLayers(wwd, layerManager) {
     var serviceWMSAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
     var layerName = ["povmap:povmap-global-subnational-infant-mortality-rates_2000", 'povmap:povmap-global-subnational-prevalence-child-malnutrition',
@@ -852,6 +881,7 @@ function loadWMSLayers(wwd, layerManager) {
         // Create a WmsCapabilities object from the XML DOM
         var wms = new WorldWind.WmsCapabilities(xmlDom);
         // using for loop to add multiple layers to layer manager; SUCCESS!!!!
+        var i = 0;
         for (i = 0; i < layerName.length; i++) {
             // Retrieve a WmsLayerCapabilities object by the desired layer name
             var wmsLayerCapabilities = wms.getNamedLayer(layerName[i]);
@@ -897,6 +927,93 @@ function filterOutBlanks(inputData) {
     return tempArray;
 }
 
+//Applies functionality for the buttons
+function giveGeoComaprisonFunctionality(agriData, geoJSONData, wwd, layerManager) {
+    //Generate the slider first
+    var sliderHTML = $('#geoSlider');
+    sliderHTML.slider({
+        value: 1980,
+        min: 1960,
+        max: 2010,
+        step:1
+    });
+    
+    sliderHTML.on('slide', function(event, ui) {
+        //Capture the year div
+        var sliderValueDiv = $('#geoSlideValue');
+        sliderValueDiv.html('Year Select: ' + ui.value);
+    })
+    
+    //Search through the buttons
+    var count = 4;
+    var i = 0;
+    for(i = 0; i < count; i++) {
+        var buttonHTML = $('#geoCompType' + i);
+        buttonHTML.button();
+        buttonHTML.click(function(event) {
+            //Find the year based on the slider value
+            var sliderValue = $('#geoSlider').slider("value");
+            
+            var buttonNumber = this.id.slice('geoCompType'.length);
+            
+            //Do some data stuff, go through the agridata based on the button
+            //number for every country
+            var countryData = [];
+            var j = 0;
+            var k = 0;
+            for(j = 0; j < agriData.length; j++) {
+                console.log(agriData[j], buttonNumber);
+                for(k = 0; k < 
+                        agriData[j].dataValues[buttonNumber].timeValues.length; 
+                        k++) {
+                    //Basically find if the year exist
+                    if(agriData[j].dataValues[buttonNumber].timeValues[k].year 
+                            == sliderValue) {
+                        //Push the country and value pair
+                        var tempObject = 
+                                {value: agriData[j].dataValues[buttonNumber].timeValues[k].value,
+                                code3: agriData[j].code3};
+                        countryData.push(tempObject);
+                        break;
+                    }
+                }
+            }
+            
+            //Got all the data, colour it
+            countryData = filterOutBlanks(countryData);
+            var countryLayer = colourizeCountries(countryData, geoJSONData);
+            //Check if the country layer exist
+            var l = 0;
+            for(l = 0; l < wwd.layers.length; l++) {
+                if(wwd.layers[l].displayName == 'Countries') {
+                    wwd.removeLayer(wwd.layers[l]);
+                }
+            }
+            
+            wwd.addLayer(countryLayer);
+            layerManager.synchronizeLayerList();
+        });
+    }
+}
+
+//Generates the html for geo location comparison
+//Assumes the agriData is from agri.csv
+function generateGeoComparisonButton(agriData) {
+    var count = 4;
+    var i = 0;
+    var compairsonHTML = '';
+    for(i = 0; i < count; i++) {
+        var buttonTempName = agriData[0].dataValues[i].typeName;
+        compairsonHTML += '<button id="geoCompType' + i + 
+                '">Generate Geo Comparison for' + buttonTempName + '</button><br>';
+    }
+    
+    //Also implement the slider
+    compairsonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
+    var dropArea = $('#f');
+    dropArea.html(compairsonHTML);
+}
+
 //Gives the buttons funcitonality
 function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
     //Do a search for all the buttons based on the data
@@ -913,7 +1030,7 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
                 
                 //Do we already have a plot?
                 var plotHTML = $('#' + plotID);
-                console.log($(plotHTML).html());
+                
                 if(plotHTML.html() == '') {
                     plotScatter(dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName, 
                             dataPoint.dataValues[buttonNumber].timeValues, 
@@ -930,51 +1047,175 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
                 plotScatter(dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName,
                         dataPoint.dataValues[buttonNumber].timeValues,
                         'multiGraph', 1);
+                getRegressionFunctionPlot(
+                        dataPoint.dataValues[buttonNumber].timeValues, 
+                        'multiGraph',dataPoint.code3, 
+                        dataPoint.dataValues[buttonNumber].typeName);
             })
         }
     }
     
 }
 
+//Based on z-score get a colour
+//Green means above mean, red means below, alpha is 1 by default
+function getColour(zScore) {
+    var configuration = {};
+    configuration.attributes = new WorldWind.ShapeAttributes(null);
+    
+    //Could use exponential decay function or something
+    var red = 0;
+    var green = 0;
+    
+    
+    if(zScore < 0) {
+        red = 1;
+        green = Math.exp(zScore);
+    } else if(zScore == 0) {
+        red = 1;
+        green = 1;
+    } else if(zScore > 0) {
+        green = 1;
+        red = Math.exp(-1*zScore);
+    }
+    console.log(red, green, zScore);
+    configuration.attributes.interiorColor = 
+            new WorldWind.Color(red, green, 0, 1);
+    configuration.attributes.outlineColor = 
+            new WorldWind.Color(0.5 * red, 0.5 * green, 0, 1);
+    return configuration;
+}
 
-//Generates the button
+//Given a set of gradients and country pairs, colourize the countries
+//Also needs the GEOJSON file to be accessed
+function colourizeCountries(valueCountryPair, geoJSONData) {
+    //Isolate the gradients
+    var i = 0;
+    var values = [];
+    for(i = 0; i < valueCountryPair.length; i++) {
+        values.push(valueCountryPair[i].value);
+    }
+    //Find mean, and sd
+    console.log(values);
+    var mean = ss.mean(values);
+    var sd = ss.standardDeviation(values);
+    
+    //Loop through and determine the colour based on zscore
+    var countryLayers = new WorldWind.RenderableLayer('Countries');
+    var zScore;
+    for(i = 0; i < valueCountryPair.length; i++) {
+        zScore = ss.zScore(valueCountryPair[i].value, mean, sd);
+        //Get the colour
+        var countryConfiguration;
+        countryConfiguration = getColour(zScore);
+        
+        //Fire up the rendering
+        var j = 0;
+        for(j = 0; j < geoJSONData.features.length; j++) {
+            if(geoJSONData.features[j].properties.code3 == valueCountryPair[i].code3) {
+                var countryString = JSON.stringify(geoJSONData.features[j]);
+                console.log(geoJSONData.features[j]);
+                var tempCallBack = function() {
+                    return countryConfiguration;
+                }
+                var countryStringJSON = new WorldWind.GeoJSONParser(countryString);
+                countryStringJSON.load(null, tempCallBack, countryLayers);
+            }
+        }
+    }
+    
+    //Returns a renderable layer
+    return countryLayers;
+}
+
+
+//Helps out with the regression function, given an array of time-values pairs,
+//convert them to x-y pairs
+function getXYPairs(incomingData) {
+    var xyPairs = [];
+    var i = 0;
+    for(i = 0; i < incomingData.length; i++) {
+        xyPairs.push([parseFloat(incomingData[i].year), 
+                parseFloat(incomingData[i].value)]);
+    }
+    
+    return xyPairs;
+}
+
+//Given a set of data, finds the regression function
+function getRegressionFunctionPlot(incomingData, htmlID, countryCode, 
+        titleName) {
+    var regressionFunction;
+    
+    //Filter out the data
+    var tempDataArray = filterOutBlanks(incomingData);
+    incomingData = tempDataArray;
+    
+    //Get the xy pairs
+    var xyPairs = getXYPairs(incomingData);
+    
+    //Perform a linear regression
+    var regressionFunction = ss.linearRegression(xyPairs);
+    console.log(xyPairs, regressionFunction);
+    //Retrieve the new y-values
+    var regressionFunctionLine = ss.linearRegressionLine(regressionFunction);
+    
+    var i = 0;
+    var newYValues = [];
+    for(i = 0; i < incomingData.length; i++) {
+        newYValues.push(regressionFunctionLine(incomingData[i].year));
+    }
+    console.log(newYValues);
+    
+    //Format it it can be used by plotScatter function
+    var inputData = [];
+    var tempData;
+    for(i = 0; i < incomingData.length; i++) {
+        tempData = {};
+        tempData.year = incomingData[i].year;
+        tempData.value = newYValues[i];
+        inputData.push(tempData);
+    }
+    
+    //Assuming the previous title was made, simply add regression to the add
+    titleName += ' regression';
+    
+    //Plot it
+    plotScatter(countryCode, titleName, inputData, htmlID, 1);
+}
+
+//Generate the button to remove the multigraphs
+function generateRemoveButton() {
+    //Generate the remove button for the graphs
+    var removeHTML = '<button id="removeButton">Remove all graphs</button>';
+    $('#g').append(removeHTML);
+    var removeButton = $('#removeButton');
+    removeButton.button();
+    removeButton.on('click', function() {
+        //Just purge the multigraph
+        Plotly.purge('multiGraph');
+    });
+}
+
+//Generates the button for agriculture. Changes on update
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
-    var agriHTML = '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for layers.." title="Type in a layer">';
+    var agriHTML = '';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
-        agriHTML += '<ul id="myUL">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
-            agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '</li>';
+            agriHTML += '<h4>' + dataPoint.dataValues[i].typeName; + '</h4>';
             agriHTML += '<div id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
                     + ' id="plotButton' + i + '">Plot Graph</button>';
             agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
             agriHTML += '<br>';
         }
-        agriHTML += '</ul>';
     }
     return agriHTML;
 }
-
-//Search layer data
-function myFunction() {
-            var input, ul, li, a, i;
-            input = document.getElementById("myInput");
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    ul[i].style.display = "";
-                } else {
-                    ul[i].style.display = "none";
-
-                }
-            }
-        }
 
 //Creates a scatter plot based on the input data
 //It is assumed that the input data is an array of timeValue pair
@@ -1015,7 +1256,6 @@ function plotScatter(countryCode, titleName, inputData, htmlID, mode) {
     
     //Check if the htmlID is empty
     var plotHTML = $('#'+ htmlID);
-    console.log(plotHTML.html());
     if((mode == 0) || ((mode == 1) && plotHTML.html() == '')){
         //Indicates new plot
         Plotly.newPlot(htmlID, [graph], layout);
@@ -1057,16 +1297,17 @@ var tabsFn = (function() {
 
 $(document).ready(function() {
     $( ".resizable" ).resizable({
-        handles: 'e, w',
         animate: true,
-        maxHeight: 800,
+        maxHeight: 250,
         maxWidth: 1380,
         minHeight: 150,
-        minWidth: 280,
-        ghost: true
+        minWidth: 280
     });
 } );
-
+    
+    
+    //alert("HOWDY!! HAW HAW HAW");
+    
     //sidebar toggle
         $(document).ready(function() {
             $(".toggle2").click(function () {
@@ -1076,6 +1317,7 @@ $(document).ready(function() {
                 $(".tab4").hide();
                 $(".tab5").hide();
                 $(".tab6").hide();
+                $(".tab7").hide();
             });
         });
 
@@ -1087,6 +1329,7 @@ $(document).ready(function() {
                 $(".tab4").hide();
                 $(".tab5").hide();
                 $(".tab6").hide();
+                $(".tab7").hide();
             });
         });
         $(document).ready(function() {
@@ -1097,6 +1340,7 @@ $(document).ready(function() {
                 $(".tab3").hide();
                 $(".tab5").hide();
                 $(".tab6").hide();
+                $(".tab7").hide();
             });
         });
         $(document).ready(function() {
@@ -1107,6 +1351,7 @@ $(document).ready(function() {
                 $(".tab3").hide();
                 $(".tab4").hide();
                 $(".tab6").hide();
+                $(".tab7").hide();
             });
         });
         $(document).ready(function() {
@@ -1117,11 +1362,24 @@ $(document).ready(function() {
                 $(".tab3").hide();
                 $(".tab4").hide();
                 $(".tab5").hide();
+                $(".tab7").hide();
             });
         });
         $(document).ready(function() {
             $(".toggle1").click(function () {
                 $(".tab1").toggle();
+                $(".tab2").hide();
+                $(".tab3").hide();
+                $(".tab4").hide();
+                $(".tab5").hide();
+                $(".tab6").hide();
+                $(".tab7").hide();
+            });
+        });
+        $(document).ready(function() {
+            $(".toggle7").click(function () {
+                $(".tab7").toggle();
+                $(".tab1").hide();
                 $(".tab2").hide();
                 $(".tab3").hide();
                 $(".tab4").hide();
