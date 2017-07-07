@@ -449,7 +449,7 @@ $(document).ready(function(){
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 6000);
+}, 3000);
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
