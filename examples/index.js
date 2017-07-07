@@ -963,7 +963,7 @@ function generateGeoComparisonButton(agriData) {
     
     //Also implement the slider
     compairsonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
-    var dropArea = $('#f');
+    var dropArea = $('#d');
     dropArea.html(compairsonHTML);
 }
 
