@@ -451,7 +451,7 @@ $(document).ready(function(){
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 6000);
+}, 3000);
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
@@ -1154,14 +1154,14 @@ function generateRemoveButton() {
 //Generates the button
         function generateAgriCultureButtons(inputData, codeName) {
             //Based on the input data, generate the buttons/html
-            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for layers.." title="Type in a layer">';
+            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for datasets.." title="Type in a layer">';
             var dataPoint = findDataPointCountry(inputData, codeName,3);
             if(dataPoint != 0) {
                 var i = 0;
                 agriHTML += '<ul id="myUL">';
                 for(i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the HTML
-                    agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '</li>';
+                    agriHTML += '<li>' + dataPoint.dataValues[i].typeName; + '</li>';
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'
                         + ' id="plotButton' + i + '">Plot Graph</button>';
