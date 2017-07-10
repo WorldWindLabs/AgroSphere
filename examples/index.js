@@ -201,7 +201,7 @@ requirejs({paths:{
 
                             //Pop the tab out
 							var popTab = $('#c');
-							popTab.show();
+							popTab.show('slow','swing');
 
                         }
                     }
