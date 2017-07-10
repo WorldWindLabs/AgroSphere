@@ -963,17 +963,17 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 function generateGeoComparisonButton(agriData) {
     var count = 4;
     var i = 0;
-    var compairsonHTML = '';
+    var comparisonHTML = '';
     for(i = 0; i < count; i++) {
         var buttonTempName = agriData[0].dataValues[i].typeName;
-        compairsonHTML += '<button id="geoCompType' + i +
+        comparisonHTML += '<button id="geoCompType' + i +
                 '">Generate Geo Comparison for ' + buttonTempName + '</button><br>';
     }
 
     //Also implement the slider
-    compairsonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
+    comparisonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
     var dropArea = $('#d');
-    dropArea.html(compairsonHTML);
+    dropArea.html(comparisonHTML);
 }
 
 //Gives the buttons funcitonality
