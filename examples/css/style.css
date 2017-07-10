@@ -101,12 +101,15 @@ body {
     background-color: #313A7D;
 }
 .nav-tabs li a:hover {
-    background-color: inherit !important;
+    background-color: lightgreen;
 }
 
+/*
 .nav-tabs li a[aria-expanded="true"]{
-    background-color: inherit !important;
+    background-color: white;
 }
+*/
+.nav-tabs li a.normal { background-color: #313A7D; !important }
 
 .nav-tabs .glyphicon {
     color: #fff;
