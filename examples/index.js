@@ -1289,7 +1289,7 @@ function generateAtmoButtons(inputData, stationName) {
 //Generates the button
         function generateAgriCultureButtons(inputData, codeName) {
             //Based on the input data, generate the buttons/html
-            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for layers.." title="Type in a layer">';
+            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for agricultura data.." title="Type in a layer">';
             var agriHTML = '<h4>Agriculture Data</h4>' +
                 '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
             agriHTML += '<button id="search"></button>';
@@ -1299,7 +1299,7 @@ function generateAtmoButtons(inputData, stationName) {
                 agriHTML += '<ul id="myUL">';
                 for(i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the HTML
-                    agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '</li>';
+                    agriHTML += '<li>' + dataPoint.dataValues[i].typeName; + '</li>';
                     agriHTML += '<div class="layerTitle"><li>' + dataPoint.dataValues[i].typeName + '</li>';
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'

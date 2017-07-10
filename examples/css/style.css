@@ -119,7 +119,7 @@ body {
     color: #fff;
 }
 .nav-tabs .active .glyphicon {
-    color: #333;
+    color: white;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
