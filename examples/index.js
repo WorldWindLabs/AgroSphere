@@ -1100,6 +1100,15 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
             })
         }
     }
+    //Do something with the input
+    var input = $('#myInput');
+    input.keyup(function() {
+        searchLayer();
+    });
+
+    var buttonObj = $('#search');
+    buttonObj.button();
+    buttonObj.click(searchLayer);
 }
 
 //Based on z-score get a colour
@@ -1258,47 +1267,50 @@ function generateAtmoButtons(inputData, stationName) {
     }
     return atmoHTML;
 }
+        //Search layer data
+        function searchLayer() {
+            var titles = $('.layerTitle');
+            var input = $('#myInput');
+            console.log(input);
+            for (var i = 0; i < titles.length; i ++) {
+
+                //Agriculture Blah == #myInput? -- false probably
+
+                //console.log($(titles[i]).html(), input[0].value);
+                if ($(titles[i]).html() == input[0].value) {
+                    $(titles[i]).show();
+                }
+                else{
+                    $(titles[i]).hide();
+                }
+            }
+        }
 
 //Generates the button
-function generateAgriCultureButtons(inputData, codeName) {
-    //Based on the input data, generate the buttons/html
-    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for agriculture data.." title="Type in a layer">';
-
-    var dataPoint = findDataPointCountry(inputData, codeName, 3);
-    if (dataPoint != 0) {
-        var i = 0;
-        agriHTML += '<ul id="myUL">';
-        for (i = 0; i < dataPoint.dataValues.length; i++) {
-            //Generate the HTML
-            agriHTML += '<li>' + dataPoint.dataValues[i].typeName + '</li>';
-            agriHTML += '<li>' + dataPoint.dataValues[i].typeName + '</li>';
-            agriHTML += '<div id="graphPoint' + i + '"></div>';
-            agriHTML += '<button'
-                + ' id="plotButton' + i + '">Plot Graph</button>';
-            agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
-            agriHTML += '<br>';
+        function generateAgriCultureButtons(inputData, codeName) {
+            //Based on the input data, generate the buttons/html
+            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for layers.." title="Type in a layer">';
+            var agriHTML = '<h4>Agriculture Data</h4>' +
+                '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
+            agriHTML += '<button id="search"></button>';
+            var dataPoint = findDataPointCountry(inputData, codeName,3);
+            if(dataPoint != 0) {
+                var i = 0;
+                agriHTML += '<ul id="myUL">';
+                for(i = 0; i < dataPoint.dataValues.length; i++) {
+                    //Generate the HTML
+                    agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '</li>';
+                    agriHTML += '<div class="layerTitle"><li>' + dataPoint.dataValues[i].typeName + '</li>';
+                    agriHTML += '<div id="graphPoint' + i + '"></div>';
+                    agriHTML += '<button'
+                        + ' id="plotButton' + i + '">Plot Graph</button>';
+                    agriHTML += '<button id="addButton' + i + '">Add Graph</button></div>';
+                    agriHTML += '<br>';
+                }
+                agriHTML += '</ul>';
+            }
+            return agriHTML;
         }
-        agriHTML += '</ul>';
-    }
-    return agriHTML;
-}
-
-//Search layer data
-function myFunction() {
-    var input, ul, li, a, i;
-    input = document.getElementById("myInput");
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            ul[i].style.display = "";
-        } else {
-            ul[i].style.display = "none";
-
-        }
-    }
-}
 
 //Creates a scatter plot based on the input data
 //It is assumed that the input data is an array of timeValue pair

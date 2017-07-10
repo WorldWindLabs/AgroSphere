@@ -1,98 +1,90 @@
 <img src="https://worldwind.arc.nasa.gov/css/images/nasa-logo.svg" height="100"/>
 <p>in partnership with the <a href="http://www.esa.int" target="_blank">European Space Agency</a></p>
 
-# Web World Wind
+# NASA AgClimate
 
-3D virtual globe API for JavaScript, developed by NASA. Provides a geographic context, complete with terrain, for 
-visualizing geographic or geo-located information in 3D and 2D. Web World Wind provides high-resolution terrain and 
-imagery, retrieved from remote servers automatically as needed. Developers can provide custom terrain and imagery. 
-Contains a rich set of features for displaying and interacting with geographic data and representing a wide range of 
-geometric objects. More information at [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov).    
+### AgClimate is the largest three-dimensional web-based interactive browser of agriculture, weather, climate,
+and other publicly available time-aware geospatial data, built upon NASA's revolutionary World Wind technology.
 
-## Get Started
+## Video Tutorial
 
-Develop a world-class World Wind application for the web. Setup instructions, developers guides, API documentation and 
-more are available at [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov). This GitHub repository contains the 
-library source, examples and tutorials.
+<a href="https://www.youtube.com/watch?v=WMYI1UcgFr4">
+<img src="http://i.imgur.com/GTxfgk7.png" />
+</a>
 
-- [worldwind.arc.nasa.gov](https://worldwind.arc.nasa.gov) has all things World Wind in one place
-- [Developer's Guide](https://webworldwind.org) has a complete description of Web World Wind's functionality. You'll 
-  also find there links to many Web World Wind resources, including a user guide. The Web World Wind distribution 
-  provides many simple examples showing how to use all of Web World Wind's functionality.
-- [World Wind Forum](https://forum.worldwindcentral.com) provides help from the World Wind community
-- [GitHub Issues](https://github.com/NASAWorldWind/WebWorldWind/issues) provides requirements and issue tracking
-- [WebStorm](https://www.jetbrains.com/webstorm) is used by the NASA World Wind development team
+## Introduction
 
-## Example Usage
+The NASA WorldWind 2017 Intern team has designed an educational web application to visualize the effects of climate change
+on different parts of the world using the open-source Web World Wind API. Spatial data for agriculture and atmosphere in
+various formats are organized, analyzed and visualized on the globe. Users can hover the cursor over placemarks for
+statistical data specific to that country’s history for atmosphere and agriculture throughout a specified time frame.
+Users can also easily control each dataset on the globe by adjusting the opacity, time value, etc., while comparing
+selected countries. This web application gives a customizable experience to teachers, science centers and home schoolers
+who can learn about climate issues by manipulating the data according to their interests.
 
-Here is a simple web app using Web World Wind. It is the contents of SimplestExample.html in the example collection. It 
-displays an interactive virtual globe in an HTML canvas.
+_Screenshot showing how the Earth looks like through AgClimate in its starting position. This image shows the Blue Marble
+layer as a base; AgClimate also supports Bing Maps and a Digital Elevation Layer too._
 
-    <!DOCTYPE html>
-    <!-- This is a very simple example of using Web World Wind. -->
-    <html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <title>World Wind Example</title>
-        <!-- Include the Web World Wind library. -->
-        <script src="http://worldwindserver.net/webworldwind/worldwind.min.js" type="text/javascript"></script>
-    </head>
-    <body>
-    <div style="position: absolute; top: 50px; left: 50px;">
-        <!-- Create a canvas for Web World Wind. -->
-        <canvas id="canvasOne" width="1024" height="768">
-            Your browser does not support HTML5 Canvas.
-        </canvas>
-    </div>
-    <script>
-        // Register an event listener to be called when the page is loaded.
-        window.addEventListener("load", eventWindowLoaded, false);
+<img src=" " />
 
-        // Define the event listener to initialize Web World Wind.
-        function eventWindowLoaded() {
-            // Create a World Window for the canvas.
-            var wwd = new WorldWind.WorldWindow("canvasOne");
+_Image showing..._
 
-            // Add some image layers to the World Window's globe.
-            wwd.addLayer(new WorldWind.BMNGOneImageLayer());
-            wwd.addLayer(new WorldWind.BingAerialWithLabelsLayer());
+<img src="http://i.imgur.com/2HnOm8V.jpg" />
 
-            // Add a compass, a coordinates display and some view controls to the World Window.
-            wwd.addLayer(new WorldWind.CompassLayer());
-            wwd.addLayer(new WorldWind.CoordinatesDisplayLayer(wwd));
-            wwd.addLayer(new WorldWind.ViewControlsLayer(wwd));
-        }
-    </script>
-    </body>
-    </html>
+_Screenshot showing AgClimate comparing agricultural data from around the world..._
 
-## License
+<img src="http://i.imgur.com/nqK4kV0.png" />
 
-    NASA WORLD WIND
+## Features of AgClimate
 
-    Copyright (C) 2001 United States Government
-    as represented by the Administrator of the
-    National Aeronautics and Space Administration.
-    All Rights Reserved.
+* Load in any number of spatiotemporal geographically accurate data from multiple sources, using a variety of formats including WMTS, WMS, KML, TIFF, and CSV.
+* Input data sources of different sizes and projections, then see that data in any preferred projection including 3D, Mercator, Equirectangular, Polar and more.
+* Adjust the time and date of any layer and easily experience how the visualized data changes with respect to time and space.
+* Adjust the opacity of each layer and thereby integrate layers to study groups of information together.
+* Change the order for where layers are placed in the hierarchy.
+* Visualize graphs of agricultural data with respect to time.
+* Compare data for each country with color display.
+* Read available information about each layer.
+* Use the Destination tool to immediately visit any desired location.
 
-    NASA OPEN SOURCE AGREEMENT VERSION 1.3
 
-    This open source agreement ("agreement") defines the rights of use, reproduction,
-    distribution, modification and redistribution of certain computer software originally
-    released by the United States Government as represented by the Government Agency
-    listed below ("Government Agency"). The United States Government, as represented by
-    Government Agency, is an intended third-party beneficiary of all subsequent
-    distributions or redistributions of the subject software. Anyone who uses, reproduces,
-    distributes, modifies or redistributes the subject software, as defined herein, or any
-    part thereof, is, by that action, accepting in full the responsibilities and obligations 
-    contained in this agreement.
+## How to Run and Develop AgClimate Locally
 
-    Government Agency: National Aeronautics and Space Administration (NASA)
-    Government Agency Original Software Designation: ARC-15166-1
-    Government Agency Original Software Title: NASA World Wind
-    User Registration Requested. Please send email with your contact information to Patrick.Hogan@nasa.gov
-    Government Agency Point of Contact for Original Software: Patrick.Hogan@nasa.gov
+Start by cloning the repository to your local system. You can do this through the terminal by using the ```git``` command, as outlined below.
 
-    You may obtain a full copy of the license at:
+```
+git clone https://github.com/WorldWind-2017/AgClimate.git
+```
 
-        https://worldwind.arc.nasa.gov/LICENSE.html
+The above code should clone the repository to a folder called AgClimate. To navigate to the examples folder specific to AgClimate, you can use the command outlined below.
+
+```
+cd AgClimate/examples
+```
+
+The main heart of the Javascript functions associated with World Weather are contained within the ```index.js``` file in the apps folder. One example of editing this file is through the program vim, which can be used through the following command.
+
+```
+vim index.js
+```
+
+If you modify the source of NASA World Wind during development, you will need to recompile the source to a minified Javascript file. To do this, navigate to the Developmet folder (one folder back from the apps folder), then run the command ```grunt```.
+
+```
+cd ..
+grunt
+```
+
+The above command should run successfully and copy the compiled Javascript file to the apps folder automatically.
+
+
+
+***
+
+**Organization:** NASA Ames Research Center
+
+**Manager:** <a href="https://www.linkedin.com/in/phogan">Patrick Hogan</a>
+
+**Authors:**
+
+
