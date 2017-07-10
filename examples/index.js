@@ -1114,6 +1114,15 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 			});
         }
     }
+
+    //Do something with the input
+      var input = $('#myInput');
+      input.keyup(function() {
+          searchLayer();
+      });
+       var buttonObj = $('#search');
+       buttonObj.button();
+       buttonObj.click(searchLayer);
     
 }
 
@@ -1260,6 +1269,7 @@ function generateRemoveButton() {
 
 //Similar logic to generating agriculture buttons butt for atomosphere
 function generateAtmoButtons(inputData, stationName) {
+    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for agricultura data.." title="Type in a layer">';
     var atmoHTML = '<h4>Atomsphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
     if (dataPoint != 0) {
