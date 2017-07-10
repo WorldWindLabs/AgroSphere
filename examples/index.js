@@ -200,8 +200,18 @@ requirejs({paths:{
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //Pop the tab out
-							var popTab = $('#c');
-							popTab.show('slow','swing');
+                            var popTab = $('#c');
+                            var otherTab = $('#a');
+                            var otherTab2 = $('#b');
+                            var otherTab3 = $('#d');
+                            var otherTab4 = $('#e');
+                            var otherTab5 = $('#f');
+                            popTab.show('slow','swing');
+                            otherTab.hide();
+                            otherTab2.hide();
+                            otherTab3.hide();
+                            otherTab4.hide();
+                            otherTab5.hide();
 
                         }
                     }
@@ -1192,7 +1202,7 @@ function generateRemoveButton() {
                 agriHTML += '<ul id="myUL">';
                 for(i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the HTML
-                    agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '</li>';
+                    agriHTML += '<li>' + dataPoint.dataValues[i].typeName; + '</li>';
                     agriHTML += '<div class="layerTitle"><li>' + dataPoint.dataValues[i].typeName + '</li>';
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'
