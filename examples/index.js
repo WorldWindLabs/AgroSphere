@@ -200,13 +200,12 @@ requirejs({paths:{
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //Pop the tab out
-                            var popTab = $('#c');
                             var otherTab = $('#a');
                             var otherTab2 = $('#b');
                             var otherTab3 = $('#d');
                             var otherTab4 = $('#e');
                             var otherTab5 = $('#f');
-                            popTab.show('slow','swing');
+                            details.show('slow','swing');
                             otherTab.hide();
                             otherTab2.hide();
                             otherTab3.hide();
