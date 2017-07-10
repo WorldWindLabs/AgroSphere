@@ -199,10 +199,6 @@ requirejs({paths:{
                             //Give functionality for the buttons generated
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
                             
-                            //Pop the tab out
-							var popTab = $('#c');
-							popTab.show();
-                            
                         }
                     }
                 }
@@ -451,7 +447,7 @@ $(document).ready(function(){
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 3000);
+}, 6000);
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
@@ -979,17 +975,19 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
                 //Generate the plot based on things
                 var buttonID = this.id;
                 var buttonNumber = buttonID.slice('plotButton'.length);
+				var selfHTML = $('#' + buttonID);
                 var plotID = 'graphPoint' + buttonNumber;
                 
                 //Do we already have a plot?
                 var plotHTML = $('#' + plotID);
-                
                 if(plotHTML.html() == '') {
                     plotScatter(dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName, 
                             dataPoint.dataValues[buttonNumber].timeValues, 
                             plotID, 0);
+					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
+					selfHTML.html("option", "label", 'Plot Graph');
                 }
             })
             var addButtonHTML = $('#addButton' + i).button();
@@ -1154,14 +1152,14 @@ function generateRemoveButton() {
 //Generates the button
         function generateAgriCultureButtons(inputData, codeName) {
             //Based on the input data, generate the buttons/html
-            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for datasets.." title="Type in a layer">';
+            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for layers.." title="Type in a layer">';
             var dataPoint = findDataPointCountry(inputData, codeName,3);
             if(dataPoint != 0) {
                 var i = 0;
                 agriHTML += '<ul id="myUL">';
                 for(i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the HTML
-                    agriHTML += '<li>' + dataPoint.dataValues[i].typeName; + '</li>';
+                    agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '</li>';
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'
                         + ' id="plotButton' + i + '">Plot Graph</button>';
