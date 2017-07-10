@@ -1406,62 +1406,62 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".toggle2").click(function () {
         $(".tab2").toggle('slow', 'swing');
-        $(".tab1").hide();
-        $(".tab3").hide();
-        $(".tab4").hide();
-        $(".tab5").hide();
-        $(".tab6").hide();
+        $(".tab1").hide('slow', 'swing');
+        $(".tab3").hide('slow', 'swing');
+        $(".tab4").hide('slow', 'swing');
+        $(".tab5").hide('slow', 'swing');
+        $(".tab6").hide('slow', 'swing');
     });
 });
 
 $(document).ready(function () {
     $(".toggle3").click(function () {
         $(".tab3").toggle('slow', 'swing');
-        $(".tab2").hide();
-        $(".tab1").hide();
-        $(".tab4").hide();
-        $(".tab5").hide();
-        $(".tab6").hide();
+        $(".tab2").hide('slow', 'swing');
+        $(".tab1").hide('slow', 'swing');
+        $(".tab4").hide('slow', 'swing');
+        $(".tab5").hide('slow', 'swing');
+        $(".tab6").hide('slow', 'swing');
     });
 });
 $(document).ready(function () {
     $(".toggle4").click(function () {
         $(".tab4").toggle('slow', 'swing');
-        $(".tab2").hide();
-        $(".tab1").hide();
-        $(".tab3").hide();
-        $(".tab5").hide();
-        $(".tab6").hide();
+        $(".tab2").hide('slow', 'swing');
+        $(".tab1").hide('slow', 'swing');
+        $(".tab3").hide('slow', 'swing');
+        $(".tab5").hide('slow', 'swing');
+        $(".tab6").hide('slow', 'swing');
     });
 });
 $(document).ready(function () {
     $(".toggle5").click(function () {
         $(".tab5").toggle('slow', 'swing');
-        $(".tab2").hide();
-        $(".tab1").hide();
-        $(".tab3").hide();
-        $(".tab4").hide();
-        $(".tab6").hide();
+        $(".tab2").hide('slow', 'swing');
+        $(".tab1").hide('slow', 'swing');
+        $(".tab3").hide('slow', 'swing');
+        $(".tab4").hide('slow', 'swing');
+        $(".tab6").hide('slow', 'swing');
     });
 });
 $(document).ready(function () {
     $(".toggle6").click(function () {
         $(".tab6").toggle('slow', 'swing');
-        $(".tab2").hide();
-        $(".tab1").hide();
-        $(".tab3").hide();
-        $(".tab4").hide();
-        $(".tab5").hide();
+        $(".tab2").hide('slow', 'swing');
+        $(".tab1").hide('slow', 'swing');
+        $(".tab3").hide('slow', 'swing');
+        $(".tab4").hide('slow', 'swing');
+        $(".tab5").hide('slow', 'swing');
     });
 });
 $(document).ready(function () {
     $(".toggle1").click(function () {
         $(".tab1").toggle('slow', 'swing');
-        $(".tab2").hide();
-        $(".tab3").hide();
-        $(".tab4").hide();
-        $(".tab5").hide();
-        $(".tab6").hide();
+        $(".tab2").hide('slow', 'swing');
+        $(".tab3").hide('slow', 'swing');
+        $(".tab4").hide('slow', 'swing');
+        $(".tab5").hide('slow', 'swing');
+        $(".tab6").hide('slow', 'swing');
     });
 });
 });
