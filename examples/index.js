@@ -198,6 +198,11 @@ requirejs({paths:{
                             
                             //Give functionality for the buttons generated
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
+
+                            //Pop the tab out
+							var popTab = $('#c');
+							popTab.show();
+
                         }
                     }
                 }
@@ -446,7 +451,7 @@ $(document).ready(function(){
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 6000);
+}, 3000);
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
@@ -958,7 +963,7 @@ function generateGeoComparisonButton(agriData) {
 
     //Also implement the slider
     compairsonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
-    var dropArea = $('#f');
+    var dropArea = $('#d');
     dropArea.html(compairsonHTML);
 }
 
@@ -974,20 +979,17 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
                 //Generate the plot based on things
                 var buttonID = this.id;
                 var buttonNumber = buttonID.slice('plotButton'.length);
-				var selfHTML = $('#' + buttonID);
                 var plotID = 'graphPoint' + buttonNumber;
 
                 //Do we already have a plot?
                 var plotHTML = $('#' + plotID);
-				
+
                 if(plotHTML.html() == '') {
                     plotScatter(dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName,
                             dataPoint.dataValues[buttonNumber].timeValues,
                             plotID, 0);
-					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
-					selfHTML.html("option", "label", 'Plot Graph');
                 }
             })
             var addButtonHTML = $('#addButton' + i).button();
@@ -1005,15 +1007,6 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
             })
         }
     }
-    //Do something with the input
-    var input = $('#myInput');
-    input.keyup(function() {
-        searchLayer();
-    });
-
-    var buttonObj = $('#search');
-    buttonObj.button();
-    buttonObj.click(myFunction);
 
 }
 
@@ -1158,44 +1151,21 @@ function generateRemoveButton() {
 }
 
 
-        //Search layer data
-        function searchLayer() {
-            var titles = $('.layerTitle');
-            var input = $('#myInput');
-            console.log(input);
-            for (var i = 0; i < titles.length; i ++) {
-
-                //Agriculture Blah == #myInput? -- false probably
-
-                //console.log($(titles[i]).html(), input[0].value);
-                if ($(titles[i]).html() == input[0].value) {
-                    $(titles[i]).show();
-                }
-                else{
-                    $(titles[i]).hide();
-                }
-            }
-        }
-
 //Generates the button
         function generateAgriCultureButtons(inputData, codeName) {
             //Based on the input data, generate the buttons/html
-            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for layers.." title="Type in a layer">';
-            var agriHTML = '<h4>Agriculture Data</h4>' +
-                    '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-            agriHTML += '<button id="search"></button>';
+            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for datasets.." title="Type in a layer">';
             var dataPoint = findDataPointCountry(inputData, codeName,3);
             if(dataPoint != 0) {
                 var i = 0;
                 agriHTML += '<ul id="myUL">';
                 for(i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the HTML
-                    agriHTML += '<li><a href="#">' + dataPoint.dataValues[i].typeName; + '</li>';
-                    agriHTML += '<div class="layerTitle"><li>' + dataPoint.dataValues[i].typeName + '</li>';
+                    agriHTML += '<li>' + dataPoint.dataValues[i].typeName; + '</li>';
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'
                         + ' id="plotButton' + i + '">Plot Graph</button>';
-                    agriHTML += '<button id="addButton' + i + '">Add Graph</button></div>';
+                    agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
                     agriHTML += '<br>';
                 }
                 agriHTML += '</ul>';
@@ -1203,10 +1173,22 @@ function generateRemoveButton() {
             return agriHTML;
         }
 
+//Search layer data
+        function myFunction() {
+            var input, ul, li, a, i;
+            input = document.getElementById("myInput");
+            ul = document.getElementById("myUL");
+            li = ul.getElementsByTagName("li");
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    ul[i].style.display = "";
+                } else {
+                    ul[i].style.display = "none";
 
-
-
-
+                }
+            }
+        }
 
 
 //Creates a scatter plot based on the input data
@@ -1222,7 +1204,7 @@ function plotScatter(countryCode, titleName, inputData, htmlID, mode) {
         xValues.push(parseFloat(filteredData[i].year));
         yValues.push(parseFloat(filteredData[i].value));
     }
-    
+
     //Create the plotly graph
     var graph = {
         name: titleName + ' ' + countryCode,
@@ -1231,21 +1213,21 @@ function plotScatter(countryCode, titleName, inputData, htmlID, mode) {
         mode: 'markers',
         type: 'scatter'
     };
-    
+
     var xAxis = {
         title: 'Year'
     }
-    
+
     var yAxis = {
         title: 'Unitless'
     }
-    
+
     var layout = {
         xaxis: xAxis,
         yaxis: yAxis,
         title: 'Legend vs year'
     };
-    
+
     //Check if the htmlID is empty
     var plotHTML = $('#'+ htmlID);
     if((mode == 0) || ((mode == 1) && plotHTML.html() == '')){
@@ -1284,7 +1266,7 @@ var tabsFn = (function() {
 
 // sidebar functions
 $( function() {
-    $( "#draggable" ).draggable({containment: "window"});
+    $( "#draggable" ).draggable({containment: "window", handle:".nav-tabs"});
 
 } );
 
@@ -1303,7 +1285,7 @@ $(document).ready(function() {
 //sidebar toggle
 $(document).ready(function() {
     $(".toggle2").click(function () {
-        $(".tab2").toggle();
+        $(".tab2").toggle("slow","swing");
         $(".tab1").hide();
         $(".tab3").hide();
         $(".tab4").hide();
@@ -1314,7 +1296,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $(".toggle3").click(function () {
-        $(".tab3").toggle();
+        $(".tab3").toggle("slow","swing");
         $(".tab2").hide();
         $(".tab1").hide();
         $(".tab4").hide();
@@ -1324,7 +1306,7 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
     $(".toggle4").click(function () {
-        $(".tab4").toggle();
+        $(".tab4").toggle("slow","swing");
         $(".tab2").hide();
         $(".tab1").hide();
         $(".tab3").hide();
@@ -1334,7 +1316,7 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
     $(".toggle5").click(function () {
-        $(".tab5").toggle();
+        $(".tab5").toggle("slow","swing");
         $(".tab2").hide();
         $(".tab1").hide();
         $(".tab3").hide();
@@ -1344,7 +1326,7 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
     $(".toggle6").click(function () {
-        $(".tab6").toggle();
+        $(".tab6").toggle("slow","swing");
         $(".tab2").hide();
         $(".tab1").hide();
         $(".tab3").hide();
@@ -1354,7 +1336,7 @@ $(document).ready(function() {
 });
 $(document).ready(function() {
     $(".toggle1").click(function () {
-        $(".tab1").toggle();
+        $(".tab1").toggle("slow","swing");
         $(".tab2").hide();
         $(".tab3").hide();
         $(".tab4").hide();
