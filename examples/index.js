@@ -225,10 +225,6 @@ requirejs({paths:{
 							detailsHTML += generateAtmoButtons(atmoData, dataPoint.stationName);
 							details.html(detailsHTML);
 							
-							//Generate the station buttons
-							
-							detailsHTML += generateAtmoButtons(atmoData, dataPoint.stationName);
-							details.html(detailsHTML);
 
 							//Give functionality for buttons generated
 							giveAtmoButtonsFunctionality(detailsHTML, atmoData, dataPoint.stationName);
@@ -1019,43 +1015,44 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
 					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
-					selfHTML.html("option", "label", 'Plot Graph');
-                }
-            })
-		}
-	}
-}
-
-//Gives the button functionality
-function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
-	var dataPoint = findDataPointStation(inputData, stationName);
-	if(dataPoint != 0) {
-
-		var i = 0;
-		for(i = 0; i < dataPoint.dataValues.length; i++) {
-            var buttonHTML = $('#plotButton' + i).button();
-            buttonHTML.click(function(event) {
-                //Generate the plot based on things
+					selfHTML.html("option", "label", "Plot Graph");
+                };			
+			});
+			var combineButtonHTML = $('#combineButton' + i).button();
+            combineButtonHTML.click(function(event) {
                 var buttonID = this.id;
-                var buttonNumber = buttonID.slice('plotButton'.length);
-				var selfHTML = $('#' + buttonID);
-                var plotID = 'graphPoint' + buttonNumber;
-
-                //Do we already have a plot?
-                var plotHTML = $('#' + plotID);
-                if(plotHTML.html() == '') {
-                    plotScatter(dataPoint.dataValues[buttonNumber].typeName, '',
-                            dataPoint.dataValues[buttonNumber].timeValues,
-                            plotID, 0);
-					selfHTML.button("option", "label", "Hide Graph");
-                } else {
-                    plotHTML.html('');
-					selfHTML.html("option", "label", 'Plot Graph');
-                }
-            })
+                var buttonNumber = buttonID.slice('combineButton'.length);
+                //Add to the graph
+                plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
+                        dataPoint.dataValues[buttonNumber].timeValues,
+                        'multiGraph', 1);
+            });
+			
+			var addButtonHTML = $('#addButton' + i).button();
+			addButtonHTML.click( function(event) {
+				//Grab id
+				var buttonID = this.id;
+				var buttonNumber = buttonID.slice('addButton'.length);
+				
+				//Check how many divs there are 
+				var manyGraphDivChildren = $('#manyGraph > div');
+				
+				var graphNumber = manyGraphDivChildren.length;
+				
+				//Generate the html
+				var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
+				
+				$('#manyGraph').append(graphDiv);
+				
+				//Graph it
+				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
+                            dataPoint.dataValues[buttonNumber].timeValues, 
+                            'subGraph' + graphNumber, 0);
+			});
 		}
 	}
 }
+
 
 //Gives the buttons funcitonality
 function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
@@ -1081,7 +1078,7 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
-					selfHTML.html("option", "label", 'Plot Graph');
+					selfHTML.html("option", "label", "Plot Graph");
                 }
             })
             var combineButtonHTML = $('#combineButton' + i).button();
@@ -1247,12 +1244,16 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
 function generateRemoveButton() {
     //Generate the remove button for the graphs
     var removeHTML = '<button id="removeButton">Remove all graphs</button>';
-    $('#g').append(removeHTML);
+    $('#d').append(removeHTML);
     var removeButton = $('#removeButton');
     removeButton.button();
     removeButton.on('click', function () {
-        //Just purge the multigraph
-        Plotly.purge('multiGraph');
+        //Just purge all the children of the almighty graph
+		var almightyGraphDiv = $('#almightyGraph > div');
+		var i = 0;
+		for(i = 0; i < almightyGraphDiv.length; i++) {
+			Plotly.purge(almightyGraphDiv[i].id);
+		}
     });
 }
 
@@ -1271,6 +1272,8 @@ function generateAtmoButtons(inputData, stationName) {
             atmoHTML += '<div id="graphPoint' + i + '"></div>';
             atmoHTML += '<button'
                 + ' id="plotButton' + i + '">Plot Graph</button>';
+			atmoHTML += '<button id="combineButton' + i + '">Combine Grpah </button>';
+            atmoHTML += '<button id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br>';
         }
     }
