@@ -1266,7 +1266,7 @@ var tabsFn = (function() {
 
 // sidebar functions
 $( function() {
-    $( "#draggable" ).draggable({containment: "window"});
+    $( "#draggable" ).draggable({containment: "window",handle:".nav-tabs"});
 
 } );
 
