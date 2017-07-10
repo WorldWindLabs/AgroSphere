@@ -199,16 +199,14 @@ requirejs({paths:{
                             //Give functionality for the buttons generated
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
                             
-                            //Pop the tab out
-							var popTab = $('#c');
-							popTab.show();
-                            
+
+
                         }
                     }
                 }
             }
         }
-        
+
         wwd.addEventListener('mousemove', handlePick);
         // Set up to handle clicks and taps.
 
@@ -234,9 +232,9 @@ requirejs({paths:{
 
         // Listen for taps on mobile devices.
         var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
-        
+
         console.timeEnd('First');
-        
+
 //Given a layerName and its layernumber, generate a layer control block
 
 //Key Notes: This function generates the HTML first then supplies
@@ -259,18 +257,18 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
     if(typeof(wmsConfig.timeSequences) != 'undefined') {
         layerControlHTML += generateTimeControl(wwd, layerName, layerNumber);
     }
-    
+
     //Place the HTML somewhere
     $('#b').append(layerControlHTML);
 
     //Add functionality to opacity slider
     giveOpacitySliderFunctionality(wwd, layerName, layerNumber);
-    
+
     //Check time again to add functionality
     if(typeof(wmsConfig.timeSequences) != 'undefined') {
         giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig);
     }
-    console.log(wmsLayerCapabilities);    
+    console.log(wmsLayerCapabilities);
 }
 
 //Finds the layer based on the name in the wwd
@@ -391,7 +389,7 @@ function generateTimeControl(wwd, layerName, layerNumber) {
     //Create the three buttons
 	timeHTML += '<button id="time_left_' + layerNumber + '">Left</button>';
 	timeHTML += '<button id="time_middle_' + layerNumber + '">Play</button>';
-	timeHTML += '<button id="time_right_' + layerNumber + '">Right</button>'; 
+	timeHTML += '<button id="time_right_' + layerNumber + '">Right</button>';
 
     //Wrap up the HTML
     timeHTML += '</div>';
@@ -412,7 +410,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 	leftButton.on("click", function(event, ui){
 	    if((timeSlot - 1 > 0)) {
 	     	targetLayer.time = wmsConfig.timeSequences[timeSlot - 1].endTime;
-		    wwd.redraw();   
+		    wwd.redraw();
 		    timeSlot--;
 	    }
 	});
@@ -425,7 +423,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 		    timeSlot++;
 	});
 }
-    
+
 $(document).ready(function(){
     $(".focustext").hide();
 });
@@ -466,7 +464,7 @@ $(document).ready(function () {
 function generatePlacemarkLayer(wwd, csvData){
     //Data type list
     var dataTypes = ['countries'];
-    
+
     //Common features
     var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/",
         placemark,
@@ -483,7 +481,7 @@ function generatePlacemarkLayer(wwd, csvData){
     placemarkAttributes.labelAttributes.color = WorldWind.Color.YELLOW;
     placemarkAttributes.drawLeaderLine = true;
     placemarkAttributes.leaderLineAttributes.outlineColor = WorldWind.Color.RED;
-    
+
     // Define the images we'll use for the placemarks.
     var images = [
         "plain-black.png", "plain-blue.png", "plain-brown.png",
@@ -497,7 +495,7 @@ function generatePlacemarkLayer(wwd, csvData){
     ];
     var i = 0;
     for(i = 0; i < dataTypes.length; i++) {
-        var placemarkLayer = new WorldWind.RenderableLayer(dataTypes[i] + 
+        var placemarkLayer = new WorldWind.RenderableLayer(dataTypes[i] +
                 " Placemarks");
         //Create the pins
         var j = 0;
@@ -505,59 +503,59 @@ function generatePlacemarkLayer(wwd, csvData){
         for(j = 0; j < csvData[i].length; j++) {
             // Create the placemark and its label.
             var placemark = new WorldWind.Placemark(new WorldWind.Position
-                    (parseFloat(csvData[i][j].lat), 
+                    (parseFloat(csvData[i][j].lat),
                     parseFloat(csvData[i][j].lon), 1e2), true, null);
             var labelString = '';
             if(dataTypes[i] == 'countries') {
                 labelString = csvData[i][j].country;
             }
-            
-            
+
+
             placemark.label = labelString;
             placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 
-            // Create the placemark attributes for this placemark. Note that 
+            // Create the placemark attributes for this placemark. Note that
             //the attributes differ only by their image URL.
-            placemarkAttributes = new 
+            placemarkAttributes = new
                     WorldWind.PlacemarkAttributes(placemarkAttributes);
             placemarkAttributes.imageSource = pinLibrary + images[9 - 2*i];
             //Search if it is a country
             if(dataTypes[i] == 'countries') {
                 //Image would be a flag
-                placemarkAttributes.imageSource = './flags/' + 
+                placemarkAttributes.imageSource = './flags/' +
                         csvData[i][j].iconCode + '.png';
             }
-            
+
             placemark.attributes = placemarkAttributes;
 
-            // Create the highlight attributes for this placemark. 
+            // Create the highlight attributes for this placemark.
             //Note that the normal attributes are specified as
-            // the default highlight attributes so that all properties are 
+            // the default highlight attributes so that all properties are
             //identical except the image scale. You could
-            // instead vary the color, image, or other property to control 
+            // instead vary the color, image, or other property to control
             //the highlight representation.
-            highlightAttributes = new 
+            highlightAttributes = new
                     WorldWind.PlacemarkAttributes(placemarkAttributes);
             highlightAttributes.imageScale = 4;
             placemark.highlightAttributes = highlightAttributes;
 
             //Attach the type to it
             placemark.type = dataTypes[i];
-            
+
             //Make it so the labels are visible from 10e6
             placemark.eyeDistanceScalingLabelThreshold = 10e6;
             placemark.eyeDistanceScalingThreshold = 5e6;
 
             // Add the placemark to the layer.
-            placemarkLayer.addRenderable(placemark);            
+            placemarkLayer.addRenderable(placemark);
         }
         //Before adding to the layer, attach a type to it
         placemarkLayer.type = dataTypes[i];
-        
+
         // Add the placemarks layer to the World Window's layer list.
         wwd.addLayer(placemarkLayer);
     }
-    
+
 }
 
 //Loads all the data
@@ -578,7 +576,7 @@ function loadCSVData(){
                 csvData.push($.csv.toObjects(csvString));
                 console.log(csvData);
     		}
-    	});	    
+    	});
 	}
 	return csvData;
 }
@@ -587,10 +585,10 @@ function loadCSVData(){
 function filterCSVData(csvData, parameterType, thresholdValue) {
     //Since we already have the data, just go through it and pop each one
     //that we don't need
-    
-    //Duplicate it 
+
+    //Duplicate it
     var tempData = csvData.slice(0);
-    
+
     var i = 0;
     var returnData = [];
     for(i = 0; i < tempData.length; i++) {
@@ -604,9 +602,9 @@ function filterCSVData(csvData, parameterType, thresholdValue) {
                     return data.year < thresholdValue;
                 }));
         }
-        
+
     }
-    
+
     return returnData;
 }
 
@@ -657,9 +655,9 @@ function loadCSVDataArray() {
                 csvData.push($.csv.toArrays(csvString));
                 console.log(csvData);
     		}
-    	});	    
+    	});
 	}
-	return csvData;    
+	return csvData;
 }
 
 //Find a value given a name
@@ -687,19 +685,19 @@ function convertArrayToDataSet(csvData) {
         var tempObject = {};
         var needPushToObj;
         //First instance or can't find it
-        if((objectList.length == 0) || 
+        if((objectList.length == 0) ||
                 (findDataBasedName(objectList,csvData[i][0]) == 0)) {
-            
+
             //Give it a name assuming it is the first things
             tempObject.code3 = csvData[i][0]
-            
+
             //Give it a start time
             tempObject.startTime = csvData[0][2];
             tempObject.endTime = csvData[0][csvData[i].length - 1];
-            
+
             //Give it a data array
             tempObject.dataValues = [];
-            
+
             needPushToObj = true;
         } else {
             //We found it
@@ -719,7 +717,7 @@ function convertArrayToDataSet(csvData) {
                 //Append the item to the value
                 var timeValue = {};
                 timeValue.year = csvData[0][j];
-                
+
                 //Check if the data exist
                 var value = csvData[i][j];
                 if(value != "") {
@@ -728,7 +726,7 @@ function convertArrayToDataSet(csvData) {
                 } else {
                     timeValue.value = "";
                 }
-                
+
                 dataValueObject.timeValues.push(timeValue);
             }
         }
@@ -737,7 +735,7 @@ function convertArrayToDataSet(csvData) {
         if(needPushToObj) {
             objectList.push(tempObject);
         }
-        
+
     }
     console.log(objectList);
     return objectList;
@@ -764,7 +762,7 @@ function loadWMTSLayers(wwd, layerManager) {
             var wmsLayer;
             wmsLayer = new WorldWind.WmsTimeDimensionedLayer(wmsConfig);
             wmsLayer.time = wmsConfig.timeSequences[0].endTime;
-            
+
             // disable layer by default
             wmsLayer.enabled = false;
 
@@ -810,11 +808,11 @@ function loadGEOJsonData() {
             console.log('fail');
         }
     });
-    
+
     //Change the ISO name to code3
     var i = 0;
     for(i = 0; i < data.features.length; i++) {
-        data.features[i].properties.code3 = 
+        data.features[i].properties.code3 =
                 data.features[i].properties.ISO_A3;
         delete data.features[i].properties.ISO_A3;
         data.features[i].properties.name =
@@ -846,7 +844,7 @@ function loadWMSLayers(wwd, layerManager) {
 
             var wmsLayer;
             wmsLayer = new WorldWind.WmsLayer(wmsConfig);
-            
+
             // disable layer by default
             wmsLayer.enabled = false;
 
@@ -873,7 +871,7 @@ function filterOutBlanks(inputData) {
     for(i = 0; i < inputData.length; i++) {
         //Check for empty string
         if(inputData[i].value != "") {
-            
+
             tempArray.push(inputData[i]);
         }
     }
@@ -890,13 +888,13 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
         max: 2010,
         step:1
     });
-    
+
     sliderHTML.on('slide', function(event, ui) {
         //Capture the year div
         var sliderValueDiv = $('#geoSlideValue');
         sliderValueDiv.html('Year Select: ' + ui.value);
     })
-    
+
     //Search through the buttons
     var count = 4;
     var i = 0;
@@ -906,9 +904,9 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
         buttonHTML.click(function(event) {
             //Find the year based on the slider value
             var sliderValue = $('#geoSlider').slider("value");
-            
+
             var buttonNumber = this.id.slice('geoCompType'.length);
-            
+
             //Do some data stuff, go through the agridata based on the button
             //number for every country
             var countryData = [];
@@ -916,14 +914,14 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
             var k = 0;
             for(j = 0; j < agriData.length; j++) {
                 console.log(agriData[j], buttonNumber);
-                for(k = 0; k < 
-                        agriData[j].dataValues[buttonNumber].timeValues.length; 
+                for(k = 0; k <
+                        agriData[j].dataValues[buttonNumber].timeValues.length;
                         k++) {
                     //Basically find if the year exist
-                    if(agriData[j].dataValues[buttonNumber].timeValues[k].year 
+                    if(agriData[j].dataValues[buttonNumber].timeValues[k].year
                             == sliderValue) {
                         //Push the country and value pair
-                        var tempObject = 
+                        var tempObject =
                                 {value: agriData[j].dataValues[buttonNumber].timeValues[k].value,
                                 code3: agriData[j].code3};
                         countryData.push(tempObject);
@@ -931,7 +929,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
                     }
                 }
             }
-            
+
             //Got all the data, colour it
             countryData = filterOutBlanks(countryData);
             var countryLayer = colourizeCountries(countryData, geoJSONData);
@@ -942,7 +940,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
                     wwd.removeLayer(wwd.layers[l]);
                 }
             }
-            
+
             wwd.addLayer(countryLayer);
             layerManager.synchronizeLayerList();
         });
@@ -957,13 +955,13 @@ function generateGeoComparisonButton(agriData) {
     var compairsonHTML = '';
     for(i = 0; i < count; i++) {
         var buttonTempName = agriData[0].dataValues[i].typeName;
-        compairsonHTML += '<button id="geoCompType' + i + 
+        compairsonHTML += '<button id="geoCompType' + i +
                 '">Generate Geo Comparison for' + buttonTempName + '</button><br>';
     }
-    
+
     //Also implement the slider
     compairsonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
-    var dropArea = $('#d');
+    var dropArea = $('#f');
     dropArea.html(compairsonHTML);
 }
 
@@ -980,13 +978,13 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
                 var buttonID = this.id;
                 var buttonNumber = buttonID.slice('plotButton'.length);
                 var plotID = 'graphPoint' + buttonNumber;
-                
+
                 //Do we already have a plot?
                 var plotHTML = $('#' + plotID);
-                
+
                 if(plotHTML.html() == '') {
-                    plotScatter(dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName, 
-                            dataPoint.dataValues[buttonNumber].timeValues, 
+                    plotScatter(dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName,
+                            dataPoint.dataValues[buttonNumber].timeValues,
                             plotID, 0);
                 } else {
                     plotHTML.html('');
@@ -1001,13 +999,22 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
                         dataPoint.dataValues[buttonNumber].timeValues,
                         'multiGraph', 1);
                 getRegressionFunctionPlot(
-                        dataPoint.dataValues[buttonNumber].timeValues, 
-                        'multiGraph',dataPoint.code3, 
+                        dataPoint.dataValues[buttonNumber].timeValues,
+                        'multiGraph',dataPoint.code3,
                         dataPoint.dataValues[buttonNumber].typeName);
             })
         }
     }
-    
+    //Do something with the input
+    var input = $('#myInput');
+    input.keyup(function() {
+        searchLayer();
+    });
+
+    var buttonObj = $('#search');
+    buttonObj.button();
+    buttonObj.click(myFunction);
+
 }
 
 //Based on z-score get a colour
@@ -1015,12 +1022,12 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 function getColour(zScore) {
     var configuration = {};
     configuration.attributes = new WorldWind.ShapeAttributes(null);
-    
+
     //Could use exponential decay function or something
     var red = 0;
     var green = 0;
-    
-    
+
+
     if(zScore < 0) {
         red = 1;
         green = Math.exp(zScore);
@@ -1032,9 +1039,9 @@ function getColour(zScore) {
         red = Math.exp(-1*zScore);
     }
     console.log(red, green, zScore);
-    configuration.attributes.interiorColor = 
+    configuration.attributes.interiorColor =
             new WorldWind.Color(red, green, 0, 1);
-    configuration.attributes.outlineColor = 
+    configuration.attributes.outlineColor =
             new WorldWind.Color(0.5 * red, 0.5 * green, 0, 1);
     return configuration;
 }
@@ -1052,7 +1059,7 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
     console.log(values);
     var mean = ss.mean(values);
     var sd = ss.standardDeviation(values);
-    
+
     //Loop through and determine the colour based on zscore
     var countryLayers = new WorldWind.RenderableLayer('Countries');
     var zScore;
@@ -1061,7 +1068,7 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
         //Get the colour
         var countryConfiguration;
         countryConfiguration = getColour(zScore);
-        
+
         //Fire up the rendering
         var j = 0;
         for(j = 0; j < geoJSONData.features.length; j++) {
@@ -1076,7 +1083,7 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
             }
         }
     }
-    
+
     //Returns a renderable layer
     return countryLayers;
 }
@@ -1088,38 +1095,38 @@ function getXYPairs(incomingData) {
     var xyPairs = [];
     var i = 0;
     for(i = 0; i < incomingData.length; i++) {
-        xyPairs.push([parseFloat(incomingData[i].year), 
+        xyPairs.push([parseFloat(incomingData[i].year),
                 parseFloat(incomingData[i].value)]);
     }
-    
+
     return xyPairs;
 }
 
 //Given a set of data, finds the regression function
-function getRegressionFunctionPlot(incomingData, htmlID, countryCode, 
+function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
         titleName) {
     var regressionFunction;
-    
+
     //Filter out the data
     var tempDataArray = filterOutBlanks(incomingData);
     incomingData = tempDataArray;
-    
+
     //Get the xy pairs
     var xyPairs = getXYPairs(incomingData);
-    
+
     //Perform a linear regression
     var regressionFunction = ss.linearRegression(xyPairs);
     console.log(xyPairs, regressionFunction);
     //Retrieve the new y-values
     var regressionFunctionLine = ss.linearRegressionLine(regressionFunction);
-    
+
     var i = 0;
     var newYValues = [];
     for(i = 0; i < incomingData.length; i++) {
         newYValues.push(regressionFunctionLine(incomingData[i].year));
     }
     console.log(newYValues);
-    
+
     //Format it it can be used by plotScatter function
     var inputData = [];
     var tempData;
@@ -1129,10 +1136,10 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
         tempData.value = newYValues[i];
         inputData.push(tempData);
     }
-    
+
     //Assuming the previous title was made, simply add regression to the add
     titleName += ' regression';
-    
+
     //Plot it
     plotScatter(countryCode, titleName, inputData, htmlID, 1);
 }
@@ -1151,21 +1158,42 @@ function generateRemoveButton() {
 }
 
 
+        //Search layer data
+        function searchLayer() {
+            var titles = $('.layerTitle');
+            var input = $('#myInput');
+            console.log(input);
+            for (var i = 0; i < titles.length; i ++) {
+
+                //Agriculture Blah == #myInput? -- false probably
+
+                //console.log($(titles[i]).html(), input[0].value);
+                if ($(titles[i]).html() == input[0].value) {
+                    $(titles[i]).show();
+                }
+                else{
+                    $(titles[i]).hide();
+                }
+            }
+        }
+
 //Generates the button
         function generateAgriCultureButtons(inputData, codeName) {
             //Based on the input data, generate the buttons/html
-            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for datasets.." title="Type in a layer">';
+            var agriHTML = '<h4>Agriculture Data</h4>' +
+                    '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
+            agriHTML += '<button id="search"></button>';
             var dataPoint = findDataPointCountry(inputData, codeName,3);
             if(dataPoint != 0) {
                 var i = 0;
                 agriHTML += '<ul id="myUL">';
                 for(i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the HTML
-                    agriHTML += '<li>' + dataPoint.dataValues[i].typeName; + '</li>';
+                    agriHTML += '<div class="layerTitle"><li>' + dataPoint.dataValues[i].typeName + '</li>';
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'
                         + ' id="plotButton' + i + '">Plot Graph</button>';
-                    agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
+                    agriHTML += '<button id="addButton' + i + '">Add Graph</button></div>';
                     agriHTML += '<br>';
                 }
                 agriHTML += '</ul>';
@@ -1173,22 +1201,10 @@ function generateRemoveButton() {
             return agriHTML;
         }
 
-//Search layer data
-        function myFunction() {
-            var input, ul, li, a, i;
-            input = document.getElementById("myInput");
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    ul[i].style.display = "";
-                } else {
-                    ul[i].style.display = "none";
 
-                }
-            }
-        }
+
+
+
 
 
 //Creates a scatter plot based on the input data
@@ -1266,7 +1282,7 @@ var tabsFn = (function() {
 
 // sidebar functions
 $( function() {
-    $( "#draggable" ).draggable({containment: "window",handle:".nav-tabs"});
+    $( "#draggable" ).draggable({containment: "window"});
 
 } );
 
@@ -1285,63 +1301,63 @@ $(document).ready(function() {
 //sidebar toggle
 $(document).ready(function() {
     $(".toggle2").click(function () {
-        $(".tab2").toggle("slow","swing");
-        $(".tab1").hide("slow","swing");
-        $(".tab3").hide("slow","swing");
-        $(".tab4").hide("slow","swing");
-        $(".tab5").hide("slow","swing");
-        $(".tab6").hide("slow","swing");
+        $(".tab2").toggle();
+        $(".tab1").hide();
+        $(".tab3").hide();
+        $(".tab4").hide();
+        $(".tab5").hide();
+        $(".tab6").hide();
     });
 });
 
 $(document).ready(function() {
     $(".toggle3").click(function () {
-        $(".tab3").toggle("slow","swing");
-        $(".tab2").hide("slow","swing");
-        $(".tab1").hide("slow","swing");
-        $(".tab4").hide("slow","swing");
-        $(".tab5").hide("slow","swing");
-        $(".tab6").hide("slow","swing");
+        $(".tab3").toggle();
+        $(".tab2").hide();
+        $(".tab1").hide();
+        $(".tab4").hide();
+        $(".tab5").hide();
+        $(".tab6").hide();
     });
 });
 $(document).ready(function() {
     $(".toggle4").click(function () {
-        $(".tab4").toggle("slow","swing");
-        $(".tab2").hide("slow","swing");
-        $(".tab1").hide("slow","swing");
-        $(".tab3").hide("slow","swing");
-        $(".tab5").hide("slow","swing");
-        $(".tab6").hide("slow","swing");
+        $(".tab4").toggle();
+        $(".tab2").hide();
+        $(".tab1").hide();
+        $(".tab3").hide();
+        $(".tab5").hide();
+        $(".tab6").hide();
     });
 });
 $(document).ready(function() {
     $(".toggle5").click(function () {
-        $(".tab5").toggle("slow","swing");
-        $(".tab2").hide("slow","swing");
-        $(".tab1").hide("slow","swing");
-        $(".tab3").hide("slow","swing");
-        $(".tab4").hide("slow","swing");
-        $(".tab6").hide("slow","swing");
+        $(".tab5").toggle();
+        $(".tab2").hide();
+        $(".tab1").hide();
+        $(".tab3").hide();
+        $(".tab4").hide();
+        $(".tab6").hide();
     });
 });
 $(document).ready(function() {
     $(".toggle6").click(function () {
-        $(".tab6").toggle("slow","swing");
-        $(".tab2").hide("slow","swing");
-        $(".tab1").hide("slow","swing");
-        $(".tab3").hide("slow","swing");
-        $(".tab4").hide("slow","swing");
-        $(".tab5").hide("slow","swing");
+        $(".tab6").toggle();
+        $(".tab2").hide();
+        $(".tab1").hide();
+        $(".tab3").hide();
+        $(".tab4").hide();
+        $(".tab5").hide();
     });
 });
 $(document).ready(function() {
     $(".toggle1").click(function () {
-        $(".tab1").toggle("slow","swing");
-        $(".tab2").hide("slow","swing");
-        $(".tab3").hide("slow","swing");
-        $(".tab4").hide("slow","swing");
-        $(".tab5").hide("slow","swing");
-        $(".tab6").hide("slow","swing");
+        $(".tab1").toggle();
+        $(".tab2").hide();
+        $(".tab3").hide();
+        $(".tab4").hide();
+        $(".tab5").hide();
+        $(".tab6").hide();
     });
 });
 });
