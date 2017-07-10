@@ -144,7 +144,7 @@ requirejs({paths:{
         }
 
         //Handle a pick (only placemarks shall be)
-        var highlightedItems = []
+        var highlightedItems = [];
         var handlePick = function(o) {
             var x = o.clientX;
             var y = o.clientY;
@@ -967,7 +967,7 @@ function generateGeoComparisonButton(agriData) {
     for(i = 0; i < count; i++) {
         var buttonTempName = agriData[0].dataValues[i].typeName;
         compairsonHTML += '<button id="geoCompType' + i +
-                '">Generate Geo Comparison for' + buttonTempName + '</button><br>';
+                '">Generate Geo Comparison for ' + buttonTempName + '</button><br>';
     }
 
     //Also implement the slider
