@@ -992,7 +992,7 @@ function generateGeoComparisonButton(agriData) {
     //Also implement the slider
     comparisonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
     var dropArea = $('#d');
-    dropArea.html(comparisonHTML);
+    dropArea.append(comparisonHTML);
 }
 
 //Gives the button functionality
@@ -1061,54 +1061,63 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
 function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
     //Do a search for all the buttons based on the data
     var dataPoint = findDataPointCountry(inputData, codeName, 3);
-    if (dataPoint != 0) {
+    if(dataPoint != 0) {
         var i = 0;
-        for (i = 0; i < dataPoint.dataValues.length; i++) {
+        for(i = 0; i < dataPoint.dataValues.length; i++) {
             var buttonHTML = $('#plotButton' + i).button();
-            buttonHTML.click(function (event) {
+            buttonHTML.click(function(event) {
                 //Generate the plot based on things
                 var buttonID = this.id;
                 var buttonNumber = buttonID.slice('plotButton'.length);
-                var selfHTML = $('#' + buttonID);
+				var selfHTML = $('#' + buttonID);
                 var plotID = 'graphPoint' + buttonNumber;
-
-
+                
                 //Do we already have a plot?
                 var plotHTML = $('#' + plotID);
-                if (plotHTML.html() == '') {
-                    plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
-                        dataPoint.dataValues[buttonNumber].timeValues,
-                        plotID, 0);
-                    selfHTML.button("option", "label", "Hide Graph");
+                if(plotHTML.html() == '') {
+                    plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
+                            dataPoint.dataValues[buttonNumber].timeValues, 
+                            plotID, 0);
+					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
-                    selfHTML.html("option", "label", 'Plot Graph');
+					selfHTML.html("option", "label", 'Plot Graph');
                 }
             })
-            var addButtonHTML = $('#addButton' + i).button();
-            addButtonHTML.click(function (event) {
+            var combineButtonHTML = $('#combineButton' + i).button();
+            combineButtonHTML.click(function(event) {
                 var buttonID = this.id;
-                var buttonNumber = buttonID.slice('addButton'.length);
+                var buttonNumber = buttonID.slice('combineButton'.length);
                 //Add to the graph
-                plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
-                    dataPoint.dataValues[buttonNumber].timeValues,
-                    'multiGraph', 1);
-                getRegressionFunctionPlot(
-                    dataPoint.dataValues[buttonNumber].timeValues,
-                    'multiGraph', dataPoint.code3,
-                    dataPoint.dataValues[buttonNumber].typeName);
-            })
+                plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
+                        dataPoint.dataValues[buttonNumber].timeValues,
+                        'multiGraph', 1);
+            });
+			
+			var addButtonHTML = $('#addButton' + i).button();
+			addButtonHTML.click( function(event) {
+				//Grab id
+				var buttonID = this.id;
+				var buttonNumber = buttonID.slice('addButton'.length);
+				
+				//Check how many divs there are 
+				var manyGraphDivChildren = $('#manyGraph > div');
+				
+				var graphNumber = manyGraphDivChildren.length;
+				
+				//Generate the html
+				var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
+				
+				$('#manyGraph').append(graphDiv);
+				
+				//Graph it
+				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
+                            dataPoint.dataValues[buttonNumber].timeValues, 
+                            'subGraph' + graphNumber, 0);
+			});
         }
     }
-    //Do something with the input
-    var input = $('#myInput');
-    input.keyup(function() {
-        searchLayer();
-    });
-
-    var buttonObj = $('#search');
-    buttonObj.button();
-    buttonObj.click(searchLayer);
+    
 }
 
 //Based on z-score get a colour
@@ -1289,7 +1298,6 @@ function generateAtmoButtons(inputData, stationName) {
 //Generates the button
         function generateAgriCultureButtons(inputData, codeName) {
             //Based on the input data, generate the buttons/html
-            var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for agricultura data.." title="Type in a layer">';
             var agriHTML = '<h4>Agriculture Data</h4>' +
                 '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
             agriHTML += '<button id="search"></button>';
@@ -1304,6 +1312,7 @@ function generateAtmoButtons(inputData, stationName) {
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'
                         + ' id="plotButton' + i + '">Plot Graph</button>';
+					agriHTML += '<button id="combineButton' + i + '">Combine Grpah </button>';
                     agriHTML += '<button id="addButton' + i + '">Add Graph</button></div>';
                     agriHTML += '<br>';
                 }
@@ -1321,11 +1330,11 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
     var xValues = [];
     var yValues = [];
     var i = 0;
-    for (i = 0; i < filteredData.length; i++) {
+    for(i = 0; i < filteredData.length; i++) {
         xValues.push(parseFloat(filteredData[i].year));
         yValues.push(parseFloat(filteredData[i].value));
     }
-
+    
     //Create the plotly graph
     var graph = {
         name: titleName + ' ' + secondName,
@@ -1334,27 +1343,41 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
         mode: 'markers',
         type: 'scatter'
     };
-
+    
     var xAxis = {
         title: 'Year'
     }
-
-    var yAxis = {
-        title: 'Unitless'
-    }
-
+    
+	if(mode == 0) {
+		var yAxis = {
+			title: titleName
+		}; 
+	}
+	else {
+		var yAxis = {
+			title: 'Unitless'
+		};
+	}
+	
+	var titleString = '';
+	if(mode == 0) {
+		titleString = titleName + ' vs Year';
+	} else {
+		titleString = 'Legend vs Year';
+	}
+	
     var layout = {
         xaxis: xAxis,
         yaxis: yAxis,
-        title: 'Legend vs year'
+        title: titleString
     };
-
+    
     //Check if the htmlID is empty
-    var plotHTML = $('#' + htmlID);
-    if ((mode == 0) || ((mode == 1) && plotHTML.html() == '')) {
+    var plotHTML = $('#'+ htmlID);
+    if((mode == 0) || ((mode == 1) && plotHTML.html() == '')){
         //Indicates new plot
         Plotly.newPlot(htmlID, [graph], layout);
-    } else if (mode == 1) {
+    } else if(mode == 1) {
         Plotly.addTraces(htmlID, [graph]);
         var dimensions = {
             width: '80%'
