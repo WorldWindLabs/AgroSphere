@@ -1175,8 +1175,8 @@ function giveWeatherButtonFunctionality() {
 				//Create some html
 				var dropArea = $('#searchDetails');
 				var tempHTML = '<h5>Weather Details for ' + data.name + '</h5>';
-				tempHTML += '<p>Current outlook:' + data.weather.main + '</p>';
-				tempHTML += '<p>Current outlook description:' + data.weather.description + '</p>';
+				tempHTML += '<p>Current outlook:' + data.weather[0].main + '</p>';
+				tempHTML += '<p>Current outlook description:' + data.weather[0].description + '</p>';
 				tempHTML += '<p>Current Temperature (K): ' + data.main.temp + '</p>';
 				tempHTML += '<p>Max Temperature Today (K): ' + data.main.temp_max + '</p>'; 
 				tempHTML += '<p>Min Temperature Today (K): ' + data.main.temp_min + '</p>';
