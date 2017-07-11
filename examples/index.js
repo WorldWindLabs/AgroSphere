@@ -1021,7 +1021,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
 					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
-					selfHTML.html("option", "label", "Plot Graph");
+					selfHTML.button("option", "label", "Plot Graph");
                 };			
 			});
 			var combineButtonHTML = $('#combineButton' + i).button();
@@ -1084,7 +1084,7 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
-					selfHTML.html("option", "label", "Plot Graph");
+					selfHTML.button("option", "label", "Plot Graph");
                 }
             })
             var combineButtonHTML = $('#combineButton' + i).button();
