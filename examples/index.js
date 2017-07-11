@@ -1504,6 +1504,17 @@ $(document).ready(function () {
 
 //sidebar toggle
 $(document).ready(function () {
+    $(".toggle1").click(function () {
+        $(".tab1").toggle('slow', 'swing');
+        $(".tab2").hide('slow', 'swing');
+        $(".tab3").hide('slow', 'swing');
+        $(".tab4").hide('slow', 'swing');
+        $(".tab5").hide('slow', 'swing');
+        $(".tab6").hide('slow', 'swing');
+        $(".tab7").hide('slow', 'swing');
+    });
+});
+$(document).ready(function () {
     $(".toggle2").click(function () {
         $(".tab2").toggle('slow', 'swing');
         $(".tab1").hide('slow', 'swing');
@@ -1511,6 +1522,7 @@ $(document).ready(function () {
         $(".tab4").hide('slow', 'swing');
         $(".tab5").hide('slow', 'swing');
         $(".tab6").hide('slow', 'swing');
+        $(".tab7").hide('slow', 'swing');
     });
 });
 
@@ -1522,8 +1534,10 @@ $(document).ready(function () {
         $(".tab4").hide('slow', 'swing');
         $(".tab5").hide('slow', 'swing');
         $(".tab6").hide('slow', 'swing');
+        $(".tab7").hide('slow', 'swing');
     });
 });
+
 $(document).ready(function () {
     $(".toggle4").click(function () {
         $(".tab4").toggle('slow', 'swing');
@@ -1532,8 +1546,10 @@ $(document).ready(function () {
         $(".tab3").hide('slow', 'swing');
         $(".tab5").hide('slow', 'swing');
         $(".tab6").hide('slow', 'swing');
+        $(".tab7").hide('slow', 'swing');
     });
 });
+
 $(document).ready(function () {
     $(".toggle5").click(function () {
         $(".tab5").toggle('slow', 'swing');
@@ -1542,8 +1558,10 @@ $(document).ready(function () {
         $(".tab3").hide('slow', 'swing');
         $(".tab4").hide('slow', 'swing');
         $(".tab6").hide('slow', 'swing');
+        $(".tab7").hide('slow', 'swing');
     });
 });
+
 $(document).ready(function () {
     $(".toggle6").click(function () {
         $(".tab6").toggle('slow', 'swing');
@@ -1552,16 +1570,20 @@ $(document).ready(function () {
         $(".tab3").hide('slow', 'swing');
         $(".tab4").hide('slow', 'swing');
         $(".tab5").hide('slow', 'swing');
+        $(".tab7").hide('slow', 'swing');
     });
 });
+
 $(document).ready(function () {
-    $(".toggle1").click(function () {
-        $(".tab1").toggle('slow', 'swing');
+    $(".toggle7").click(function () {
+        $(".tab7").toggle('slow', 'swing');
+        $(".tab1").hide('slow', 'swing');
         $(".tab2").hide('slow', 'swing');
         $(".tab3").hide('slow', 'swing');
         $(".tab4").hide('slow', 'swing');
         $(".tab5").hide('slow', 'swing');
         $(".tab6").hide('slow', 'swing');
+
     });
 });
 });
