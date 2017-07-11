@@ -1261,7 +1261,14 @@ function generateRemoveButton() {
 		var almightyGraphDiv = $('#almightyGraph > div');
 		var i = 0;
 		for(i = 0; i < almightyGraphDiv.length; i++) {
-			Plotly.purge(almightyGraphDiv[i].id);
+			if(almightyGraphDiv[i].childNodes.length == 1) {
+				Plotly.purge(almightyGraphDiv[i].id);
+			} else {
+				var j = 0;
+				for(j = 0; j < almightyGraphDiv[i].childNodes.length; j++) {
+					Plotly.purge(almightyGraphDiv[i].childNodes[j].id);
+				}
+			}
 		}
     });
 }
