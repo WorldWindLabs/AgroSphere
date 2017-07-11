@@ -1149,7 +1149,7 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 //Generates a button which searches a city and code
 function generateWeatherHTML() {
 	var weatherHTML = '<h4>Weather Search</h4>';
-	weatherHTML += '<input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer">'
+	weatherHTML += '<input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer">';
 	weatherHTML += '<input type="text" id="countryInput" placeholder="Put in 2-letter code">';
 	weatherHTML += '<button id="searchWeather">Search Weather</button><br>';
 	

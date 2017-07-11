@@ -2,7 +2,6 @@ div, h1, h2, h3, h4, h5, p, a {
     color:white !important;
 }
 
-
 #info-img {
     width:100%;
 }
@@ -428,4 +427,8 @@ audio
 
 .img-responsive {
     width:100%;
+}
+
+#cityInput, #countryInput {
+    color:black !important;
 }
