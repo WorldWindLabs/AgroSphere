@@ -145,7 +145,7 @@ requirejs({paths:{
         }
 
         //Handle a pick (only placemarks shall be)
-        var highlightedItems = []
+        var highlightedItems = [];
         var handlePick = function(o) {
             var x = o.clientX;
             var y = o.clientY;
@@ -693,7 +693,7 @@ function loadCSVDataArray() {
 //Find a value given a name
 //Returns 0 if it can't be found, else returns something
 //This assumes we are working with convertArrayToDataSet
-function findDataBasedName(inputArray, name) {
+function findDataBaseName(inputArray, name) {
     var i = 0;
     for(i = 0; i < inputArray.length; i++) {
         //Find if the name exists
@@ -716,7 +716,7 @@ function convertArrayToDataSet(csvData) {
         var needPushToObj;
         //First instance or can't find it
         if((objectList.length == 0) ||
-                (findDataBasedName(objectList,csvData[i][0]) == 0)) {
+                (findDataBaseName(objectList,csvData[i][0]) == 0)) {
 
             //Give it a name assuming it is the first things
             tempObject.code3 = csvData[i][0]
@@ -731,7 +731,7 @@ function convertArrayToDataSet(csvData) {
             needPushToObj = true;
         } else {
             //We found it
-            tempObject = findDataBasedName(objectList, csvData[i][0]);
+            tempObject = findDataBaseName(objectList, csvData[i][0]);
             needPushToObj = false;
         }
         var j = 0;
