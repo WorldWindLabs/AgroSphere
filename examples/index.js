@@ -234,7 +234,7 @@ requirejs({paths:{
             }
         };
         
-        wwd.addEventListener('mousemove', handlePick);
+        wwd.addEventListener('click', handlePick);
         // Set up to handle clicks and taps.
 
         // The common gesture-handling function.
