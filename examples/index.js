@@ -1204,7 +1204,7 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
 		} else if (zValue == 0) {
 			red = 255;
 			green = 255;
-		} else if (i > 0) {
+		} else if (zValue > 0) {
 			green = 255;
 			red = Math.round(Math.exp(-1 * zValue) * 255);
 		}		
