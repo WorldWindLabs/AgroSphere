@@ -107,7 +107,7 @@ requirejs({paths:{
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
         
         //Automatically zoom into NASA Ames
-        wwd.goTo(new WorldWind.Position(37.4089, -122.0644, 10e5));
+        wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 10e5));
 
         var starFieldLayer = new WorldWind.StarFieldLayer();
         var atmosphereLayer = new WorldWind.AtmosphereLayer();
@@ -556,7 +556,7 @@ function generatePlacemarkLayer(wwd, csvData){
             //the highlight representation.
             highlightAttributes = new
                     WorldWind.PlacemarkAttributes(placemarkAttributes);
-            highlightAttributes.imageScale = 4;
+            highlightAttributes.imageScale = 3;
             placemark.highlightAttributes = highlightAttributes;
 
             //Attach the type to it
