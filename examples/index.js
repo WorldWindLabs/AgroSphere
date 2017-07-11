@@ -963,7 +963,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
             //Check if the country layer exist
             var l = 0;
             for(l = 0; l < wwd.layers.length; l++) {
-                if(wwd.layers[l].displayName == 'Countries') {
+                if(wwd.layers[l].displayName == 'Geo Country Data') {
                     wwd.removeLayer(wwd.layers[l]);
                 }
             }
@@ -1167,8 +1167,54 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
     var mean = ss.mean(values);
     var sd = ss.standardDeviation(values);
 
+	//Generate the legend for the thing
+	var legendAmounts = 7;
+	var legendOffset = -3;
+	
+	//Empty the legend segment
+	$('#colour-legend').html('');
+	
+	var legendHTML = '';
+	for(i = 0; i < legendAmounts; i++) {
+		//Search the div and generate the appropiate canvas next to it
+		var segmentHTML = '<h4>Geo comparison Legend</h4>';
+		segmentHTML += '<p>Standard deviation of ' + (i + legendOffset) + 
+				' or a value of ' + (mean + (sd * (i + legendOffset))) + '</p>';
+		segmentHTML += '<canvas id="canvas'+ i + '" width="200" height="100"></canvas>';
+		
+		segmentHTML += '<br>';
+		legendHTML += segmentHTML;
+	}
+	$('#colour-legend').html(legendHTML);
+	
+	for(i = 0; i < legendAmounts; i++) {
+		//Colour the canvas
+		var tempCanvas = document.getElementById("canvas" + i);
+		var tempCanvaCtx = tempCanvas.getContext("2d");
+		
+	    //Could use exponential decay function or something
+		var red = 0;
+		var green = 0;
+
+		var zValue = i + legendOffset;
+
+		if (zValue < 0) {
+			red = 255;
+			green = Math.round(Math.exp(zValue) * 255);
+		} else if (zValue == 0) {
+			red = 255;
+			green = 255;
+		} else if (i > 0) {
+			green = 255;
+			red = Math.round(Math.exp(-1 * zValue) * 255);
+		}		
+		console.log(red,green);
+		tempCanvaCtx.fillStyle = 'rgb('+ red +', ' + green + ', 0)';
+		tempCanvaCtx.fillRect(0,0,200,100);
+	}
+	
     //Loop through and determine the colour based on zscore
-    var countryLayers = new WorldWind.RenderableLayer('Countries');
+    var countryLayers = new WorldWind.RenderableLayer('Geo Country Data');
     var zScore;
     for (i = 0; i < valueCountryPair.length; i++) {
         zScore = ss.zScore(valueCountryPair[i].value, mean, sd);
