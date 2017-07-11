@@ -1396,7 +1396,7 @@ function generateAtmoButtons(inputData, stationName) {
             atmoHTML += '<div id="graphPoint' + i + '"></div>';
             atmoHTML += '<button'
                 + ' id="plotButton' + i + '">Plot Graph</button>';
-			atmoHTML += '<button id="combineButton' + i + '">Combine Grpah </button>';
+			atmoHTML += '<button id="combineButton' + i + '">Combine Graph </button>';
             atmoHTML += '<button id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br>';
         }
@@ -1437,7 +1437,7 @@ function generateAtmoButtons(inputData, stationName) {
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'
                         + ' id="plotButton' + i + '">Plot Graph</button>';
-					agriHTML += '<button id="combineButton' + i + '">Combine Grpah </button>';
+					agriHTML += '<button id="combineButton' + i + '">Combine Graph </button>';
                     agriHTML += '<button id="addButton' + i + '">Add Graph</button><br></div>';
                 }
                 agriHTML += '</ul>';
