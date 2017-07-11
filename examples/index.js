@@ -10,6 +10,8 @@
  * @version $Id: index.js 3320 2015-07-15 20:53:05Z dcollins $
  */
 
+var APIKEY = '26fb68df7323284ea4430d8e4d3c60b1';
+ 
 requirejs({paths:{
     "jquery":"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min",
     "jqueryui": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min",
@@ -102,6 +104,10 @@ requirejs({paths:{
         //Generate the remove button
         generateRemoveButton();
         
+		//Generate the button for weather
+		generateWeatherHTML();
+		giveWeatherButtonFunctionality();
+		
         //Generate regression comparison and the provide functionality
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
@@ -1133,11 +1139,52 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 			} else if(textValue == '') {
 				$(layerTitles[i]).show();
 			} else if($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-				$(layerTitles[i]).show();
+			$(layerTitles[i]).show();
 			}
 		}
     });
        
+}
+
+//Generates a button which searches a city and code
+function generateWeatherHTML() {
+	var weatherHTML = '<h4>Weather Search</h4>';
+	weatherHTML += '<input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer">'
+	weatherHTML += '<input type="text" id="countryInput" placeholder="Put in 2-letter code">';
+	weatherHTML += '<button id="searchWeather">Search Weather</button><br>';
+	
+	$('#e').append(weatherHTML);
+}
+
+function giveWeatherButtonFunctionality() {
+	var weatherButton = $('#searchWeather').button();
+	weatherButton.on('click', function() {
+		//Extract the two inputs
+		var cityInput = $('#cityInput').val();
+		var countryInput = $('#countryInput').val();
+		
+		//Make an api request
+		var apiURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ',' 
+				+ countryInput + '&appid=' + APIKEY;
+		//Make an ajax request
+		$.ajax({
+			url: encodeURI(apiURL),
+			method: 'get',
+			dataType: 'json',
+			success: function(data) {
+				//Create some html
+				var dropArea = $('#searchDetails');
+				var tempHTML = '<h5>Weather Details for ' + data.name + '</h5>';
+				tempHTML += '<p>Current Temperature (K): ' + data.main.temp + '</p>';
+				tempHTML += '<p>Max Temperature Today (K): ' + data.main.temp_max + '</p>'; 
+				tempHTML += '<p>Min Temperature Today (K): ' + data.main.temp_min + '</p>';
+				tempHTML += '<p>Pressure (HPa): ' + data.main.pressure + '</p>';
+				tempHTML += '<p>Humidity (%): ' + data.main.humidity + '</p>';
+				dropArea.append(tempHTML);
+				console.log('success');
+			}
+		})
+	});
 }
 
 //Based on z-score get a colour
