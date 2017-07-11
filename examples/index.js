@@ -1115,15 +1115,29 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
         }
     }
 
-    //Do something with the input
-      var input = $('#myInput');
-      input.keyup(function() {
-          searchLayer();
-      });
-       var buttonObj = $('#search');
-       buttonObj.button();
-       buttonObj.click(searchLayer);
-    
+    //Assign functionality to the search bar
+    var searchButton = $('#search').button();
+    searchButton.on('click', function() {
+        //Basically get the input value
+		var input = $('#myInput');
+		var textValue = input.val().toUpperCase();
+		
+		//Iterate through the entire list and hide if it doesn't contain the
+		//thing
+		var i = 0;
+		var layerTitles = $('div .layerTitle');
+		var layerTitleList = $('div .layerTitle > li');
+		for(i = 0; i < layerTitleList.length; i++) {
+			if(!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+				$(layerTitles[i]).hide();
+			} else if(textValue == '') {
+				$(layerTitles[i]).show();
+			} else if($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+				$(layerTitles[i]).show();
+			}
+		}
+    });
+       
 }
 
 //Based on z-score get a colour
@@ -1346,7 +1360,6 @@ function generateAtmoButtons(inputData, stationName) {
         function searchLayer() {
             var titles = $('.layerTitle');
             var input = $('#myInput');
-            console.log(input);
             for (var i = 0; i < titles.length; i ++) {
 
                 //Agriculture Blah == #myInput? -- false probably
@@ -1366,21 +1379,19 @@ function generateAtmoButtons(inputData, stationName) {
             //Based on the input data, generate the buttons/html
             var agriHTML = '<h4>Agriculture Data</h4>' +
                 '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-            agriHTML += '<button id="search"></button>';
+            agriHTML += '<button id="search">Search</button>';
             var dataPoint = findDataPointCountry(inputData, codeName,3);
             if(dataPoint != 0) {
                 var i = 0;
                 agriHTML += '<ul id="myUL">';
                 for(i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the HTML
-                    agriHTML += '<li>' + dataPoint.dataValues[i].typeName; + '</li>';
-                    agriHTML += '<div class="layerTitle"><li>' + dataPoint.dataValues[i].typeName + '</li>';
+                    agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'
                         + ' id="plotButton' + i + '">Plot Graph</button>';
 					agriHTML += '<button id="combineButton' + i + '">Combine Grpah </button>';
-                    agriHTML += '<button id="addButton' + i + '">Add Graph</button></div>';
-                    agriHTML += '<br>';
+                    agriHTML += '<button id="addButton' + i + '">Add Graph</button><br></div>';
                 }
                 agriHTML += '</ul>';
             }
