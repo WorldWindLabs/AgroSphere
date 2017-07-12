@@ -1537,7 +1537,9 @@ var tabsFn = (function () {
 
 // sidebar functions
 $(function () {
-    $("#draggable").draggable({containment: "window", handle:".nav-tabs"});
+    $("#draggable").draggable({
+        handle:".nav-tabs"
+    });
 });
 
 $(document).ready(function () {
