@@ -1546,6 +1546,8 @@ $(document).ready(function () {
     $(".resizable").resizable({
         handles: 'e, w',
         animate: true,
+        animateEasing: "easeOutBounce",
+        animateDuration: "slow",
         maxHeight: 800,
         maxWidth: 1380,
         minHeight: 150,
