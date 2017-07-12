@@ -988,8 +988,8 @@ function generateGeoComparisonButton(agriData) {
     var comparisonHTML = '';
     for(i = 0; i < count; i++) {
         var buttonTempName = agriData[0].dataValues[i].typeName;
-        comparisonHTML += '<button id="geoCompType' + i +
-            '">Generate Geo Comparison for ' + buttonTempName + '</button><br>';
+        comparisonHTML += '<p><button id="geoCompType' + i +
+            '">Generate Geo Comparison for ' + buttonTempName + '</button><br></p>';
     }
     //Also implement the slider
     comparisonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
@@ -1362,7 +1362,7 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
 //Generate the button to remove the multigraphs
 function generateRemoveButton() {
     //Generate the remove button for the graphs
-    var removeHTML = '<button id="removeButton">Remove all graphs</button>';
+    var removeHTML = '<p><button id="removeButton">Remove all graphs</button></p>';
     $('#d').append(removeHTML);
     var removeButton = $('#removeButton');
     removeButton.button();
