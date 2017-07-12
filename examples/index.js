@@ -989,7 +989,7 @@ function generateGeoComparisonButton(agriData) {
     for(i = 0; i < count; i++) {
         var buttonTempName = agriData[0].dataValues[i].typeName;
         comparisonHTML += '<p><button id="geoCompType' + i +
-            '">Generate Geo Comparison for ' + buttonTempName + '</button><br></p>';
+            '">Generate Geo Comparison for ' + buttonTempName + '</button><br><p>';
     }
     //Also implement the slider
     comparisonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
