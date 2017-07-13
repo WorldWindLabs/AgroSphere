@@ -1141,28 +1141,6 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
         }
 
         //Assign functionality to the search bar
-        var searchButton = $('#search').button();
-        searchButton.on('click', function () {
-            //Basically get the input value
-            var input = $('#myInput');
-            var textValue = input.val().toUpperCase();
-
-            //Iterate through the entire list and hide if it doesn't contain the
-            //thing
-            var i = 0;
-            var layerTitles = $('div .layerTitle');
-            var layerTitleList = $('div .layerTitle > li');
-            for (i = 0; i < layerTitleList.length; i++) {
-                if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                    $(layerTitles[i]).hide();
-                } else if (textValue == '') {
-                    $(layerTitles[i]).show();
-                } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                    $(layerTitles[i]).show();
-                }
-            }
-        });
-
         $('#myInput').keyup(function (event) {
             //if (event.which == 13) {
                 var input = $('#myInput');
@@ -1496,7 +1474,7 @@ function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' +
         '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-    agriHTML += '<button class="btn-info" id="search">Search</button>';
+
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
