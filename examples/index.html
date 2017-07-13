@@ -138,7 +138,7 @@
 </div>
 
 <div class="col-md-3">
-    <div class="tabs-left" id='draggable'>
+    <div class="tabs-left resizable" id='draggable'>
         <ul class="nav nav-tabs">
             <li><a href="#a" data-toggle="tab" data-tooltip="Available Layers" class="toggle1"><span class="glyphicon glyphicon-globe"></span></a></li>
             <li><a href="#b" data-toggle="tab" data-tooltip="Layer Controls" class="toggle2"><span class="glyphicon glyphicon-pencil"></span></a></li>
@@ -148,14 +148,14 @@
             <li><a href="#f" data-toggle="tab" data-tooltip="View Options" class="toggle6"><span class="glyphicon glyphicon-eye-open"></span></a></li>
             <li><a href="#g" data-toggle="tab" data-tooltip="Learn Events" class="toggle7"><span class="glyphicon glyphicon-book"></span></a></li>
         </ul>
-        <div class="tab-content show resizable">
-            <div class="tab1 tab-pane" id="a"><h4>Available Layers</h4><div class="list-group" id="layerList"></div></div>
-            <div class="tab2 tab-pane" id="b"><h4>Layer Controls</h4></div>
-            <div class="tab3 tab-pane" id="c">
+        <div class="tab-content show">
+            <div class="tab1 tab-pane resizable" id="a"><h4>Available Layers</h4><div class="list-group" id="layerList"></div></div>
+            <div class="tab2 tab-pane resizable" id="b"><h4>Layer Controls</h4></div>
+            <div class="tab3 tab-pane resizable" id="c">
                 <h4>Country Details</h4>
                 <p>Please click on a flag to see data specific for a country or territory.</p>
             </div>
-            <div class="tab4 tab-pane" id="d">
+            <div class="tab4 tab-pane resizable" id="d">
                 <h4>Global Data Comparisons</h4>
 					<div id="almightyGraph">
 						<div id="multiGraph"></div>
@@ -164,11 +164,11 @@
 					<div id="colour-legend">
 					</div>
             </div>
-            <div class="tab5 tab-pane" id="e">
+            <div class="tab5 tab-pane resizable" id="e">
                 <h4>Current Weather</h4>
                 <div id="searchDetails"></div>
             </div>
-            <div class="tab6 tab-pane" id="f">
+            <div class="tab6 tab-pane resizable" id="f">
                 <h4>View Options</h4>
                 <h5>Projections</h5>
                 <div class="dropdown" id="projectionDropdown"></div>
@@ -193,7 +193,7 @@
                     Your browser does not support the audio element.
                 </audio>
             </div>
-            <div class="tab7 tab-pane" id="g">
+            <div class="tab7 tab-pane resizable" id="g">
                 <h4>Learn Events</h4>
                 <button class="btn btn-block togglebutton">WORLD FACTS</button>
                 <div class="focustext">
