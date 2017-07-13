@@ -87,7 +87,6 @@ body {
 .nav-tabs {
     float: left;
     border-bottom: 0;
-    height:600px;
 }
 
 .nav-tabs li {
@@ -430,6 +429,17 @@ audio
     width:100%;
 }
 
+/* color for current weather search bar input */
 #cityInput, #countryInput {
     color:black !important;
+}
+
+.tab-content {
+    background: red;
+}
+
+/* button css */
+
+.btn-info {
+    border-radius:5px;
 }

@@ -427,9 +427,9 @@ function generateTimeControl(wwd, layerName, layerNumber) {
     timeHTML += '<div id="time_date_' + layerNumber + '">INITIAL DATE</div>';
 
     //Create the three buttons
-	timeHTML += '<button id="time_left_' + layerNumber + '">Left</button>';
-	timeHTML += '<button id="time_middle_' + layerNumber + '">Play</button>';
-	timeHTML += '<button id="time_right_' + layerNumber + '">Right</button>';
+	timeHTML += '<button class="btn-info" id="time_left_' + layerNumber + '">Left</button>';
+	timeHTML += '<button class="btn-info" id="time_middle_' + layerNumber + '">Play</button>';
+	timeHTML += '<button class="btn-info" id="time_right_' + layerNumber + '">Right</button>';
 
     //Wrap up the HTML
     timeHTML += '</div>';
@@ -1002,7 +1002,7 @@ function generateGeoComparisonButton(agriData) {
     var comparisonHTML = '';
     for(i = 0; i < count; i++) {
         var buttonTempName = agriData[0].dataValues[i].typeName;
-        comparisonHTML += '<p><button id="geoCompType' + i +
+        comparisonHTML += '<p><button class="btn-info" id="geoCompType' + i +
             '">Generate Geo Comparison for ' + buttonTempName + '</button><br><p>';
     }
     //Also implement the slider
@@ -1171,7 +1171,7 @@ function generateWeatherHTML() {
 	var weatherHTML = '<p>Weather Search</p>';
 	weatherHTML += '<p><input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
 	weatherHTML += '<p><input type="text" id="countryInput" placeholder="Put in 2-letter code"></p>';
-	weatherHTML += '<p><button id="searchWeather">Search Weather</button></p>';
+	weatherHTML += '<p><button class="btn-info id="searchWeather">Search Weather</button></p>';
 	
 	$('#e').append(weatherHTML);
 }
@@ -1404,7 +1404,7 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
 //Generate the button to remove the multigraphs
 function generateRemoveButton() {
     //Generate the remove button for the graphs
-    var removeHTML = '<p><button id="removeButton">Remove all graphs</button></p>';
+    var removeHTML = '<p><button class="btn-info" id="removeButton">Remove all graphs</button></p>';
     $('#d').append(removeHTML);
     var removeButton = $('#removeButton');
     removeButton.button();
@@ -1440,9 +1440,9 @@ function generateAtmoButtons(inputData, stationName) {
             atmoHTML += '<p>' + dataPoint.dataValues[i].typeName + '</p>';
             atmoHTML += '<div id="graphPoint' + i + '"></div>';
             atmoHTML += '<button'
-                + ' id="plotButton' + i + '">Plot Graph</button>';
-			atmoHTML += '<button id="combineButton' + i + '">Combine Graph </button>';
-            atmoHTML += '<button id="addButton' + i + '">Add Graph</button>';
+                + ' class="btn-info' + ' id="plotButton' + i + '">Plot Graph</button>';
+			atmoHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
+            atmoHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br>';
         }
     }
@@ -1471,7 +1471,7 @@ function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' +
         '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-    agriHTML += '<button id="search">Search</button>';
+    agriHTML += '<button class="btn-info" id="search">Search</button>';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
@@ -1481,10 +1481,10 @@ function generateAgriCultureButtons(inputData, codeName) {
             agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
             agriHTML += '<div id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
-                + ' id="plotButton' + i + '">Plot Graph</button>';
-            agriHTML += '<button id="combineButton' + i + '">Combine Graph </button>';
-            agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
-            agriHTML += '<button id="regButton' + i + '">Project to 2050</button></div>';
+                + ' class="btn-info' + ' id="plotButton' + i + '">Plot Graph</button>';
+            agriHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
+            agriHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
+            agriHTML += '<button class="btn-info" id="regButton' + i + '">Project to 2050</button></div>';
             agriHTML += '<br></div>';
         }
         agriHTML += '</ul>';
