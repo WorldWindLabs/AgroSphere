@@ -16,18 +16,19 @@ requirejs({paths:{
     "jquery":"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min",
     "jqueryui": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min",
     "jquery-csv": "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/jquery.csv",
-    "simple-stats": "https://unpkg.com/simple-statistics@4.1.0/dist/simple-statistics.min"
+    "simple-stats": "https://unpkg.com/simple-statistics@4.1.0/dist/simple-statistics.min",
+	"regression": "../src/regression/regression"
 }
 },['../src/WorldWind',
         './LayerManager', '../src/formats/kml/KmlFile',
         '../src/formats/kml/controls/KmlTreeVisibility', './Pin', 'jquery', 'jqueryui', 'jquery-csv',
-        'simple-stats'],
+        'simple-stats', 'regression'],
     function (ww,
               LayerManager, KmlFile, KmlTreeVisibility) {
         "use strict";
         
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
-
+		var regression = require("regression");
         var wwd = new WorldWind.WorldWindow("canvasOne");
 
         var layers = [
@@ -55,7 +56,20 @@ requirejs({paths:{
             format: "image/png",
             size: 256
         };
-
+					// Data
+			var data2 = [
+				[1, 10],
+				[2, 30],
+				[3, 68],
+				[4, 130],
+				[5, 222],
+				[6, 350],
+				[7, 520],
+				[8, 738],
+				[9, 1010],
+				[10, 1342]
+			];
+		console.log(regression('exponential',data2));
         // new instance of layer created
         var dataLayer = new WorldWind.WmsLayer(config, null);
 
@@ -252,7 +266,7 @@ requirejs({paths:{
             // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
             // relative to the upper left corner of the canvas rather than the upper left corner of the page.
             var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-
+			console.log(pickList.objects);
             // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
             if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                 var position = pickList.objects[0].position;
@@ -1018,6 +1032,9 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
                     plotScatter(dataPoint.dataValues[buttonNumber].typeName, '',
                             dataPoint.dataValues[buttonNumber].timeValues,
                             plotID, 0);
+					getRegressionFunctionPlot(
+							dataPoint.dataValues[button].timeValues, plotID,
+							dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);
 					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
@@ -1081,6 +1098,9 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
                     plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
                             dataPoint.dataValues[buttonNumber].timeValues, 
                             plotID, 0);
+					getRegressionFunctionPlot(
+							dataPoint.dataValues[buttonNumber].timeValues, plotID,
+							dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);
 					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
@@ -1215,6 +1235,7 @@ function getColour(zScore) {
         new WorldWind.Color(red, green, 0, 1);
     configuration.attributes.outlineColor =
         new WorldWind.Color(0.5 * red, 0.5 * green, 0, 1);
+	configuration.name = 'Hello World';
     return configuration;
 }
 
@@ -1285,7 +1306,7 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
         //Get the colour
         var countryConfiguration;
         countryConfiguration = getColour(zScore);
-
+		countryConfiguration.name = 'haha';
         //Fire up the rendering
         var j = 0;
         for (j = 0; j < geoJSONData.features.length; j++) {
@@ -1295,11 +1316,19 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
                     return countryConfiguration;
                 }
                 var countryStringJSON = new WorldWind.GeoJSONParser(countryString);
-                countryStringJSON.load(null, tempCallBack, countryLayers);
+                countryStringJSON.load(null, tempCallBack, null);
+				var innerLayer = countryStringJSON.layer;
+				var k = 0;
+				for(k = 0; k < innerLayer.renderables.length; k++) {
+					innerLayer.renderables[k].userProperties.country = valueCountryPair[i].code3;
+				}
+				countryLayers.addRenderable(innerLayer);
+				//countryStringJSON.layer.displayName = valueCountryPair[i].code3;
+				//countryLayers.addRenderable(countryStringJSON.layer);
             }
         }
     }
-
+	console.log(countryLayers);
     //Returns a renderable layer
     return countryLayers;
 }
@@ -1322,7 +1351,7 @@ function getXYPairs(incomingData) {
 function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
                                    titleName) {
     var regressionFunction;
-
+	console.log('Hello1');
     //Filter out the data
     var tempDataArray = filterOutBlanks(incomingData);
     incomingData = tempDataArray;
@@ -1331,32 +1360,45 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
     var xyPairs = getXYPairs(incomingData);
 
     //Perform a linear regression
-    var regressionFunction = ss.linearRegression(xyPairs);
-
+    var regressionFunction = regression('linear', xyPairs);
+	var regressionFunction2 = regression('exponential', xyPairs);
     //Retrieve the new y-values
-    var regressionFunctionLine = ss.linearRegressionLine(regressionFunction);
+    //var regressionFunctionLine = ss.linearRegressionLine(regressionFunction);
 
     var i = 0;
     var newYValues = [];
-    for (i = 0; i < incomingData.length; i++) {
-        newYValues.push(regressionFunctionLine(incomingData[i].year));
+	var newYValues2 = [];
+	var startYear = 1960;
+	var endYear = 2050;
+    for (i = 0; i < endYear - startYear; i++) {
+        newYValues.push((regressionFunction.equation[0]*(i + startYear)) + regressionFunction.equation[1]);
+		newYValues2.push((regressionFunction2.equation[0]*Math.exp(regressionFunction2.equation[1]*(i + startYear))));
     }
 
     //Format it it can be used by plotScatter function
     var inputData = [];
+	var inputData2 = [];
     var tempData;
-    for (i = 0; i < incomingData.length; i++) {
+	var tempData2;
+    for (i = 0; i < endYear - startYear; i++) {
         tempData = {};
-        tempData.year = incomingData[i].year;
+        tempData.year = i + startYear;
         tempData.value = newYValues[i];
         inputData.push(tempData);
+		tempData2 = {};
+		tempData2.year = i + startYear;
+		tempData2.value = newYValues2[i];
+		inputData2.push(tempData2);
     }
 
     //Assuming the previous title was made, simply add regression to the add
     titleName += ' regression';
 
     //Plot it
+	console.log('Run', titleName, countryCode, inputData, htmlID);
+	
     plotScatter(titleName, countryCode, inputData, htmlID, 1);
+	plotScatter(titleName, countryCode, inputData2, htmlID, 1);
 }
 
 //Generate the button to remove the multigraphs
@@ -1399,7 +1441,7 @@ function generateAtmoButtons(inputData, stationName) {
             atmoHTML += '<div id="graphPoint' + i + '"></div>';
             atmoHTML += '<button'
                 + ' id="plotButton' + i + '">Plot Graph</button>';
-			atmoHTML += '<button id="combineButton' + i + '">Combine Graph </button>';
+			atmoHTML += '<button id="combineButton' + i + '">Combine Grpah </button>';
             atmoHTML += '<button id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br>';
         }
@@ -1440,8 +1482,10 @@ function generateAtmoButtons(inputData, stationName) {
                     agriHTML += '<div id="graphPoint' + i + '"></div>';
                     agriHTML += '<button'
                         + ' id="plotButton' + i + '">Plot Graph</button>';
-					agriHTML += '<button id="combineButton' + i + '">Combine Graph </button>';
-                    agriHTML += '<button id="addButton' + i + '">Add Graph</button><br></div>';
+					agriHTML += '<button id="combineButton' + i + '">Combine Grpah </button>';
+                    agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
+					agriHTML += '<button id="regButton' + i + '">Project to 2050</button></div>';
+					agriHTML += '<br></div>';
                 }
                 agriHTML += '</ul>';
             }
@@ -1501,6 +1545,7 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
     
     //Check if the htmlID is empty
     var plotHTML = $('#'+ htmlID);
+	console.log(mode);
     if((mode == 0) || ((mode == 1) && plotHTML.html() == '')){
         //Indicates new plot
         Plotly.newPlot(htmlID, [graph], layout);
@@ -1512,6 +1557,7 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
         var multiGraphUpdate = {
             title: 'Multiple Graphs'
         }
+		console.log('Hi');
         Plotly.update(htmlID, multiGraphUpdate);
         Plotly.relayout(htmlID, dimensions);
     }
