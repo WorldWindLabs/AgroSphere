@@ -17,18 +17,21 @@ requirejs({paths:{
     "jqueryui": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min",
     "jquery-csv": "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/jquery.csv",
     "simple-stats": "https://unpkg.com/simple-statistics@4.1.0/dist/simple-statistics.min",
-	"regression": "../src/regression/regression"
+	"regression": "../src/regression/regression",
+	"math": "../src/math/math.min"
 }
 },['../src/WorldWind',
         './LayerManager', '../src/formats/kml/KmlFile',
         '../src/formats/kml/controls/KmlTreeVisibility', './Pin', 'jquery', 'jqueryui', 'jquery-csv',
-        'simple-stats', 'regression'],
+        'simple-stats', 'regression', 'math'],
     function (ww,
               LayerManager, KmlFile, KmlTreeVisibility) {
         "use strict";
         
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 		var regression = require("regression");
+		var derivative = require("math");
+		console.log(derivative.derivative('sinh(x)','x'));
         var wwd = new WorldWind.WorldWindow("canvasOne");
 
         var layers = [
@@ -270,7 +273,11 @@ requirejs({paths:{
             // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
             if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                 var position = pickList.objects[0].position;
-                wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
+                
+				
+				//Find the closest country and placemark
+				findInformationUsingLocation(wwd, position.latitude, position.longitude, csvData[0], csvData[1]);
+				//wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
             }
         };
 
@@ -281,7 +288,7 @@ requirejs({paths:{
         var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
         
         console.timeEnd('First');
-        
+
 //Given a layerName and its layernumber, generate a layer control block
 
 //Key Notes: This function generates the HTML first then supplies
@@ -691,7 +698,7 @@ function findDataPointCountry(dataSet, countryCode, codeNumber) {
 
 //Load the csvFile differently
 function loadCSVDataArray() {
-    var csvList = ['agri.csv', 'AtmoDataTest.csv'];
+    var csvList = ['agri.csv', 'Atmo.csv'];
     //Find the file
     var csvString = "";
 
@@ -1033,7 +1040,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
                             dataPoint.dataValues[buttonNumber].timeValues,
                             plotID, 0);
 					getRegressionFunctionPlot(
-							dataPoint.dataValues[button].timeValues, plotID,
+							dataPoint.dataValues[buttonNumber].timeValues, plotID,
 							dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);
 					selfHTML.button("option", "label", "Hide Graph");
                 } else {
@@ -1431,7 +1438,7 @@ function generateRemoveButton() {
 
 //Similar logic to generating agriculture buttons butt for atomosphere
 function generateAtmoButtons(inputData, stationName) {
-    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for agricultura data.." title="Type in a layer">';
+    //var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for agricultura data.." title="Type in a layer">';
     var atmoHTML = '<h4>Atomsphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
     if (dataPoint != 0) {
@@ -1443,7 +1450,7 @@ function generateAtmoButtons(inputData, stationName) {
             atmoHTML += '<p>' + dataPoint.dataValues[i].typeName + '</p>';
             atmoHTML += '<div id="graphPoint' + i + '"></div>';
             atmoHTML += '<button'
-                + ' class="btn-info' + ' id="plotButton' + i + '">Plot Graph</button>';
+                + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
 			atmoHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
             atmoHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br>';
@@ -1492,6 +1499,42 @@ function generateAgriCultureButtons(inputData, codeName) {
         agriHTML += '</ul>';
     }
     return agriHTML;
+}
+
+//Finds the closest country (centre based)
+function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
+	//Go through every country 
+	var i = 0;
+	var smallestCountryDistance = 10e10;
+	var countryCode;
+	//var locationChecker = new WorldWind.Location()
+	for(i = 0; i < countryData.length; i++) {
+		//Determine the distance
+		var location1 = new WorldWind.Location(countryData[i].lat, countryData[i].lon);
+		var location2 = new WorldWind.Location(lat, lon);
+		var distance = WorldWind.Location.greatCircleDistance(location1, location2) * wwd.globe.equatorialRadius;
+		//console.log(distance, countryData[i].code3);
+		if(distance < smallestCountryDistance) {
+			smallestCountryDistance = distance;
+			countryCode = countryData[i].code3;
+		}
+	}	
+	
+	var smallestStationDistance = 10e10;
+	var stationName;
+	for(i = 0; i < stationData.length; i++) {
+		//Determine the distance
+		var location1 = new WorldWind.Location(stationData[i].lat, stationData[i].lon);
+		var location2 = new WorldWind.Location(lat, lon);
+		var distance = WorldWind.Location.greatCircleDistance(location1, location2) * wwd.globe.equatorialRadius;
+		//console.log(distance, countryData[i].code3);
+		if(distance < smallestStationDistance) {
+			smallestStationDistance = distance;
+			stationName = stationData[i].stationName;
+		}
+	}	
+	console.log(countryCode, smallestCountryDistance);
+	console.log(stationName, smallestStationDistance);
 }
 
 //Creates a scatter plot based on the input data
