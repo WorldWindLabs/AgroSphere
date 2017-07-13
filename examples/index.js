@@ -1414,13 +1414,16 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
     }
 
     //Assuming the previous title was made, simply add regression to the add
-    titleName += ' regression';
 
     //Plot it
-	console.log('Run', titleName, countryCode, inputData, htmlID);
+	//Assuming the previous title was made, simply add regression to the add
+	var titleName1 = titleName;
+	var titleName2 = titleName;
 	
-    plotScatter(titleName, countryCode, inputData, htmlID, 1);
-	plotScatter(titleName, countryCode, inputData2, htmlID, 1);
+    titleName1 += 'linear regression ' + regressionFunction.r2.toPrecision(5);
+	titleName2 += 'exponential regression ' + regressionFunction2.r2.toPrecision(5);
+    plotScatter(titleName1, countryCode, inputData, htmlID, 1);
+	plotScatter(titleName2, countryCode, inputData2, htmlID, 1);
 }
 
 //Generate the button to remove the multigraphs
@@ -1503,10 +1506,9 @@ function generateAgriCultureButtons(inputData, codeName) {
             agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
             agriHTML += '<div id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
-                + ' class="btn-info' + ' id="plotButton' + i + '">Plot Graph</button>';
+                + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
             agriHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
             agriHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
-            agriHTML += '<button class="btn-info" id="regButton' + i + '">Project to 2050</button></div>';
             agriHTML += '<br></div>';
         }
         agriHTML += '</ul>';
@@ -1574,7 +1576,7 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
     } else if(mode == 1) {
         Plotly.addTraces(htmlID, [graph]);
         var dimensions = {
-            width: '80%'
+            width: '100%'
         }
         var multiGraphUpdate = {
             title: 'Multiple Graphs'
