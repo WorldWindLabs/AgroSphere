@@ -127,7 +127,7 @@ body {
 
 .tab-content {
     margin-left: 45px;
-    width:400px;
+    width:500px;
 }
 
 .tab-content .tab-pane {
@@ -452,4 +452,10 @@ audio
 
 .btn-block {
     border-radius:5px;
+}
+
+/* adding space between each ag dataset */
+
+.layerTitle {
+    padding: 12px 0 12px 0;
 }
