@@ -1002,8 +1002,8 @@ function generateGeoComparisonButton(agriData) {
     var comparisonHTML = '';
     for(i = 0; i < count; i++) {
         var buttonTempName = agriData[0].dataValues[i].typeName;
-        comparisonHTML += '<button id="geoCompType' + i +
-            '">Generate Geo Comparison for ' + buttonTempName + '</button><br>';
+        comparisonHTML += '<p><button id="geoCompType' + i +
+            '">Generate Geo Comparison for ' + buttonTempName + '</button><br><p>';
     }
     //Also implement the slider
     comparisonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
@@ -1168,10 +1168,10 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 
 //Generates a button which searches a city and code
 function generateWeatherHTML() {
-	var weatherHTML = '<h4>Weather Search</h4>';
-	weatherHTML += '<input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer">';
-	weatherHTML += '<input type="text" id="countryInput" placeholder="Put in 2-letter code">';
-	weatherHTML += '<button id="searchWeather">Search Weather</button><br>';
+	var weatherHTML = '<p>Weather Search</p>';
+	weatherHTML += '<p><input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
+	weatherHTML += '<p><input type="text" id="countryInput" placeholder="Put in 2-letter code"></p>';
+	weatherHTML += '<p><button id="searchWeather">Search Weather</button></p>';
 	
 	$('#e').append(weatherHTML);
 }
@@ -1195,8 +1195,8 @@ function giveWeatherButtonFunctionality() {
 				//Create some html
 				var dropArea = $('#searchDetails');
 				var tempHTML = '<h5>Weather Details for ' + data.name + '</h5>';
-				tempHTML += '<p>Current outlook:' + data.weather[0].main + '</p>';
-				tempHTML += '<p>Current outlook description:' + data.weather[0].description + '</p>';
+				tempHTML += '<p>Current Outlook: ' + data.weather[0].main + '</p>';
+				tempHTML += '<p>Current Outlook Description: ' + data.weather[0].description + '</p>';
 				tempHTML += '<p>Current Temperature (K): ' + data.main.temp + '</p>';
 				tempHTML += '<p>Max Temperature Today (K): ' + data.main.temp_max + '</p>'; 
 				tempHTML += '<p>Min Temperature Today (K): ' + data.main.temp_min + '</p>';
@@ -1404,7 +1404,7 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
 //Generate the button to remove the multigraphs
 function generateRemoveButton() {
     //Generate the remove button for the graphs
-    var removeHTML = '<button id="removeButton">Remove all graphs</button>';
+    var removeHTML = '<p><button id="removeButton">Remove all graphs</button></p>';
     $('#d').append(removeHTML);
     var removeButton = $('#removeButton');
     removeButton.button();
@@ -1583,13 +1583,17 @@ var tabsFn = (function () {
 
 // sidebar functions
 $(function () {
-    $("#draggable").draggable({containment: "window", handle:".nav-tabs"});
+    $("#draggable").draggable({
+        handle:".nav-tabs"
+    });
 });
 
 $(document).ready(function () {
     $(".resizable").resizable({
         handles: 'e, w',
         animate: true,
+        animateEasing: "easeOutBounce",
+        animateDuration: "slow",
         maxHeight: 800,
         maxWidth: 1380,
         minHeight: 150,
