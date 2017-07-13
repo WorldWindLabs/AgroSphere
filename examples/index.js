@@ -1083,87 +1083,109 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
     var dataPoint = findDataPointCountry(inputData, codeName, 3);
     if(dataPoint != 0) {
         var i = 0;
-        for(i = 0; i < dataPoint.dataValues.length; i++) {
+        for (i = 0; i < dataPoint.dataValues.length; i++) {
             var buttonHTML = $('#plotButton' + i).button();
-            buttonHTML.click(function(event) {
+            buttonHTML.click(function (event) {
                 //Generate the plot based on things
                 var buttonID = this.id;
                 var buttonNumber = buttonID.slice('plotButton'.length);
-				var selfHTML = $('#' + buttonID);
+                var selfHTML = $('#' + buttonID);
                 var plotID = 'graphPoint' + buttonNumber;
-                
+
                 //Do we already have a plot?
                 var plotHTML = $('#' + plotID);
-                if(plotHTML.html() == '') {
-                    plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
-                            dataPoint.dataValues[buttonNumber].timeValues, 
-                            plotID, 0);
-					getRegressionFunctionPlot(
-							dataPoint.dataValues[buttonNumber].timeValues, plotID,
-							dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);
-					selfHTML.button("option", "label", "Hide Graph");
+                if (plotHTML.html() == '') {
+                    plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
+                        dataPoint.dataValues[buttonNumber].timeValues,
+                        plotID, 0);
+                    getRegressionFunctionPlot(
+                        dataPoint.dataValues[buttonNumber].timeValues, plotID,
+                        dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);
+                    selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
-					selfHTML.button("option", "label", "Plot Graph");
+                    selfHTML.button("option", "label", "Plot Graph");
                 }
             })
             var combineButtonHTML = $('#combineButton' + i).button();
-            combineButtonHTML.click(function(event) {
+            combineButtonHTML.click(function (event) {
                 var buttonID = this.id;
                 var buttonNumber = buttonID.slice('combineButton'.length);
                 //Add to the graph
-                plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
-                        dataPoint.dataValues[buttonNumber].timeValues,
-                        'multiGraph', 1);
+                plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
+                    dataPoint.dataValues[buttonNumber].timeValues,
+                    'multiGraph', 1);
             });
-			
-			var addButtonHTML = $('#addButton' + i).button();
-			addButtonHTML.click( function(event) {
-				//Grab id
-				var buttonID = this.id;
-				var buttonNumber = buttonID.slice('addButton'.length);
-				
-				//Check how many divs there are 
-				var manyGraphDivChildren = $('#manyGraph > div');
-				
-				var graphNumber = manyGraphDivChildren.length;
-				
-				//Generate the html
-				var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
-				
-				$('#manyGraph').append(graphDiv);
-				
-				//Graph it
-				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
-                            dataPoint.dataValues[buttonNumber].timeValues, 
-                            'subGraph' + graphNumber, 0);
-			});
-        }
-    }
 
-    //Assign functionality to the search bar
-    var searchButton = $('#search').button();
-    searchButton.on('click', function() {
-        //Basically get the input value
-		var input = $('#myInput');
-		var textValue = input.val().toUpperCase();
-		
-		//Iterate through the entire list and hide if it doesn't contain the
-		//thing
-		var i = 0;
-		var layerTitles = $('div .layerTitle');
-		var layerTitleList = $('div .layerTitle > li');
-		for(i = 0; i < layerTitleList.length; i++) {
-			if(!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-				$(layerTitles[i]).hide();
-			} else if(textValue == '') {
-				$(layerTitles[i]).show();
-			} else if($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-			$(layerTitles[i]).show();
-			}
-		}
-    });
-       
+            var addButtonHTML = $('#addButton' + i).button();
+            addButtonHTML.click(function (event) {
+                //Grab id
+                var buttonID = this.id;
+                var buttonNumber = buttonID.slice('addButton'.length);
+
+                //Check how many divs there are
+                var manyGraphDivChildren = $('#manyGraph > div');
+
+                var graphNumber = manyGraphDivChildren.length;
+
+                //Generate the html
+                var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
+
+                $('#manyGraph').append(graphDiv);
+
+                //Graph it
+                plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
+                    dataPoint.dataValues[buttonNumber].timeValues,
+                    'subGraph' + graphNumber, 0);
+            });
+        }
+
+        //Assign functionality to the search bar
+        var searchButton = $('#search').button();
+        searchButton.on('click', function () {
+            //Basically get the input value
+            var input = $('#myInput');
+            var textValue = input.val().toUpperCase();
+
+            //Iterate through the entire list and hide if it doesn't contain the
+            //thing
+            var i = 0;
+            var layerTitles = $('div .layerTitle');
+            var layerTitleList = $('div .layerTitle > li');
+            for (i = 0; i < layerTitleList.length; i++) {
+                if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                    $(layerTitles[i]).hide();
+                } else if (textValue == '') {
+                    $(layerTitles[i]).show();
+                } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                    $(layerTitles[i]).show();
+                }
+            }
+        });
+
+        $('#myInput').keyup(function (event) {
+            //if (event.which == 13) {
+                var input = $('#myInput');
+                var textValue = input.val().toUpperCase();
+
+                //Iterate through the entire list and hide if it doesn't contain the
+                //thing
+                var i = 0;
+                var layerTitles = $('div .layerTitle');
+                var layerTitleList = $('div .layerTitle > li');
+                for (i = 0; i < layerTitleList.length; i++) {
+                    if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                        $(layerTitles[i]).hide();
+                    } else if (textValue == '') {
+                        $(layerTitles[i]).show();
+                    } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                        $(layerTitles[i]).show();
+                    }
+                }
+           // }
+
+        });
+    }
 }
 
 //Generates a button which searches a city and code

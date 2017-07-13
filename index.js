@@ -104,7 +104,7 @@ requirejs({paths:{
         //Generate regression comparison and the provide functionality
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
-        
+
         //Automatically zoom into NASA Ames
         wwd.goTo(new WorldWind.Position(37.4089, -122.0644, 10e5));
 
