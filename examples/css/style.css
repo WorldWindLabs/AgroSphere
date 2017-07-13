@@ -126,6 +126,7 @@ body {
 
 .tab-content {
     margin-left: 45px;
+    width:400px;
 }
 
 .tab-content .tab-pane {
@@ -432,10 +433,6 @@ audio
 /* color for current weather search bar input */
 #cityInput, #countryInput {
     color:black !important;
-}
-
-.tab-content {
-    background: red;
 }
 
 /* button css */
