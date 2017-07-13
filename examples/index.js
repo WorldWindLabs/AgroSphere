@@ -1441,7 +1441,7 @@ function generateAtmoButtons(inputData, stationName) {
             atmoHTML += '<div id="graphPoint' + i + '"></div>';
             atmoHTML += '<button'
                 + ' id="plotButton' + i + '">Plot Graph</button>';
-			atmoHTML += '<button id="combineButton' + i + '">Combine Grpah </button>';
+			atmoHTML += '<button id="combineButton' + i + '">Combine Graph </button>';
             atmoHTML += '<button id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br>';
         }
@@ -1467,30 +1467,30 @@ function generateAtmoButtons(inputData, stationName) {
         }
 
 //Generates the button
-        function generateAgriCultureButtons(inputData, codeName) {
-            //Based on the input data, generate the buttons/html
-            var agriHTML = '<h4>Agriculture Data</h4>' +
-                '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-            agriHTML += '<button id="search">Search</button>';
-            var dataPoint = findDataPointCountry(inputData, codeName,3);
-            if(dataPoint != 0) {
-                var i = 0;
-                agriHTML += '<ul id="myUL">';
-                for(i = 0; i < dataPoint.dataValues.length; i++) {
-                    //Generate the HTML
-                    agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
-                    agriHTML += '<div id="graphPoint' + i + '"></div>';
-                    agriHTML += '<button'
-                        + ' id="plotButton' + i + '">Plot Graph</button>';
-					agriHTML += '<button id="combineButton' + i + '">Combine Grpah </button>';
-                    agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
-					agriHTML += '<button id="regButton' + i + '">Project to 2050</button></div>';
-					agriHTML += '<br></div>';
-                }
-                agriHTML += '</ul>';
-            }
-            return agriHTML;
+function generateAgriCultureButtons(inputData, codeName) {
+    //Based on the input data, generate the buttons/html
+    var agriHTML = '<h4>Agriculture Data</h4>' +
+        '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
+    agriHTML += '<button id="search">Search</button>';
+    var dataPoint = findDataPointCountry(inputData, codeName,3);
+    if(dataPoint != 0) {
+        var i = 0;
+        agriHTML += '<ul id="myUL">';
+        for(i = 0; i < dataPoint.dataValues.length; i++) {
+            //Generate the HTML
+            agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
+            agriHTML += '<div id="graphPoint' + i + '"></div>';
+            agriHTML += '<button'
+                + ' id="plotButton' + i + '">Plot Graph</button>';
+            agriHTML += '<button id="combineButton' + i + '">Combine Graph </button>';
+            agriHTML += '<button id="addButton' + i + '">Add Graph</button>';
+            agriHTML += '<button id="regButton' + i + '">Project to 2050</button></div>';
+            agriHTML += '<br></div>';
         }
+        agriHTML += '</ul>';
+    }
+    return agriHTML;
+}
 
 //Creates a scatter plot based on the input data
 //It is assumed that the input data is an array of timeValue pair
@@ -1590,7 +1590,6 @@ $(function () {
 
 $(document).ready(function () {
     $(".resizable").resizable({
-        handles: 'e, w',
         animate: true,
         animateEasing: "easeOutBounce",
         animateDuration: "slow",
