@@ -48,11 +48,11 @@ input[type=checkbox] {
 }
 
 .btn:hover{
-    background-color:#16006D !important;
-    -moz-transform: scale(1.02);
-    -webkit-transform: scale(1.02);
-    transform: scale(1.02);
-    font-size:15px !important;
+    background-color:black !important;
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+    font-size:14px !important;
 }
 
 
@@ -442,12 +442,14 @@ audio
 
 .btn-info {
     border-radius:5px;
+    border: none;
+    background-color: #323232 !important;
 }
 
 .btn-info:hover {
-    -moz-transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -moz-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .btn-block {
