@@ -107,13 +107,6 @@ body {
     background-color: #313A7D !important;
 }
 
-/*
-.nav-tabs li a[aria-expanded="true"]{
-    background-color: white;
-}
-*/
-.nav-tabs li a.normal { background-color: #313A7D; !important }
-
 .nav-tabs .glyphicon {
     color: #fff;
 }
@@ -135,7 +128,6 @@ body {
     background-color: #313A7D;
     padding: 1.6rem;
     overflow-y: auto;
-    border-radius:10px;
 }
 
 .tab-content .active {

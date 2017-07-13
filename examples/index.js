@@ -220,7 +220,7 @@ requirejs({paths:{
                             //Give functionality for the buttons generated
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
-                            //fixed hover flags bug
+                            //fixed hover flags bug - now click instead of hover eventlistener
                             var otherTab = $('#a');
                             var otherTab2 = $('#b');
                             var otherTab3 = $('#d');
@@ -1482,7 +1482,7 @@ function generateAgriCultureButtons(inputData, codeName) {
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
             agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
-            agriHTML += '<div id="graphPoint' + i + '"></div>';
+            agriHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
             agriHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
