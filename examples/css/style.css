@@ -443,3 +443,13 @@ audio
 .btn-info {
     border-radius:5px;
 }
+
+.btn-info:hover {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.btn-block {
+    border-radius:5px;
+}
