@@ -1590,6 +1590,7 @@ $(function () {
 
 $(document).ready(function () {
     $(".resizable").resizable({
+        handles:"e,w",
         animate: true,
         animateEasing: "easeOutBounce",
         animateDuration: "slow",
