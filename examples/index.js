@@ -222,28 +222,36 @@ requirejs({paths:{
                             //Get the agriculture data
                             detailsHTML += generateAgriCultureButtons(agriData, dataPoint.code3);
                             details.html(detailsHTML);
-                            
+
                             //Give functionality for the buttons generated
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
-                            //fixed hover flags bug
+                            //fixed hover flags bug - now click instead of hover eventlistener
                             var otherTab = $('#a');
                             var otherTab2 = $('#b');
                             var otherTab3 = $('#d');
                             var otherTab4 = $('#e');
                             var otherTab5 = $('#f');
-                            details.show('slow','swing');
+                            var otherTab6 = $('#g');
+                            var otherTab7 = $('#h');
+                            details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
                             otherTab3.hide();
                             otherTab4.hide();
                             otherTab5.hide();
+                            otherTab6.hide();
+                            otherTab7.hide();
+                            $("details").attr("aria-expanded","true");
+
 
                         } else if(pickList.objects[i].userObject.type == 'station') {
 							var dataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
-							var details = $('#c');
+
+							var details = $('#d');
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
+
 							detailsHTML += '<p>Station Name: ' + dataPoint.stationName + '</p>';
 
 							//Generate the station buttons
@@ -254,7 +262,23 @@ requirejs({paths:{
 							//Generate the plots
 							getWeatherAndAgri(agriData, atmoData, csvData[0], dataPoint.stationName);
 							//Give functionality for buttons generated
-							//giveAtmoButtonsFunctionality(detailsHTML, atmoData, dataPoint.stationName);
+							giveAtmoButtonsFunctionality(detailsHTML, atmoData, dataPoint.stationName);
+
+                            var otherTab = $('#a');
+                            var otherTab2 = $('#b');
+                            var otherTab3 = $('#c');
+                            var otherTab4 = $('#e');
+                            var otherTab5 = $('#f');
+                            var otherTab6 = $('#g');
+                            var otherTab7 = $('#h');
+                            details.show('fast','swing');
+                            otherTab.hide();
+                            otherTab2.hide();
+                            otherTab3.hide();
+                            otherTab4.hide();
+                            otherTab5.hide();
+                            otherTab6.hide();
+                            otherTab7.hide();
 						}
                     }
                 }
@@ -1024,8 +1048,8 @@ function generateGeoComparisonButton(agriData) {
             '">Generate Geo Comparison for ' + buttonTempName + '</button><br><p>';
     }
     //Also implement the slider
-    comparisonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
-    var dropArea = $('#d');
+    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
+    var dropArea = $('#e');
     dropArea.append(comparisonHTML);
 }
 
@@ -1076,7 +1100,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
                 } else {
                     plotHTML.html('');
 					selfHTML.button("option", "label", "Plot Graph");
-                };			
+                }
 			});
 			var combineButtonHTML = $('#combineButton' + i).button();
             combineButtonHTML.click(function(event) {
@@ -1110,6 +1134,29 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
                             'subGraph' + graphNumber, 0);
 			});
 		}
+        //Assign functionality to the search bar
+        $('#myInput').keyup(function (event) {
+            //if (event.which == 13) {
+            var input = $('#myInput');
+            var textValue = input.val().toUpperCase();
+
+            //Iterate through the entire list and hide if it doesn't contain the
+            //thing
+            var i = 0;
+            var layerTitles = $('div .layerTitle');
+            var layerTitleList = $('div .layerTitle > p');
+            for (i = 0; i < layerTitleList.length; i++) {
+                if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                    $(layerTitles[i]).hide();
+                } else if (textValue == '') {
+                    $(layerTitles[i]).show();
+                } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                    $(layerTitles[i]).show();
+                }
+            }
+            // }
+
+        });
 	}
 }
 
@@ -1217,7 +1264,7 @@ function generateWeatherHTML() {
 	weatherHTML += '<p><input type="text" id="countryInput" placeholder="Put in 2-letter code"></p>';
 	weatherHTML += '<p><button class="btn-info id="searchWeather">Search Weather</button></p>';
 	
-	$('#e').append(weatherHTML);
+	$('#f').append(weatherHTML);
 }
 
 function giveWeatherButtonFunctionality() {
@@ -1452,7 +1499,7 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
 function generateRemoveButton() {
     //Generate the remove button for the graphs
     var removeHTML = '<p><button class="btn-info" id="removeButton">Remove all graphs</button></p>';
-    $('#d').append(removeHTML);
+    $('#e').append(removeHTML);
     var removeButton = $('#removeButton');
     removeButton.button();
     removeButton.on('click', function () {
@@ -1472,8 +1519,7 @@ function generateRemoveButton() {
     });
 }
 
-
-//Similar logic to generating agriculture buttons butt for atomosphere
+//Similar logic to generating agriculture buttons but for atomosphere
 function generateAtmoButtons(inputData, stationName) {
     var atmoHTML = '<h4>Atomsphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
@@ -1483,13 +1529,14 @@ function generateAtmoButtons(inputData, stationName) {
         for (i = 0; i < dataPoint.dataValues.length; i++) {
 
             //Generate the remaining HTML
+            atmoHTML += '<div class="layerTitle" id="layerTitle' + i + '">';
             atmoHTML += '<p>' + dataPoint.dataValues[i].typeName + '</p>';
-            atmoHTML += '<div id="graphPoint' + i + '"></div>';
+            atmoHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             atmoHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
 			atmoHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
             atmoHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
-            atmoHTML += '<br>';
+            atmoHTML += '<br></div>';
         }
     }
     return atmoHTML;
@@ -1508,7 +1555,7 @@ function generateAgriCultureButtons(inputData, codeName) {
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
             agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
-            agriHTML += '<div id="graphPoint' + i + '"></div>';
+            agriHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
             agriHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
@@ -1775,7 +1822,8 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
     }
 }
 
-var tabsFn = (function () {
+// sidebar functions
+var tabsFn = (function() {
 
     function init() {
         setHeight();
@@ -1783,7 +1831,7 @@ var tabsFn = (function () {
 
     function setHeight() {
         var $tabPane = $('.tab-pane'),
-            tabsHeight = $('.nav-tabs').height();
+            tabsHeight = $('.resizable').height();
 
         $tabPane.css({
             height: tabsHeight
@@ -1791,110 +1839,105 @@ var tabsFn = (function () {
     }
 
     $(init);
+
+    $( ".resizable" ).resizable({
+        stop:setHeight,
+        // animation removed - stops resizing from working
+        maxHeight: 800,
+        maxWidth: 1200,
+        minHeight: 250,
+        minWidth: 280
+    });
 })();
 
-// sidebar functions
 $(function () {
-    $("#draggable").draggable({
-        handle:".nav-tabs"
+    $(".draggable").draggable({
+        handle: ".nav-tabs"
     });
 });
 
-$(document).ready(function () {
-    $(".resizable").resizable({
-        animate: true,
-        animateEasing: "easeOutBounce",
-        animateDuration: "slow",
-        maxHeight: 800,
-        maxWidth: 1380,
-        minHeight: 150,
-        minWidth: 280,
-        ghost: true
-    });
-});
 
 //sidebar toggle
 $(document).ready(function () {
     $(".toggle1").click(function () {
-        $(".tab1").toggle('slow', 'swing');
-        $(".tab2").hide('slow', 'swing');
-        $(".tab3").hide('slow', 'swing');
-        $(".tab4").hide('slow', 'swing');
-        $(".tab5").hide('slow', 'swing');
-        $(".tab6").hide('slow', 'swing');
-        $(".tab7").hide('slow', 'swing');
+        $("#a").toggle('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-$(document).ready(function () {
     $(".toggle2").click(function () {
-        $(".tab2").toggle('slow', 'swing');
-        $(".tab1").hide('slow', 'swing');
-        $(".tab3").hide('slow', 'swing');
-        $(".tab4").hide('slow', 'swing');
-        $(".tab5").hide('slow', 'swing');
-        $(".tab6").hide('slow', 'swing');
-        $(".tab7").hide('slow', 'swing');
+        $("#b").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
     $(".toggle3").click(function () {
-        $(".tab3").toggle('slow', 'swing');
-        $(".tab2").hide('slow', 'swing');
-        $(".tab1").hide('slow', 'swing');
-        $(".tab4").hide('slow', 'swing');
-        $(".tab5").hide('slow', 'swing');
-        $(".tab6").hide('slow', 'swing');
-        $(".tab7").hide('slow', 'swing');
+        $("#c").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
     $(".toggle4").click(function () {
-        $(".tab4").toggle('slow', 'swing');
-        $(".tab2").hide('slow', 'swing');
-        $(".tab1").hide('slow', 'swing');
-        $(".tab3").hide('slow', 'swing');
-        $(".tab5").hide('slow', 'swing');
-        $(".tab6").hide('slow', 'swing');
-        $(".tab7").hide('slow', 'swing');
+        $("#d").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
     $(".toggle5").click(function () {
-        $(".tab5").toggle('slow', 'swing');
-        $(".tab2").hide('slow', 'swing');
-        $(".tab1").hide('slow', 'swing');
-        $(".tab3").hide('slow', 'swing');
-        $(".tab4").hide('slow', 'swing');
-        $(".tab6").hide('slow', 'swing');
-        $(".tab7").hide('slow', 'swing');
+        $("#e").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
     $(".toggle6").click(function () {
-        $(".tab6").toggle('slow', 'swing');
-        $(".tab2").hide('slow', 'swing');
-        $(".tab1").hide('slow', 'swing');
-        $(".tab3").hide('slow', 'swing');
-        $(".tab4").hide('slow', 'swing');
-        $(".tab5").hide('slow', 'swing');
-        $(".tab7").hide('slow', 'swing');
+        $("#f").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
     $(".toggle7").click(function () {
-        $(".tab7").toggle('slow', 'swing');
-        $(".tab1").hide('slow', 'swing');
-        $(".tab2").hide('slow', 'swing');
-        $(".tab3").hide('slow', 'swing');
-        $(".tab4").hide('slow', 'swing');
-        $(".tab5").hide('slow', 'swing');
-        $(".tab6").hide('slow', 'swing');
-
+        $("#g").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
+    });
+    $(".toggle8").click(function () {
+        $("#h").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
     });
 });
 });

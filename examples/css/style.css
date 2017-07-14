@@ -87,7 +87,6 @@ body {
 .nav-tabs {
     float: left;
     border-bottom: 0;
-    height:600px;
 }
 
 .nav-tabs li {
@@ -104,15 +103,8 @@ body {
 }
 
 .nav-tabs li a[aria-expanded="true"]{
-    background-color: #313A7D !important;
+    background-color: lightgreen !important;
 }
-
-/*
-.nav-tabs li a[aria-expanded="true"]{
-    background-color: white;
-}
-*/
-.nav-tabs li a.normal { background-color: #313A7D; !important }
 
 .nav-tabs .glyphicon {
     color: #fff;
@@ -127,7 +119,7 @@ body {
 
 .tab-content {
     margin-left: 45px;
-    width:500px;
+    height:500px;
 }
 
 .tab-content .tab-pane {
@@ -135,11 +127,10 @@ body {
     background-color: #313A7D;
     padding: 1.6rem;
     overflow-y: auto;
-    border-radius:10px;
 }
 
 .tab-content .active {
-    display: block;
+    display: inline-block;
 }
 
 .list-group {
@@ -250,7 +241,6 @@ li{
 .ui-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: -5px; bottom: -5px; }
 .ui-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; }
 .ui-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}
-
 
 /* video backgrund */
 .fullscreen-bg {
