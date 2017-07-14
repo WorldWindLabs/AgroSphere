@@ -1070,7 +1070,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
                 } else {
                     plotHTML.html('');
 					selfHTML.button("option", "label", "Plot Graph");
-                };			
+                }
 			});
 			var combineButtonHTML = $('#combineButton' + i).button();
             combineButtonHTML.click(function(event) {
@@ -1482,10 +1482,7 @@ function generateRemoveButton() {
     });
 }
 
-//Similar logic to generating agriculture buttons butt for atfmosphere
-function generateAtmoButtons(inputData, stationName) {
     //var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for agricultura data.." title="Type in a layer">';
-=======
 //Similar logic to generating agriculture buttons butt for atmosphere
 function generateAtmoButtons(inputData, stationName) {
 
@@ -1508,7 +1505,7 @@ function generateAtmoButtons(inputData, stationName) {
         }
     }
     return atmoHTML;
-};
+}
 
 //Generates the button
 function generateAgriCultureButtons(inputData, codeName) {
