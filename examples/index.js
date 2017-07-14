@@ -254,7 +254,7 @@ requirejs({paths:{
 
 							//Generate the station buttons
 
-							//detailsHTML += generateAtmoButtons(atmoData, dataPoint.stationName);
+							detailsHTML += generateAtmoButtons(atmoData, dataPoint.stationName);
 							details.html(detailsHTML);
 							
 							//Generate the plots
@@ -1077,13 +1077,13 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
 	if(dataPoint != 0) {
 		var i = 0;
 		for(i = 0; i < dataPoint.dataValues.length; i++) {
-            var buttonHTML = $('#plotButton' + i).button();
+            var buttonHTML = $('#plotWeatherButton' + i).button();
             buttonHTML.click(function(event) {
                 //Generate the plot based on things
                 var buttonID = this.id;
-                var buttonNumber = buttonID.slice('plotButton'.length);
+                var buttonNumber = buttonID.slice('plotWeatherButton'.length);
 				var selfHTML = $('#' + buttonID);
-                var plotID = 'graphPoint' + buttonNumber;
+                var plotID = 'graphWeatherPoint' + buttonNumber;
 
                 //Do we already have a plot?
                 var plotHTML = $('#' + plotID);
@@ -1538,9 +1538,9 @@ function generateAtmoButtons(inputData, stationName) {
             //Generate the remaining HTML
             atmoHTML += '<div class="layerTitle" id="layerTitle' + i + '">';
             atmoHTML += '<p>' + dataPoint.dataValues[i].typeName + '</p>';
-            atmoHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
+            atmoHTML += '<div class="resizeGraph" id="graphWeatherPoint' + i + '"></div>';
             atmoHTML += '<button'
-                + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
+                + ' class="btn-info"' + ' id="plotWeatherButton' + i + '">Plot Graph</button>';
 			atmoHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
             atmoHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br></div>';
