@@ -1639,7 +1639,7 @@ var tabsFn = (function() {
 })();
 
 $(function () {
-    $("#draggable").draggable({
+    $(".draggable").draggable({
     });
 });
 
