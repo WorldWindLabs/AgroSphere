@@ -242,7 +242,7 @@ requirejs({paths:{
 							var dataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
 							var details = $('#c');
-							var detailsHTML = '<h4>Weather Station Detail</h4>';
+							var detailsHTML = '<h4>Weather Station Details</h4>';
 							detailsHTML += '<p>Station Name: ' + dataPoint.stationName + '</p>';
 
 							//Generate the station buttons
@@ -253,6 +253,20 @@ requirejs({paths:{
 
 							//Give functionality for buttons generated
 							giveAtmoButtonsFunctionality(detailsHTML, atmoData, dataPoint.stationName);
+
+                            var otherTab = $('#a');
+                            var otherTab2 = $('#b');
+                            var otherTab3 = $('#d');
+                            var otherTab4 = $('#e');
+                            var otherTab5 = $('#f');
+                            var otherTab6 = $('#g');
+                            details.show('slow','swing');
+                            otherTab.hide();
+                            otherTab2.hide();
+                            otherTab3.hide();
+                            otherTab4.hide();
+                            otherTab5.hide();
+                            otherTab6.hide();
 						}
                     }
                 }

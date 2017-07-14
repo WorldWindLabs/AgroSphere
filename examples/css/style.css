@@ -103,7 +103,7 @@ body {
 }
 
 .nav-tabs li a[aria-expanded="true"]{
-    background-color: #313A7D !important;
+    background-color: lightgreen !important;
 }
 
 .nav-tabs .glyphicon {
