@@ -237,6 +237,7 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+                            $("details").attr("aria-expanded","true");
 
                         } else if(pickList.objects[i].userObject.type == 'station') {
 							var dataPoint =
