@@ -119,6 +119,7 @@ body {
 
 .tab-content {
     margin-left: 45px;
+    height:500px;
 }
 
 .tab-content .tab-pane {

@@ -1634,7 +1634,7 @@ var tabsFn = (function() {
         maxHeight: 800,
         maxWidth: 1380,
         minHeight: 250,
-        minWidth: 280,
+        minWidth: 280
     });
 })();
 
