@@ -1104,6 +1104,29 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
                             'subGraph' + graphNumber, 0);
 			});
 		}
+        //Assign functionality to the search bar
+        $('#myInput').keyup(function (event) {
+            //if (event.which == 13) {
+            var input = $('#myInput');
+            var textValue = input.val().toUpperCase();
+
+            //Iterate through the entire list and hide if it doesn't contain the
+            //thing
+            var i = 0;
+            var layerTitles = $('div .layerTitle');
+            var layerTitleList = $('div .layerTitle > p');
+            for (i = 0; i < layerTitleList.length; i++) {
+                if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                    $(layerTitles[i]).hide();
+                } else if (textValue == '') {
+                    $(layerTitles[i]).show();
+                } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                    $(layerTitles[i]).show();
+                }
+            }
+            // }
+
+        });
 	}
 }
 
@@ -1459,11 +1482,14 @@ function generateRemoveButton() {
     });
 }
 
-
 //Similar logic to generating agriculture buttons butt for atfmosphere
 function generateAtmoButtons(inputData, stationName) {
     //var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for agricultura data.." title="Type in a layer">';
-    var atmoHTML = '<h4>Atmosphere Data</h4>';
+=======
+//Similar logic to generating agriculture buttons butt for atmosphere
+function generateAtmoButtons(inputData, stationName) {
+
+    var atmoHTML = '<h4>Atmosphere Data</h4>' + '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
     var dataPoint = findDataPointStation(inputData, stationName);
     if (dataPoint != 0) {
         var i = 0;
@@ -1471,17 +1497,18 @@ function generateAtmoButtons(inputData, stationName) {
         for (i = 0; i < dataPoint.dataValues.length; i++) {
 
             //Generate the remaining HTML
+            atmoHTML += '<div class="layerTitle" id="layerTitle' + i + '">';
             atmoHTML += '<p>' + dataPoint.dataValues[i].typeName + '</p>';
-            atmoHTML += '<div id="graphPoint' + i + '"></div>';
+            atmoHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             atmoHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
 			atmoHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
             atmoHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
-            atmoHTML += '<br>';
+            atmoHTML += '<br></div>';
         }
     }
     return atmoHTML;
-}
+};
 
 //Generates the button
 function generateAgriCultureButtons(inputData, codeName) {
