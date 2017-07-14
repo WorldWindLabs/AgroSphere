@@ -97,8 +97,6 @@ requirejs({paths:{
             'gpw-v4:gpw-v4-population-count_2000', 'gpw-v4:gpw-v4-population-count_2005', 'gpw-v4:gpw-v4-population-count_2010', 'gpw-v4:gpw-v4-population-count_2015',
             'gpw-v4:gpw-v4-population-count_2020'];*/
         //Load the WMTS layers
-        loadWMTSLayers(wwd, layerManager);
-        loadWMSLayers(wwd, layerManager);
         console.time('First');
         var geoJSONData = loadGEOJsonData();
         var sampleGradCount = 
@@ -124,8 +122,8 @@ requirejs({paths:{
         generateRemoveButton();
         
 		//Generate the button for weather
-		//generateWeatherHTML();
-		//giveWeatherButtonFunctionality();
+		generateWeatherHTML();
+		giveWeatherButtonFunctionality();
 		//createSearchButton();
 		//giveSearchButtonFunctionality();
         //Generate regression comparison and the provide functionality
@@ -1252,7 +1250,12 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 		var allButtonHTML = $('#allButton').button();
 		allButtonHTML.on('click', function() {
 			//Plots a stacked bar
-			plotStack(dataPoint, 'allGraph');
+			var topX = $('#amount').val();
+			var amount = 5;
+			if(!Number.isNaN(parseInt(topX))) {
+				amount = parseInt(topX);
+			}
+			plotStack(dataPoint, 'allGraph', amount);
 		});
     }
 }
@@ -1262,9 +1265,9 @@ function generateWeatherHTML() {
 	var weatherHTML = '<p>Weather Search</p>';
 	weatherHTML += '<p><input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
 	weatherHTML += '<p><input type="text" id="countryInput" placeholder="Put in 2-letter code"></p>';
-	weatherHTML += '<p><button class="btn-info id="searchWeather">Search Weather</button></p>';
+	weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
 	
-	$('#f').append(weatherHTML);
+	$('#e').append(weatherHTML);
 }
 
 function giveWeatherButtonFunctionality() {
@@ -1277,6 +1280,7 @@ function giveWeatherButtonFunctionality() {
 		//Make an api request
 		var apiURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ',' 
 				+ countryInput + '&appid=' + APIKEY;
+		console.log(apiURL);
 		//Make an ajax request
 		$.ajax({
 			url: encodeURI(apiURL),
@@ -1288,14 +1292,17 @@ function giveWeatherButtonFunctionality() {
 				var tempHTML = '<h5>Weather Details for ' + data.name + '</h5>';
 				tempHTML += '<p>Current Outlook: ' + data.weather[0].main + '</p>';
 				tempHTML += '<p>Current Outlook Description: ' + data.weather[0].description + '</p>';
-				tempHTML += '<p>Current Temperature (K): ' + data.main.temp + '</p>';
-				tempHTML += '<p>Max Temperature Today (K): ' + data.main.temp_max + '</p>'; 
-				tempHTML += '<p>Min Temperature Today (K): ' + data.main.temp_min + '</p>';
+				tempHTML += '<p>Current Temperature (Celsius): ' + (data.main.temp - 272) + '</p>';
+				tempHTML += '<p>Max Temperature Today (Celsius): ' + (data.main.temp_max - 272) + '</p>'; 
+				tempHTML += '<p>Min Temperature Today (Celsius): ' + (data.main.temp_min  - 272) + '</p>';
 				tempHTML += '<p>Pressure (HPa): ' + data.main.pressure + '</p>';
 				tempHTML += '<p>Humidity (%): ' + data.main.humidity + '</p>';
 				tempHTML += '<p>Wind speed (m/s)' + data.wind.speed + '</p>';
 				dropArea.append(tempHTML);
 				console.log('success');
+			},
+			fail: function() {
+				console.log('fail');
 			}
 		})
 	});
@@ -1547,7 +1554,7 @@ function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' +
         '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-
+	agriHTML += '<input type="text" id="amount" placeholder="How many top?" title="Type in a layer">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
@@ -1621,7 +1628,7 @@ function createSearchButton() {
 }
 
 //Plots a stacked bar given all the set of data
-function plotStack(inputData, htmlID) {
+function plotStack(inputData, htmlID, amount) {
 	var i = 0;
 	var filteredDataSet = [];
 	for(i = 0; i < inputData.dataValues.length; i++) {
@@ -1668,7 +1675,7 @@ function plotStack(inputData, htmlID) {
 		tempAmounts.sort(function(a, b){return a-b});
 		
 		//Grab the 5th highest value
-		var threshold = tempAmounts[tempAmounts.length - 6];
+		var threshold = tempAmounts[tempAmounts.length - amount - 1];
 		var top5 = 0;
 		//Now find every data set that has a value that is the 5th or higher (not 0)
 		for(j = 0; j < filteredDataSet.length; j++) {
@@ -1724,7 +1731,7 @@ function plotStack(inputData, htmlID) {
 		y: topPercentages,
 		type: 'scatter',
 		yaxis:'y2',
-		name: 'Top 5'
+		name: 'Top ' + amount
 	}
 	traces.push(tempTrace);
 	//Create the graph
@@ -1737,7 +1744,7 @@ function plotStack(inputData, htmlID) {
 	}
 	
 	var yAxis2 = {
-		title: 'Percentage of top 5',
+		title: 'Percentage of top ' + amount,
 		overlaying: 'y',
 		side: 'right'
 	}
