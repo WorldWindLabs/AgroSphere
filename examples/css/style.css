@@ -129,7 +129,7 @@ body {
 }
 
 .tab-content .active {
-    display: block;
+    display: inline-block;
 }
 
 .list-group {
@@ -447,8 +447,4 @@ audio
 
 .layerTitle {
     padding: 12px 0 12px 0;
-}
-
-#draggable {
-    background:red;
 }

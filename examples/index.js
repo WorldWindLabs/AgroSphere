@@ -1640,6 +1640,7 @@ var tabsFn = (function() {
 
 $(function () {
     $(".draggable").draggable({
+        handle: ".nav-tabs"
     });
 });
 
