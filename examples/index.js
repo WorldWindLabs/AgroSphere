@@ -226,19 +226,19 @@ requirejs({paths:{
                             //fixed hover flags bug - now click instead of hover eventlistener
                             var otherTab = $('#a');
                             var otherTab2 = $('#b');
-                            var otherTab7 = $('#h');
                             var otherTab3 = $('#d');
                             var otherTab4 = $('#e');
                             var otherTab5 = $('#f');
                             var otherTab6 = $('#g');
+                            var otherTab7 = $('#h');
                             details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
-                            otherTab7.hide();
                             otherTab3.hide();
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+                            otherTab7.hide();
                             $("details").attr("aria-expanded","true");
 
 
@@ -246,7 +246,7 @@ requirejs({paths:{
 							var dataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
 
-							var details = $('#h');
+							var details = $('#d');
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 
 							detailsHTML += '<p>Station Name: ' + dataPoint.stationName + '</p>';
@@ -262,10 +262,11 @@ requirejs({paths:{
 
                             var otherTab = $('#a');
                             var otherTab2 = $('#b');
-                            var otherTab3 = $('#d');
+                            var otherTab3 = $('#c');
                             var otherTab4 = $('#e');
                             var otherTab5 = $('#f');
                             var otherTab6 = $('#g');
+                            var otherTab7 = $('#h');
                             details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
@@ -273,6 +274,7 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+                            otherTab7.hide();
 						}
                     }
                 }
