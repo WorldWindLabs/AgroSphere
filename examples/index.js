@@ -203,7 +203,7 @@ requirejs({paths:{
                         if(pickList.objects[i].userObject.type == 'countries') {
                             var dataPoint = 
                                     findDataPoint(csvData[0], placeLat, placeLon);
-                            var details = $('#c');
+                            var details = $("#country");
                             var detailsHTML = '<h4>Country Details</h4>';
                             detailsHTML += 
                                     '<p>Country: ' + dataPoint.country + '</p>';
@@ -225,13 +225,13 @@ requirejs({paths:{
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //fixed hover flags bug - now click instead of hover eventlistener
-                            var otherTab = $('#a');
-                            var otherTab2 = $('#b');
-                            var otherTab3 = $('#d');
-                            var otherTab4 = $('#e');
-                            var otherTab5 = $('#f');
-                            var otherTab6 = $('#g');
-                            var otherTab7 = $('#h');
+                            var otherTab = $("#layers");
+                            var otherTab2 = $("#graphs");
+                            var otherTab3 = $("#station");
+                            var otherTab4 = $("#comp");
+                            var otherTab5 = $("#weather");
+                            var otherTab6 = $("#view");
+                            var otherTab7 = $("#learn");
                             details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
@@ -247,7 +247,7 @@ requirejs({paths:{
 							var dataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
 
-							var details = $('#d');
+							var details = $("#station");
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 
 							detailsHTML += '<p>Station Name: ' + dataPoint.stationName + '</p>';
@@ -262,13 +262,13 @@ requirejs({paths:{
 							//Give functionality for buttons generated
 							giveAtmoButtonsFunctionality(detailsHTML, atmoData, dataPoint.stationName);
 
-                            var otherTab = $('#a');
-                            var otherTab2 = $('#b');
-                            var otherTab3 = $('#c');
-                            var otherTab4 = $('#e');
-                            var otherTab5 = $('#f');
-                            var otherTab6 = $('#g');
-                            var otherTab7 = $('#h');
+                            var otherTab = $("#layers");
+                            var otherTab2 = $("#graphs");
+                            var otherTab3 = $("#country");
+                            var otherTab4 = $("#comp");
+                            var otherTab5 = $("#weather");
+                            var otherTab6 = $("#view");
+                            var otherTab7 = $("#learn");
                             details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
@@ -339,7 +339,7 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
     }
 
     //Place the HTML somewhere
-    $('#b').append(layerControlHTML);
+    $("#graphs").append(layerControlHTML);
 
     //Add functionality to opacity slider
     giveOpacitySliderFunctionality(wwd, layerName, layerNumber);
@@ -1047,7 +1047,7 @@ function generateGeoComparisonButton(agriData) {
     }
     //Also implement the slider
     comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
-    var dropArea = $('#e');
+    var dropArea = $("#comp");
     dropArea.append(comparisonHTML);
 }
 
@@ -1267,7 +1267,7 @@ function generateWeatherHTML() {
 	weatherHTML += '<p><input type="text" id="countryInput" placeholder="Put in 2-letter code"></p>';
 	weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
 	
-	$('#e').append(weatherHTML);
+	$("#weather").append(weatherHTML);
 }
 
 function giveWeatherButtonFunctionality() {
@@ -1506,7 +1506,7 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
 function generateRemoveButton() {
     //Generate the remove button for the graphs
     var removeHTML = '<p><button class="btn-info" id="removeButton">Remove all graphs</button></p>';
-    $('#e').append(removeHTML);
+    $("#graphs").append(removeHTML);
     var removeButton = $('#removeButton');
     removeButton.button();
     removeButton.on('click', function () {
@@ -1618,7 +1618,7 @@ function createSearchButton() {
 	var searchHTML = '<h4>Compare weather and agriculture data</h4>';
 	searchHTML+= '<button id="searchWeather">Enable Draw</button>';
 	searchHTML += '<div id="searchResults"></div>';
-	$('#e').append(searchHTML);
+	$("#comp").append(searchHTML);
 	
 	var searchButton = $('#searchWeather').button();
 	searchButton.on('click', function() {
