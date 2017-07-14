@@ -1036,7 +1036,7 @@ function generateGeoComparisonButton(agriData) {
     }
     //Also implement the slider
     comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
-    var dropArea = $('#d');
+    var dropArea = $('#e');
     dropArea.append(comparisonHTML);
 }
 
@@ -1202,7 +1202,7 @@ function generateWeatherHTML() {
 	weatherHTML += '<p><input type="text" id="countryInput" placeholder="Put in 2-letter code"></p>';
 	weatherHTML += '<p><button class="btn-info id="searchWeather">Search Weather</button></p>';
 	
-	$('#e').append(weatherHTML);
+	$('#f').append(weatherHTML);
 }
 
 function giveWeatherButtonFunctionality() {
@@ -1651,127 +1651,84 @@ $(function () {
 //sidebar toggle
 $(document).ready(function () {
     $(".toggle1").click(function () {
-
-        $("#a").toggle('slow', 'swing');
-        $("#b").hide('slow', 'swing');
-        $("#c").hide('slow', 'swing');
-        $("#h").hide('slow', 'swing');
-        $("#d").hide('slow', 'swing');
-        $("#e").hide('slow', 'swing');
-        $("#f").hide('slow', 'swing');
-        $("#g").hide('slow', 'swing');
-
-
-
+        $("#a").toggle('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-$(document).ready(function () {
     $(".toggle2").click(function () {
-
-        $("#b").toggle('slow', 'swing');
-        $("#a").hide('slow', 'swing');
-        $("#c").hide('slow', 'swing');
-        $("#h").hide('slow', 'swing');
-        $("#d").hide('slow', 'swing');
-        $("#e").hide('slow', 'swing');
-        $("#f").hide('slow', 'swing');
-        $("#g").hide('slow', 'swing');
-
+        $("#b").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
     $(".toggle3").click(function () {
-
-        $("#c").toggle('slow', 'swing');
-        $("#a").hide('slow', 'swing');
-        $("#b").hide('slow', 'swing');
-        $("#h").hide('slow', 'swing');
-        $("#d").hide('slow', 'swing');
-        $("#e").hide('slow', 'swing');
-        $("#f").hide('slow', 'swing');
-        $("#g").hide('slow', 'swing');
-
-
+        $("#c").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
-    $(".toggle8").click(function () {
-                $("#h").toggle('slow', 'swing');
-                $("#a").hide('slow', 'swing');
-                $("#b").hide('slow', 'swing');
-                $("#c").hide('slow', 'swing');
-                $("#d").hide('slow', 'swing');
-                $("#e").hide('slow', 'swing');
-                $("#f").hide('slow', 'swing');
-                $("#g").hide('slow', 'swing');
-
-
-            });
-$(document).ready(function () {
     $(".toggle4").click(function () {
-
-        $("#d").toggle('slow', 'swing');
-        $("#a").hide('slow', 'swing');
-        $("#b").hide('slow', 'swing');
-        $("#c").hide('slow', 'swing');
-        $("#h").hide('slow', 'swing');
-        $("#e").hide('slow', 'swing');
-        $("#f").hide('slow', 'swing');
-        $("#g").hide('slow', 'swing');
-
+        $("#d").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
     $(".toggle5").click(function () {
-
-        $("#e").toggle('slow', 'swing');
-        $("#a").hide('slow', 'swing');
-        $("#b").hide('slow', 'swing');
-        $("#c").hide('slow', 'swing');
-        $("#h").hide('slow', 'swing');
-        $("#d").hide('slow', 'swing');
-        $("#f").hide('slow', 'swing');
-        $("#g").hide('slow', 'swing');
-
-
+        $("#e").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
     $(".toggle6").click(function () {
-
-        $("#f").toggle('slow', 'swing');
-        $("#a").hide('slow', 'swing');
-        $("#b").hide('slow', 'swing');
-        $("#c").hide('slow', 'swing');
-        $("#h").hide('slow', 'swing');
-        $("#d").hide('slow', 'swing');
-        $("#e").hide('slow', 'swing');
-        $("#g").hide('slow', 'swing');
-
-
+        $("#f").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-$(document).ready(function () {
     $(".toggle7").click(function () {
-
-        $("#g").toggle('slow', 'swing');
-        $("#a").hide('slow', 'swing');
-        $("#b").hide('slow', 'swing');
-        $("#c").hide('slow', 'swing');
-        $("#h").hide('slow', 'swing');
-        $("#d").hide('slow', 'swing');
-        $("#e").hide('slow', 'swing');
-        $("#f").hide('slow', 'swing');
-
-
+        $("#g").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#h").hide('fast', 'swing');
     });
-});
-
-
+    $(".toggle8").click(function () {
+        $("#h").toggle('fast', 'swing');
+        $("#a").hide('fast', 'swing');
+        $("#b").hide('fast', 'swing');
+        $("#c").hide('fast', 'swing');
+        $("#d").hide('fast', 'swing');
+        $("#e").hide('fast', 'swing');
+        $("#f").hide('fast', 'swing');
+        $("#g").hide('fast', 'swing');
+    });
 });
 });
