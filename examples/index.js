@@ -231,7 +231,7 @@ requirejs({paths:{
                             var otherTab4 = $('#e');
                             var otherTab5 = $('#f');
                             var otherTab6 = $('#g');
-                            details.show('slow','swing');
+                            details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
                             otherTab7.hide();
@@ -244,8 +244,10 @@ requirejs({paths:{
                         } else if(pickList.objects[i].userObject.type == 'station') {
 							var dataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
+
 							var details = $('#h');
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
+
 							detailsHTML += '<p>Station Name: ' + dataPoint.stationName + '</p>';
 
 							//Generate the station buttons
@@ -256,6 +258,20 @@ requirejs({paths:{
 
 							//Give functionality for buttons generated
 							giveAtmoButtonsFunctionality(detailsHTML, atmoData, dataPoint.stationName);
+
+                            var otherTab = $('#a');
+                            var otherTab2 = $('#b');
+                            var otherTab3 = $('#d');
+                            var otherTab4 = $('#e');
+                            var otherTab5 = $('#f');
+                            var otherTab6 = $('#g');
+                            details.show('fast','swing');
+                            otherTab.hide();
+                            otherTab2.hide();
+                            otherTab3.hide();
+                            otherTab4.hide();
+                            otherTab5.hide();
+                            otherTab6.hide();
 						}
                     }
                 }
@@ -1018,7 +1034,7 @@ function generateGeoComparisonButton(agriData) {
             '">Generate Geo Comparison for ' + buttonTempName + '</button><br><p>';
     }
     //Also implement the slider
-    comparisonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
+    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
     var dropArea = $('#d');
     dropArea.append(comparisonHTML);
 }
@@ -1618,7 +1634,7 @@ var tabsFn = (function() {
         stop:setHeight,
         // animation removed - stops resizing from working
         maxHeight: 800,
-        maxWidth: 1380,
+        maxWidth: 1200,
         minHeight: 250,
         minWidth: 280
     });
@@ -1634,6 +1650,7 @@ $(function () {
 //sidebar toggle
 $(document).ready(function () {
     $(".toggle1").click(function () {
+
         $("#a").toggle('slow', 'swing');
         $("#b").hide('slow', 'swing');
         $("#c").hide('slow', 'swing');
@@ -1643,10 +1660,13 @@ $(document).ready(function () {
         $("#f").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
 
+
+
     });
 });
 $(document).ready(function () {
     $(".toggle2").click(function () {
+
         $("#b").toggle('slow', 'swing');
         $("#a").hide('slow', 'swing');
         $("#c").hide('slow', 'swing');
@@ -1661,6 +1681,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $(".toggle3").click(function () {
+
         $("#c").toggle('slow', 'swing');
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
@@ -1669,6 +1690,7 @@ $(document).ready(function () {
         $("#e").hide('slow', 'swing');
         $("#f").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
+
 
     });
 });
@@ -1688,6 +1710,7 @@ $(document).ready(function () {
             });
 $(document).ready(function () {
     $(".toggle4").click(function () {
+
         $("#d").toggle('slow', 'swing');
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
@@ -1702,6 +1725,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $(".toggle5").click(function () {
+
         $("#e").toggle('slow', 'swing');
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
@@ -1711,11 +1735,13 @@ $(document).ready(function () {
         $("#f").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
 
+
     });
 });
 
 $(document).ready(function () {
     $(".toggle6").click(function () {
+
         $("#f").toggle('slow', 'swing');
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
@@ -1725,11 +1751,13 @@ $(document).ready(function () {
         $("#e").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
 
+
     });
 });
 
 $(document).ready(function () {
     $(".toggle7").click(function () {
+
         $("#g").toggle('slow', 'swing');
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
