@@ -1015,7 +1015,7 @@ function generateGeoComparisonButton(agriData) {
             '">Generate Geo Comparison for ' + buttonTempName + '</button><br><p>';
     }
     //Also implement the slider
-    comparisonHTML += '<div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div>';
+    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
     var dropArea = $('#d');
     dropArea.append(comparisonHTML);
 }
@@ -1632,7 +1632,7 @@ var tabsFn = (function() {
         stop:setHeight,
         // animation removed - stops resizing from working
         maxHeight: 800,
-        maxWidth: 1380,
+        maxWidth: 1200,
         minHeight: 250,
         minWidth: 280
     });
