@@ -1460,10 +1460,10 @@ function generateRemoveButton() {
 }
 
 
-//Similar logic to generating agriculture buttons butt for atomosphere
+//Similar logic to generating agriculture buttons butt for atfmosphere
 function generateAtmoButtons(inputData, stationName) {
     //var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for agricultura data.." title="Type in a layer">';
-    var atmoHTML = '<h4>Atomsphere Data</h4>';
+    var atmoHTML = '<h4>Atmosphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
     if (dataPoint != 0) {
         var i = 0;
