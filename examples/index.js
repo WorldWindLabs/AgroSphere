@@ -226,6 +226,7 @@ requirejs({paths:{
                             //fixed hover flags bug - now click instead of hover eventlistener
                             var otherTab = $('#a');
                             var otherTab2 = $('#b');
+                            var otherTab7 = $('#h');
                             var otherTab3 = $('#d');
                             var otherTab4 = $('#e');
                             var otherTab5 = $('#f');
@@ -233,15 +234,17 @@ requirejs({paths:{
                             details.show('slow','swing');
                             otherTab.hide();
                             otherTab2.hide();
+                            otherTab7.hide();
                             otherTab3.hide();
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
 
+
                         } else if(pickList.objects[i].userObject.type == 'station') {
 							var dataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
-							var details = $('#c');
+							var details = $('#h');
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 							detailsHTML += '<p>Station Name: ' + dataPoint.stationName + '</p>';
 
@@ -1634,10 +1637,12 @@ $(document).ready(function () {
         $("#a").toggle('slow', 'swing');
         $("#b").hide('slow', 'swing');
         $("#c").hide('slow', 'swing');
+        $("#h").hide('slow', 'swing');
         $("#d").hide('slow', 'swing');
         $("#e").hide('slow', 'swing');
         $("#f").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
+
     });
 });
 $(document).ready(function () {
@@ -1645,10 +1650,12 @@ $(document).ready(function () {
         $("#b").toggle('slow', 'swing');
         $("#a").hide('slow', 'swing');
         $("#c").hide('slow', 'swing');
+        $("#h").hide('slow', 'swing');
         $("#d").hide('slow', 'swing');
         $("#e").hide('slow', 'swing');
         $("#f").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
+
     });
 });
 
@@ -1657,22 +1664,39 @@ $(document).ready(function () {
         $("#c").toggle('slow', 'swing');
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
+        $("#h").hide('slow', 'swing');
         $("#d").hide('slow', 'swing');
         $("#e").hide('slow', 'swing');
         $("#f").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
+
     });
 });
 
+$(document).ready(function () {
+    $(".toggle8").click(function () {
+                $("#h").toggle('slow', 'swing');
+                $("#a").hide('slow', 'swing');
+                $("#b").hide('slow', 'swing');
+                $("#c").hide('slow', 'swing');
+                $("#d").hide('slow', 'swing');
+                $("#e").hide('slow', 'swing');
+                $("#f").hide('slow', 'swing');
+                $("#g").hide('slow', 'swing');
+
+
+            });
 $(document).ready(function () {
     $(".toggle4").click(function () {
         $("#d").toggle('slow', 'swing');
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
         $("#c").hide('slow', 'swing');
+        $("#h").hide('slow', 'swing');
         $("#e").hide('slow', 'swing');
         $("#f").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
+
     });
 });
 
@@ -1682,9 +1706,11 @@ $(document).ready(function () {
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
         $("#c").hide('slow', 'swing');
+        $("#h").hide('slow', 'swing');
         $("#d").hide('slow', 'swing');
         $("#f").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
+
     });
 });
 
@@ -1694,9 +1720,11 @@ $(document).ready(function () {
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
         $("#c").hide('slow', 'swing');
+        $("#h").hide('slow', 'swing');
         $("#d").hide('slow', 'swing');
         $("#e").hide('slow', 'swing');
         $("#g").hide('slow', 'swing');
+
     });
 });
 
@@ -1706,10 +1734,15 @@ $(document).ready(function () {
         $("#a").hide('slow', 'swing');
         $("#b").hide('slow', 'swing');
         $("#c").hide('slow', 'swing');
+        $("#h").hide('slow', 'swing');
         $("#d").hide('slow', 'swing');
         $("#e").hide('slow', 'swing');
         $("#f").hide('slow', 'swing');
 
+
     });
+});
+
+
 });
 });
