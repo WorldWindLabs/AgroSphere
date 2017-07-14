@@ -1460,23 +1460,6 @@ function generateAtmoButtons(inputData, stationName) {
     }
     return atmoHTML;
 }
-        //Search layer data
-        function searchLayer() {
-            var titles = $('.layerTitle');
-            var input = $('#myInput');
-            for (var i = 0; i < titles.length; i ++) {
-
-                //Agriculture Blah == #myInput? -- false probably
-
-                //console.log($(titles[i]).html(), input[0].value);
-                if ($(titles[i]).html() == input[0].value) {
-                    $(titles[i]).show();
-                }
-                else{
-                    $(titles[i]).hide();
-                }
-            }
-        }
 
 //Generates the button
 function generateAgriCultureButtons(inputData, codeName) {
