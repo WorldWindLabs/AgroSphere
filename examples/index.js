@@ -1633,15 +1633,13 @@ var tabsFn = (function() {
         // animation removed - stops resizing from working
         maxHeight: 800,
         maxWidth: 1380,
-        minHeight: 150,
+        minHeight: 250,
         minWidth: 280,
-        ghost: true
     });
 })();
 
 $(function () {
     $("#draggable").draggable({
-        handle:".nav-tabs"
     });
 });
 
