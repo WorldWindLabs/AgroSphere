@@ -87,7 +87,6 @@ body {
 .nav-tabs {
     float: left;
     border-bottom: 0;
-    height:600px;
 }
 
 .nav-tabs li {
@@ -120,7 +119,6 @@ body {
 
 .tab-content {
     margin-left: 45px;
-    width:500px;
 }
 
 .tab-content .tab-pane {
