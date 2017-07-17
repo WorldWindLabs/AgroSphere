@@ -39,7 +39,6 @@ input[type=checkbox] {
     transform: scale(1.5);
 }
 
-
 .btn {
     background-color:#323232 !important;
     text-align:center !important;
@@ -130,6 +129,10 @@ body {
 }
 
 .tab-content .active {
+    display: inline-block;
+}
+
+.tab-content .tab-pane .active {
     display: inline-block;
 }
 
@@ -436,6 +439,7 @@ input {
 /* color for current weather search bar input */
 #cityInput, #countryInput {
     color:black !important;
+
 }
 
 /* button css */
