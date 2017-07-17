@@ -1064,7 +1064,8 @@ function generateGeoComparisonButton(agriData) {
     var i = 0;
 	var j = 0;
     var comparisonHTML = '';
-	
+    //Also implement the slider
+    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
 	var buttonNames = [];
 	for(i = 0; i < agriData.length; i++) {
 		for(j = 0; j < agriData[i].dataValues.length; j++) {
@@ -1079,8 +1080,7 @@ function generateGeoComparisonButton(agriData) {
         comparisonHTML += '<p><button class="btn-info" id="geoCompType' + i +
             '">Generate Geo Comparison for ' + buttonTempName + '</button><br><p>';
     }
-    //Also implement the slider
-    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
+
     var dropArea = $('#comp');
     dropArea.append(comparisonHTML);
 }
@@ -1166,29 +1166,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
                             'subGraph' + graphNumber, 0);
 			});
 		}
-        //Assign functionality to the search bar
-        $('#myInput').keyup(function (event) {
-            //if (event.which == 13) {
-            var input = $('#myInput');
-            var textValue = input.val().toUpperCase();
 
-            //Iterate through the entire list and hide if it doesn't contain the
-            //thing
-            var i = 0;
-            var layerTitles = $('div .layerTitle');
-            var layerTitleList = $('div .layerTitle > p');
-            for (i = 0; i < layerTitleList.length; i++) {
-                if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                    $(layerTitles[i]).hide();
-                } else if (textValue == '') {
-                    $(layerTitles[i]).show();
-                } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                    $(layerTitles[i]).show();
-                }
-            }
-            // }
-
-        });
 		//Assign functionality to the allButton
 		var allButtonHTML = $('#allButton').button();
 		allButtonHTML.on('click', function() {
@@ -1308,15 +1286,15 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 //Generates a button which searches a city and code
 function generateWeatherHTML(countryData) {
 	var weatherHTML = '<p>Weather Search</p>';
-	weatherHTML += '<p><input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';	
-	weatherHTML += '<select id="countryNames">'
+	weatherHTML += '<p><input type="text" class="form-control" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
+	weatherHTML += '<select id="countryNames" class="form-control">'
 	var i = 0;
 	console.log(countryData);
 	for(i = 0; i < countryData.length; i++) {
 		weatherHTML += '<option>' + countryData[i].code2 + ' - ' + countryData[i].country + '</option>';
 	}
 	weatherHTML += '</select>';
-	weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
+	weatherHTML += '<p><button class="btn-info" "id="searchWeather">Search Weather</button></p>';
 	$('#weather').append(weatherHTML);
 }
 
@@ -1603,8 +1581,7 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
-    var agriHTML = '<h4>Agriculture Data</h4>' +
-        '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
+    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
 	agriHTML += '<input type="text" id="amount" placeholder="How many of the biggest crops?" title="Type in a layer">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
