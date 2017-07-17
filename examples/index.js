@@ -1412,7 +1412,7 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
 	var legendHTML = '';
 	for(i = 0; i < legendAmounts; i++) {
 		//Search the div and generate the appropiate canvas next to it
-		var segmentHTML = '<h4>Geo comparison Legend</h4>';
+		var segmentHTML = '<h4>Geo Comparison Legend</h4>';
 		segmentHTML += '<p>Standard deviation of ' + (i + legendOffset) + 
 				' or a value of ' + (mean + (sd * (i + legendOffset))) + '</p>';
 		segmentHTML += '<canvas id="canvas'+ i + '" width="200" height="100"></canvas>';
@@ -1557,7 +1557,7 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
 //Generate the button to remove the multigraphs
 function generateRemoveButton() {
     //Generate the remove button for the graphs
-    var removeHTML = '<p><button class="btn-info" id="removeButton">Remove all graphs</button></p>';
+    var removeHTML = '<p><button class="btn-info" id="removeButton">Remove All Graphs</button></p>';
     $("#graphs").append(removeHTML);
     var removeButton = $('#removeButton');
     removeButton.button();
@@ -1596,7 +1596,7 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
             atmoHTML += '<br></div>';
         }
 		atmoHTML += '<div id="allGraph"></div>';
-		atmoHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
+		atmoHTML += '<button class="btn-info" id="allButton">Graph All Crops</button>';
     }
     return atmoHTML;
 }
@@ -1605,12 +1605,12 @@ function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' +
         '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-	agriHTML += '<input type="text" id="amount" placeholder="How many top?" title="Type in a layer">';
+	agriHTML += '<input type="text" id="amount" placeholder="How many of the biggest crops?" title="Type in a layer">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
         agriHTML += '<ul id="myUL">';
-		agriHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
+		agriHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
 		agriHTML += '<div id="allGraph"></div>';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
