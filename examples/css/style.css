@@ -465,3 +465,15 @@ input {
 .layerTitle {
     padding: 12px 0 12px 0;
 }
+
+/* slider CSS */
+
+.ui-slider .ui-slider-handle {
+    background:#313A7D;
+}
+
+.ui-slider .ui-slider-handle:hover {
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}

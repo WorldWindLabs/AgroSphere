@@ -1588,7 +1588,7 @@ function generateRemoveButton() {
 }
 
 function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
-    var atmoHTML = '<h4>Atomsphere Data</h4>';
+    var atmoHTML = '<h4>Atmosphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
 	atmoHTML += '<div id="allGraph"></div>';
 	atmoHTML += '<button class="btn-info" id="allButton">Graph All Crops</button>';
