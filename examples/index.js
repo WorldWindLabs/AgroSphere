@@ -1143,7 +1143,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
 				var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
 				
 				$('#manyGraph').append(graphDiv);
-				
+
 				//Graph it
 				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
                             dataPoint.dataValues[buttonNumber].timeValues, 
@@ -1898,15 +1898,6 @@ $(document).ready(function () {
 
     });
     $(".toggle2").click(function () {
-        $("#graphs").toggle('fast', 'swing');
-        $("#layers").hide('fast', 'swing');
-        $("#country").hide('fast', 'swing');
-        $("#station").hide('fast', 'swing');
-        $("#comp").hide('fast', 'swing');
-        $("#weather").hide('fast', 'swing');
-        $("#view").hide('fast', 'swing');
-    });
-    $(".toggle3").click(function () {
         $("#country").toggle('fast', 'swing');
         $("#layers").hide('fast', 'swing');
         $("#graphs").hide('fast', 'swing');
@@ -1915,10 +1906,19 @@ $(document).ready(function () {
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
     });
-    $(".toggle4").click(function () {
+    $(".toggle3").click(function () {
         $("#station").toggle('fast', 'swing');
         $("#layers").hide('fast', 'swing');
         $("#graphs").hide('fast', 'swing');
+        $("#country").hide('fast', 'swing');
+        $("#comp").hide('fast', 'swing');
+        $("#weather").hide('fast', 'swing');
+        $("#view").hide('fast', 'swing');
+    });
+    $(".toggle4").click(function () {
+        $("#graphs").toggle('fast', 'swing');
+        $("#layers").hide('fast', 'swing');
+        $("#station").hide('fast', 'swing');
         $("#country").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
