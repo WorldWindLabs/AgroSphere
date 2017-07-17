@@ -1156,29 +1156,29 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
                             'subGraph' + graphNumber, 0);
 			});
 		}
-        //Assign functionality to the search bar
-        $('#myInput').keyup(function (event) {
-            //if (event.which == 13) {
-            var input = $('#myInput');
-            var textValue = input.val().toUpperCase();
-
-            //Iterate through the entire list and hide if it doesn't contain the
-            //thing
-            var i = 0;
-            var layerTitles = $('div .layerTitle');
-            var layerTitleList = $('div .layerTitle > p');
-            for (i = 0; i < layerTitleList.length; i++) {
-                if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                    $(layerTitles[i]).hide();
-                } else if (textValue == '') {
-                    $(layerTitles[i]).show();
-                } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                    $(layerTitles[i]).show();
-                }
-            }
-            // }
-
-        });
+        // //Assign functionality to the search bar
+        // $('#myInput').keyup(function (event) {
+        //     //if (event.which == 13) {
+        //     var input = $('#myInput');
+        //     var textValue = input.val().toUpperCase();
+        //
+        //     //Iterate through the entire list and hide if it doesn't contain the
+        //     //thing
+        //     var i = 0;
+        //     var layerTitles = $('div .layerTitle');
+        //     var layerTitleList = $('div .layerTitle > p');
+        //     for (i = 0; i < layerTitleList.length; i++) {
+        //         if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+        //             $(layerTitles[i]).hide();
+        //         } else if (textValue == '') {
+        //             $(layerTitles[i]).show();
+        //         } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+        //             $(layerTitles[i]).show();
+        //         }
+        //     }
+        //     // }
+        //
+        // });
 	}
 }
 
@@ -1287,8 +1287,8 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 //Generates a button which searches a city and code
 function generateWeatherHTML() {
 	var weatherHTML = '<p>Weather Search</p>';
-	weatherHTML += '<p><input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
-	weatherHTML += '<p><input type="text" id="countryInput" placeholder="Put in 2-letter code"></p>';
+	weatherHTML += '<p><input type="text" id="cityInput" class="form-control" placeholder="Search for city" title="Type in a layer"></p>';
+	weatherHTML += '<p><input type="text" id="countryInput" class="form-control" placeholder="Put in 2-letter code"></p>';
 	weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
 	
 	$("#weather").append(weatherHTML);
@@ -1577,8 +1577,8 @@ function generateAtmoButtons(inputData, stationName) {
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' +
-        '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-	agriHTML += '<input type="text" id="amount" placeholder="How many top?" title="Type in a layer">';
+        '<input type="text" id="myInput" class="form-control" placeholder="Search for datasets.." title="Type in a layer">';
+	agriHTML += '<input type="text" id="amount" class="form-control" placeholder="How many top?" title="Type in a layer">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
