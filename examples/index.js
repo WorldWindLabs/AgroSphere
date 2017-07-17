@@ -123,6 +123,14 @@ requirejs({paths:{
         //Load the WMTS layers
         console.time('First');
         var geoJSONData = loadGEOJsonData();
+        var sampleGradCount = 
+                '[{"gradient": 0.5, "code3": "AFG"}, {"gradient": 7, "code3": "AUS"},' +
+                '{"gradient": -2, "code3": "JPN"}, {"gradient": -1, "code3": "USA"},' +
+                '{"gradient": -3, "code3": "JOR"}, {"gradient": 1, "code3": "NZL"},' +
+                '{"gradient": 0, "code3": "ESP"}]';
+        //var tempData = JSON.parse(sampleGradCount);
+        //var countryLayers = colourizeCountries(tempData, geoJSONData);
+        //wwd.addLayer(countryLayers);
         
         
         //Load the country data
@@ -219,7 +227,7 @@ requirejs({paths:{
                         if(pickList.objects[i].userObject.type == 'countries') {
                             var dataPoint = 
                                     findDataPoint(csvData[0], placeLat, placeLon);
-                            var details = $('#c');
+                            var details = $("#country");
                             var detailsHTML = '<h4>Country Details</h4>';
                             detailsHTML += 
                                     '<p>Country: ' + dataPoint.country + '</p>';
@@ -241,13 +249,13 @@ requirejs({paths:{
                             giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //fixed hover flags bug - now click instead of hover eventlistener
-                            var otherTab = $('#a');
-                            var otherTab2 = $('#b');
-                            var otherTab3 = $('#d');
-                            var otherTab4 = $('#e');
-                            var otherTab5 = $('#f');
-                            var otherTab6 = $('#g');
-                            var otherTab7 = $('#h');
+                            var otherTab = $("#layers");
+                            var otherTab2 = $("#graphs");
+                            var otherTab3 = $("#station");
+                            var otherTab4 = $("#comp");
+                            var otherTab5 = $("#weather");
+                            var otherTab6 = $("#view");
+                            var otherTab7 = $("#learn");
                             details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
@@ -263,7 +271,7 @@ requirejs({paths:{
 							var dataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
 
-							var details = $('#d');
+							var details = $("#station");
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 
 							detailsHTML += '<p>Station Name: ' + dataPoint.stationName + '</p>';
@@ -278,13 +286,13 @@ requirejs({paths:{
 							//Give functionality for buttons generated
 							giveAtmoButtonsFunctionality(detailsHTML, atmoData, dataPoint.stationName);
 
-                            var otherTab = $('#a');
-                            var otherTab2 = $('#b');
-                            var otherTab3 = $('#c');
-                            var otherTab4 = $('#e');
-                            var otherTab5 = $('#f');
-                            var otherTab6 = $('#g');
-                            var otherTab7 = $('#h');
+                            var otherTab = $("#layers");
+                            var otherTab2 = $("#graphs");
+                            var otherTab3 = $("#country");
+                            var otherTab4 = $("#comp");
+                            var otherTab5 = $("#weather");
+                            var otherTab6 = $("#view");
+                            var otherTab7 = $("#learn");
                             details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
@@ -355,7 +363,7 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
     }
 
     //Place the HTML somewhere
-    $('#b').append(layerControlHTML);
+    $("#graphs").append(layerControlHTML);
 
     //Add functionality to opacity slider
     giveOpacitySliderFunctionality(wwd, layerName, layerNumber);
@@ -1063,7 +1071,7 @@ function generateGeoComparisonButton(agriData) {
     }
     //Also implement the slider
     comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
-    var dropArea = $('#e');
+    var dropArea = $("#comp");
     dropArea.append(comparisonHTML);
 }
 
@@ -1262,21 +1270,6 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 
         });
 		
-		//Assign functionality to graph amounts
-		$('#amount').on('keypress',function (event) {
-			//Enter button
-			if(event.keyCode == 13) {
-				//Plots a stacked bar
-				var topX = $('#amount').val();
-				var amount = 5;
-				if(!Number.isNaN(parseInt(topX))) {
-					amount = parseInt(topX);
-				}
-					plotStack(dataPoint, 'allGraph', amount);				
-				}
-			console.log('press');
-		});
-		
 		//Assign functionality to the allButton
 		var allButtonHTML = $('#allButton').button();
 		allButtonHTML.on('click', function() {
@@ -1298,7 +1291,7 @@ function generateWeatherHTML() {
 	weatherHTML += '<p><input type="text" id="countryInput" class="form-control" placeholder="Put in 2-letter code"></p>';
 	weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
 	
-	$('#e').append(weatherHTML);
+	$("#weather").append(weatherHTML);
 }
 
 function giveWeatherButtonFunctionality() {
@@ -1537,7 +1530,7 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
 function generateRemoveButton() {
     //Generate the remove button for the graphs
     var removeHTML = '<p><button class="btn-info" id="removeButton">Remove all graphs</button></p>';
-    $('#e').append(removeHTML);
+    $("#graphs").append(removeHTML);
     var removeButton = $('#removeButton');
     removeButton.button();
     removeButton.on('click', function () {
@@ -1590,19 +1583,18 @@ function generateAgriCultureButtons(inputData, codeName) {
     if(dataPoint != 0) {
         var i = 0;
         agriHTML += '<ul id="myUL">';
-		agriHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
-		agriHTML += '<div id="allGraph"></div>';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
             agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
-			agriHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
+            agriHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
             agriHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
             agriHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             agriHTML += '<br></div>';
         }
-		
+		agriHTML += '<div id="allGraph"></div>';
+		agriHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
         agriHTML += '</ul>';
     }
     return agriHTML;
@@ -1650,7 +1642,7 @@ function createSearchButton() {
 	var searchHTML = '<h4>Compare weather and agriculture data</h4>';
 	searchHTML+= '<button id="searchWeather">Enable Draw</button>';
 	searchHTML += '<div id="searchResults"></div>';
-	$('#e').append(searchHTML);
+	$("#comp").append(searchHTML);
 	
 	var searchButton = $('#searchWeather').button();
 	searchButton.on('click', function() {
@@ -1782,7 +1774,6 @@ function plotStack(inputData, htmlID, amount) {
 	}
 	
 	var layout = {
-		title: 'Crop Production for ' + inputData.code3,
 		barmode: 'stack',
 		xaxis: xAxis,
 		yaxis: yAxis,
@@ -1900,84 +1891,84 @@ $(function () {
 //sidebar toggle
 $(document).ready(function () {
     $(".toggle1").click(function () {
-        $("#a").toggle('fast', 'swing');
-        $("#b").hide('fast', 'swing');
-        $("#c").hide('fast', 'swing');
-        $("#d").hide('fast', 'swing');
-        $("#e").hide('fast', 'swing');
-        $("#f").hide('fast', 'swing');
-        $("#g").hide('fast', 'swing');
-        $("#h").hide('fast', 'swing');
+        $("#layers").toggle('fast', 'swing');
+        $("#graphs").hide('fast', 'swing');
+        $("#country").hide('fast', 'swing');
+        $("#station").hide('fast', 'swing');
+        $("#comp").hide('fast', 'swing');
+        $("#weather").hide('fast', 'swing');
+        $("#view").hide('fast', 'swing');
+        $("#learn").hide('fast', 'swing');
     });
     $(".toggle2").click(function () {
-        $("#b").toggle('fast', 'swing');
-        $("#a").hide('fast', 'swing');
-        $("#c").hide('fast', 'swing');
-        $("#d").hide('fast', 'swing');
-        $("#e").hide('fast', 'swing');
-        $("#f").hide('fast', 'swing');
-        $("#g").hide('fast', 'swing');
-        $("#h").hide('fast', 'swing');
+        $("#graphs").toggle('fast', 'swing');
+        $("#layers").hide('fast', 'swing');
+        $("#country").hide('fast', 'swing');
+        $("#station").hide('fast', 'swing');
+        $("#comp").hide('fast', 'swing');
+        $("#weather").hide('fast', 'swing');
+        $("#view").hide('fast', 'swing');
+        $("#learn").hide('fast', 'swing');
     });
     $(".toggle3").click(function () {
-        $("#c").toggle('fast', 'swing');
-        $("#a").hide('fast', 'swing');
-        $("#b").hide('fast', 'swing');
-        $("#d").hide('fast', 'swing');
-        $("#e").hide('fast', 'swing');
-        $("#f").hide('fast', 'swing');
-        $("#g").hide('fast', 'swing');
-        $("#h").hide('fast', 'swing');
+        $("#country").toggle('fast', 'swing');
+        $("#layers").hide('fast', 'swing');
+        $("#graphs").hide('fast', 'swing');
+        $("#station").hide('fast', 'swing');
+        $("#comp").hide('fast', 'swing');
+        $("#weather").hide('fast', 'swing');
+        $("#view").hide('fast', 'swing');
+        $("#learn").hide('fast', 'swing');
     });
     $(".toggle4").click(function () {
-        $("#d").toggle('fast', 'swing');
-        $("#a").hide('fast', 'swing');
-        $("#b").hide('fast', 'swing');
-        $("#c").hide('fast', 'swing');
-        $("#e").hide('fast', 'swing');
-        $("#f").hide('fast', 'swing');
-        $("#g").hide('fast', 'swing');
-        $("#h").hide('fast', 'swing');
+        $("#station").toggle('fast', 'swing');
+        $("#layers").hide('fast', 'swing');
+        $("#graphs").hide('fast', 'swing');
+        $("#country").hide('fast', 'swing');
+        $("#comp").hide('fast', 'swing');
+        $("#weather").hide('fast', 'swing');
+        $("#view").hide('fast', 'swing');
+        $("#learn").hide('fast', 'swing');
     });
     $(".toggle5").click(function () {
-        $("#e").toggle('fast', 'swing');
-        $("#a").hide('fast', 'swing');
-        $("#b").hide('fast', 'swing');
-        $("#c").hide('fast', 'swing');
-        $("#d").hide('fast', 'swing');
-        $("#f").hide('fast', 'swing');
-        $("#g").hide('fast', 'swing');
-        $("#h").hide('fast', 'swing');
+        $("#comp").toggle('fast', 'swing');
+        $("#layers").hide('fast', 'swing');
+        $("#graphs").hide('fast', 'swing');
+        $("#country").hide('fast', 'swing');
+        $("#station").hide('fast', 'swing');
+        $("#weather").hide('fast', 'swing');
+        $("#view").hide('fast', 'swing');
+        $("#learn").hide('fast', 'swing');
     });
     $(".toggle6").click(function () {
-        $("#f").toggle('fast', 'swing');
-        $("#a").hide('fast', 'swing');
-        $("#b").hide('fast', 'swing');
-        $("#c").hide('fast', 'swing');
-        $("#d").hide('fast', 'swing');
-        $("#e").hide('fast', 'swing');
-        $("#g").hide('fast', 'swing');
-        $("#h").hide('fast', 'swing');
+        $("#weather").toggle('fast', 'swing');
+        $("#layers").hide('fast', 'swing');
+        $("#graphs").hide('fast', 'swing');
+        $("#country").hide('fast', 'swing');
+        $("#station").hide('fast', 'swing');
+        $("#comp").hide('fast', 'swing');
+        $("#view").hide('fast', 'swing');
+        $("#learn").hide('fast', 'swing');
     });
     $(".toggle7").click(function () {
-        $("#g").toggle('fast', 'swing');
-        $("#a").hide('fast', 'swing');
-        $("#b").hide('fast', 'swing');
-        $("#c").hide('fast', 'swing');
-        $("#d").hide('fast', 'swing');
-        $("#e").hide('fast', 'swing');
-        $("#f").hide('fast', 'swing');
-        $("#h").hide('fast', 'swing');
+        $("#view").toggle('fast', 'swing');
+        $("#layers").hide('fast', 'swing');
+        $("#graphs").hide('fast', 'swing');
+        $("#country").hide('fast', 'swing');
+        $("#station").hide('fast', 'swing');
+        $("#comp").hide('fast', 'swing');
+        $("#weather").hide('fast', 'swing');
+        $("#learn").hide('fast', 'swing');
     });
     $(".toggle8").click(function () {
-        $("#h").toggle('fast', 'swing');
-        $("#a").hide('fast', 'swing');
-        $("#b").hide('fast', 'swing');
-        $("#c").hide('fast', 'swing');
-        $("#d").hide('fast', 'swing');
-        $("#e").hide('fast', 'swing');
-        $("#f").hide('fast', 'swing');
-        $("#g").hide('fast', 'swing');
+        $("#learn").toggle('fast', 'swing');
+        $("#layers").hide('fast', 'swing');
+        $("#graphs").hide('fast', 'swing');
+        $("#country").hide('fast', 'swing');
+        $("#station").hide('fast', 'swing');
+        $("#comp").hide('fast', 'swing');
+        $("#weather").hide('fast', 'swing');
+        $("#view").hide('fast', 'swing');
     });
 });
 });
