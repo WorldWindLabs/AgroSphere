@@ -1100,21 +1100,19 @@ function generateGeoComparisonButton(agriData) {
 
     var dropArea = $('#comp');
 
-    dropArea.append('<input type="text" id="geoCompareSearch" placeholder="Search for datasets..." title="Type in a layer">');
+    dropArea.append('<input type="text" class="form-control" id="geoCompareSearch" placeholder="Search for datasets..." title="Type in a layer">');
 	comparisonHTML += '<div id="buttonDiv">';
     for(i = 0; i < buttonNames.length; i++) {
         var buttonTempName = buttonNames[i];
         comparisonHTML += '<button class="btn-info" id="geoCompType' + i +
             '">Generate Geo Comparison for ' + buttonTempName + '</button><br>';
     }
-<<<<<<< HEAD
+
     comparisonHTML += '</div>';
     //Also implement the slider
     comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
-=======
 
-    var dropArea = $('#comp');
->>>>>>> 2842cbef52b116c72b287c4072ece7d2b8202bad
+    var dropArea = $('#comp')
     dropArea.append(comparisonHTML);
 }
 
@@ -1614,8 +1612,8 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
-    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-	agriHTML += '<input type="text" id="amount" placeholder="How many of the biggest crops?" title="Type in a layer">';
+    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
+	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Type in a layer">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
