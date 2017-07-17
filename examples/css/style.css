@@ -374,7 +374,7 @@ audio
 }
 
 /* search bar */
-#myInput {
+input {
     background-position: 10px 12px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
     width: 100%; /* Full-width */
