@@ -1108,10 +1108,6 @@ function generateGeoComparisonButton(agriData) {
             '">Generate Geo Comparison for ' + buttonTempName + '</button><br>';
     }
 
-    comparisonHTML += '</div>';
-    //Also implement the slider
-    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
-
     var dropArea = $('#comp')
     dropArea.append(comparisonHTML);
 }
