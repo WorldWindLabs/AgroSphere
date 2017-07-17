@@ -1064,15 +1064,15 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
         //Iterate through the entire list and hide if it doesn't contain the
         //thing
         var i = 0;
-        var layerTitles = $('#buttonDiv');
-        var layerTitleList = $('#buttonDiv > button');
+        var layerTitles = $('.buttonDiv');
+        var layerTitleList = $('.buttonDiv > button');
         for (i = 0; i < layerTitleList.length; i++) {
             if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                $(layerTitleList[i]).hide();
+                $(layerTitles[i]).hide();
             } else if (textValue == '') {
-                $(layerTitleList[i]).show();
+                $(layerTitles[i]).show();
             } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                $(layerTitleList[i]).show();
+                $(layerTitles[i]).show();
             }
         }
         // }
@@ -1101,12 +1101,13 @@ function generateGeoComparisonButton(agriData) {
     var dropArea = $('#comp');
 
     dropArea.append('<input type="text" class="form-control" id="geoCompareSearch" placeholder="Search for datasets..." title="Type in a layer">');
-	comparisonHTML += '<div id="buttonDiv">';
+	comparisonHTML += '<div>';
     for(i = 0; i < buttonNames.length; i++) {
         var buttonTempName = buttonNames[i];
-        comparisonHTML += '<button class="btn-info" id="geoCompType' + i +
-            '">Generate Geo Comparison for ' + buttonTempName + '</button><br>';
+        comparisonHTML += '<div class="buttonDiv"><button class="btn-info" id="geoCompType' + i +
+            '">Generate Geo Comparison for ' + buttonTempName + '</button><br></div>';
     }
+
 
     var dropArea = $('#comp')
     dropArea.append(comparisonHTML);
@@ -1586,6 +1587,8 @@ function generateRemoveButton() {
 function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
     var atmoHTML = '<h4>Atmosphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
+	atmoHTML += '<div id="allGraph"></div>';
+	atmoHTML += '<button class="btn-info" id="allButton">Graph All Crops</button>';
     if (dataPoint != 0) {
         var i = 0;
         for (i = 0; i < dataPoint.dataValues.length; i++) {
@@ -1600,8 +1603,6 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
             atmoHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br></div>';
         }
-		atmoHTML += '<div id="allGraph"></div>';
-		atmoHTML += '<button class="btn-info" id="allButton">Graph All Crops</button>';
     }
     return atmoHTML;
 }
