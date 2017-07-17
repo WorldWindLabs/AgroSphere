@@ -255,7 +255,6 @@ requirejs({paths:{
                             var otherTab4 = $("#comp");
                             var otherTab5 = $("#weather");
                             var otherTab6 = $("#view");
-                            var otherTab7 = $("#learn");
                             details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
@@ -263,7 +262,6 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
-                            otherTab7.hide();
                             $("details").attr("aria-expanded","true");
 
 
@@ -292,7 +290,6 @@ requirejs({paths:{
                             var otherTab4 = $("#comp");
                             var otherTab5 = $("#weather");
                             var otherTab6 = $("#view");
-                            var otherTab7 = $("#learn");
                             details.show('fast','swing');
                             otherTab.hide();
                             otherTab2.hide();
@@ -300,7 +297,6 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
-                            otherTab7.hide();
 						}
                     }
                 }
@@ -1543,7 +1539,7 @@ function generateRemoveButton() {
 			} else {
 				var j = 0;
 				for(j = 0; j < almightyGraphDiv[i].childNodes.length; j++) {
-					Plotly.purge(almightyGraphDiv[i].childNodes[j].id);
+				    Plotly.purge(almightyGraphDiv[i].childNodes[j].id);
 				}
 			}
 		}
@@ -1579,10 +1575,13 @@ function generateAgriCultureButtons(inputData, codeName) {
     var agriHTML = '<h4>Agriculture Data</h4>' +
         '<input type="text" id="myInput" class="form-control" placeholder="Search for datasets.." title="Type in a layer">';
 	agriHTML += '<input type="text" id="amount" class="form-control" placeholder="How many top?" title="Type in a layer">';
-    var dataPoint = findDataPointCountry(inputData, codeName,3);
+
+	var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
+
         var i = 0;
         agriHTML += '<ul id="myUL">';
+
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
             agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
@@ -1594,7 +1593,7 @@ function generateAgriCultureButtons(inputData, codeName) {
             agriHTML += '<br></div>';
         }
 		agriHTML += '<div id="allGraph"></div>';
-		agriHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
+        agriHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
         agriHTML += '</ul>';
     }
     return agriHTML;
@@ -1898,7 +1897,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-        $("#learn").hide('fast', 'swing');
+
     });
     $(".toggle2").click(function () {
         $("#graphs").toggle('fast', 'swing');
@@ -1908,7 +1907,6 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-        $("#learn").hide('fast', 'swing');
     });
     $(".toggle3").click(function () {
         $("#country").toggle('fast', 'swing');
@@ -1918,7 +1916,6 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-        $("#learn").hide('fast', 'swing');
     });
     $(".toggle4").click(function () {
         $("#station").toggle('fast', 'swing');
@@ -1928,7 +1925,6 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-        $("#learn").hide('fast', 'swing');
     });
     $(".toggle5").click(function () {
         $("#comp").toggle('fast', 'swing');
@@ -1938,7 +1934,6 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-        $("#learn").hide('fast', 'swing');
     });
     $(".toggle6").click(function () {
         $("#weather").toggle('fast', 'swing');
@@ -1948,7 +1943,6 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-        $("#learn").hide('fast', 'swing');
     });
     $(".toggle7").click(function () {
         $("#view").toggle('fast', 'swing');
@@ -1958,17 +1952,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
-        $("#learn").hide('fast', 'swing');
     });
-    $(".toggle8").click(function () {
-        $("#learn").toggle('fast', 'swing');
-        $("#layers").hide('fast', 'swing');
-        $("#graphs").hide('fast', 'swing');
-        $("#country").hide('fast', 'swing');
-        $("#station").hide('fast', 'swing');
-        $("#comp").hide('fast', 'swing');
-        $("#weather").hide('fast', 'swing');
-        $("#view").hide('fast', 'swing');
-    });
+
 });
 });
