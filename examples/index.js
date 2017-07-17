@@ -1546,7 +1546,7 @@ function generateRemoveButton() {
 
 //Similar logic to generating agriculture buttons but for atomosphere
 function generateAtmoButtons(inputData, stationName) {
-    var atmoHTML = '<h4>Atomsphere Data</h4>';
+    var atmoHTML = '<h4>Atmosphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
     if (dataPoint != 0) {
         var i = 0;
