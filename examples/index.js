@@ -1055,6 +1055,29 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
             layerManager.synchronizeLayerList();
         });
     }
+
+    $('#geoCompareSearch').keyup(function (event) {
+        //if (event.which == 13) {
+        var input = $('#geoCompareSearch');
+        var textValue = input.val().toUpperCase();
+
+        //Iterate through the entire list and hide if it doesn't contain the
+        //thing
+        var i = 0;
+        var layerTitles = $('#buttonDiv');
+        var layerTitleList = $('#buttonDiv > button');
+        for (i = 0; i < layerTitleList.length; i++) {
+            if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                $(layerTitleList[i]).hide();
+            } else if (textValue == '') {
+                $(layerTitleList[i]).show();
+            } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                $(layerTitleList[i]).show();
+            }
+        }
+        // }
+
+    });
 }
 
 //Generates the html for geo location comparison
@@ -1074,14 +1097,22 @@ function generateGeoComparisonButton(agriData) {
 			}
 		}
 	}
-	
-    for(i = 0; i < buttonNames.length; i++) {
-        var buttonTempName = buttonNames[i];
-        comparisonHTML += '<p><button class="btn-info" id="geoCompType' + i +
-            '">Generate Geo Comparison for ' + buttonTempName + '</button><br><p>';
-    }
 
     var dropArea = $('#comp');
+
+    dropArea.append('<input type="text" class="form-control" id="geoCompareSearch" placeholder="Search for datasets..." title="Type in a layer">');
+	comparisonHTML += '<div id="buttonDiv">';
+    for(i = 0; i < buttonNames.length; i++) {
+        var buttonTempName = buttonNames[i];
+        comparisonHTML += '<button class="btn-info" id="geoCompType' + i +
+            '">Generate Geo Comparison for ' + buttonTempName + '</button><br>';
+    }
+
+    comparisonHTML += '</div>';
+    //Also implement the slider
+    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
+
+    var dropArea = $('#comp')
     dropArea.append(comparisonHTML);
 }
 
@@ -1581,8 +1612,8 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
-    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
-	agriHTML += '<input type="text" id="amount" placeholder="How many of the biggest crops?" title="Type in a layer">';
+    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
+	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Type in a layer">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
