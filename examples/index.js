@@ -146,13 +146,13 @@ requirejs({paths:{
         generateRemoveButton();
         
 		//Generate the button for weather
-		generateWeatherHTML();
+		generateWeatherHTML(csvData[0]);
 		giveWeatherButtonFunctionality();
 		//createSearchButton();
 		//giveSearchButtonFunctionality();
         //Generate regression comparison and the provide functionality
-        //generateGeoComparisonButton(agriData);
-        //giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
+        generateGeoComparisonButton(agriData);
+        giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
         
         //Automatically zoom into NASA Ames
         wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 10e5));
@@ -264,23 +264,32 @@ requirejs({paths:{
                             otherTab6.hide();
 
                         } else if(pickList.objects[i].userObject.type == 'station') {
-							var dataPoint =
+							var atmoDataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
 
-							var details = $("#station");
+							console.log(atmoDataPoint);
+							var countryData = csvData[0];
+							var ccode2 = atmoDataPoint.stationName.slice(0,2);
+							var ccode3 = findDataPointCountry(countryData, ccode2, 2).code3;
+							console.log(ccode3);
+							
+							var agriDataPoint = findDataPointCountry(agriData, ccode3, 3);
+							
+							var details = $('#station');
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 
-							detailsHTML += '<p>Station Name: ' + dataPoint.stationName + '</p>';
-
+							detailsHTML += '<p>Station Name: ' + atmoDataPoint.stationName + '</p>';
+							console.log(agriDataPoint);
 							//Generate the station buttons
 
-							detailsHTML += generateAtmoButtons(atmoData, dataPoint.stationName);
+							detailsHTML += generateAtmoButtons(atmoData, atmoDataPoint.stationName, agriDataPoint, ccode3);
 							details.html(detailsHTML);
 							
 							//Generate the plots
-							getWeatherAndAgri(agriData, atmoData, csvData[0], dataPoint.stationName);
+							//getWeatherAndAgri(agriData, atmoData, csvData[0], dataPoint.stationName);
 							//Give functionality for buttons generated
-							giveAtmoButtonsFunctionality(detailsHTML, atmoData, dataPoint.stationName);
+							giveAtmoButtonsFunctionality(detailsHTML, atmoData, 
+									atmoDataPoint.stationName, agriDataPoint);
 
                             var otherTab = $("#layers");
                             var otherTab2 = $("#graphs");
@@ -1001,38 +1010,34 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
     })
 
     //Search through the buttons
-    var count = 4;
     var i = 0;
-    for(i = 0; i < count; i++) {
+    for(i = 0; i < agriData.length; i++) {
         var buttonHTML = $('#geoCompType' + i);
         buttonHTML.button();
         buttonHTML.click(function(event) {
             //Find the year based on the slider value
             var sliderValue = $('#geoSlider').slider("value");
 
-            var buttonNumber = this.id.slice('geoCompType'.length);
-
+            var buttonName = $('#' + this.id).text().slice('Generate Geo Comparison for '.length);
+			console.log(buttonName);
             //Do some data stuff, go through the agridata based on the button
             //number for every country
             var countryData = [];
             var j = 0;
             var k = 0;
+			var l = 0;
             for(j = 0; j < agriData.length; j++) {
-
-                for(k = 0; k <
-                agriData[j].dataValues[buttonNumber].timeValues.length;
-                    k++) {
-                    //Basically find if the year exist
-                    if(agriData[j].dataValues[buttonNumber].timeValues[k].year
-                        == sliderValue) {
-                        //Push the country and value pair
-                        var tempObject =
-                            {value: agriData[j].dataValues[buttonNumber].timeValues[k].value,
-                                code3: agriData[j].code3};
-                        countryData.push(tempObject);
-                        break;
-                    }
-                }
+				for(k = 0; k < agriData[j].dataValues.length; k++) {
+					if(agriData[j].dataValues[k].typeName == buttonName) {
+						for(l = 0; l < agriData[j].dataValues[k].timeValues.length; l++) {
+							if(agriData[j].dataValues[k].timeValues[l].year == sliderValue) {
+								var tempObject = {value: agriData[j].dataValues[k].timeValues[l].value,
+										code3:agriData[j].code3};
+								countryData.push(tempObject);
+							}
+						}
+					}
+				}
             }
 
             //Got all the data, colour it
@@ -1055,17 +1060,28 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 //Generates the html for geo location comparison
 //Assumes the agriData is from agri.csv
 function generateGeoComparisonButton(agriData) {
-    var count = 4;
+     var count = 4;
     var i = 0;
+	var j = 0;
     var comparisonHTML = '';
-    for(i = 0; i < count; i++) {
-        var buttonTempName = agriData[0].dataValues[i].typeName;
+	
+	var buttonNames = [];
+	for(i = 0; i < agriData.length; i++) {
+		for(j = 0; j < agriData[i].dataValues.length; j++) {
+			if(!buttonNames.includes(agriData[i].dataValues[j].typeName)) {
+				buttonNames.push(agriData[i].dataValues[j].typeName);
+			}
+		}
+	}
+	
+    for(i = 0; i < buttonNames.length; i++) {
+        var buttonTempName = buttonNames[i];
         comparisonHTML += '<p><button class="btn-info" id="geoCompType' + i +
             '">Generate Geo Comparison for ' + buttonTempName + '</button><br><p>';
     }
     //Also implement the slider
     comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
-    var dropArea = $("#comp");
+    var dropArea = $('#comp');
     dropArea.append(comparisonHTML);
 }
 
@@ -1090,7 +1106,7 @@ function getWeatherAndAgri(agriData, stationData, countryData, stationName) {
 }
 
 //Gives the button functionality
-function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
+function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriDataPoint) {
 	var dataPoint = findDataPointStation(inputData, stationName);
 	if(dataPoint != 0) {
 		var i = 0;
@@ -1143,36 +1159,47 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName) {
 				var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
 				
 				$('#manyGraph').append(graphDiv);
-
+				
 				//Graph it
 				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
                             dataPoint.dataValues[buttonNumber].timeValues, 
                             'subGraph' + graphNumber, 0);
 			});
 		}
-        // //Assign functionality to the search bar
-        // $('#myInput').keyup(function (event) {
-        //     //if (event.which == 13) {
-        //     var input = $('#myInput');
-        //     var textValue = input.val().toUpperCase();
-        //
-        //     //Iterate through the entire list and hide if it doesn't contain the
-        //     //thing
-        //     var i = 0;
-        //     var layerTitles = $('div .layerTitle');
-        //     var layerTitleList = $('div .layerTitle > p');
-        //     for (i = 0; i < layerTitleList.length; i++) {
-        //         if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-        //             $(layerTitles[i]).hide();
-        //         } else if (textValue == '') {
-        //             $(layerTitles[i]).show();
-        //         } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-        //             $(layerTitles[i]).show();
-        //         }
-        //     }
-        //     // }
-        //
-        // });
+        //Assign functionality to the search bar
+        $('#myInput').keyup(function (event) {
+            //if (event.which == 13) {
+            var input = $('#myInput');
+            var textValue = input.val().toUpperCase();
+
+            //Iterate through the entire list and hide if it doesn't contain the
+            //thing
+            var i = 0;
+            var layerTitles = $('div .layerTitle');
+            var layerTitleList = $('div .layerTitle > p');
+            for (i = 0; i < layerTitleList.length; i++) {
+                if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                    $(layerTitles[i]).hide();
+                } else if (textValue == '') {
+                    $(layerTitles[i]).show();
+                } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                    $(layerTitles[i]).show();
+                }
+            }
+            // }
+
+        });
+		//Assign functionality to the allButton
+		var allButtonHTML = $('#allButton').button();
+		allButtonHTML.on('click', function() {
+			//Plots a stacked bar
+			var topX = $('#amount').val();
+			var amount = 5;
+			if(!Number.isNaN(parseInt(topX))) {
+				amount = parseInt(topX);
+			}
+			plotStack(agriDataPoint, 'allGraph', amount);
+		});
 	}
 }
 
@@ -1279,13 +1306,18 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 }
 
 //Generates a button which searches a city and code
-function generateWeatherHTML() {
+function generateWeatherHTML(countryData) {
 	var weatherHTML = '<p>Weather Search</p>';
-	weatherHTML += '<p><input type="text" id="cityInput" class="form-control" placeholder="Search for city" title="Type in a layer"></p>';
-	weatherHTML += '<p><input type="text" id="countryInput" class="form-control" placeholder="Put in 2-letter code"></p>';
+	weatherHTML += '<p><input type="text" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';	
+	weatherHTML += '<select id="countryNames">'
+	var i = 0;
+	console.log(countryData);
+	for(i = 0; i < countryData.length; i++) {
+		weatherHTML += '<option>' + countryData[i].code2 + ' - ' + countryData[i].country + '</option>';
+	}
+	weatherHTML += '</select>';
 	weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
-	
-	$("#weather").append(weatherHTML);
+	$('#weather').append(weatherHTML);
 }
 
 function giveWeatherButtonFunctionality() {
@@ -1293,8 +1325,9 @@ function giveWeatherButtonFunctionality() {
 	weatherButton.on('click', function() {
 		//Extract the two inputs
 		var cityInput = $('#cityInput').val();
-		var countryInput = $('#countryInput').val();
-		
+		var country = $('#countryNames :selected').val();
+		var countryInput = country.slice(0,2);
+		console.log(countryInput);
 		//Make an api request
 		var apiURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ',' 
 				+ countryInput + '&appid=' + APIKEY;
@@ -1307,12 +1340,13 @@ function giveWeatherButtonFunctionality() {
 			success: function(data) {
 				//Create some html
 				var dropArea = $('#searchDetails');
+				dropArea.html('');
 				var tempHTML = '<h5>Weather Details for ' + data.name + '</h5>';
 				tempHTML += '<p>Current Outlook: ' + data.weather[0].main + '</p>';
 				tempHTML += '<p>Current Outlook Description: ' + data.weather[0].description + '</p>';
-				tempHTML += '<p>Current Temperature (Celsius): ' + (data.main.temp - 272) + '</p>';
-				tempHTML += '<p>Max Temperature Today (Celsius): ' + (data.main.temp_max - 272) + '</p>'; 
-				tempHTML += '<p>Min Temperature Today (Celsius): ' + (data.main.temp_min  - 272) + '</p>';
+				tempHTML += '<p>Current Temperature (Celsius): ' + Math.round((data.main.temp - 272),2) + '</p>';
+				tempHTML += '<p>Max Temperature Today (Celsius): ' + Math.round((data.main.temp_max - 272),2) + '</p>'; 
+				tempHTML += '<p>Min Temperature Today (Celsius): ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
 				tempHTML += '<p>Pressure (HPa): ' + data.main.pressure + '</p>';
 				tempHTML += '<p>Humidity (%): ' + data.main.humidity + '</p>';
 				tempHTML += '<p>Wind speed (m/s)' + data.wind.speed + '</p>';
@@ -1544,13 +1578,11 @@ function generateRemoveButton() {
     });
 }
 
-//Similar logic to generating agriculture buttons but for atmosphere
-function generateAtmoButtons(inputData, stationName) {
-    var atmoHTML = '<h4>Atmosphere Data</h4>';
+function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
+    var atmoHTML = '<h4>Atomsphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
     if (dataPoint != 0) {
         var i = 0;
-
         for (i = 0; i < dataPoint.dataValues.length; i++) {
 
             //Generate the remaining HTML
@@ -1563,35 +1595,34 @@ function generateAtmoButtons(inputData, stationName) {
             atmoHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br></div>';
         }
+		atmoHTML += '<div id="allGraph"></div>';
+		atmoHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
     }
     return atmoHTML;
 }
 
-//Generates the button
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' +
-        '<input type="text" id="myInput" class="form-control" placeholder="Search for datasets.." title="Type in a layer">';
-	agriHTML += '<input type="text" id="amount" class="form-control" placeholder="How many top?" title="Type in a layer">';
-
-	var dataPoint = findDataPointCountry(inputData, codeName,3);
+        '<input type="text" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
+	agriHTML += '<input type="text" id="amount" placeholder="How many top?" title="Type in a layer">';
+    var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
-
         var i = 0;
         agriHTML += '<ul id="myUL">';
-
+		agriHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
+		agriHTML += '<div id="allGraph"></div>';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
             agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
-            agriHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
+			agriHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
             agriHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
             agriHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             agriHTML += '<br></div>';
         }
-		agriHTML += '<div id="allGraph"></div>';
-        agriHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
+		
         agriHTML += '</ul>';
     }
     return agriHTML;
