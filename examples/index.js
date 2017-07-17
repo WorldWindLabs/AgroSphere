@@ -1262,6 +1262,21 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 
         });
 		
+		//Assign functionality to graph amounts
+		$('#amount').on('keypress',function (event) {
+			//Enter button
+			if(event.keyCode == 13) {
+				//Plots a stacked bar
+				var topX = $('#amount').val();
+				var amount = 5;
+				if(!Number.isNaN(parseInt(topX))) {
+					amount = parseInt(topX);
+				}
+					plotStack(dataPoint, 'allGraph', amount);				
+				}
+			console.log('press');
+		});
+		
 		//Assign functionality to the allButton
 		var allButtonHTML = $('#allButton').button();
 		allButtonHTML.on('click', function() {
@@ -1575,18 +1590,19 @@ function generateAgriCultureButtons(inputData, codeName) {
     if(dataPoint != 0) {
         var i = 0;
         agriHTML += '<ul id="myUL">';
+		agriHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
+		agriHTML += '<div id="allGraph"></div>';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
             agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
-            agriHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
+			agriHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             agriHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
             agriHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
             agriHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             agriHTML += '<br></div>';
         }
-		agriHTML += '<div id="allGraph"></div>';
-		agriHTML += '<button class="btn-info" id="allButton">Graph all crops</button>';
+		
         agriHTML += '</ul>';
     }
     return agriHTML;
