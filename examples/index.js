@@ -1513,14 +1513,14 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
 	
 	//Empty the legend segment
 	$('#colour-legend').html('');
-	
+
 	var legendHTML = '';
 	for(i = 0; i < legendAmounts; i++) {
 		//Search the div and generate the appropiate canvas next to it
-		var segmentHTML = '<h4>Geo Comparison Legend</h4>';
+		var segmentHTML = '<h5>' + 'Geo Comparison Legend ' + i + '</h5>';
 		segmentHTML += '<p>Standard deviation of ' + (i + legendOffset) + 
 				' or a value of ' + (mean + (sd * (i + legendOffset))) + '</p>';
-		segmentHTML += '<canvas id="canvas'+ i + '" width="200" height="100"></canvas>';
+		segmentHTML += '<canvas id="canvas'+ i + '" width="100" height="50"></canvas>';
 		
 		segmentHTML += '<br>';
 		legendHTML += segmentHTML;
@@ -1708,8 +1708,8 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
-    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Type in a layer">';
-	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Type in a layer">';
+    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
 	agriHTML += '<br><button id="sortByName">Sort by Name</button>';
 	agriHTML += '<br><button id="sortByAverage">Sort by Average</button>';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
