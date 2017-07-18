@@ -1359,6 +1359,8 @@ function giveWeatherButtonFunctionality() {
 				tempHTML += '<p>Current Outlook: ' + data.weather[0].main + '</p>';
 				tempHTML += '<p>Current Outlook Description: ' + data.weather[0].description + '</p>';
 				tempHTML += '<p>Current Temperature (Celsius): ' + Math.round((data.main.temp - 272),2) + '</p>';
+				tempHTML += '<p>Sunrise: ' + timeConverter(data.sys.sunrise) + '</p>';
+                tempHTML += '<p>Sunset: ' + timeConverter(data.sys.sunset) + '</p>';
 				tempHTML += '<p>Max Temperature Today (Celsius): ' + Math.round((data.main.temp_max - 272),2) + '</p>'; 
 				tempHTML += '<p>Min Temperature Today (Celsius): ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
 				tempHTML += '<p>Pressure (HPa): ' + data.main.pressure + '</p>';
@@ -1373,6 +1375,20 @@ function giveWeatherButtonFunctionality() {
 		})
 	});
 }
+
+        function timeConverter(UNIX_timestamp){
+            var a = new Date(UNIX_timestamp * 1000);
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var year = a.getFullYear();
+            var month = months[a.getMonth()];
+            var date = a.getDate();
+            var hour = a.getHours();
+            var min = a.getMinutes();
+            var sec = a.getSeconds();
+            var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+            return time;
+        }
+
 
 //Based on z-score get a colour
 //Green means above mean, red means below, alpha is 1 by default
