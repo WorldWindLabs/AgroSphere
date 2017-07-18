@@ -483,7 +483,7 @@ input {
 }
 
 /* modal css */
-#myModal, #myModal2  {
+#appinfomodal, #tutorialmodal2 {
     height:600px;
     max-height:600px;
 }

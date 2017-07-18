@@ -1282,9 +1282,9 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
         }
 
         //Assign functionality to the search bar
-        $('#myInput').keyup(function (event) {
+        $('#searchinput').keyup(function (event) {
             //if (event.which == 13) {
-                var input = $('#myInput');
+                var input = $('#searchinput');
                 var textValue = input.val().toUpperCase();
 
                 //Iterate through the entire list and hide if it doesn't contain the
@@ -1633,7 +1633,7 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
-    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
+    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Type in a layer">';
 	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Type in a layer">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
