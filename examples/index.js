@@ -1377,16 +1377,16 @@ function giveWeatherButtonFunctionality() {
 }
 
         function timeConverter(UNIX_timestamp){
-            var a = new Date(UNIX_timestamp * 1000);
+            var unixTime = new Date(UNIX_timestamp * 1000);
             var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            var year = a.getFullYear();
-            var month = months[a.getMonth()];
-            var date = a.getDate();
-            var hour = a.getHours();
-            var min = a.getMinutes();
-            var sec = a.getSeconds();
-            var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-            return time;
+            var year = unixTime.getFullYear();
+            var month = months[unixTime.getMonth()];
+            var date = unixTime.getDate();
+            var hour = unixTime.getHours();
+            var min = unixTime.getMinutes();
+            var sec = unixTime.getSeconds();
+            var currentTime = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec + " (In Your Timezone)";
+            return currentTime;
         }
 
 
