@@ -1709,7 +1709,7 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
+	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the top crops?" title="Search for datasets..">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
@@ -1771,20 +1771,7 @@ function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
 	console.log(stationName, smallestStationDistance);
 }
 
-//Enables draw mode 
-function createSearchButton() {
-	//Drop at the weather point
-	var searchHTML = '<h4>Compare weather and agriculture data</h4>';
-	searchHTML+= '<button id="searchWeather">Enable Draw</button>';
-	searchHTML += '<div id="searchResults"></div>';
-	$("#comp").append(searchHTML);
-	
-	var searchButton = $('#searchWeather').button();
-	searchButton.on('click', function() {
-		//Set the searchMode to 1
-		searchMode = 1;
-	});
-}
+
 
 //Plots a stacked bar given all the set of data
 function plotStack(inputData, htmlID, amount) {
