@@ -52,67 +52,45 @@ requirejs({paths:{
             wwd.addLayer(layers[l].layer);
         }
 
-        // var config = {
-        //     service: "http://sedac.ciesin.columbia.edu/geoserver/wms",
-        //     layerNames: 'usgrid:usgrid-summary-file1-2000_usa-pctasian-2000',
-        //     sector: new WorldWind.Sector(-90, 90, -180, 180),
-        //     levelZeroDelta: new WorldWind.Location(36, 36),
-        //     numLevels: 1,
-        //     format: "image/png",
-        //     size: 256
-        // };
-			// 		// Data
-			// var data2 = [
-			// 	[1, 10],
-			// 	[2, 30],
-			// 	[3, 68],
-			// 	[4, 130],
-			// 	[5, 222],
-			// 	[6, 350],
-			// 	[7, 520],
-			// 	[8, 738],
-			// 	[9, 1010],
-			// 	[10, 1342]
-			// ];
-        // console.log(regression('exponential',data2));
-        // // new instance of layer created
-        // var dataLayer = new WorldWind.WmsLayer(config, null);
-        //
-        // // data layer named
-        // dataLayer.displayName = "Data layer";
-        //
-        // //disable layer by default
-        // dataLayer.enabled = false;
-        //
-        // // layer added to globe
-        // wwd.addLayer(dataLayer);
 
-        // Create a layer manager for controlling layer visibility.
-        var layerManager = new LayerManager(wwd);
 
-        // Set up to handle clicks and taps.
-        // The common gesture-handling function.
-        var handleClick = function (recognizer) {
-            // Obtain the event location.
-            var x = recognizer.clientX,
-                y = recognizer.clientY;
-
-            // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
-            // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-            var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-
-            // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
-            if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
-                var position = pickList.objects[0].position;
-                wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
-            }
+        var config = {
+            service: "http://sedac.ciesin.columbia.edu/geoserver/wms",
+            layerNames: 'usgrid:usgrid-summary-file1-2000_usa-pctasian-2000',
+            sector: new WorldWind.Sector(-90, 90, -180, 180),
+            levelZeroDelta: new WorldWind.Location(36, 36),
+            numLevels: 1,
+            format: "image/png",
+            size: 256
         };
+					// Data
+			var data2 = [
+				[1, 10],
+				[2, 30],
+				[3, 68],
+				[4, 130],
+				[5, 222],
+				[6, 350],
+				[7, 520],
+				[8, 738],
+				[9, 1010],
+				[10, 1342]
+			];
+        console.log(regression('exponential',data2));
+        // new instance of layer created
+        var dataLayer = new WorldWind.WmsLayer(config, null);
 
-        // Listen for mouse clicks.
-        var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
+        // data layer named
+        dataLayer.displayName = "Data layer";
 
-        // Listen for taps on mobile devices.
-        var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
+        //disable layer by default
+        dataLayer.enabled = false;
+
+        // layer added to globe
+        wwd.addLayer(dataLayer);
+
+
+
 
         // Web Map Service information from NASA's Near Earth Observations WMS
         //var serviceAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
@@ -123,7 +101,7 @@ requirejs({paths:{
         //Load the WMTS layers
         console.time('First');
         var geoJSONData = loadGEOJsonData();
-        var sampleGradCount = 
+        var sampleGradCount =
                 '[{"gradient": 0.5, "code3": "AFG"}, {"gradient": 7, "code3": "AUS"},' +
                 '{"gradient": -2, "code3": "JPN"}, {"gradient": -1, "code3": "USA"},' +
                 '{"gradient": -3, "code3": "JOR"}, {"gradient": 1, "code3": "NZL"},' +
@@ -131,8 +109,8 @@ requirejs({paths:{
         //var tempData = JSON.parse(sampleGradCount);
         //var countryLayers = colourizeCountries(tempData, geoJSONData);
         //wwd.addLayer(countryLayers);
-        
-        
+
+
         //Load the country data
         var csvData = loadCSVData();
         var csvMultiData = loadCSVDataArray();
@@ -144,7 +122,7 @@ requirejs({paths:{
 
         //Generate the remove button
         generateRemoveButton();
-        
+
 		//Generate the button for weather
 		generateWeatherHTML(csvData[0]);
 		giveWeatherButtonFunctionality();
@@ -153,9 +131,13 @@ requirejs({paths:{
         //Generate regression comparison and the provide functionality
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
-        
+
         //Automatically zoom into NASA Ames
         wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 10e5));
+
+
+
+
 
         var starFieldLayer = new WorldWind.StarFieldLayer();
         var atmosphereLayer = new WorldWind.AtmosphereLayer();
@@ -165,6 +147,8 @@ requirejs({paths:{
         wwd.addLayer(starFieldLayer);
         wwd.addLayer(atmosphereLayer);
 
+        // Create a layer manager for controlling layer visibility.
+        var layerManager = new LayerManager(wwd);
         wwd.redrawCallbacks.push(runSunSimulation);
 
         var sunSimulationCheckBox = document.getElementById('stars-simulation');
@@ -312,6 +296,30 @@ requirejs({paths:{
         
         wwd.addEventListener('click', handlePick);
         // Set up to handle clicks and taps.
+
+        // The common gesture-handling function.
+        var handleClick = function (recognizer) {
+            // Obtain the event location.
+            var x = recognizer.clientX,
+                y = recognizer.clientY;
+
+            // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
+            // relative to the upper left corner of the canvas rather than the upper left corner of the page.
+            var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
+
+            // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
+            if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
+                var position = pickList.objects[0].position;
+                wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
+            }
+        };
+
+        // Listen for mouse clicks.
+        var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
+
+        // Listen for taps on mobile devices.
+        var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
+
 
         // The common gesture-handling function.
         var handleClick = function (recognizer) {
