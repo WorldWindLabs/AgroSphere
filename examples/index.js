@@ -52,64 +52,12 @@ requirejs({paths:{
             wwd.addLayer(layers[l].layer);
         }
 
-
-
-        // var config = {
-        //     service: "http://sedac.ciesin.columbia.edu/geoserver/wms",
-        //     layerNames: 'usgrid:usgrid-summary-file1-2000_usa-pctasian-2000',
-        //     sector: new WorldWind.Sector(-90, 90, -180, 180),
-        //     levelZeroDelta: new WorldWind.Location(36, 36),
-        //     numLevels: 1,
-        //     format: "image/png",
-        //     size: 256
-        // };
-			// 		// Data
-			// var data2 = [
-			// 	[1, 10],
-			// 	[2, 30],
-			// 	[3, 68],
-			// 	[4, 130],
-			// 	[5, 222],
-			// 	[6, 350],
-			// 	[7, 520],
-			// 	[8, 738],
-			// 	[9, 1010],
-			// 	[10, 1342]
-			// ];
-        // console.log(regression('exponential',data2));
-        // // new instance of layer created
-        // var dataLayer = new WorldWind.WmsLayer(config, null);
-        //
-        // // data layer named
-        // dataLayer.displayName = "Data layer";
-        //
-        // //disable layer by default
-        // dataLayer.enabled = false;
-        //
-        // // layer added to globe
-        // wwd.addLayer(dataLayer);
-
-
-
-
         // Web Map Service information from NASA's Near Earth Observations WMS
         //var serviceAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
         // Named layer displaying Average Temperature data
-        /*var layerName = ["povmap:povmap-global-subnational-infant-mortality-rates_2000", 'povmap:povmap-global-subnational-prevalence-child-malnutrition',
-            'gpw-v4:gpw-v4-population-count_2000', 'gpw-v4:gpw-v4-population-count_2005', 'gpw-v4:gpw-v4-population-count_2010', 'gpw-v4:gpw-v4-population-count_2015',
-            'gpw-v4:gpw-v4-population-count_2020'];*/
         //Load the WMTS layers
         console.time('First');
         var geoJSONData = loadGEOJsonData();
-        var sampleGradCount =
-                '[{"gradient": 0.5, "code3": "AFG"}, {"gradient": 7, "code3": "AUS"},' +
-                '{"gradient": -2, "code3": "JPN"}, {"gradient": -1, "code3": "USA"},' +
-                '{"gradient": -3, "code3": "JOR"}, {"gradient": 1, "code3": "NZL"},' +
-                '{"gradient": 0, "code3": "ESP"}]';
-        //var tempData = JSON.parse(sampleGradCount);
-        //var countryLayers = colourizeCountries(tempData, geoJSONData);
-        //wwd.addLayer(countryLayers);
-
 
         //Load the country data
         var csvData = loadCSVData();
@@ -126,8 +74,7 @@ requirejs({paths:{
 		//Generate the button for weather
 		generateWeatherHTML(csvData[0]);
 		giveWeatherButtonFunctionality();
-		//createSearchButton();
-		//giveSearchButtonFunctionality();
+
         //Generate regression comparison and the provide functionality
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
@@ -135,13 +82,8 @@ requirejs({paths:{
         //Automatically zoom into NASA Ames
         wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 10e5));
 
-
-
-
-
         var starFieldLayer = new WorldWind.StarFieldLayer();
         var atmosphereLayer = new WorldWind.AtmosphereLayer();
-
 
         //IMPORTANT: add the starFieldLayer before the atmosphereLayer
         wwd.addLayer(starFieldLayer);
@@ -1769,21 +1711,6 @@ function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
 	}	
 	console.log(countryCode, smallestCountryDistance);
 	console.log(stationName, smallestStationDistance);
-}
-
-//Enables draw mode 
-function createSearchButton() {
-	//Drop at the weather point
-	var searchHTML = '<h4>Compare weather and agriculture data</h4>';
-	searchHTML+= '<button id="searchWeather">Enable Draw</button>';
-	searchHTML += '<div id="searchResults"></div>';
-	$("#comp").append(searchHTML);
-	
-	var searchButton = $('#searchWeather').button();
-	searchButton.on('click', function() {
-		//Set the searchMode to 1
-		searchMode = 1;
-	});
 }
 
 //Plots a stacked bar given all the set of data
