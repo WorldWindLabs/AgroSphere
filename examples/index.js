@@ -1351,9 +1351,9 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 		});
 		
         //Assign functionality to the search bar
-        $('#myInput').keyup(function (event) {
+        $('#searchinput').keyup(function (event) {
             //if (event.which == 13) {
-                var input = $('#myInput');
+                var input = $('#searchinput');
                 var textValue = input.val().toUpperCase();
 
                 //Iterate through the entire list and hide if it doesn't contain the
@@ -1428,6 +1428,8 @@ function giveWeatherButtonFunctionality() {
 				tempHTML += '<p>Current Outlook: ' + data.weather[0].main + '</p>';
 				tempHTML += '<p>Current Outlook Description: ' + data.weather[0].description + '</p>';
 				tempHTML += '<p>Current Temperature (Celsius): ' + Math.round((data.main.temp - 272),2) + '</p>';
+				tempHTML += '<p>Sunrise: ' + timeConverter(data.sys.sunrise) + '</p>';
+                tempHTML += '<p>Sunset: ' + timeConverter(data.sys.sunset) + '</p>';
 				tempHTML += '<p>Max Temperature Today (Celsius): ' + Math.round((data.main.temp_max - 272),2) + '</p>'; 
 				tempHTML += '<p>Min Temperature Today (Celsius): ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
 				tempHTML += '<p>Pressure (HPa): ' + data.main.pressure + '</p>';
@@ -1442,6 +1444,20 @@ function giveWeatherButtonFunctionality() {
 		})
 	});
 }
+
+        function timeConverter(UNIX_timestamp){
+            var unixTime = new Date(UNIX_timestamp * 1000);
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var year = unixTime.getFullYear();
+            var month = months[unixTime.getMonth()];
+            var date = unixTime.getDate();
+            var hour = unixTime.getHours();
+            var min = unixTime.getMinutes();
+            var sec = unixTime.getSeconds();
+            var currentTime = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec + " (In Your Timezone)";
+            return currentTime;
+        }
+
 
 //Based on z-score get a colour
 //Green means above mean, red means below, alpha is 1 by default
@@ -1686,7 +1702,7 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
-    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="myInput" placeholder="Search for datasets.." title="Type in a layer">';
+    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Type in a layer">';
 	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Type in a layer">';
 	agriHTML += '<br><button id="sortByName">Sort by Name</button>';
 	agriHTML += '<br><button id="sortByAverage">Sort by Average</button>';
