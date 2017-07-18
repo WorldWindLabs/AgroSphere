@@ -1330,7 +1330,7 @@ function generateWeatherHTML(countryData) {
 		weatherHTML += '<option>' + countryData[i].code2 + ' - ' + countryData[i].country + '</option>';
 	}
 	weatherHTML += '</select>';
-	weatherHTML += '<p><button class="btn-info" "id="searchWeather">Search Weather</button></p>';
+	weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
 	$('#weather').append(weatherHTML);
 }
 
