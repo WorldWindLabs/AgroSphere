@@ -1239,9 +1239,6 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
                     plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                         dataPoint.dataValues[buttonNumber].timeValues,
                         plotID, 0);
-                    /*getRegressionFunctionPlot(
-                        dataPoint.dataValues[buttonNumber].timeValues, plotID,
-                        dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);*/
                     selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
@@ -1281,6 +1278,78 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
             });
         }
 
+		$('#sortByName').click(function() {
+			//Go through the entire button list and sort them
+			var divList = $('.layerTitle');
+			var newList = [];
+			divList.sort(function(a, b) {
+				//Compare with the list element
+				if(a.firstChild.innerText < b.firstChild.innerText) {
+					return -1;
+				} else if(a.firstChild.innerText > b.firstChild.innerText) {
+					return 1;
+				}
+				return 0;
+			});
+			
+			//Now that things are sorted, make a duplicate
+			var i = 0;
+			for(i = 0; i < divList.length; i++) {
+				//$('#myUL').append($(divList[i]).html());
+				newList.push($(divList[i]).clone());
+			}
+			$('#myUL > .layerTitle').remove();
+			for(i = 0; i < newList.length; i++) {
+				$('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
+			}
+			giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName);
+		});
+		
+		$('#sortByAverage').click(function() {
+			var divList = $('.layerTitle');
+			var newList = [];
+			divList.sort(function(a, b) {
+				//Get the buttons
+				var buttonNumber1 = $(a).attr('id').slice('layerTitle'.length);
+				var buttonNumber2 = $(b).attr('id').slice('layerTitle'.length);
+				var data1 = dataPoint.dataValues[buttonNumber1].timeValues;
+				data1 = filterOutBlanks(data1, 0);
+				var data2 = dataPoint.dataValues[buttonNumber2].timeValues;
+				data2 = filterOutBlanks(data2, 0);
+				//Got the number
+				var sum1 = 0;
+				var i = 0;
+				for(i = 0; i < data1.length; i++) {
+					sum1 += data1[i].value;
+				}
+				var mean1 = sum1/i;
+				var sum2 = 0;
+				for(i = 0; i < data2.length; i++) {
+					sum2+= data2[i].value;
+				}
+				var mean2 = sum2/i;
+				
+				if(mean1 < mean2) {
+					return 1;
+				} else if(mean1 > mean2) {
+					return -1;
+				}
+				return 0;
+			});
+			//console.log(divList);
+			//Now that things are sorted, make a duplicate
+			var newList = [];
+			for(i = 0; i < divList.length; i++) {
+				//$('#myUL').append($(divList[i]).html());
+				newList.push($(divList[i]).clone());
+			}
+			$('#myUL > .layerTitle').remove();
+			for(i = 0; i < newList.length; i++) {
+				$('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
+			}
+			giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName);
+		});
+		
         //Assign functionality to the search bar
         $('#searchinput').keyup(function (event) {
             //if (event.which == 13) {
@@ -1635,12 +1704,15 @@ function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
+	agriHTML += '<br><button id="sortByName">Sort by Name</button>';
+	agriHTML += '<br><button id="sortByAverage">Sort by Average</button>';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
         agriHTML += '<ul id="myUL">';
 		agriHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
 		agriHTML += '<div id="allGraph"></div>';
+		//agriHTML = '<div id="allDiv">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
             agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
@@ -1651,7 +1723,7 @@ function generateAgriCultureButtons(inputData, codeName) {
             agriHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             agriHTML += '<br></div>';
         }
-		
+		//agriHTML += '</div>';
         agriHTML += '</ul>';
     }
     return agriHTML;
@@ -1827,14 +1899,20 @@ function plotStack(inputData, htmlID, amount) {
 	var yAxis2 = {
 		title: 'Percentage of top ' + amount,
 		overlaying: 'y',
-		side: 'right'
+		side: 'right',
+		anchor: 'y',
+		//position: 0.85
 	}
 	
 	var layout = {
+		title: 'Top ' + amount + ' crop production for ' + inputData.code3 + ' vs Year',
 		barmode: 'stack',
 		xaxis: xAxis,
 		yaxis: yAxis,
-		yaxis2: yAxis2
+		yaxis2: yAxis2,
+		legend: {
+			x: 1.15
+		}
 	}
 	Plotly.newPlot(htmlID, traces, layout);
 }
