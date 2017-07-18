@@ -1899,14 +1899,20 @@ function plotStack(inputData, htmlID, amount) {
 	var yAxis2 = {
 		title: 'Percentage of top ' + amount,
 		overlaying: 'y',
-		side: 'right'
+		side: 'right',
+		anchor: 'y',
+		//position: 0.85
 	}
 	
 	var layout = {
+		title: 'Top ' + amount + ' crop production for ' + inputData.code3 + ' vs Year',
 		barmode: 'stack',
 		xaxis: xAxis,
 		yaxis: yAxis,
-		yaxis2: yAxis2
+		yaxis2: yAxis2,
+		legend: {
+			x: 1.15
+		}
 	}
 	Plotly.newPlot(htmlID, traces, layout);
 }
