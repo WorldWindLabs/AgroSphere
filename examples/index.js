@@ -54,40 +54,40 @@ requirejs({paths:{
 
 
 
-        var config = {
-            service: "http://sedac.ciesin.columbia.edu/geoserver/wms",
-            layerNames: 'usgrid:usgrid-summary-file1-2000_usa-pctasian-2000',
-            sector: new WorldWind.Sector(-90, 90, -180, 180),
-            levelZeroDelta: new WorldWind.Location(36, 36),
-            numLevels: 1,
-            format: "image/png",
-            size: 256
-        };
-					// Data
-			var data2 = [
-				[1, 10],
-				[2, 30],
-				[3, 68],
-				[4, 130],
-				[5, 222],
-				[6, 350],
-				[7, 520],
-				[8, 738],
-				[9, 1010],
-				[10, 1342]
-			];
-        console.log(regression('exponential',data2));
-        // new instance of layer created
-        var dataLayer = new WorldWind.WmsLayer(config, null);
-
-        // data layer named
-        dataLayer.displayName = "Data layer";
-
-        //disable layer by default
-        dataLayer.enabled = false;
-
-        // layer added to globe
-        wwd.addLayer(dataLayer);
+        // var config = {
+        //     service: "http://sedac.ciesin.columbia.edu/geoserver/wms",
+        //     layerNames: 'usgrid:usgrid-summary-file1-2000_usa-pctasian-2000',
+        //     sector: new WorldWind.Sector(-90, 90, -180, 180),
+        //     levelZeroDelta: new WorldWind.Location(36, 36),
+        //     numLevels: 1,
+        //     format: "image/png",
+        //     size: 256
+        // };
+			// 		// Data
+			// var data2 = [
+			// 	[1, 10],
+			// 	[2, 30],
+			// 	[3, 68],
+			// 	[4, 130],
+			// 	[5, 222],
+			// 	[6, 350],
+			// 	[7, 520],
+			// 	[8, 738],
+			// 	[9, 1010],
+			// 	[10, 1342]
+			// ];
+        // console.log(regression('exponential',data2));
+        // // new instance of layer created
+        // var dataLayer = new WorldWind.WmsLayer(config, null);
+        //
+        // // data layer named
+        // dataLayer.displayName = "Data layer";
+        //
+        // //disable layer by default
+        // dataLayer.enabled = false;
+        //
+        // // layer added to globe
+        // wwd.addLayer(dataLayer);
 
 
 
