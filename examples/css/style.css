@@ -81,11 +81,17 @@ body {
 .tabs-left {
     margin-top:6rem;
     z-index:1000;
+    position:absolute;
+    top:-60px;
+    left:0;
 }
 
 .nav-tabs {
     float: left;
     border-bottom: 0;
+    position:absolute;
+    top:0;
+    left:0;
 }
 
 .nav-tabs li {
@@ -477,3 +483,9 @@ input {
     -webkit-transform: scale(1.03);
     transform: scale(1.03);
 }
+
+/* modal css */
+.modal-content  {
+    border-radius:0;
+}
+
