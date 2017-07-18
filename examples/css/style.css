@@ -81,11 +81,17 @@ body {
 .tabs-left {
     margin-top:6rem;
     z-index:1000;
+    position:absolute;
+    top:-60px;
+    left:0;
 }
 
 .nav-tabs {
     float: left;
     border-bottom: 0;
+    position:absolute;
+    top:0;
+    left:0;
 }
 
 .nav-tabs li {
@@ -476,4 +482,31 @@ input {
     -moz-transform: scale(1.03);
     -webkit-transform: scale(1.03);
     transform: scale(1.03);
+}
+
+/* modal css */
+.modal-content  {
+    border-radius:0;
+}
+
+.modal.fade .modal-dialog {
+    -webkit-transform: scale(0.1);
+    -moz-transform: scale(0.1);
+    -ms-transform: scale(0.1);
+    transform: scale(0.1);
+    top: 300px;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.modal.fade.in .modal-dialog {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform: translate3d(0, -300px, 0);
+    transform: translate3d(0, -300px, 0);
+    opacity: 1;
 }
