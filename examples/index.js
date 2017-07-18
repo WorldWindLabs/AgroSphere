@@ -1651,14 +1651,14 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
-	agriHTML += '<br><button id="sortByName">Sort by Name</button>';
-	agriHTML += '<br><button id="sortByAverage">Sort by Average</button>';
+	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the top crops?" title="Search for datasets..">';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
         agriHTML += '<ul id="myUL">';
-		agriHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
+		agriHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button><br>';
+        agriHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
+        agriHTML += '<button class="btn-info" id="sortByAverage">Sort by Average</button><br>';
 		agriHTML += '<div id="allGraph"></div>';
 		//agriHTML = '<div id="allDiv">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
