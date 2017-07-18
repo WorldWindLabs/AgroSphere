@@ -479,7 +479,12 @@ input {
 }
 
 /* modal css */
-.modal-content  {
+#myModal, #myModal2  {
+    height:600px;
+    max-height:600px;
+}
+
+modal-content {
     border-radius:0;
 }
 
