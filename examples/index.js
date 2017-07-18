@@ -1995,6 +1995,5 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
     });
-
 });
 });
