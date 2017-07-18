@@ -1961,7 +1961,6 @@ var tabsFn = (function() {
 
 $(function () {
     $(".draggable").draggable({
-        handle: ".nav-t	abs"
     });
 });
 
@@ -1976,7 +1975,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 500);
+		setTimeout(function() {checkTabs()}, 250);
     });
     $(".toggle2").click(function () {
         $("#country").toggle('fast', 'swing');
@@ -1986,7 +1985,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 500);
+		setTimeout(function() {checkTabs()}, 250);
     });
     $(".toggle3").click(function () {
         $("#station").toggle('fast', 'swing');
@@ -1996,7 +1995,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 500);
+		setTimeout(function() {checkTabs()}, 250);
     });
     $(".toggle4").click(function () {
         $("#graphs").toggle('fast', 'swing');
@@ -2006,7 +2005,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 500);
+		setTimeout(function() {checkTabs()}, 250);
     });
     $(".toggle5").click(function () {
         $("#comp").toggle('fast', 'swing');
@@ -2016,7 +2015,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 500);
+		setTimeout(function() {checkTabs()}, 250);
     });
     $(".toggle6").click(function () {
         $("#weather").toggle('fast', 'swing');
@@ -2026,7 +2025,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 500);
+		setTimeout(function() {checkTabs()}, 250);
     });
     $(".toggle7").click(function () {
         $("#view").toggle('fast', 'swing');
@@ -2036,7 +2035,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 500);
+		setTimeout(function() {checkTabs()}, 250);
     });
 });
 });
