@@ -11,7 +11,7 @@
  */
 
 var APIKEY = '26fb68df7323284ea4430d8e4d3c60b1';
-var searchMode = 0;
+var geoMode = 0;
  
  
 requirejs({paths:{
@@ -1003,6 +1003,7 @@ function filterOutBlanks(inputData, mode) {
 //Applies functionality for the buttons
 function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager) {
     //Generate the slider first
+	geoMode = 0;
     var sliderHTML = $('#geoSlider');
     sliderHTML.slider({
         value: 1980,
@@ -1017,6 +1018,11 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
         sliderValueDiv.html('Year Select: ' + ui.value);
     })
 
+	sliderHTML.on('slidestop', function(event, ui) {
+		var year = ui.value;
+		document.getElementById('geoCompType' + geoMode).click();
+	});
+	
     //Search through the buttons
     var i = 0;
     for(i = 0; i < agriData.length; i++) {
@@ -1025,7 +1031,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
         buttonHTML.click(function(event) {
             //Find the year based on the slider value
             var sliderValue = $('#geoSlider').slider("value");
-
+			geoMode = parseInt(this.id.slice('geoCompType'.length));
             var buttonName = $('#' + this.id).text().slice('Generate Geo Comparison for '.length);
 			console.log(buttonName);
             //Do some data stuff, go through the agridata based on the button
