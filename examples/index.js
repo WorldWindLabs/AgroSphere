@@ -54,40 +54,40 @@ requirejs({paths:{
 
 
 
-        var config = {
-            service: "http://sedac.ciesin.columbia.edu/geoserver/wms",
-            layerNames: 'usgrid:usgrid-summary-file1-2000_usa-pctasian-2000',
-            sector: new WorldWind.Sector(-90, 90, -180, 180),
-            levelZeroDelta: new WorldWind.Location(36, 36),
-            numLevels: 1,
-            format: "image/png",
-            size: 256
-        };
-					// Data
-			var data2 = [
-				[1, 10],
-				[2, 30],
-				[3, 68],
-				[4, 130],
-				[5, 222],
-				[6, 350],
-				[7, 520],
-				[8, 738],
-				[9, 1010],
-				[10, 1342]
-			];
-        console.log(regression('exponential',data2));
-        // new instance of layer created
-        var dataLayer = new WorldWind.WmsLayer(config, null);
-
-        // data layer named
-        dataLayer.displayName = "Data layer";
-
-        //disable layer by default
-        dataLayer.enabled = false;
-
-        // layer added to globe
-        wwd.addLayer(dataLayer);
+        // var config = {
+        //     service: "http://sedac.ciesin.columbia.edu/geoserver/wms",
+        //     layerNames: 'usgrid:usgrid-summary-file1-2000_usa-pctasian-2000',
+        //     sector: new WorldWind.Sector(-90, 90, -180, 180),
+        //     levelZeroDelta: new WorldWind.Location(36, 36),
+        //     numLevels: 1,
+        //     format: "image/png",
+        //     size: 256
+        // };
+			// 		// Data
+			// var data2 = [
+			// 	[1, 10],
+			// 	[2, 30],
+			// 	[3, 68],
+			// 	[4, 130],
+			// 	[5, 222],
+			// 	[6, 350],
+			// 	[7, 520],
+			// 	[8, 738],
+			// 	[9, 1010],
+			// 	[10, 1342]
+			// ];
+        // console.log(regression('exponential',data2));
+        // // new instance of layer created
+        // var dataLayer = new WorldWind.WmsLayer(config, null);
+        //
+        // // data layer named
+        // dataLayer.displayName = "Data layer";
+        //
+        // //disable layer by default
+        // dataLayer.enabled = false;
+        //
+        // // layer added to globe
+        // wwd.addLayer(dataLayer);
 
 
 
@@ -1894,6 +1894,27 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
     }
 }
 
+//Checks if there is anything visible
+function checkTabs() {
+	var allTabs = $('.tab-content > .tab-pane');
+	
+	var i = 0;
+	var isDisplay = false;
+	
+	for(i = 0; i < allTabs.length; i++) {
+		if($(allTabs[i]).css('display') != 'none') {
+			isDisplay = true;
+			
+		}
+	}
+	var resizable = $('.resizable');
+	if(isDisplay) {
+		resizable.show();
+	} else {
+		resizable.hide();
+	}
+}
+
 // sidebar functions
 var tabsFn = (function() {
 
@@ -1924,7 +1945,7 @@ var tabsFn = (function() {
 
 $(function () {
     $(".draggable").draggable({
-        handle: ".nav-tabs"
+        handle: ".nav-t	abs"
     });
 });
 
@@ -1939,7 +1960,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle2").click(function () {
         $("#country").toggle('fast', 'swing');
@@ -1949,6 +1970,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle3").click(function () {
         $("#station").toggle('fast', 'swing');
@@ -1958,6 +1980,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle4").click(function () {
         $("#graphs").toggle('fast', 'swing');
@@ -1967,6 +1990,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle5").click(function () {
         $("#comp").toggle('fast', 'swing');
@@ -1976,6 +2000,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle6").click(function () {
         $("#weather").toggle('fast', 'swing');
@@ -1985,6 +2010,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle7").click(function () {
         $("#view").toggle('fast', 'swing');
@@ -1994,6 +2020,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
 });
 });
