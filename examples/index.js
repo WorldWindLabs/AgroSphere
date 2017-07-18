@@ -1325,7 +1325,7 @@ function generateWeatherHTML(countryData) {
 		weatherHTML += '<option>' + countryData[i].code2 + ' - ' + countryData[i].country + '</option>';
 	}
 	weatherHTML += '</select>';
-	weatherHTML += '<p><button class="btn-info" "id="searchWeather">Search Weather</button></p>';
+	weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
 	$('#weather').append(weatherHTML);
 }
 
@@ -1889,6 +1889,27 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
     }
 }
 
+//Checks if there is anything visible
+function checkTabs() {
+	var allTabs = $('.tab-content > .tab-pane');
+	
+	var i = 0;
+	var isDisplay = false;
+	
+	for(i = 0; i < allTabs.length; i++) {
+		if($(allTabs[i]).css('display') != 'none') {
+			isDisplay = true;
+			
+		}
+	}
+	var resizable = $('.resizable');
+	if(isDisplay) {
+		resizable.show();
+	} else {
+		resizable.hide();
+	}
+}
+
 // sidebar functions
 var tabsFn = (function() {
 
@@ -1919,7 +1940,7 @@ var tabsFn = (function() {
 
 $(function () {
     $(".draggable").draggable({
-        handle: ".nav-tabs"
+        handle: ".nav-t	abs"
     });
 });
 
@@ -1934,7 +1955,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
-
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle2").click(function () {
         $("#country").toggle('fast', 'swing');
@@ -1944,6 +1965,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle3").click(function () {
         $("#station").toggle('fast', 'swing');
@@ -1953,6 +1975,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle4").click(function () {
         $("#graphs").toggle('fast', 'swing');
@@ -1962,6 +1985,7 @@ $(document).ready(function () {
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle5").click(function () {
         $("#comp").toggle('fast', 'swing');
@@ -1971,6 +1995,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle6").click(function () {
         $("#weather").toggle('fast', 'swing');
@@ -1980,6 +2005,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#view").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
     $(".toggle7").click(function () {
         $("#view").toggle('fast', 'swing');
@@ -1989,7 +2015,7 @@ $(document).ready(function () {
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
+		setTimeout(function() {checkTabs()}, 500);
     });
-
 });
 });
