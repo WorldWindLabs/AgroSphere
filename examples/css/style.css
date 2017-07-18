@@ -35,8 +35,12 @@ div {
 }
 
 
-input[type=checkbox] {
-    transform: scale(1.5);
+input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .btn {
