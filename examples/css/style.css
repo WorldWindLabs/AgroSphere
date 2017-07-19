@@ -463,6 +463,7 @@ input {
 
 .btn-block {
     border-radius:5px;
+    overflow-y:hidden;
 }
 
 /* adding space between each ag dataset */
