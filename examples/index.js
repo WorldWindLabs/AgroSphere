@@ -349,16 +349,22 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
     var legendHTML = '<br><h5>Legend for ' + layerName + '</h5>';
-    if(typeof(wmsLayerCapabilities.styles[0].legendUrls[0].url)
-        != 'undefined') {
-        //Create the legend tag
-        var legendURL = wmsLayerCapabilities.styles[0].legendUrls[0].url;
-        legendHTML += '<div><img src="'+ legendURL +'"></div>';
-    } else {
-        //Say it does not exist
-        legendHTML += '<div><p>A legend does not exist'  +
-            'for this layer</p></div>';
-    }
+	console.log(wmsLayerCapabilities, typeof(wmsLayerCapabilities.styles));
+	//if(typeof(wmsLayerCapabilities.styles) != 'undefined') {
+		if((wmsLayerCapabilities.styles
+			!= null) && (wmsLayerCapabilities.styles[0].legendUrls[0]) != null) {
+			//Create the legend tag
+			var legendURL = wmsLayerCapabilities.styles[0].legendUrls[0].url;
+			legendHTML += '<div><img src="'+ legendURL +'"></div>';
+		} else {
+			//Say it does not exist
+			legendHTML += '<div><p>A legend does not exist'  +
+				'for this layer</p></div>';
+		}
+	//} else {
+	//	legendHTML += '<div><p>A legend does not exist'  +
+	//		'for this layer</p></div>';		
+	//}
     return legendHTML;
 }
 
@@ -441,9 +447,6 @@ function generateTimeControl(wwd, layerName, layerNumber) {
     timeHTML += '<div id="time_date_' + layerNumber + '">INITIAL DATE</div>';
 
     //Create the three buttons
-	timeHTML += '<button class="btn-info" id="time_left_' + layerNumber + '">Left</button>';
-	timeHTML += '<button class="btn-info" id="time_middle_' + layerNumber + '">Play</button>';
-	timeHTML += '<button class="btn-info" id="time_right_' + layerNumber + '">Right</button>';
 	timeHTML += '<h4>Time Scale</h4>';
 	timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
     //Wrap up the HTML
@@ -465,7 +468,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 	slider.slider({
         value: Math.round(wmsConfig.timeSequences.length/2),
         min: 0,
-        max: wmsConfig.timeSequences.length,
+        max: wmsConfig.timeSequences.length - 1,
         step: 0.01		
 	});
 	
@@ -829,7 +832,7 @@ function convertArrayToDataSet(csvData) {
 
 function loadWMTSLayers(wwd, layerManager) {
     var serviceWMTSAddress = "https://neowms.sci.gsfc.nasa.gov/wms/wms";
-    var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA", "MOD11C1_D_LSTNI"];
+    var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA", "MOD11C1_D_LSTNI", "MOD_143D_RR"];
     // Called asynchronously to parse and create the WMS layer
     var createWMTSLayer = function (xmlDom) {
         // Create a WmsCapabilities object from the XML DOM
@@ -1679,8 +1682,8 @@ function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
-	agriHTML += '<br><button id="sortByName">Sort by Name</button>';
-	agriHTML += '<br><button id="sortByAverage">Sort by Average</button>';
+	agriHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
+	agriHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Average</button>';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
