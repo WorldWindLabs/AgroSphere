@@ -489,8 +489,9 @@ input {
     max-height:600px;
 }
 
-modal-content {
+.modal-content {
     border-radius:0;
+    color:black;
 }
 
 .modal.fade .modal-dialog {

@@ -611,7 +611,7 @@ function generatePlacemarkLayer(wwd, csvData){
 //Loads all the data
 //Essentially all the data is loaded before hand if it is part of the CSV lit
 function loadCSVData(){
-    var csvList = ['countries.csv', 'station.csv'];
+    var csvList = ['csvdata/countries.csv', 'csvdata/weatherstations.csv'];
     //Find the file
     var csvString = "";
 
@@ -701,7 +701,7 @@ function findDataPointCountry(dataSet, countryCode, codeNumber) {
 
 //Load the csvFile differently
 function loadCSVDataArray() {
-    var csvList = ['agri2.csv', 'Atmo.csv'];
+    var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv'];
     //Find the file
     var csvString = "";
 
@@ -1037,7 +1037,6 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 }
 
 //Generates the html for geo location comparison
-//Assumes the agriData is from agri.csv
 function generateGeoComparisonButton(agriData) {
      var count = 4;
     var i = 0;
