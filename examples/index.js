@@ -349,16 +349,22 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
     var legendHTML = '<br><h5>Legend for ' + layerName + '</h5>';
-    if(typeof(wmsLayerCapabilities.styles[0].legendUrls[0].url)
-        != 'undefined') {
-        //Create the legend tag
-        var legendURL = wmsLayerCapabilities.styles[0].legendUrls[0].url;
-        legendHTML += '<div><img src="'+ legendURL +'"></div>';
-    } else {
-        //Say it does not exist
-        legendHTML += '<div><p>A legend does not exist'  +
-            'for this layer</p></div>';
-    }
+	console.log(wmsLayerCapabilities, typeof(wmsLayerCapabilities.styles));
+	//if(typeof(wmsLayerCapabilities.styles) != 'undefined') {
+		if((wmsLayerCapabilities.styles
+			!= null) && (wmsLayerCapabilities.styles[0].legendUrls[0]) != null) {
+			//Create the legend tag
+			var legendURL = wmsLayerCapabilities.styles[0].legendUrls[0].url;
+			legendHTML += '<div><img src="'+ legendURL +'"></div>';
+		} else {
+			//Say it does not exist
+			legendHTML += '<div><p>A legend does not exist'  +
+				'for this layer</p></div>';
+		}
+	//} else {
+	//	legendHTML += '<div><p>A legend does not exist'  +
+	//		'for this layer</p></div>';		
+	//}
     return legendHTML;
 }
 
@@ -829,7 +835,7 @@ function convertArrayToDataSet(csvData) {
 
 function loadWMTSLayers(wwd, layerManager) {
     var serviceWMTSAddress = "https://neowms.sci.gsfc.nasa.gov/wms/wms";
-    var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA", "MOD11C1_D_LSTNI"];
+    var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA", "MOD11C1_D_LSTNI", "MOD_143D_RR"];
     // Called asynchronously to parse and create the WMS layer
     var createWMTSLayer = function (xmlDom) {
         // Create a WmsCapabilities object from the XML DOM
