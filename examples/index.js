@@ -79,6 +79,7 @@ requirejs({paths:{
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
 
+		
         //Automatically zoom into NASA Ames
         wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 10e5));
 
@@ -92,6 +93,9 @@ requirejs({paths:{
         // Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(wwd);
         wwd.redrawCallbacks.push(runSunSimulation);
+
+		//Generate WMS/WMTS Layers
+		loadWMTSLayers(wwd, layerManager);		
 
         var sunSimulationCheckBox = document.getElementById('stars-simulation');
         var doRunSimulation = false;
@@ -440,7 +444,8 @@ function generateTimeControl(wwd, layerName, layerNumber) {
 	timeHTML += '<button class="btn-info" id="time_left_' + layerNumber + '">Left</button>';
 	timeHTML += '<button class="btn-info" id="time_middle_' + layerNumber + '">Play</button>';
 	timeHTML += '<button class="btn-info" id="time_right_' + layerNumber + '">Right</button>';
-
+	timeHTML += '<h4>Time Scale</h4>';
+	timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
     //Wrap up the HTML
     timeHTML += '</div>';
 
@@ -456,22 +461,44 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 	var rightButton = $(rightButtonString);
 	leftButton.button();
 	var targetLayer = getLayerFromName(wwd, layerName);
-	var timeSlot = 0;
-	leftButton.on("click", function(event, ui){
-	    if((timeSlot - 1 > 0)) {
-	     	targetLayer.time = wmsConfig.timeSequences[timeSlot - 1].endTime;
+	var slider = $('#time_scale_' + layerNumber).slider();
+	slider.slider({
+        value: Math.round(wmsConfig.timeSequences.length/2),
+        min: 0,
+        max: wmsConfig.timeSequences.length,
+        step: 0.01		
+	});
+	
+	slider.on('slide', function(event, ui) {
+		var timeNumber = ui.value - Math.floor(ui.value);
+		$('#time_date_' + layerNumber).html('Current time for this layer: ' + wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber));
+	});
+	
+	slider.on('slidestop', function(event, ui) {
+		var timeNumber = ui.value - Math.floor(ui.value);
+		
+		targetLayer.time = wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber);
+	});
+	/*leftButton.on("click", function(event, ui){
+		if(wmsConfig.timeSequences[0].scaleForCurrentTime != 0) {
+			console.log(targetLayer.time);
+	     	targetLayer.time = new Date(wmsConfig.timeSequences[0].previous());
 		    wwd.redraw();
-		    timeSlot--;
-	    }
+			console.log(targetLayer.time);
+			//Redraw the date
+			$('#time_date_' + layerNumber).html('Current Time for this layer: ' + targetLayer.time);
+		}
 	});
 	rightButton.button();
 	rightButton.on("click", function(event, ui){
 		//Move the time to the left
-		if((timeSlot + 1) < wmsConfig.timeSequences.length)
-		    targetLayer.time = wmsConfig.timeSequences[timeSlot + 1].endTime;
+		//if((timeSlot + 1) < wmsConfig.timeSequences.length)
+		if(wmsConfig.timeSequences[0].scaleForCurrentTime != 1) {
+		    targetLayer.time =  new Date(wmsConfig.timeSequences[0].next());
 		    wwd.redraw();
-		    timeSlot++;
-	});
+			$('#time_date_' + layerNumber).html('Current Time for this layer: ' + targetLayer.time);
+		}
+	});*/
 }
 
 $(document).ready(function(){
@@ -802,7 +829,7 @@ function convertArrayToDataSet(csvData) {
 
 function loadWMTSLayers(wwd, layerManager) {
     var serviceWMTSAddress = "https://neowms.sci.gsfc.nasa.gov/wms/wms";
-    var layerName = ["MOD14A1_E_FIRE", "MODAL2_M_AER_OD"];
+    var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA", "MOD11C1_D_LSTNI"];
     // Called asynchronously to parse and create the WMS layer
     var createWMTSLayer = function (xmlDom) {
         // Create a WmsCapabilities object from the XML DOM
@@ -820,7 +847,8 @@ function loadWMTSLayers(wwd, layerManager) {
 
             var wmsLayer;
             wmsLayer = new WorldWind.WmsTimeDimensionedLayer(wmsConfig);
-            wmsLayer.time = wmsConfig.timeSequences[0].endTime;
+			console.log(wmsConfig.timeSequences);
+            wmsLayer.time = wmsConfig.timeSequences[0].startTime;
 
             // disable layer by default
             wmsLayer.enabled = false;
@@ -1650,14 +1678,14 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 function generateAgriCultureButtons(inputData, codeName) {
     //Based on the input data, generate the buttons/html
     var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the top crops?" title="Search for datasets..">';
+	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
+	agriHTML += '<br><button id="sortByName">Sort by Name</button>';
+	agriHTML += '<br><button id="sortByAverage">Sort by Average</button>';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
         agriHTML += '<ul id="myUL">';
-		agriHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button><br>';
-        agriHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
-        agriHTML += '<button class="btn-info" id="sortByAverage">Sort by Average</button><br>';
+		agriHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
 		agriHTML += '<div id="allGraph"></div>';
 		//agriHTML = '<div id="allDiv">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
