@@ -64,7 +64,8 @@ requirejs({paths:{
         var csvMultiData = loadCSVDataArray();
         var agriData = convertArrayToDataSet(csvMultiData[0]);
 		var atmoData = convertArrayToDataSet(csvMultiData[1]);
-
+		var priceData = convertArrayToDataSet(csvMultiData[2]);
+		var liveData = convertArrayToDataSet(csvMultiData[3]);
         //Generate the placemark layers
         generatePlacemarkLayer(wwd, csvData);
 
@@ -172,11 +173,14 @@ requirejs({paths:{
                             
                             
                             //Get the agriculture data
-                            detailsHTML += generateAgriCultureButtons(agriData, dataPoint.code3);
+							detailsHTML += generateCountryButtons();
+							detailsHTML += '<div id="buttonArea"></div>';
+                            //detailsHTML += generateAgriCultureButtons(agriData, dataPoint.code3);
                             details.html(detailsHTML);
 
                             //Give functionality for the buttons generated
-                            giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
+							giveCountryButtonsFunctionality(agriData, priceData, liveData, dataPoint.code3);
+                            //giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //fixed hover flags bug - now click instead of hover eventlistener
                             var otherTab = $("#layers");
@@ -731,7 +735,7 @@ function findDataPointCountry(dataSet, countryCode, codeNumber) {
 
 //Load the csvFile differently
 function loadCSVDataArray() {
-    var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv'];
+    var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv', 'csvdata/livestock.csv'];
     //Find the file
     var csvString = "";
 
@@ -1197,7 +1201,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
 
 
 //Gives the buttons funcitonality
-function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
+function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
     //Do a search for all the buttons based on the data
     var dataPoint = findDataPointCountry(inputData, codeName, 3);
     if(dataPoint != 0) {
@@ -1280,7 +1284,7 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 			for(i = 0; i < newList.length; i++) {
 				$('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
 			}
-			giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName);
+			giveDataButtonsFunctionality(detailsHTML, inputData, codeName);
 		});
 		
 		$('#sortByAverage').click(function() {
@@ -1325,7 +1329,7 @@ function giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName) {
 			for(i = 0; i < newList.length; i++) {
 				$('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
 			}
-			giveAgriCultureButtonsFunctionality(detailsHTML, inputData, codeName);
+			giveDataButtonsFunctionality(detailsHTML, inputData, codeName);
 		});
 		
         //Assign functionality to the search bar
@@ -1678,33 +1682,77 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
     return atmoHTML;
 }
 
-function generateAgriCultureButtons(inputData, codeName) {
+function generateCountryButtons() {
+	var countryHTML = '<h4>Country Buttons</h4>';
+	countryHTML += '<button id="spawnAgri">Show Agriculture Buttons</button>';
+	countryHTML += '<button id="spawnPrice">Show Price Buttons</button>';
+	countryHTML += '<button id="spawnLive">Show Livestock Buttons</button>';
+	return countryHTML;
+}
+
+function giveCountryButtonsFunctionality(agriData, priceData, liveData, codeName) {
+	var buttonAreaHTML = $('#buttonArea');
+	var agriButtons = $('#spawnAgri').button();
+	var priceButtons = $('#spawnPrice').button();
+	var liveButtons = $('#spawnLive').button();
+	agriButtons.on('click', function(){
+		//Generate agri culture buttons
+		buttonAreaHTML.html('');
+		buttonAreaHTML.html(generateDataButtons(agriData, codeName, 0));
+		giveDataButtonsFunctionality(buttonAreaHTML, agriData, codeName);
+	});
+	priceButtons.on('click', function() {
+		buttonAreaHTML.html('');
+		buttonAreaHTML.html(generateDataButtons(priceData, codeName, 1));
+		giveDataButtonsFunctionality(buttonAreaHTML, priceData, codeName);
+	});
+	liveButtons.on('click', function() {
+		buttonAreaHTML.html('');
+		buttonAreaHTML.html(generateDataButtons(liveData, codeName, 2));
+		giveDataButtonsFunctionality(buttonAreaHTML, liveData, codeName);		
+	});
+}
+
+function generateDataButtons(inputData, codeName, mode) {
     //Based on the input data, generate the buttons/html
-    var agriHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-	agriHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
-	agriHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
-	agriHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Average</button>';
+	//Mode dictates what to call the title or search bar
+	switch(mode) {
+		case 0:
+			var dataHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
+		break;
+		case 1:
+			var dataHTML = '<h4>Price Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of top prices?" title="Search for datasets..">';
+		break;
+		case 2:
+			var dataHTML = '<h4>Livestock Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many livestocks?" title="Search for datasets..">';
+		break;
+	}
+	dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
+	dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Average</button>';
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
-        agriHTML += '<ul id="myUL">';
-		agriHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
-		agriHTML += '<div id="allGraph"></div>';
-		//agriHTML = '<div id="allDiv">';
+        dataHTML += '<ul id="myUL">';
+		dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
+		dataHTML += '<div id="allGraph"></div>';
+		//dataHTML = '<div id="allDiv">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
-            agriHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
-			agriHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
-            agriHTML += '<button'
+            dataHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
+			dataHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
+            dataHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
-            agriHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
-            agriHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
-            agriHTML += '<br></div>';
+            dataHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
+            dataHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
+            dataHTML += '<br></div>';
         }
-		//agriHTML += '</div>';
-        agriHTML += '</ul>';
+		//dataHTML += '</div>';
+        dataHTML += '</ul>';
     }
-    return agriHTML;
+    return dataHTML;
 }
 
 //Finds the closest country (centre based)
