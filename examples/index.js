@@ -468,7 +468,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 	slider.slider({
         value: Math.round(wmsConfig.timeSequences.length/2),
         min: 0,
-        max: wmsConfig.timeSequences.length,
+        max: wmsConfig.timeSequences.length - 1,
         step: 0.01		
 	});
 	
