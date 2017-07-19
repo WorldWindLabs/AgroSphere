@@ -470,7 +470,8 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 	});
 	
 	slider.on('slide', function(event, ui) {
-		$('#time_date_' + layerNumber).html('Current time for this layer: ' + wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(ui.value - Math.floor(ui.value)));
+		var timeNumber = ui.value - Math.floor(ui.value);
+		$('#time_date_' + layerNumber).html('Current time for this layer: ' + wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber));
 	});
 	
 	slider.on('slidestop', function(event, ui) {
