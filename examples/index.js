@@ -1231,7 +1231,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
                 plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                     dataPoint.dataValues[buttonNumber].timeValues,
                     'multiGraph', 1);
-				$('#messagePoint' + buttonNumber).html('Combined graph!');
+				$('#messagePoint' + buttonNumber).html('Combined graph! Please go to Data Graphs Tab');
 				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
 
@@ -1255,7 +1255,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
                 plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                     dataPoint.dataValues[buttonNumber].timeValues,
                     'subGraph' + graphNumber, 0);
-				$('#messagePoint' + buttonNumber).html('Added graph!');
+				$('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
 				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
         }
