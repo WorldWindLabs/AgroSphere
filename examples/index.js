@@ -1078,7 +1078,6 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
                 $(layerTitles[i]).show();
             }
         }
-        // }
 
     });
 }
@@ -1187,6 +1186,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
 				amount = parseInt(topX);
 			}
 			plotStack(agriDataPoint, 'allGraphStation', amount);
+			createSubPlot(dataPoint.dataValues, 'allGraphStation');
 		});
 	}
 }
@@ -1769,6 +1769,53 @@ function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
 	console.log(stationName, smallestStationDistance);
 }
 
+//Assuming a previous graph has been made
+function createSubPlot(inputData, htmlID) {
+	//In essence create subplots
+	var i = 0;
+	var traces = [];
+	var newLayout = {};
+	var incAmounts = (0.5/(inputData.length)).toFixed(2);
+	newLayout['yaxis'] = {domain: [0, 0.5]};
+	newLayout['yaxis2'] = {domain: [0, 0.5]};
+	for(i = 0; i < inputData.length; i++) {
+		var dataPoint = filterOutBlanks(inputData[i].timeValues, 0);
+		var j = 0;
+		var xValues = [];
+		var yValues = [];
+		for(j = 0; j < dataPoint.length; j++) {
+			xValues.push(parseInt(dataPoint[j].year));
+			yValues.push(parseFloat(dataPoint[j].value));
+		}
+		console.log(xValues);
+		var tempTrace = {
+			x: xValues,
+			y: yValues,
+			name: inputData[i].typeName,
+			xaxis: 'x',
+			yaxis: 'y' + (i + 3),
+			graph: 'scatter'
+		}
+		traces.push(tempTrace);
+		var lowDomain = (0.5 + (i * incAmounts)).toFixed(2);
+		var highDomain = (0.5 + ((i + 1) * incAmounts)).toFixed(2);
+		if(highDomain > 1) {
+			highDomain = 1;
+		}
+		console.log(lowDomain, highDomain);
+		//newLayout['xaxis' + i + 3] = {anchor: 'y' + i + 3};
+		newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain - 0.01]};
+	}
+	//newLayout['xaxis'] = {anchor: 'y'}
+	Plotly.addTraces(htmlID, traces);
+	Plotly.relayout(htmlID, newLayout);
+	//Plotly.update(htmlID, traces, newLayout);
+	Plotly.relayout( htmlID, {
+    'xaxis.autorange': true,
+    'yaxis.autorange': true
+	});
+}
+
 //Plots a stacked bar given all the set of data
 function plotStack(inputData, htmlID, amount) {
 	var i = 0;
@@ -1901,7 +1948,8 @@ function plotStack(inputData, htmlID, amount) {
 		yaxis2: yAxis2,
 		legend: {
 			x: 1.15
-		}
+		},
+		autosize: true
 	}
 	Plotly.newPlot(htmlID, traces, layout);
 }
