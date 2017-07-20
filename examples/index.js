@@ -1784,7 +1784,21 @@ function generateDataButtons(inputData, codeName, mode) {
     if(dataPoint != 0) {
         var i = 0;
         dataHTML += '<ul id="myUL">';
-		dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Selections</button>';
+		switch(mode) {
+            case 0:
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
+                break;
+            case 1:
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Price</button>';
+            break;
+            case 2:
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Livestocks</button>';
+                break;
+            case 3:
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission</button>';
+                break;
+        }
+
 		dataHTML += '<div id="allGraph"></div>';
 		//dataHTML = '<div id="allDiv">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
