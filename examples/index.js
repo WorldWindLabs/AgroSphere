@@ -547,7 +547,7 @@ function generatePlacemarkLayer(wwd, csvData){
     placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
         WorldWind.OFFSET_FRACTION, 0.5,
         WorldWind.OFFSET_FRACTION, 1.0);
-    placemarkAttributes.labelAttributes.color = WorldWind.Color.BLACK;
+    placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
     placemarkAttributes.drawLeaderLine = true;
     placemarkAttributes.leaderLineAttributes.outlineColor = WorldWind.Color.RED;
 
