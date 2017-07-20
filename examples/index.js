@@ -1197,7 +1197,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
                         dataPoint.dataValues[buttonNumber].timeValues,
                         'multiGraph', 1);
             });
-			
+
 			var addButtonHTML = $('#addButton' + i).button();
 			addButtonHTML.click( function(event) {
 				//Grab id
