@@ -326,7 +326,7 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
     }
 
     //Place the HTML somewhere
-    $("#graphs").append(layerControlHTML);
+    $("#layers").append(layerControlHTML);
 
     //Add functionality to opacity slider
     giveOpacitySliderFunctionality(wwd, layerName, layerNumber);
@@ -1720,10 +1720,10 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
 
 function generateCountryButtons() {
 	var countryHTML = '<h4>Country Buttons</h4>';
-	countryHTML += '<button id="spawnAgri">Show Agriculture Buttons</button>';
-	countryHTML += '<button id="spawnPrice">Show Price Buttons</button>';
-	countryHTML += '<button id="spawnLive">Show Livestock Buttons</button>';
-	countryHTML += '<button id="spawnEmissionAgri">Show Emission Agri Buttons</button>';
+	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Buttons</button>';
+	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Buttons</button>';
+	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Buttons</button>';
+	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Emission Agri Buttons</button>';
 	return countryHTML;
 }
 
@@ -1784,7 +1784,7 @@ function generateDataButtons(inputData, codeName, mode) {
     if(dataPoint != 0) {
         var i = 0;
         dataHTML += '<ul id="myUL">';
-		dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
+		dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Selections</button>';
 		dataHTML += '<div id="allGraph"></div>';
 		//dataHTML = '<div id="allDiv">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
