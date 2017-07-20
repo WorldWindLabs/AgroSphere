@@ -1220,6 +1220,8 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
                     plotHTML.html('');
                     selfHTML.button("option", "label", "Plot Graph");
                 }
+				$('#messagePoint' + buttonNumber).html('Plotted graph!');
+				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             })
             var combineButtonHTML = $('#combineButton' + i).button();
             combineButtonHTML.click(function (event) {
@@ -1229,6 +1231,8 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
                 plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                     dataPoint.dataValues[buttonNumber].timeValues,
                     'multiGraph', 1);
+				$('#messagePoint' + buttonNumber).html('Combined graph!');
+				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
 
             var addButtonHTML = $('#addButton' + i).button();
@@ -1251,6 +1255,8 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
                 plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                     dataPoint.dataValues[buttonNumber].timeValues,
                     'subGraph' + graphNumber, 0);
+				$('#messagePoint' + buttonNumber).html('Added graph!');
+				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
         }
 
@@ -1621,11 +1627,11 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
     if (dataPoint != 0) {
         var i = 0;
         for (i = 0; i < dataPoint.dataValues.length; i++) {
-
             //Generate the remaining HTML
             atmoHTML += '<div class="layerTitle" id="layerTitle' + i + '">';
             atmoHTML += '<p>' + dataPoint.dataValues[i].typeName + '</p>';
             atmoHTML += '<div class="resizeGraph" id="graphWeatherPoint' + i + '"></div>';
+			atmoHTML += '<div id="messagePoint' + i + '"></div>';
             atmoHTML += '<button'
                 + ' class="btn-info"' + ' id="plotWeatherButton' + i + '">Plot Graph</button>';
 			atmoHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
@@ -1718,6 +1724,7 @@ function generateDataButtons(inputData, codeName, mode) {
         }
 
 		dataHTML += '<div id="allGraph"></div>';
+		
 		//dataHTML = '<div id="allDiv">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
@@ -1725,6 +1732,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             dataHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
+			dataHTML += '<div id="messagePoint' + i + '"></div>';
             dataHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
             dataHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             dataHTML += '<br></div>';
