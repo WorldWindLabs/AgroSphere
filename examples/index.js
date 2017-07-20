@@ -53,7 +53,6 @@ requirejs({paths:{
         }
 
         // Web Map Service information from NASA's Near Earth Observations WMS
-        //var serviceAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
         // Named layer displaying Average Temperature data
         //Load the WMTS layers
         console.time('First');
@@ -191,7 +190,7 @@ requirejs({paths:{
                             var otherTab4 = $("#comp");
                             var otherTab5 = $("#weather");
                             var otherTab6 = $("#view");
-                            details.show('fast','swing');
+                            details.show();
                             otherTab.hide();
                             otherTab2.hide();
                             otherTab3.hide();
@@ -215,14 +214,12 @@ requirejs({paths:{
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 
 							detailsHTML += '<p>Station Name: ' + atmoDataPoint.stationName + '</p>';
-							console.log(agriDataPoint);
 							//Generate the station buttons
 
 							detailsHTML += generateAtmoButtons(atmoData, atmoDataPoint.stationName, agriDataPoint, ccode3);
 							details.html(detailsHTML);
 							
 							//Generate the plots
-							//getWeatherAndAgri(agriData, atmoData, csvData[0], dataPoint.stationName);
 							//Give functionality for buttons generated
 							giveAtmoButtonsFunctionality(detailsHTML, atmoData, 
 									atmoDataPoint.stationName, agriDataPoint);
@@ -282,7 +279,6 @@ requirejs({paths:{
             // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
             // relative to the upper left corner of the canvas rather than the upper left corner of the page.
             var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-			console.log(pickList.objects);
             // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
             if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                 var position = pickList.objects[0].position;
@@ -290,7 +286,6 @@ requirejs({paths:{
 				
 				//Find the closest country and placemark
 				findInformationUsingLocation(wwd, position.latitude, position.longitude, csvData[0], csvData[1]);
-				//wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
             }
         };
 
@@ -494,26 +489,6 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 		
 		targetLayer.time = wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber);
 	});
-	/*leftButton.on("click", function(event, ui){
-		if(wmsConfig.timeSequences[0].scaleForCurrentTime != 0) {
-			console.log(targetLayer.time);
-	     	targetLayer.time = new Date(wmsConfig.timeSequences[0].previous());
-		    wwd.redraw();
-			console.log(targetLayer.time);
-			//Redraw the date
-			$('#time_date_' + layerNumber).html('Current Time for this layer: ' + targetLayer.time);
-		}
-	});
-	rightButton.button();
-	rightButton.on("click", function(event, ui){
-		//Move the time to the left
-		//if((timeSlot + 1) < wmsConfig.timeSequences.length)
-		if(wmsConfig.timeSequences[0].scaleForCurrentTime != 1) {
-		    targetLayer.time =  new Date(wmsConfig.timeSequences[0].next());
-		    wwd.redraw();
-			$('#time_date_' + layerNumber).html('Current Time for this layer: ' + targetLayer.time);
-		}
-	});*/
 }
 
 $(document).ready(function(){
@@ -654,7 +629,8 @@ function generatePlacemarkLayer(wwd, csvData){
 //Loads all the data
 //Essentially all the data is loaded before hand if it is part of the CSV lit
 function loadCSVData(){
-    var csvList = ['csvdata/countries.csv', 'csvdata/weatherstations.csv'];
+    var csvList = ['csvdata/countries.csv', 'csvdata/weatherstations.csv',
+			'csvdata/cropAcros.csv'];
     //Find the file
     var csvString = "";
 
@@ -1071,7 +1047,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 							if(agriData[j].dataValues[k].typeName == buttonName) {
 								for(m = 0; m < agriData[j].dataValues[k].timeValues.length; m++) {
 									if(agriData[j].dataValues[k].timeValues[m].year == sliderValue) {
-										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + ' ' + buttonName + ' value is ' + 
+										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + ' - ' + buttonName + ' value is ' + 
 												agriData[j].dataValues[k].timeValues[m].value;
 									}
 								}
@@ -1102,7 +1078,6 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
                 $(layerTitles[i]).show();
             }
         }
-        // }
 
     });
 }
@@ -1137,26 +1112,6 @@ function generateGeoComparisonButton(agriData) {
 
     var dropArea = $('#comp')
     dropArea.append(comparisonHTML);
-}
-
-//Searches for both the weather and station data given the station name
-function getWeatherAndAgri(agriData, stationData, countryData, stationName) {
-	//Deduce the 2-letter country from the stationName
-	var ccode2 = stationName.slice(0,2);
-	
-	//From the two-letter code, get the 3-letter code
-	var ccode3 = (findDataPointCountry(countryData, ccode2, 2)).code3;
-	
-	//Now with the 3-letter code, find the agriculture data
-	var agriPoint = findDataPointCountry(agriData, ccode3, 3);
-	
-	//Find the station data
-	var stationPoint = findDataPointStation(stationData, stationName);
-	//console.log(agriPoint);
-	//console.log(stationPoint);
-	
-	//Plot
-	
 }
 
 //Gives the button functionality
@@ -1230,7 +1185,8 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
 			if(!Number.isNaN(parseInt(topX))) {
 				amount = parseInt(topX);
 			}
-			plotStack(agriDataPoint, 'allGraph', amount);
+			plotStack(agriDataPoint, 'allGraphStation', amount);
+			createSubPlot(dataPoint.dataValues, 'allGraphStation');
 		});
 	}
 }
@@ -1524,46 +1480,6 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
 	var legendOffset = -3;
 	
 	//Empty the legend segment
-	$('#colour-legend').html('');
-
-	var legendHTML = '';
-	for(i = 0; i < legendAmounts; i++) {
-		//Search the div and generate the appropiate canvas next to it
-		var segmentHTML = '<h5>' + 'Geo Comparison Legend ' + i + '</h5>';
-		segmentHTML += '<p>Standard deviation of ' + (i + legendOffset) + 
-				' or a value of ' + (mean + (sd * (i + legendOffset))) + '</p>';
-		segmentHTML += '<canvas id="canvas'+ i + '" width="100" height="50"></canvas>';
-		
-		segmentHTML += '<br>';
-		legendHTML += segmentHTML;
-	}
-	$('#colour-legend').html(legendHTML);
-	
-	for(i = 0; i < legendAmounts; i++) {
-		//Colour the canvas
-		var tempCanvas = document.getElementById("canvas" + i);
-		var tempCanvaCtx = tempCanvas.getContext("2d");
-		
-	    //Could use exponential decay function or something
-		var red = 0;
-		var green = 0;
-
-		var zValue = i + legendOffset;
-
-		if (zValue < 0) {
-			red = 255;
-			green = Math.round(Math.exp(zValue) * 255);
-		} else if (zValue == 0) {
-			red = 255;
-			green = 255;
-		} else if (zValue > 0) {
-			green = 255;
-			red = Math.round(Math.exp(-1 * zValue) * 255);
-		}		
-		console.log(red,green);
-		tempCanvaCtx.fillStyle = 'rgb('+ red +', ' + green + ', 0)';
-		tempCanvaCtx.fillRect(0,0,200,100);
-	}
 	
     //Loop through and determine the colour based on zscore
     var countryLayers = new WorldWind.RenderableLayer('Geo Country Data');
@@ -1698,8 +1614,8 @@ function generateRemoveButton() {
 function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
     var atmoHTML = '<h4>Atmosphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
-	atmoHTML += '<div id="allGraph"></div>';
-	atmoHTML += '<button class="btn-info" id="allButton">Graph All Crops</button>';
+	atmoHTML += '<div id="allGraphStation"></div>';
+	atmoHTML += '<button class="btn-info" id="allButton">Graph Crops and Weather</button>';
     if (dataPoint != 0) {
         var i = 0;
         for (i = 0; i < dataPoint.dataValues.length; i++) {
@@ -1853,6 +1769,53 @@ function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
 	console.log(stationName, smallestStationDistance);
 }
 
+//Assuming a previous graph has been made
+function createSubPlot(inputData, htmlID) {
+	//In essence create subplots
+	var i = 0;
+	var traces = [];
+	var newLayout = {};
+	var incAmounts = (0.5/(inputData.length)).toFixed(2);
+	newLayout['yaxis'] = {domain: [0, 0.5]};
+	newLayout['yaxis2'] = {domain: [0, 0.5]};
+	for(i = 0; i < inputData.length; i++) {
+		var dataPoint = filterOutBlanks(inputData[i].timeValues, 0);
+		var j = 0;
+		var xValues = [];
+		var yValues = [];
+		for(j = 0; j < dataPoint.length; j++) {
+			xValues.push(parseInt(dataPoint[j].year));
+			yValues.push(parseFloat(dataPoint[j].value));
+		}
+		console.log(xValues);
+		var tempTrace = {
+			x: xValues,
+			y: yValues,
+			name: inputData[i].typeName,
+			xaxis: 'x',
+			yaxis: 'y' + (i + 3),
+			graph: 'scatter'
+		}
+		traces.push(tempTrace);
+		var lowDomain = (0.5 + (i * incAmounts)).toFixed(2);
+		var highDomain = (0.5 + ((i + 1) * incAmounts)).toFixed(2);
+		if(highDomain > 1) {
+			highDomain = 1;
+		}
+		console.log(lowDomain, highDomain);
+		//newLayout['xaxis' + i + 3] = {anchor: 'y' + i + 3};
+		newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain - 0.01]};
+	}
+	//newLayout['xaxis'] = {anchor: 'y'}
+	Plotly.addTraces(htmlID, traces);
+	Plotly.relayout(htmlID, newLayout);
+	//Plotly.update(htmlID, traces, newLayout);
+	Plotly.relayout( htmlID, {
+    'xaxis.autorange': true,
+    'yaxis.autorange': true
+	});
+}
+
 //Plots a stacked bar given all the set of data
 function plotStack(inputData, htmlID, amount) {
 	var i = 0;
@@ -1985,7 +1948,8 @@ function plotStack(inputData, htmlID, amount) {
 		yaxis2: yAxis2,
 		legend: {
 			x: 1.15
-		}
+		},
+		autosize: true
 	}
 	Plotly.newPlot(htmlID, traces, layout);
 }
