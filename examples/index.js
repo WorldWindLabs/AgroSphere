@@ -1071,7 +1071,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 							if(agriData[j].dataValues[k].typeName == buttonName) {
 								for(m = 0; m < agriData[j].dataValues[k].timeValues.length; m++) {
 									if(agriData[j].dataValues[k].timeValues[m].year == sliderValue) {
-										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + ' ' + buttonName + ' value is ' + 
+										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + ': ' + buttonName + ', value is ' +
 												agriData[j].dataValues[k].timeValues[m].value;
 									}
 								}
