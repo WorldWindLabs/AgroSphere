@@ -66,6 +66,7 @@ requirejs({paths:{
 		var atmoData = convertArrayToDataSet(csvMultiData[1]);
 		var priceData = convertArrayToDataSet(csvMultiData[2]);
 		var liveData = convertArrayToDataSet(csvMultiData[3]);
+		var emissionAgriData = convertArrayToDataSet(csvMultiData[4]);
         //Generate the placemark layers
         generatePlacemarkLayer(wwd, csvData);
 
@@ -76,6 +77,9 @@ requirejs({paths:{
 		generateWeatherHTML(csvData[0]);
 		giveWeatherButtonFunctionality();
 
+		// Create a layer manager for controlling layer visibility.
+        var layerManager = new LayerManager(wwd);
+		
         //Generate regression comparison and the provide functionality
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
@@ -91,8 +95,6 @@ requirejs({paths:{
         wwd.addLayer(starFieldLayer);
         wwd.addLayer(atmosphereLayer);
 
-        // Create a layer manager for controlling layer visibility.
-        var layerManager = new LayerManager(wwd);
         wwd.redrawCallbacks.push(runSunSimulation);
 
 		//Generate WMS/WMTS Layers
@@ -179,7 +181,7 @@ requirejs({paths:{
                             details.html(detailsHTML);
 
                             //Give functionality for the buttons generated
-							giveCountryButtonsFunctionality(agriData, priceData, liveData, dataPoint.code3);
+							giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, dataPoint.code3);
                             //giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //fixed hover flags bug - now click instead of hover eventlistener
@@ -324,7 +326,7 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
     }
 
     //Place the HTML somewhere
-    $("#layers").append(layerControlHTML);
+    $("#graphs").append(layerControlHTML);
 
     //Add functionality to opacity slider
     giveOpacitySliderFunctionality(wwd, layerName, layerNumber);
@@ -469,10 +471,16 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 	leftButton.button();
 	var targetLayer = getLayerFromName(wwd, layerName);
 	var slider = $('#time_scale_' + layerNumber).slider();
+	var length;
+	if(wmsConfig.timeSequences.length > 1) {
+		length = wmsConfig.timeSequences.length - 1;
+	} else {
+		length = 1;
+	}
 	slider.slider({
         value: Math.round(wmsConfig.timeSequences.length/2),
         min: 0,
-        max: wmsConfig.timeSequences.length - 1,
+        max: length - 0.01,
         step: 0.01		
 	});
 	
@@ -590,7 +598,7 @@ function generatePlacemarkLayer(wwd, csvData){
                     parseFloat(csvData[i][j].lon), 1e2), true, null);
             var labelString = '';
             if(dataTypes[i] == 'countries') {
-                labelString = csvData[i][j].country;
+                labelString = csvData[i][j].country + ' ' + csvData[i][j].code3;
             } else if(dataTypes[i] == 'stations') {
 				labelString = csvData[i][j].code3;
 			}
@@ -608,6 +616,8 @@ function generatePlacemarkLayer(wwd, csvData){
                 //Image would be a flag
                 placemarkAttributes.imageSource = './flags/' +
                         csvData[i][j].iconCode + '.png';
+				placemark.userObject = {code3: csvData[i][j].code3,
+						country: csvData[i][j].country};
             }
 
             placemark.attributes = placemarkAttributes;
@@ -625,7 +635,6 @@ function generatePlacemarkLayer(wwd, csvData){
 
             //Attach the type to it
             placemark.type = dataTypes[i];
-
             //Make it so the labels are visible from 10e6
             placemark.eyeDistanceScalingLabelThreshold = 10e6;
             placemark.eyeDistanceScalingThreshold = 5e6;
@@ -735,7 +744,8 @@ function findDataPointCountry(dataSet, countryCode, codeNumber) {
 
 //Load the csvFile differently
 function loadCSVDataArray() {
-    var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv', 'csvdata/livestock.csv'];
+    var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv', 
+			'csvdata/livestock.csv', 'csvdata/emissionplants.csv'];
     //Find the file
     var csvString = "";
 
@@ -1035,15 +1045,41 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
             countryData = filterOutBlanks(countryData, 0);
             var countryLayer = colourizeCountries(countryData, geoJSONData);
             //Check if the country layer exist
+			var flagLayer;
             var l = 0;
             for(l = 0; l < wwd.layers.length; l++) {
                 if(wwd.layers[l].displayName == 'Geo Country Data') {
                     wwd.removeLayer(wwd.layers[l]);
-                }
+                } else if(wwd.layers[l].displayName == 'countries Placemarks') {
+					flagLayer = wwd.layers[l];
+				}
             }
 
             wwd.addLayer(countryLayer);
             layerManager.synchronizeLayerList();
+			var m = 0;
+			//Go through the entire country flag placemarks and change the label
+			console.log(flagLayer);
+			for(l = 0; l < flagLayer.renderables.length; l++) {
+				var code3 = flagLayer.renderables[l].userObject.code3;
+				console.log(code3);
+				//Find the agriData with the code3
+				for(j = 0; j < agriData.length; j++) {
+					if(agriData[j].code3 == code3) {
+						//Go through the timeValue that matches the year
+						for(k = 0; k < agriData[j].dataValues.length; k++) {
+							if(agriData[j].dataValues[k].typeName == buttonName) {
+								for(m = 0; m < agriData[j].dataValues[k].timeValues.length; m++) {
+									if(agriData[j].dataValues[k].timeValues[m].year == sliderValue) {
+										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + ' ' + buttonName + ' value is ' + 
+												agriData[j].dataValues[k].timeValues[m].value;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
         });
     }
 
@@ -1687,14 +1723,16 @@ function generateCountryButtons() {
 	countryHTML += '<button id="spawnAgri">Show Agriculture Buttons</button>';
 	countryHTML += '<button id="spawnPrice">Show Price Buttons</button>';
 	countryHTML += '<button id="spawnLive">Show Livestock Buttons</button>';
+	countryHTML += '<button id="spawnEmissionAgri">Show Emission Agri Buttons</button>';
 	return countryHTML;
 }
 
-function giveCountryButtonsFunctionality(agriData, priceData, liveData, codeName) {
+function giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, codeName) {
 	var buttonAreaHTML = $('#buttonArea');
 	var agriButtons = $('#spawnAgri').button();
 	var priceButtons = $('#spawnPrice').button();
 	var liveButtons = $('#spawnLive').button();
+	var emissionAgriButtons = $('#spawnEmissionAgri').button();
 	agriButtons.on('click', function(){
 		//Generate agri culture buttons
 		buttonAreaHTML.html('');
@@ -1711,6 +1749,12 @@ function giveCountryButtonsFunctionality(agriData, priceData, liveData, codeName
 		buttonAreaHTML.html(generateDataButtons(liveData, codeName, 2));
 		giveDataButtonsFunctionality(buttonAreaHTML, liveData, codeName);		
 	});
+	emissionAgriButtons.on('click', function(){
+		buttonAreaHTML.html('');
+		buttonAreaHTML.html(generateDataButtons(emissionAgriData, codeName, 3));
+		giveDataButtonsFunctionality(buttonAreaHTML, emissionAgriData, codeName);			
+	});
+	
 }
 
 function generateDataButtons(inputData, codeName, mode) {
@@ -1728,6 +1772,10 @@ function generateDataButtons(inputData, codeName, mode) {
 		case 2:
 			var dataHTML = '<h4>Livestock Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many livestocks?" title="Search for datasets..">';
+		break;
+		case 3:
+			var dataHTML = '<h4>Emission Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crops?" title="Search for datasets..">';
 		break;
 	}
 	dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
