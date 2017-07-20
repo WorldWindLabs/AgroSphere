@@ -198,6 +198,8 @@ requirejs({paths:{
                             otherTab5.hide();
                             otherTab6.hide();
 
+                            $(".toggle1").attr("aria-expanded","false");
+
                         } else if(pickList.objects[i].userObject.type == 'station') {
 							var atmoDataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
