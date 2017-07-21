@@ -1047,7 +1047,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 							if(agriData[j].dataValues[k].typeName == buttonName) {
 								for(m = 0; m < agriData[j].dataValues[k].timeValues.length; m++) {
 									if(agriData[j].dataValues[k].timeValues[m].year == sliderValue) {
-										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + ' - ' + buttonName + ' value is ' + 
+										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + '\n - ' + buttonName + '\n' + 
 												agriData[j].dataValues[k].timeValues[m].value;
 									}
 								}
@@ -1784,8 +1784,8 @@ function createSubPlot(inputData, htmlID) {
 	var traces = [];
 	var newLayout = {};
 	var incAmounts = (0.5/(inputData.length)).toFixed(2);
-	newLayout['yaxis'] = {domain: [0, 0.5]};
-	newLayout['yaxis2'] = {domain: [0, 0.5]};
+	newLayout['yaxis'] = {domain: [0, 0.5], title: 'Production in tonnes'};
+	newLayout['yaxis2'] = {domain: [0, 0.5], side: 'right', title: 'Percent'};
 	for(i = 0; i < inputData.length; i++) {
 		var dataPoint = filterOutBlanks(inputData[i].timeValues, 0);
 		var j = 0;
@@ -1812,7 +1812,20 @@ function createSubPlot(inputData, htmlID) {
 		}
 		console.log(lowDomain, highDomain);
 		//newLayout['xaxis' + i + 3] = {anchor: 'y' + i + 3};
-		newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain - 0.01]};
+		var yTitle;
+		var plotSide;
+		switch(i) {
+			case 0:
+				yTitle = 'Celsius';
+				plotSide = 'right';
+			break;
+			case 1:
+				yTitle = 'mm';
+				plotSide = 'left';
+			break;
+		}
+		newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain - 0.01],
+				title: yTitle, side: plotSide};
 	}
 	//newLayout['xaxis'] = {anchor: 'y'}
 	Plotly.addTraces(htmlID, traces);
