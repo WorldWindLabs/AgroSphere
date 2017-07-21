@@ -596,7 +596,9 @@ function generatePlacemarkLayer(wwd, csvData){
                         csvData[i][j].iconCode + '.png';
 				placemark.userObject = {code3: csvData[i][j].code3,
 						country: csvData[i][j].country};
-            }
+            } else if(dataTypes[i] == 'station') {
+				placemarkAttributes.imageSource = '../images/weather.png';
+			}
 
             placemark.attributes = placemarkAttributes;
 
