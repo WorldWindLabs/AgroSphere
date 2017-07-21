@@ -1375,7 +1375,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
 
 //Generates a button which searches a city and code
 function generateWeatherHTML(countryData) {
-	var weatherHTML = '<p>Weather Search</p>';
+	var weatherHTML = '<h5><b>Weather Search</b></h5>';
 	weatherHTML += '<p><input type="text" class="form-control" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
 	weatherHTML += '<select id="countryNames" class="form-control">'
 	var i = 0;
