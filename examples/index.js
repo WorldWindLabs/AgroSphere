@@ -197,7 +197,7 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
-
+							$('.resizable').show();
                             $(".toggle1").attr("aria-expanded","false");
 
                         } else if(pickList.objects[i].userObject.type == 'station') {
@@ -233,6 +233,7 @@ requirejs({paths:{
                             var otherTab5 = $("#weather");
                             var otherTab6 = $("#view");
                             details.show('fast','swing');
+							$('.resizable').show();
                             otherTab.hide();
                             otherTab2.hide();
                             otherTab3.hide();
@@ -2105,6 +2106,7 @@ $(function () {
 
 //sidebar toggle
 $(document).ready(function () {
+	checkTabs();
     $(".toggle1").click(function () {
         $("#layers").toggle('fast', 'swing');
         $("#graphs").hide('fast', 'swing');
