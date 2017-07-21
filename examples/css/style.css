@@ -1,5 +1,5 @@
 div, h1, h2, h3, h4, h5, p, a {
-    color:white !important;
+    color:white;
 }
 
 #info-img {
@@ -58,6 +58,9 @@ input[type="checkbox"]{
     font-size:14px !important;
 }
 
+button:active, button:focus {
+    border: 2px solid lightgreen !important;
+}
 
 .focustext {
     padding:20px 20px;
@@ -492,7 +495,17 @@ input {
 
 .modal-content {
     border-radius:0;
+}
+
+.modal-body h4, .modal-body p {
     color:black;
+}
+
+.carousel-caption p{
+    font-size: 150%;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius:10px;
+    color:white;
 }
 
 .modal.fade .modal-dialog {

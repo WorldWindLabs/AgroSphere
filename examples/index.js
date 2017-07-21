@@ -198,6 +198,8 @@ requirejs({paths:{
                             otherTab5.hide();
                             otherTab6.hide();
 
+                            $(".toggle1").attr("aria-expanded","false");
+
                         } else if(pickList.objects[i].userObject.type == 'station') {
 							var atmoDataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
@@ -545,7 +547,7 @@ function generatePlacemarkLayer(wwd, csvData){
     placemarkAttributes.labelAttributes.offset = new WorldWind.Offset(
         WorldWind.OFFSET_FRACTION, 0.5,
         WorldWind.OFFSET_FRACTION, 1.0);
-    placemarkAttributes.labelAttributes.color = WorldWind.Color.YELLOW;
+    placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
     placemarkAttributes.drawLeaderLine = true;
     placemarkAttributes.leaderLineAttributes.outlineColor = WorldWind.Color.RED;
 
@@ -1152,7 +1154,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
                         dataPoint.dataValues[buttonNumber].timeValues,
                         'multiGraph', 1);
             });
-			
+
 			var addButtonHTML = $('#addButton' + i).button();
 			addButtonHTML.click( function(event) {
 				//Grab id
@@ -1229,7 +1231,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
                 plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                     dataPoint.dataValues[buttonNumber].timeValues,
                     'multiGraph', 1);
-				$('#messagePoint' + buttonNumber).html('Combined graph!');
+				$('#messagePoint' + buttonNumber).html('Combined graph! Please go to Data Graphs Tab');
 				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
 
@@ -1253,7 +1255,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
                 plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                     dataPoint.dataValues[buttonNumber].timeValues,
                     'subGraph' + graphNumber, 0);
-				$('#messagePoint' + buttonNumber).html('Added graph!');
+				$('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
 				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
         }
