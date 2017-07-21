@@ -2064,26 +2064,47 @@ function checkTabs() {
 		}
 	}
 	var resizable = $('.resizable');
+
 	if(isDisplay) {
 		resizable.show();
 	} else {
 		resizable.hide();
-        $(".toggle1").attr("aria-expanded","false");
-        $(".toggle2").attr("aria-expanded","false");
-        $(".toggle3").attr("aria-expanded","false");
-        $(".toggle4").attr("aria-expanded","false");
-        $(".toggle5").attr("aria-expanded","false");
-        $(".toggle6").attr("aria-expanded","false");
-        $(".toggle7").attr("aria-expanded","false");
-        $('.toggle1').css('background','red');
-        $('.toggle2').css('background','red');
-        $('.toggle3').css('background','red');
-        $('.toggle4').css('background','red');
-        $('.toggle5').css('background','red');
-        $('.toggle6').css('background','red');
-        $('.toggle7').css('background','red');
-
 	}
+    if($('#layers').css('display') == 'none') {
+        $('.glyphicon-globe').css('color','white');
+    } else {
+        $('.glyphicon-globe').css('color','lightgreen');
+    }
+    if($('#country').css('display') == 'none') {
+        $('.glyphicon-flag').css('color','white');
+    } else {
+        $('.glyphicon-flag').css('color','lightgreen');
+    }
+    if($('#station').css('display') == 'none') {
+        $('.glyphicon-cloud').css('color','white');
+    } else {
+        $('.glyphicon-cloud').css('color','lightgreen');
+    }
+    if($('#graphs').css('display') == 'none') {
+        $('.fa-area-chart').css('color','white');
+    } else {
+        $('.fa-area-chart').css('color','lightgreen');
+    }
+    if($('#comp').css('display') == 'none') {
+        $('.glyphicon-briefcase').css('color','white');
+    } else {
+        $('.glyphicon-briefcase').css('color','lightgreen');
+    }
+    if($('#weather').css('display') == 'none') {
+        $('.fa-sun-o').css('color','white');
+    } else {
+        $('.fa-sun-o').css('color','lightgreen');
+    }
+    if($('#view').css('display') == 'none') {
+        $('.glyphicon-eye-open').css('color','white');
+    } else {
+        $('.glyphicon-eye-open').css('color','lightgreen');
+    }
 }
 
 // sidebar functions

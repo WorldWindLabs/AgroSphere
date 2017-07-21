@@ -2,7 +2,6 @@ button:focus, button:active {
     border: 2px solid lightgreen !important;
 }
 
-
 div, h1, h2, h3, h4, h5, p, a {
     color:white;
 }
@@ -111,7 +110,7 @@ body {
 }
 
 .nav-tabs li a[aria-expanded="true"]{
-    background-color: lightgreen !important;
+    background-color: #313A7D;
 }
 
 .nav-tabs .glyphicon {
