@@ -198,7 +198,6 @@ requirejs({paths:{
                             otherTab5.hide();
                             otherTab6.hide();
 							$('.resizable').show();
-                            $(".toggle1").attr("aria-expanded","false");
 
                         } else if(pickList.objects[i].userObject.type == 'station') {
 							var atmoDataPoint =
@@ -2069,6 +2068,21 @@ function checkTabs() {
 		resizable.show();
 	} else {
 		resizable.hide();
+        $(".toggle1").attr("aria-expanded","false");
+        $(".toggle2").attr("aria-expanded","false");
+        $(".toggle3").attr("aria-expanded","false");
+        $(".toggle4").attr("aria-expanded","false");
+        $(".toggle5").attr("aria-expanded","false");
+        $(".toggle6").attr("aria-expanded","false");
+        $(".toggle7").attr("aria-expanded","false");
+        $('.toggle1').css('background','red');
+        $('.toggle2').css('background','red');
+        $('.toggle3').css('background','red');
+        $('.toggle4').css('background','red');
+        $('.toggle5').css('background','red');
+        $('.toggle6').css('background','red');
+        $('.toggle7').css('background','red');
+
 	}
 }
 
