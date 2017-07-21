@@ -28,17 +28,18 @@ The World Wind intern team utilized technologies including HTML5, CSS, and JavaS
   according to their interests. Users will learn about the effect of weather over time on
   agriculture, and impact to national economies, and more.
 
-_Screenshot showing the available data for a selected country, which includes lists of crops, price, livestocks, and agricultural emission._
+_Screenshot showing the available data for a selected country, which includes lists of crops,
+price, livestocks, and agricultural emission._
 
-<img src=" " />
+<img src="http://imgur.com/a/vQ3Oi.jpg" />
 
-_Screenshot comparing historical agricultural and weather data on a plot for Finland._
+_Screenshot comparing historical agricultural and weather data on a plot for USA._
 
-<img src=" " />
+<img src="http://imgur.com/a/xvlbW.jpg" />
 
-_Screenshot showing AgroSphere comparing agricultural data from around the world..._
+_Screenshot showing AgroSphere comparing potato data from around the world._
 
-<img src=images/SS5>
+<img src="http://imgur.com/a/cQeq7.jpg">
 
 ## Features of AgroSphere
 
