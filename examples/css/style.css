@@ -4,6 +4,7 @@ div, h1, h2, h3, h4, h5, p, a {
 
 #info-img {
     width:100%;
+    padding:10px;
 }
 
 
@@ -488,17 +489,18 @@ input {
 }
 
 /* modal css */
-#appinfomodal, #tutorialmodal2 {
-    height:600px;
-    max-height:600px;
-}
 
 .modal-content {
     border-radius:0;
 }
 
-.modal-body h4, .modal-body p {
+.modal-body h4, .modal-body p, .modal-body a, .modal-body h5 {
     color:black;
+}
+
+.modal-header h4 {
+    color:black;
+    text-align:center;
 }
 
 .carousel-caption p{
@@ -528,4 +530,9 @@ input {
     -webkit-transform: translate3d(0, -300px, 0);
     transform: translate3d(0, -300px, 0);
     opacity: 1;
+}
+
+#github {
+    color:black;
+    font-size: 1.5em;
 }
