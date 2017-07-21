@@ -1,3 +1,8 @@
+button:focus, button:active {
+    border: 2px solid lightgreen !important;
+}
+
+
 div, h1, h2, h3, h4, h5, p, a {
     color:white;
 }
@@ -57,10 +62,6 @@ input[type="checkbox"]{
     -webkit-transform: scale(1.03);
     transform: scale(1.03);
     font-size:14px !important;
-}
-
-button:active, button:focus {
-    border: 2px solid lightgreen !important;
 }
 
 .focustext {
@@ -508,6 +509,16 @@ input {
     background: rgba(0, 0, 0, 0.8);
     border-radius:10px;
     color:white;
+}
+
+.carousel-caption {
+    position: relative;
+    left: auto;
+    right: auto;
+}
+
+.carousel-inner {
+    background: rgba(0, 0, 0, 1);
 }
 
 .modal.fade .modal-dialog {
