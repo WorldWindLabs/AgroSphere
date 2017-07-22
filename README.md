@@ -1,10 +1,12 @@
 <img src="https://worldwind.arc.nasa.gov/css/images/nasa-logo.svg" height="100"/>
 <p>in partnership with the <a href="http://www.esa.int" target="_blank">European Space Agency</a></p>
 
-# NASA AgClimate
+# NASA AgroSphere
 
-### AgClimate is the largest three-dimensional web-based interactive browser of agriculture, weather, climate,
-and other publicly available time-aware geospatial data, built upon NASA's revolutionary World Wind technology.
+### NASA World Wind is a free, open-source API that provides the tools to create interactive
+visualizations of the world in 4D, such as satellite tracking and seismic history. The NASA
+World Wind 2017 Intern team has designed an educational web app to visualize the effect of
+climate change on agriculture by nation, using the Web World Wind Software Development Kit (SDK).
 
 ## Video Tutorial
 
@@ -14,68 +16,63 @@ and other publicly available time-aware geospatial data, built upon NASA's revol
 
 ## Introduction
 
-The NASA WorldWind 2017 Intern team has designed an educational web application to visualize the effects of climate change
-on different parts of the world using the open-source Web World Wind API. Spatial data for agriculture and atmosphere in
-various formats are organized, analyzed and visualized on the globe. Users can hover the cursor over placemarks for
-statistical data specific to that country’s history for atmosphere and agriculture throughout a specified time frame.
-Users can also easily control each dataset on the globe by adjusting the opacity, time value, etc., while comparing
-selected countries. This web application gives a customizable experience to teachers, science centers and home schoolers
-who can learn about climate issues by manipulating the data according to their interests.
+The World Wind intern team utilized technologies including HTML5, CSS, and JavaScript to develop
+ our application, incorporating and analyzing spatial data for agriculture and atmosphere.
+ Data in various file formats are organized, analyzed and visualized on the globe. Users can
+ click on the respective weather and nation placemarks for statistical data specific to that
+ country’s history for atmosphere and agriculture, and for a specified timeframe. Users can
+ also control each dataset on the globe by adjusting opacity, time, and other options, for
+ comparing crop production versus climate. This web app is intended for use in the classrooms by
+  teachers, science centers and home schoolers, as well as citizens of the world. Children and
+  adults alike will be able to learn about climate issues by visually experiencing the data
+  according to their interests. Users will learn about the effect of weather over time on
+  agriculture, and impact to national economies, and more.
 
-_Screenshot showing how the Earth looks like through AgClimate in its starting position. This image shows the Blue Marble
-layer as a base; AgClimate also supports Bing Maps and a Digital Elevation Layer too._
+_Screenshot showing the available data for a selected country, which includes lists of crops,
+price, livestocks, and agricultural emission._
 
-<img src=" " />
+<img src="http://imgur.com/a/vQ3Oi.jpg" />
 
-_Image showing..._
+_Screenshot comparing historical agricultural and weather data on a plot for USA._
 
-<img src="http://i.imgur.com/2HnOm8V.jpg" />
+<img src="http://imgur.com/a/xvlbW.jpg" />
 
-_Screenshot showing AgClimate comparing agricultural data from around the world..._
+_Screenshot showing AgroSphere comparing potato data from around the world._
 
-<img src="http://i.imgur.com/nqK4kV0.png" />
+<img src="http://imgur.com/a/cQeq7.jpg">
 
-## Features of AgClimate
+## Features of AgroSphere
 
+* Dynamically visualize various types of data, such as rainfall, crop production and prices, and more.
+* Graph agricultural data from 1961 to 2014 and atmospheric data from 1989 to 2014, and view both simultaneously.
+* Adjust time and opacity of layers displayed on the globe and thereby integrate layers to study groups of information together.
+* National agricultural output can be examined closely and also compared to one another.
+* Search for current weather data for many cities around the globe.
 * Load in any number of spatiotemporal geographically accurate data from multiple sources, using a variety of formats including WMTS, WMS, KML, TIFF, and CSV.
-* Input data sources of different sizes and projections, then see that data in any preferred projection including 3D, Mercator, Equirectangular, Polar and more.
-* Adjust the time and date of any layer and easily experience how the visualized data changes with respect to time and space.
-* Adjust the opacity of each layer and thereby integrate layers to study groups of information together.
-* Change the order for where layers are placed in the hierarchy.
-* Visualize graphs of agricultural data with respect to time.
-* Compare data for each country with color display.
-* Read available information about each layer.
 * Use the Destination tool to immediately visit any desired location.
 
 
-## How to Run and Develop AgClimate Locally
+## How to Run and Develop AgroSphere Locally
 
 Start by cloning the repository to your local system. You can do this through the terminal by using the ```git``` command, as outlined below.
 
 ```
-git clone https://github.com/WorldWind-2017/AgClimate.git
+git clone https://github.com/WorldWind-2017/AgroSphere.git
 ```
 
-The above code should clone the repository to a folder called AgClimate. To navigate to the examples folder specific to AgClimate, you can use the command outlined below.
+The above code should clone the repository to a folder called AgroSphere. To navigate to the examples folder specific to AgroSphere, you can use the command outlined below.
 
 ```
-cd AgClimate/examples
+cd AgroSphere/examples
 ```
 
-The main heart of the Javascript functions associated with World Weather are contained within the ```index.js``` file in the apps folder. One example of editing this file is through the program vim, which can be used through the following command.
+The main heart of the Javascript functions associated with AgroSphere are contained within the ```index.js``` file in the apps folder. One example of editing this file is through the program vim, which can be used through the following command.
 
 ```
 vim index.js
 ```
 
-If you modify the source of NASA World Wind during development, you will need to recompile the source to a minified Javascript file. To do this, navigate to the Developmet folder (one folder back from the apps folder), then run the command ```grunt```.
 
-```
-cd ..
-grunt
-```
-
-The above command should run successfully and copy the compiled Javascript file to the apps folder automatically.
 
 
 
@@ -85,6 +82,6 @@ The above command should run successfully and copy the compiled Javascript file 
 
 **Manager:** <a href="https://www.linkedin.com/in/phogan">Patrick Hogan</a>
 
-**Authors:**
+**Authors:** John Nguyen, Mingda Tang, Stacey Chen, Atreya Iyer, Nick Rubel
 
 
