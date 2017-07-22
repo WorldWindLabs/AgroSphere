@@ -613,7 +613,7 @@ function generatePlacemarkLayer(wwd, csvData){
 				placemark.userObject = {code3: csvData[i][j].code3,
 						country: csvData[i][j].country};
             } else if(dataTypes[i] == 'station') {
-				placemarkAttributes.imageSource = '../images/pushpins/push-pin-yellow';
+				placemarkAttributes.imageSource = '../images/pushpins/push-pin-yellow.png';
 			}
 
             placemark.attributes = placemarkAttributes;
