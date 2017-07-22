@@ -12,8 +12,8 @@
 
 var APIKEY = '26fb68df7323284ea4430d8e4d3c60b1';
 var geoMode = 0;
- 
- 
+
+
 requirejs({paths:{
     "jquery":"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min",
     "jqueryui": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min",
@@ -29,7 +29,7 @@ requirejs({paths:{
     function (ww,
               LayerManager, KmlFile, KmlTreeVisibility) {
         "use strict";
-        
+
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 		var regression = require("regression");
 		var derivative = require("math");
@@ -78,12 +78,12 @@ requirejs({paths:{
 
 		// Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(wwd);
-		
+
         //Generate regression comparison and the provide functionality
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
 
-		
+
         //Automatically zoom into NASA Ames
         wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 10e5));
 
@@ -97,7 +97,7 @@ requirejs({paths:{
         wwd.redrawCallbacks.push(runSunSimulation);
 
 		//Generate WMS/WMTS Layers
-		loadWMTSLayers(wwd, layerManager);		
+		loadWMTSLayers(wwd, layerManager);
 
         var sunSimulationCheckBox = document.getElementById('stars-simulation');
         var doRunSimulation = false;
@@ -137,7 +137,7 @@ requirejs({paths:{
                 highlightedItems[h].highlighted = false;
             }
             highlightedItems = [];
-            
+
             var pickList;
             pickList = wwd.pick(wwd.canvasCoordinates(x, y));
             if(pickList.objects.length > 0) {
@@ -150,29 +150,29 @@ requirejs({paths:{
                         //It's most likely a placemark
                         //"most likely"
                         //Grab the co-ordinates
-                        var placeLat = 
+                        var placeLat =
                                 pickList.objects[i].userObject.position.latitude;
-                        var placeLon = 
+                        var placeLon =
                                 pickList.objects[i].userObject.position.longitude;
-                        
+
                         //Find the country
                         if(pickList.objects[i].userObject.type == 'countries') {
-                            var dataPoint = 
+                            var dataPoint =
                                     findDataPoint(csvData[0], placeLat, placeLon);
                             var details = $("#country");
                             var detailsHTML = '<h4>Country Details</h4>';
-                            detailsHTML += 
+                            detailsHTML +=
                                     '<p>Country: ' + dataPoint.country + '</p>';
-                            detailsHTML += 
+                            detailsHTML +=
                                     '<p>Country Code: ' + dataPoint.code3 + '</p>';
                             //We have the country code, we can do whatever we want
-                            //like 
+                            //like
                             //Perhaps show everything? lol
                             //What we need to do is generate a button which plots the graph
-                            
+
                             //Generate the agri buttons
-                            
-                            
+
+
                             //Get the agriculture data
 							detailsHTML += generateCountryButtons();
 							detailsHTML += '<div id="buttonArea"></div>';
@@ -197,6 +197,15 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+
+                            $('.glyphicon-globe').css('color','white');
+                            $('.glyphicon-cloud').css('color','white');
+                            $('.fa-area-chart').css('color','white');
+                            $('.glyphicon-briefcase').css('color','white');
+                            $('.fa-sun-o').css('color','white');
+                            $('.glyphicon-eye-open').css('color','white');
+                            $('.glyphicon-flag').css('color','lightgreen');
+
 							$('.resizable').show();
 
                         } else if(pickList.objects[i].userObject.type == 'station') {
@@ -208,9 +217,9 @@ requirejs({paths:{
 							var ccode2 = atmoDataPoint.stationName.slice(0,2);
 							var ccode3 = findDataPointCountry(countryData, ccode2, 2).code3;
 							console.log(ccode3);
-							
+
 							var agriDataPoint = findDataPointCountry(agriData, ccode3, 3);
-							
+
 							var details = $('#station');
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 
@@ -219,10 +228,10 @@ requirejs({paths:{
 
 							detailsHTML += generateAtmoButtons(atmoData, atmoDataPoint.stationName, agriDataPoint, ccode3);
 							details.html(detailsHTML);
-							
+
 							//Generate the plots
 							//Give functionality for buttons generated
-							giveAtmoButtonsFunctionality(detailsHTML, atmoData, 
+							giveAtmoButtonsFunctionality(detailsHTML, atmoData,
 									atmoDataPoint.stationName, agriDataPoint);
 
                             var otherTab = $("#layers");
@@ -239,12 +248,20 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+
+                            $('.glyphicon-globe').css('color','white');
+                            $('.glyphicon-cloud').css('color','white');
+                            $('.fa-area-chart').css('color','white');
+                            $('.glyphicon-briefcase').css('color','white');
+                            $('.fa-sun-o').css('color','white');
+                            $('.glyphicon-eye-open').css('color','white');
+                            $('.glyphicon-flag').css('color','lightgreen');
 						}
                     }
                 }
             }
         };
-        
+
         wwd.addEventListener('click', handlePick);
         // Set up to handle clicks and taps.
 
@@ -284,8 +301,8 @@ requirejs({paths:{
             // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
             if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                 var position = pickList.objects[0].position;
-                
-				
+
+
 				//Find the closest country and placemark
 				findInformationUsingLocation(wwd, position.latitude, position.longitude, csvData[0], csvData[1]);
             }
@@ -366,7 +383,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 		}
 	//} else {
 	//	legendHTML += '<div><p>A legend does not exist'  +
-	//		'for this layer</p></div>';		
+	//		'for this layer</p></div>';
 	//}
     return legendHTML;
 }
@@ -478,17 +495,17 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
         value: Math.round(wmsConfig.timeSequences.length/2),
         min: 0,
         max: length - 0.01,
-        step: 0.01		
+        step: 0.01
 	});
-	
+
 	slider.on('slide', function(event, ui) {
 		var timeNumber = ui.value - Math.floor(ui.value);
 		$('#time_date_' + layerNumber).html('Current time for this layer: ' + wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber));
 	});
-	
+
 	slider.on('slidestop', function(event, ui) {
 		var timeNumber = ui.value - Math.floor(ui.value);
-		
+
 		targetLayer.time = wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber);
 	});
 }
@@ -724,7 +741,7 @@ function findDataPointCountry(dataSet, countryCode, codeNumber) {
 
 //Load the csvFile differently
 function loadCSVDataArray() {
-    var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv', 
+    var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv',
 			'csvdata/livestock.csv', 'csvdata/emissionplants.csv'];
     //Find the file
     var csvString = "";
@@ -989,7 +1006,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 		var year = ui.value;
 		document.getElementById('geoCompType' + geoMode).click();
 	});
-	
+
     //Search through the buttons
     var i = 0;
     for(i = 0; i < agriData.length; i++) {
@@ -1051,7 +1068,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 							if(agriData[j].dataValues[k].typeName == buttonName) {
 								for(m = 0; m < agriData[j].dataValues[k].timeValues.length; m++) {
 									if(agriData[j].dataValues[k].timeValues[m].year == sliderValue) {
-										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + '\n - ' + buttonName + '\n' + 
+										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + '\n - ' + buttonName + '\n' +
 												agriData[j].dataValues[k].timeValues[m].value;
 									}
 								}
@@ -1152,7 +1169,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
                 var buttonID = this.id;
                 var buttonNumber = buttonID.slice('combineButton'.length);
                 //Add to the graph
-                plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
+                plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                         dataPoint.dataValues[buttonNumber].timeValues,
                         'multiGraph', 1);
             });
@@ -1162,20 +1179,20 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
 				//Grab id
 				var buttonID = this.id;
 				var buttonNumber = buttonID.slice('addButton'.length);
-				
-				//Check how many divs there are 
+
+				//Check how many divs there are
 				var manyGraphDivChildren = $('#manyGraph > div');
-				
+
 				var graphNumber = manyGraphDivChildren.length;
-				
+
 				//Generate the html
 				var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
-				
+
 				$('#manyGraph').append(graphDiv);
-				
+
 				//Graph it
-				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3, 
-                            dataPoint.dataValues[buttonNumber].timeValues, 
+				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
+                            dataPoint.dataValues[buttonNumber].timeValues,
                             'subGraph' + graphNumber, 0);
 			});
 		}
@@ -1275,7 +1292,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
 				}
 				return 0;
 			});
-			
+
 			//Now that things are sorted, make a duplicate
 			var i = 0;
 			for(i = 0; i < divList.length; i++) {
@@ -1288,7 +1305,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
 			}
 			giveDataButtonsFunctionality(detailsHTML, inputData, codeName);
 		});
-		
+
 		$('#sortByAverage').click(function() {
 			var divList = $('.layerTitle');
 			var newList = [];
@@ -1312,7 +1329,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
 					sum2+= data2[i].value;
 				}
 				var mean2 = sum2/i;
-				
+
 				if(mean1 < mean2) {
 					return 1;
 				} else if(mean1 > mean2) {
@@ -1333,7 +1350,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
 			}
 			giveDataButtonsFunctionality(detailsHTML, inputData, codeName);
 		});
-		
+
         //Assign functionality to the search bar
         $('#searchinput').keyup(function (event) {
             //if (event.which == 13) {
@@ -1357,7 +1374,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
            // }
 
         });
-		
+
 		//Assign functionality to the allButton
 		var allButtonHTML = $('#allButton').button();
 		allButtonHTML.on('click', function() {
@@ -1396,7 +1413,7 @@ function giveWeatherButtonFunctionality() {
 		var countryInput = country.slice(0,2);
 		console.log(countryInput);
 		//Make an api request
-		var apiURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ',' 
+		var apiURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ','
 				+ countryInput + '&appid=' + APIKEY;
 		console.log(apiURL);
 		//Make an ajax request
@@ -1414,7 +1431,7 @@ function giveWeatherButtonFunctionality() {
 				tempHTML += '<p>Current Temperature (Celsius): ' + Math.round((data.main.temp - 272),2) + '</p>';
 				tempHTML += '<p>Sunrise: ' + timeConverter(data.sys.sunrise) + '</p>';
                 tempHTML += '<p>Sunset: ' + timeConverter(data.sys.sunset) + '</p>';
-				tempHTML += '<p>Max Temperature Today (Celsius): ' + Math.round((data.main.temp_max - 272),2) + '</p>'; 
+				tempHTML += '<p>Max Temperature Today (Celsius): ' + Math.round((data.main.temp_max - 272),2) + '</p>';
 				tempHTML += '<p>Min Temperature Today (Celsius): ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
 				tempHTML += '<p>Pressure (HPa): ' + data.main.pressure + '</p>';
 				tempHTML += '<p>Humidity (%): ' + data.main.humidity + '</p>';
@@ -1488,9 +1505,9 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
 	//Generate the legend for the thing
 	var legendAmounts = 7;
 	var legendOffset = -3;
-	
+
 	//Empty the legend segment
-	
+
     //Loop through and determine the colour based on zscore
     var countryLayers = new WorldWind.RenderableLayer('Geo Country Data');
     var zScore;
@@ -1590,7 +1607,7 @@ function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
 	//Assuming the previous title was made, simply add regression to the add
 	var titleName1 = titleName;
 	var titleName2 = titleName;
-	
+
     titleName1 += 'linear regression ' + regressionFunction.r2.toPrecision(5);
 	titleName2 += 'exponential regression ' + regressionFunction2.r2.toPrecision(5);
     plotScatter(titleName1, countryCode, inputData, htmlID, 1);
@@ -1673,14 +1690,14 @@ function giveCountryButtonsFunctionality(agriData, priceData, liveData, emission
 	liveButtons.on('click', function() {
 		buttonAreaHTML.html('');
 		buttonAreaHTML.html(generateDataButtons(liveData, codeName, 2));
-		giveDataButtonsFunctionality(buttonAreaHTML, liveData, codeName);		
+		giveDataButtonsFunctionality(buttonAreaHTML, liveData, codeName);
 	});
 	emissionAgriButtons.on('click', function(){
 		buttonAreaHTML.html('');
 		buttonAreaHTML.html(generateDataButtons(emissionAgriData, codeName, 3));
-		giveDataButtonsFunctionality(buttonAreaHTML, emissionAgriData, codeName);			
+		giveDataButtonsFunctionality(buttonAreaHTML, emissionAgriData, codeName);
 	});
-	
+
 }
 
 function generateDataButtons(inputData, codeName, mode) {
@@ -1726,7 +1743,7 @@ function generateDataButtons(inputData, codeName, mode) {
         }
 
 		dataHTML += '<div id="allGraph"></div>';
-		
+
 		//dataHTML = '<div id="allDiv">';
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
@@ -1747,7 +1764,7 @@ function generateDataButtons(inputData, codeName, mode) {
 
 //Finds the closest country (centre based)
 function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
-	//Go through every country 
+	//Go through every country
 	var i = 0;
 	var smallestCountryDistance = 10e10;
 	var countryCode;
@@ -1762,8 +1779,8 @@ function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
 			smallestCountryDistance = distance;
 			countryCode = countryData[i].code3;
 		}
-	}	
-	
+	}
+
 	var smallestStationDistance = 10e10;
 	var stationName;
 	for(i = 0; i < stationData.length; i++) {
@@ -1776,7 +1793,7 @@ function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
 			smallestStationDistance = distance;
 			stationName = stationData[i].stationName;
 		}
-	}	
+	}
 	console.log(countryCode, smallestCountryDistance);
 	console.log(stationName, smallestStationDistance);
 }
@@ -1862,16 +1879,16 @@ function plotStack(inputData, htmlID, amount) {
 		yValuesSet.push(yValues);
 	}
 	//console.log(xValuesSet, yValuesSet, inputData);
-	
+
 	//We need to check by years
 	var yearAmount = (2014 - 1961);
-	
+
 	//Find the top so and so yValues
 	var totalAmounts = [];
 	var topPercentages = [];
 	var numRanks = 5;
 	var k = 0;
-	
+
 	//Array of top values
 	var showDataValues = [];
 	for(i = 0; i < inputData.dataValues[0].timeValues.length; i++) {
@@ -1883,11 +1900,11 @@ function plotStack(inputData, htmlID, amount) {
 			tempValue += parseFloat(filteredDataSet[j][i].value);
 		}
 		totalAmounts.push(tempValue);
-		
+
 		//We got all the values
 		//Filter by a raw amount
 		tempAmounts.sort(function(a, b){return a-b});
-		
+
 		//Grab the 5th highest value
 		var threshold = tempAmounts[tempAmounts.length - amount - 1];
 		var top5 = 0;
@@ -1903,7 +1920,7 @@ function plotStack(inputData, htmlID, amount) {
 						break;
 					}
 				}
-				
+
 				if(isIn == false) {
 					//Not in, create a new object
 					var tempObj = {};
@@ -1919,14 +1936,14 @@ function plotStack(inputData, htmlID, amount) {
 				}
 				//Find the percentage
 				top5 += value;
-			} 
+			}
 		}
-		
+
 		//Find the percentage
 		topPercentages.push((top5/tempValue) * 100);
 	}
 	console.log(showDataValues);
-	
+
 	//Create the traces
 	var traces = [];
 	for(i = 0; i < showDataValues.length; i++) {
@@ -1938,7 +1955,7 @@ function plotStack(inputData, htmlID, amount) {
 		}
 		traces.push(trace);
 	}
-	
+
 	//Final percentages push
 	var tempTrace = {
 		x: xValuesSet[0],
@@ -1952,11 +1969,11 @@ function plotStack(inputData, htmlID, amount) {
 	var xAxis = {
 		title: 'Year'
 	};
-	
+
 	var yAxis = {
 		title: 'Production (tonnes)'
 	}
-	
+
 	var yAxis2 = {
 		title: 'Percentage of top ' + amount,
 		overlaying: 'y',
@@ -1964,7 +1981,7 @@ function plotStack(inputData, htmlID, amount) {
 		anchor: 'y',
 		//position: 0.85
 	}
-	
+
 	var layout = {
 		title: 'Top ' + amount + ' crop production for ' + inputData.code3 + ' vs Year',
 		barmode: 'stack',
@@ -1992,7 +2009,7 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
         xValues.push(parseFloat(filteredData[i].year));
         yValues.push(parseFloat(filteredData[i].value));
     }
-    
+
     //Create the plotly graph
     var graph = {
         name: titleName + ' ' + secondName,
@@ -2001,35 +2018,35 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
         mode: 'markers',
         type: 'scatter'
     };
-    
+
     var xAxis = {
         title: 'Year'
     }
-    
+
 	if(mode == 0) {
 		var yAxis = {
 			title: titleName
-		}; 
+		};
 	}
 	else {
 		var yAxis = {
 			title: 'Unitless'
 		};
 	}
-	
+
 	var titleString = '';
 	if(mode == 0) {
 		titleString = titleName + ' vs Year';
 	} else {
 		titleString = 'Legend vs Year';
 	}
-	
+
     var layout = {
         xaxis: xAxis,
         yaxis: yAxis,
         title: titleString
     };
-    
+
     //Check if the htmlID is empty
     var plotHTML = $('#'+ htmlID);
 	console.log(mode);
@@ -2053,14 +2070,14 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
 //Checks if there is anything visible
 function checkTabs() {
 	var allTabs = $('.tab-content > .tab-pane');
-	
+
 	var i = 0;
 	var isDisplay = false;
-	
+
 	for(i = 0; i < allTabs.length; i++) {
 		if($(allTabs[i]).css('display') != 'none') {
 			isDisplay = true;
-			
+
 		}
 	}
 	var resizable = $('.resizable');
