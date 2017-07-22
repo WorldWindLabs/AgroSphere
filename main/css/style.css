@@ -1,0 +1,548 @@
+button:focus, button:active {
+    border: 2px solid lightgreen !important;
+}
+
+div, h1, h2, h3, h4, h5, p, a {
+    color:white;
+}
+
+#info-img {
+    width:100%;
+    padding:10px;
+}
+
+
+#canvasOne {
+    width: 100%;
+    height: auto;
+}
+
+/* disable right clicking */
+.body {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    -o-user-select: none;
+    user-select: none;
+}
+
+body, html {
+    height: 100%;
+}
+
+@font-face {
+    font-family: SFDisplay;
+    src: url(../font/SFDisplayRegular.ttf);
+}
+
+div {
+    font-family: SFDisplay;
+}
+
+
+input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.btn {
+    background-color:#323232 !important;
+    text-align:center !important;
+    color:white !important;
+    font-size:12px !important;
+}
+
+.btn:hover{
+    background-color:black !important;
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+    font-size:14px !important;
+}
+
+.focustext {
+    padding:20px 20px;
+}
+/* bg image - mobile only */
+
+body {
+
+    /* The image used */
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../../images/bg.jpg");
+
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-size: cover;
+}
+
+/* sidebar */
+
+.badge {
+    background-color: #777;
+}
+
+/* z-index added to make draggable appear correctly */
+.tabs-left {
+    margin-top:6rem;
+    z-index:1000;
+}
+
+.nav-tabs {
+    float: left;
+    border-bottom: 0;
+}
+
+.nav-tabs li {
+    float: none;
+    margin: 0;
+}
+.nav-tabs li a {
+    margin-right: 0;
+    border: 0;
+    background-color: #313A7D;
+}
+.nav-tabs li a:hover {
+    background-color: lightgreen;
+}
+
+.nav-tabs li a[aria-expanded="true"]{
+    background-color: #313A7D;
+}
+
+.nav-tabs .glyphicon {
+    color: #fff;
+}
+.nav-tabs .active .glyphicon {
+    color: white;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border: 0;
+}
+
+.tab-content {
+    margin-left: 45px;
+    height:500px;
+}
+
+.tab-content .tab-pane {
+    display: none;
+    background-color: #313A7D;
+    padding: 1.6rem;
+    overflow-y: auto;
+}
+
+.tab-content .active {
+    display: inline-block;
+}
+
+.tab-content .tab-pane .active {
+    display: inline-block;
+}
+
+.list-group {
+    width: 100%;
+}
+
+/* z-index added to make draggable appear correctly */
+.list-group .list-group-item {
+    height: 40px;
+    z-index:1000;
+    border: none !important;
+}
+
+/* selected layers */
+.list-group .active {
+    border:2px solid lightgreen !important;
+}
+
+.list-group .list-group-item h4, .list-group .list-group-item span {
+    line-height: 11px;
+}
+
+li{
+    background:#313A7D;
+}
+
+/* loading screen before all else */
+#loading-modal {
+    z-index:9000;
+}
+
+#loading-modal img {
+    z-index:9000;
+}
+
+
+/* tooltip hover */
+
+/* Add this attribute to the element that needs a tooltip */
+[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+    z-index:1001;
+}
+
+/* Hide the tooltip content by default */
+[data-tooltip]:before,
+[data-tooltip]:after {
+    visibility: hidden;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Position tooltip above the element */
+[data-tooltip]:before {
+    position: absolute;
+    left: 230%;
+    margin-bottom: 5px;
+    margin-left: -60px;
+    padding: 7px;
+    width: 110px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #000;
+    background-color: hsla(0, 0%, 20%, 0.9);
+    color: #fff;
+    content: attr(data-tooltip);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+/* Triangle hack to make tooltip look like a speech bubble */
+[data-tooltip]:after {
+    position: absolute;
+    left: 230%;
+    margin-left: -5px;
+    width: 0;
+    border-top: 5px solid #000;
+    border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+}
+
+/* Show tooltip content on hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+    visibility: visible;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+}
+
+.ui-resizable { position: relative;}
+.ui-resizable-handle { position: absolute;font-size: 0.1px; display: block; }
+.ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle { display: none; }
+.ui-resizable-n { cursor: n-resize; height: 7px; width: 100%; top: -5px; left: 0; }
+.ui-resizable-s { cursor: s-resize; height: 7px; width: 100%; bottom: -5px; left: 0; }
+.ui-resizable-e { cursor: e-resize; width: 7px; right: -5px; top: 0; height: 100%; }
+.ui-resizable-w { cursor: w-resize; width: 7px; left: -5px; top: 0; height: 100%; }
+.ui-resizable-se { cursor: se-resize; width: 12px; height: 12px; right: 1px; bottom: 1px; }
+.ui-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: -5px; bottom: -5px; }
+.ui-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; }
+.ui-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}
+
+/* video backgrund */
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* fixes for aspect ratios */
+@media (min-aspect-ratio: 16/9) {
+    .fullscreen-bg__video {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-aspect-ratio: 16/9) {
+    .fullscreen-bg__video {
+        width: auto;
+        height: 100%;
+    }
+}
+
+@media (min-aspect-ratio: 16/9) {
+    .fullscreen-bg__video {
+        height: 300%;
+        top: -100%;
+    }
+}
+
+@media (max-aspect-ratio: 16/9) {
+    .fullscreen-bg__video {
+        width: 300%;
+        left: -100%;
+    }
+}
+
+/* do not show video on mobile - will not work */
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+    .fullscreen-bg__video {
+        height: 300%;
+        top: -100%;
+    }
+}
+
+@media (max-aspect-ratio: 16/9) {
+    .fullscreen-bg__video {
+        width: 300%;
+        left: -100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .fullscreen-bg {
+        background: url('../../video/videoframe.png') center center / cover no-repeat;
+    }
+
+    .fullscreen-bg__video {
+        display: none;
+    }
+}
+
+/* audio effects */
+audio:hover, audio:focus, audio:active
+{
+    -webkit-box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
+    -moz-box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
+    box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    transform: scale(1.03);
+}
+audio
+{
+    width:100%;
+    -webkit-transition:all 0.5s linear;
+    -moz-transition:all 0.5s linear;
+    -o-transition:all 0.5s linear;
+    transition:all 0.5s linear;
+}
+
+#tutorial {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index:99;
+}
+
+#nasalogo {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 99;
+    width: 60px;
+}
+
+#nasalogo:hover {
+    -moz-transform: scale(1.3);
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+/* search bar */
+input {
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 14px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 7px; /* Add some space below the input */
+    color:black !important;
+}
+
+/* search bar */
+#amount {
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 14px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+    color:black !important;
+}
+
+#myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a.header {
+    background-color: #e2e2e2; /* Add a darker background color for headers */
+    cursor: default; /* Change cursor style */
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+
+/* modal carousel styling */
+#myModal p, #myModal h4, #myModal2 h4,#myModal a, #myModal2 a {
+    color:black !important;
+}
+
+.img-responsive {
+    width:100%;
+}
+
+/* color for current weather search bar input */
+#cityInput, #countryInput {
+    color:black !important;
+
+}
+
+/* button css */
+
+.btn-info {
+    border-radius:5px;
+    border: none;
+    background-color: #323232 !important;
+    margin: 2.5px;
+}
+
+.btn-info:hover {
+    -moz-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.btn-block {
+    border-radius:5px;
+    overflow-y:hidden;
+}
+
+/* adding space between each ag dataset */
+
+.layerTitle {
+    padding: 12px 0 12px 0;
+}
+
+/* slider CSS */
+
+.ui-slider .ui-slider-handle {
+    background:#313A7D;
+}
+
+.ui-slider .ui-slider-handle:hover {
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
+/* modal css */
+
+.modal-content {
+    border-radius:0;
+}
+
+.modal-body h4, .modal-body p, .modal-body a, .modal-body h5 {
+    color:black;
+}
+
+.modal-header h4 {
+    color:black;
+    text-align:center;
+}
+
+.carousel-caption p{
+    font-size: 150%;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius:10px;
+    color:white;
+}
+
+.carousel-caption {
+    position: relative;
+    left: auto;
+    right: auto;
+}
+
+.carousel-inner {
+    background: rgba(0, 0, 0, 1);
+}
+
+.modal.fade .modal-dialog {
+    -webkit-transform: scale(0.1);
+    -moz-transform: scale(0.1);
+    -ms-transform: scale(0.1);
+    transform: scale(0.1);
+    top: 300px;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.modal.fade.in .modal-dialog {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform: translate3d(0, -300px, 0);
+    transform: translate3d(0, -300px, 0);
+    opacity: 1;
+}
+
+#github {
+    color:black;
+    font-size: 1.5em;
+}

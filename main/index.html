@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Agrosphere - NASA Web World Wind</title>
+    <link rel="icon" href="http://diylogodesigns.com/blog/wp-content/uploads/2016/06/Nasa-Logo-Transparent-Background-download.png">
+
+    <!--John's Plan -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+    <!--RequireJS-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="https://unpkg.com/simple-statistics@4.1.0/dist/simple-statistics.min.js"></script>
+    <script data-main="index" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+    <!-- JS UI -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/78d4dc19c9.js"></script>
+
+</head>
+<body>
+
+<!-- loading screen -->
+<div id="loading_modal" style="position: fixed; z-index: 1100; width: 100%; height: 100%; background: rgba(0,0,0,1)">
+    <img src="../images/nasa.gif"
+         style=" position:absolute; z-index: 1100; width:30%; margin-left: 36%; margin-top: 10%; border-radius:100px;" />
+</div>
+
+<!-- background image -->
+<div class="fullscreen-bg">
+    <video loop muted autoplay poster="../video/videoframe.png" class="fullscreen-bg__video">
+        <source src="../video/milkyway.mp4" type="video/mp4">
+    </video>
+</div>
+
+<img id="nasalogo" src="../images/nasalogo.png" data-toggle="modal" data-target="#appinfomodal">
+
+<!-- Modal -->
+<div id="appinfomodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Application Information</h4>
+            </div>
+            <div class="modal-body">
+                <img id="info-img" src="../images/ames.jpg">
+                <p>This app is designed and developed by the 2017 NASA Web World Wind Intern Team at NASA Ames Research Center, which consists of
+                (by alphabetical order)</p>
+                <p>Link to our website: <a target="_blank" href="#">Agrosphere</a></p>
+                <p>Rights of background video goes to J Studio: <a target="_blank" href="https://www.youtube.com/channel/UCFSbaGR5uMeNX7kWAwdhUTg"><b>Source</b></a></p>
+                <p>Rights of background audio goes to Kishan Sheth: <a target="_blank" href="https://www.youtube.com/channel/UC5CxWJRuyID16s_XwADKI4A"><b>Source</b></a></p>
+                <p>Github Link: <a target="_blank" href="https://github.com/WorldWind-2017/AgClimate" class="fa fa-github" id="github"></a></p>
+                <br>
+                <h5><b>Application Description</b></h5>
+                <p>NASA World Wind is a free, open-source API that provides the tools to create interactive
+                     visualizations of the world in 4D. At Ames Research Center, the NASA WorldWind 2017
+                     Intern team has designed an educational web application to visualize the effects of climate change
+                     on different parts of the world using the Web World Wind Source Development Kit (SDK). </p>
+                <p>The team utilized technologies including HTML5, CSS, JavaScript, and jQuery to develop our application,
+                    incorporating and analyzing spatial data for agriculture and atmosphere. Data in various formats are organized,
+                    analyzed and visualized on the globe. </p>
+                 <p>This web apps is intended for use in the classrooms by teachers, science centers and home schoolers,
+                     as well as citizens of the world. Children and adults alike will be able to learn about climate issues
+                     by visually experiencing the data according to their interests. Users will learn about the effect of weather over time on
+                     agriculture, and impact to national economies, and more.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" id="tutorial" data-toggle="modal" data-target="#tutorialmodal">Tutorials</button>
+
+<!-- Modal -->
+<div id="tutorialmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tutorial!</h4>
+            </div>
+            <div class="modal-body">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/DfWg0Yyc4_E" frameborder="0" allowfullscreen></iframe>
+                <div id="carousel-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img class="img-responsive" src="../images/SS1.png" alt="...">
+                            <div class="carousel-caption">
+                                <p>Toggle each layers to control the globe display.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="../images/SS2.png" alt="...">
+                            <div class="carousel-caption">
+                                <p>Click on one of the five layers to display global atmospheric data, with opacity and time sliders.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="../images/SS3.png" alt="...">
+                            <div class="carousel-caption">
+                                <p>Each country includes agriculture, livestock, price, and emission data.
+                                    Clicking on the graph buttons can plot the graph or add/combine the graph in the separate 'Data Graphs tab.
+                                    The data list can also be searched and sorted.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="../images/SS4.png" alt="...">
+                            <div class="carousel-caption">
+                                <p>'Add graph' and 'combine graph' will display the plots on this tab
+                                    so that data from weather stations and countries can be simultaneously plotted.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="../images/SS5.png" alt="...">
+                            <div class="carousel-caption">
+                                <p>Search for crop data comparison around the globe and toggle the layers. Use time slider to control the year to be displayed.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="../images/SS6.png" alt="...">
+                            <div class="carousel-caption">
+                                <p>Find current weather of a city, including temperature, pressure, humidity,
+                                    sunrise, sunset, and etc.</p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="../images/SS7.png" alt="...">
+                            <div class="carousel-caption">
+                                <p>Change projection type and use the search button to specific places.
+                                    Turn on the music with audio control. </p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="../images/SS8.png" alt="...">
+                            <div class="carousel-caption">
+                                <p>The user interface is draggable, resizable, and scrollable vertically,
+                                    horizontally, and diagonally.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-md-3 container">
+    <div class="tabs-left draggable">
+        <ul class="nav nav-tabs">
+            <li><a href="#layers" data-toggle="tab" data-tooltip="Available Layers" class="toggle1"><span class="glyphicon glyphicon-globe"></span></a></li>
+            <li><a href="#country" data-toggle="tab" data-tooltip="Country Details" class="toggle2"><span class="glyphicon glyphicon-flag"></span></a></li>
+            <li><a href="#station" data-toggle="tab" data-tooltip="Weather Station Details" class="toggle3"><span class="glyphicon glyphicon-cloud"></span></a></li>
+            <li><a href="#graphs" data-toggle="tab" data-tooltip="Data Graphs" class="toggle4"><span class="fa fa-area-chart"></span></a></li>
+            <li><a href="#comp" data-toggle="tab" data-tooltip="Geo Comparisons" class="toggle5"><span class="glyphicon glyphicon-briefcase"></span></a></li>
+            <li><a href="#weather" data-toggle="tab" data-tooltip="Current Weather" class="toggle6"><span class="fa fa-sun-o"></span></a></li>
+            <li><a href="#view" data-toggle="tab" data-tooltip="View Options" class="toggle7"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+        </ul>
+        <div class="tab-content resizable">
+            <div class="tab-pane" id="layers"><h4>Available Layers</h4><div class="list-group" id="layerList"></div></div>
+            <div class="tab-pane" id="country">
+                <h4>Country Details</h4>
+                <p>Please click on a flag to see data specific for a country or territory.</p>
+                <button class="btn-info"><a href="http://www.fao.org/faostat/en/#data/" target="_blank">Download Raw Agriculture Data</a></button>
+            </div>
+            <div class="tab-pane" id="station">
+                <h4>Weather Station Details</h4>
+                <p>Please click on a pin to see data specific for the weather station.</p>
+                <button class="btn-info"><a href="https://fluxnet.fluxdata.org//data/download-data/" target="_blank">Download Raw Atmosphere Data (Fluxnet Account Required)</a></button>
+            </div>
+            <div class="tab-pane" id="graphs">
+                <h4>Data Graphs</h4>
+                <div id="almightyGraph">
+                    <div id="multiGraph"></div>
+                    <div id="manyGraph"></div>
+                </div>
+            </div>
+            <div class="tab-pane" id="comp">
+                <h4>Global Data Comparisons</h4>
+					<div id="colour-legend">
+					</div>
+            </div>
+            <div class="tab-pane" id="weather">
+                <h4>Current Weather</h4>
+                <div id="searchDetails"></div>
+            </div>
+            <div class="tab-pane" id="view">
+                <h4>View Options</h4>
+                <h5>Projections</h5>
+                <div class="dropdown" id="projectionDropdown"></div>
+                <h5>Search</h5>
+                <div class="input-group" id="searchBox">
+                    <input type="text" class="form-control" placeholder="GoTo" id="searchText"/>
+                    <span class="input-group-btn">
+                        <button id="searchButton" class="btn btn-primary" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+                <br>
+                <div>
+                    <label for="stars-simulation"><h5>Simulate Stars!</h5></label>
+                    <input id="stars-simulation" type="checkbox"/>
+                </div>
+                <!-- audio -->
+                <h5>Audio Control</h5>
+                <audio controls loop>
+                    <source src="../audio/audio.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div><!-- /tab-content -->
+    </div><!-- /tabbable -->
+</div><!-- /col -->
+
+<div class="col-sm-9" id="globe" style="width: 100%; height: 100%; position: fixed; left: 0">
+    <canvas id="canvasOne" width="1920" height="1080" style="position: fixed; left: 0; width: 100%; height: 100%">
+        Your browser does not support HTML5 Canvas.
+    </canvas>
+</div>
+
+</body>
+</html>
