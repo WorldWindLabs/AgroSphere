@@ -250,12 +250,12 @@ requirejs({paths:{
                             otherTab6.hide();
 
                             $('.glyphicon-globe').css('color','white');
-                            $('.glyphicon-cloud').css('color','white');
+                            $('.glyphicon-cloud').css('color','lightgreen');
                             $('.fa-area-chart').css('color','white');
                             $('.glyphicon-briefcase').css('color','white');
                             $('.fa-sun-o').css('color','white');
                             $('.glyphicon-eye-open').css('color','white');
-                            $('.glyphicon-flag').css('color','lightgreen');
+                            $('.glyphicon-flag').css('color','white');
 						}
                     }
                 }
