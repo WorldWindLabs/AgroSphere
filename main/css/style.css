@@ -109,6 +109,10 @@ body {
     background-color: lightgreen;
 }
 
+.nav-tabs li a[aria-expanded="true"]:hover{
+    background-color: black;
+}
+
 .nav-tabs li a[aria-expanded="true"]{
     background-color: #313A7D;
 }
