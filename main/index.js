@@ -79,7 +79,7 @@ requirejs({paths:{
 
 		// Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(wwd);
-
+		layerManager.synchronizeLayerList();
         //Generate regression comparison and the provide functionality
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
@@ -99,7 +99,7 @@ requirejs({paths:{
 
 		//Generate WMS/WMTS Layers
 		loadWMTSLayers(wwd, layerManager);
-
+		
         var sunSimulationCheckBox = document.getElementById('stars-simulation');
         var doRunSimulation = false;
         var timeStamp = Date.now();
@@ -323,13 +323,13 @@ console.timeEnd('First');
 //functionality
 function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, layerNumber) {
     //Generate the div tags
-    var layerControlHTML = '<div id="' + layerNumber + '">';
+    var layerControlHTML = '<div class="toggleLayers" id=funcLayer"' + layerNumber + '">';
 
     //Spawn opacity controller
     layerControlHTML += generateOpacityControl(wwd, layerName, layerNumber);
     //Wrap it up
 
-    layerControlHTML += '</div>';
+    
 
     //Spawn the legend
     layerControlHTML += generateLegend(wwd,
@@ -339,7 +339,7 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
     if (typeof(wmsConfig.timeSequences) != 'undefined') {
         layerControlHTML += generateTimeControl(wwd, layerName, layerNumber, wmsConfig);
     }
-
+	layerControlHTML += '</div>';
     //Place the HTML somewhere
     $("#layers").append(layerControlHTML);
 
@@ -1346,7 +1346,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			for(i = 0; i < newList.length; i++) {
 				$('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
 			}
-			giveDataButtonsFunctionality(detailsHTML, inputData, codeName);
+			giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode);
 		});
 
 		$('#sortByAverage').click(function() {
@@ -1391,7 +1391,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			for(i = 0; i < newList.length; i++) {
 				$('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
 			}
-			giveDataButtonsFunctionality(detailsHTML, inputData, codeName);
+			giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode);
 		});
 
         //Assign functionality to the search bar
@@ -2282,5 +2282,20 @@ $(document).ready(function () {
         $("#weather").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
+	
+	//Give the layer buttons extra funcitonality
+	/*var layerButtonList = $('#layerList button');
+	var layerControlList = $('.toggleLayers');
+	var i = 0;
+	var j = 0;
+	for(i = 0; i < layerButtonList.length; i++) {
+		//Find the equivalent
+		
+		if($(layerButtonList[i]).hasClass('active')) {
+			//Active class for button, find the appropiate layer
+		} else {
+			//Hide the class
+		}
+	}*/
 });
 });
