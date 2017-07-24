@@ -60,13 +60,13 @@ Start by cloning the repository to your local system. You can do this through th
 git clone https://github.com/WorldWind-2017/AgroSphere.git
 ```
 
-The above code should clone the repository to a folder called AgroSphere. To navigate to the examples folder specific to AgroSphere, you can use the command outlined below.
+The above code should clone the repository to a folder called AgroSphere. To navigate to the main folder specific to AgroSphere, you can use the command outlined below.
 
 ```
-cd AgroSphere/examples
+cd AgroSphere/main
 ```
 
-The main heart of the Javascript functions associated with AgroSphere are contained within the ```index.js``` file in the apps folder. One example of editing this file is through the program vim, which can be used through the following command.
+The main heart of the Javascript functions associated with AgroSphere are contained within the ```index.js``` file in the main folder. One example of editing this file is through the program vim, which can be used through the following command.
 
 ```
 vim index.js
