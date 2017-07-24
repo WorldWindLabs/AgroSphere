@@ -2307,5 +2307,6 @@ $(document).ready(function () {
         $("#weather").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
+	checkTabs();
 });
 });
