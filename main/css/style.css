@@ -518,10 +518,17 @@ input {
     position: relative;
     left: auto;
     right: auto;
+    padding-bottom:0;
 }
 
 .carousel-inner {
-    background: rgba(0, 0, 0, 1);
+    background:black;
+}
+
+.carousel {
+}
+.carousel-control {
+    width:3%;
 }
 
 .modal.fade .modal-dialog {
@@ -553,4 +560,10 @@ input {
 
 #fontsize {
     font-size:1.2em;
+}
+
+.item {
+    display: none;
+    position: relative;
+    .transition(.15s ease-in-out left);
 }
