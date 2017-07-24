@@ -1,4 +1,4 @@
-button:active {
+button:focus, button:active {
     border: 2px solid lightgreen !important;
 }
 
@@ -549,4 +549,8 @@ input {
 #github {
     color:black;
     font-size: 1.5em;
+}
+
+#fontsize {
+    font-size:1.2em;
 }
