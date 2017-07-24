@@ -337,7 +337,7 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
 
     //Spawn the time if it has it
     if (typeof(wmsConfig.timeSequences) != 'undefined') {
-        layerControlHTML += generateTimeControl(wwd, layerName, layerNumber);
+        layerControlHTML += generateTimeControl(wwd, layerName, layerNumber, wmsConfig);
     }
 
     //Place the HTML somewhere
@@ -460,12 +460,16 @@ function giveOpacitySliderFunctionality(wwd, layerName, layerNumber) {
 }
 
 
-function generateTimeControl(wwd, layerName, layerNumber) {
+function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
     //Create the general box
     var timeHTML = '<br><h5>Time for ' + layerName +'</h5>';
-
+	console.log(wmsConfig);
     //Create the output
-    timeHTML += '<div id="time_date_' + layerNumber + '">INITIAL DATE</div>';
+	var startDate = wmsConfig.timeSequences[0].startTime;
+	var endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime;
+    timeHTML += '<div id="time_date_' + layerNumber + '">Current Time: </div>';
+	timeHTML += '<p>Start Time: '+ startDate + '</p>'; 
+	timeHTML += '<p>End Time: ' + endDate + '</p>';
 
     //Create the three buttons
 	timeHTML += '<h4>Time Scale</h4>';
