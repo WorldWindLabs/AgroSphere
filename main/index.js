@@ -1058,36 +1058,42 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 
             //Got all the data, colour it
             countryData = filterOutBlanks(countryData, 0);
-            var countryLayer = colourizeCountries(countryData, geoJSONData);
+            var countryLayer = colourizeCountries(countryData, geoJSONData, buttonName);
             //Check if the country layer exist
 			var flagLayer;
             var l = 0;
+			var currentLayerName;
             for(l = 0; l < wwd.layers.length; l++) {
                 if(wwd.layers[l].displayName == 'Geo Country Data') {
+					console.log(wwd.layers[l]);
+					currentLayerName = wwd.layers[l].userObject.dataType;
                     wwd.removeLayer(wwd.layers[l]);
                 } else if(wwd.layers[l].displayName == 'countries Placemarks') {
 					flagLayer = wwd.layers[l];
 				}
             }
-
-            wwd.addLayer(countryLayer);
-            layerManager.synchronizeLayerList();
-			var m = 0;
-			//Go through the entire country flag placemarks and change the label
-			console.log(flagLayer);
-			for(l = 0; l < flagLayer.renderables.length; l++) {
-				var code3 = flagLayer.renderables[l].userObject.code3;
-				console.log(code3);
-				//Find the agriData with the code3
-				for(j = 0; j < agriData.length; j++) {
-					if(agriData[j].code3 == code3) {
-						//Go through the timeValue that matches the year
-						for(k = 0; k < agriData[j].dataValues.length; k++) {
-							if(agriData[j].dataValues[k].typeName == buttonName) {
-								for(m = 0; m < agriData[j].dataValues[k].timeValues.length; m++) {
-									if(agriData[j].dataValues[k].timeValues[m].year == sliderValue) {
-										flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + '\n - ' + buttonName + '\n' +
-												agriData[j].dataValues[k].timeValues[m].value;
+			console.log(currentLayerName);
+			if(currentLayerName != buttonName) {
+			
+				wwd.addLayer(countryLayer);
+				layerManager.synchronizeLayerList();
+				var m = 0;
+				//Go through the entire country flag placemarks and change the label
+				console.log(flagLayer);
+				for(l = 0; l < flagLayer.renderables.length; l++) {
+					var code3 = flagLayer.renderables[l].userObject.code3;
+					console.log(code3);
+					//Find the agriData with the code3
+					for(j = 0; j < agriData.length; j++) {
+						if(agriData[j].code3 == code3) {
+							//Go through the timeValue that matches the year
+							for(k = 0; k < agriData[j].dataValues.length; k++) {
+								if(agriData[j].dataValues[k].typeName == buttonName) {
+									for(m = 0; m < agriData[j].dataValues[k].timeValues.length; m++) {
+										if(agriData[j].dataValues[k].timeValues[m].year == sliderValue) {
+											flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + '\n - ' + buttonName + '\n' +
+													agriData[j].dataValues[k].timeValues[m].value;
+										}
 									}
 								}
 							}
@@ -1528,7 +1534,7 @@ function getColour(zScore) {
 
 //Given a set of gradients and country pairs, colourize the countries
 //Also needs the GEOJSON file to be accessed
-function colourizeCountries(valueCountryPair, geoJSONData) {
+function colourizeCountries(valueCountryPair, geoJSONData, dataName) {
     //Isolate the gradients
     var i = 0;
     var values = [];
@@ -1570,6 +1576,7 @@ function colourizeCountries(valueCountryPair, geoJSONData) {
 					innerLayer.renderables[k].userProperties.country = valueCountryPair[i].code3;
 				}
 				countryLayers.addRenderable(innerLayer);
+				countryLayers.userObject = {dataType: dataName};
 				//countryStringJSON.layer.displayName = valueCountryPair[i].code3;
 				//countryLayers.addRenderable(countryStringJSON.layer);
             }
