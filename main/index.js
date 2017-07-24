@@ -323,14 +323,10 @@ console.timeEnd('First');
 //functionality
 function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, layerNumber) {
     //Generate the div tags
-    var layerControlHTML = '<div class="toggleLayers" id=funcLayer"' + layerNumber + '">';
+    var layerControlHTML = '<div class="toggleLayers" id="funcLayer' + layerNumber + '">';
 
     //Spawn opacity controller
     layerControlHTML += generateOpacityControl(wwd, layerName, layerNumber);
-    //Wrap it up
-
-    
-
     //Spawn the legend
     layerControlHTML += generateLegend(wwd,
         wmsLayerCapabilities, layerName, layerNumber);
@@ -400,10 +396,6 @@ function generateOpacityControl(wwd, layerName, layerNumber) {
 
     //Create the output
     opacityHTML += '<div id="opacity_amount_' + layerNumber + '">100%</div>';
-
-
-    //Wrap up the HTML
-    opacityHTML += '</div>';
 
 
     return opacityHTML;
@@ -889,6 +881,39 @@ function loadWMTSLayers(wwd, layerManager) {
             wwd.addLayer(wmsLayer);
             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
             layerManager.synchronizeLayerList();
+			//Give the layer buttons extra funcitonality
+			var layerButtonList = $('#layerList button');
+			var layerControlList = $('.toggleLayers');
+			console.log(layerControlList);
+			var j = 0;
+			var k = 0;
+			for(j = 0; j < layerControlList.length; j++) {
+				$(layerControlList[j]).hide();
+			}
+			
+			
+			for(j = 0; j < layerButtonList.length; j++) {
+				$(layerButtonList[j]).button();
+				$(layerButtonList[j]).on('click', function(event) {
+					var layerNumber = -1;
+					for(k = 0; k < layerControlList.length; k++) {
+						if($(layerControlList[k]).text().includes($(this).text())) {
+							layerNumber = k;
+							break;
+						}
+					}
+					console.log(layerNumber);
+					if(layerNumber != -1) {
+						if($(this).hasClass('active')) {
+							//Active class for button, find the appropiate layer
+							$(layerControlList[k]).show();
+						} else {
+							//Hide the class
+							$(layerControlList[k]).hide();
+						}				
+					}
+				});
+			}
         }
     };
 
@@ -2282,20 +2307,5 @@ $(document).ready(function () {
         $("#weather").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
-	
-	//Give the layer buttons extra funcitonality
-	/*var layerButtonList = $('#layerList button');
-	var layerControlList = $('.toggleLayers');
-	var i = 0;
-	var j = 0;
-	for(i = 0; i < layerButtonList.length; i++) {
-		//Find the equivalent
-		
-		if($(layerButtonList[i]).hasClass('active')) {
-			//Active class for button, find the appropiate layer
-		} else {
-			//Hide the class
-		}
-	}*/
 });
 });
