@@ -31,15 +31,15 @@ The World Wind intern team utilized technologies including HTML5, CSS, and JavaS
 _Screenshot showing the available data for a selected country, which includes lists of crops,
 price, livestocks, and agricultural emission._
 
-<img src="http://imgur.com/a/vQ3Oi.jpg" />
+<img src="images/RM1.jpg" />
 
 _Screenshot comparing historical agricultural and weather data on a plot for USA._
 
-<img src="http://imgur.com/a/xvlbW.jpg" />
+<img src="images/RM2.png" />
 
 _Screenshot showing AgroSphere comparing potato data from around the world._
 
-<img src="http://imgur.com/a/cQeq7.jpg">
+<img src="images/RM3.jpg">
 
 ## Features of AgroSphere
 
@@ -60,13 +60,13 @@ Start by cloning the repository to your local system. You can do this through th
 git clone https://github.com/WorldWind-2017/AgroSphere.git
 ```
 
-The above code should clone the repository to a folder called AgroSphere. To navigate to the examples folder specific to AgroSphere, you can use the command outlined below.
+The above code should clone the repository to a folder called AgroSphere. To navigate to the main folder specific to AgroSphere, you can use the command outlined below.
 
 ```
-cd AgroSphere/examples
+cd AgroSphere/main
 ```
 
-The main heart of the Javascript functions associated with AgroSphere are contained within the ```index.js``` file in the apps folder. One example of editing this file is through the program vim, which can be used through the following command.
+The main heart of the Javascript functions associated with AgroSphere are contained within the ```index.js``` file in the main folder. One example of editing this file is through the program vim, which can be used through the following command.
 
 ```
 vim index.js

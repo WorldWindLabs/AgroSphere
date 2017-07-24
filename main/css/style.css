@@ -106,7 +106,7 @@ body {
     background-color: #313A7D;
 }
 .nav-tabs li a:hover {
-    background-color: lightgreen;
+    background-color: black;
 }
 
 .nav-tabs li a[aria-expanded="true"]:hover{
@@ -549,4 +549,8 @@ input {
 #github {
     color:black;
     font-size: 1.5em;
+}
+
+#fontsize {
+    font-size:1.2em;
 }
