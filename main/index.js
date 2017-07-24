@@ -1795,7 +1795,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			if(mode == 0) {
 				var tempTitleName = dataPoint.dataValues[i].typeName.slice(0, dataPoint.dataValues[i].typeName.length - 
 						' Production in tonnes'.length);
-				dataHTML += '<button class="btn-info" id="definitionNumber' + i + '">Get definition ' 
+				dataHTML += '<button class="btn-info" id="definitionNumber' + i + '">Get Definition for '
 						+ tempTitleName + '</button>';
 			}
 			
