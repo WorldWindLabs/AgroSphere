@@ -1,4 +1,4 @@
-button:focus, button:active {
+button:active {
     border: 2px solid lightgreen !important;
 }
 
@@ -106,7 +106,7 @@ body {
     background-color: #313A7D;
 }
 .nav-tabs li a:hover {
-    background-color: lightgreen;
+    background-color: black;
 }
 
 .nav-tabs li a[aria-expanded="true"]:hover{
