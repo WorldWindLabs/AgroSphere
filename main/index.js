@@ -66,6 +66,7 @@ requirejs({paths:{
 		var priceData = convertArrayToDataSet(csvMultiData[2]);
 		var liveData = convertArrayToDataSet(csvMultiData[3]);
 		var emissionAgriData = convertArrayToDataSet(csvMultiData[4]);
+		var agriDef = csvData[2];
         //Generate the placemark layers
         generatePlacemarkLayer(wwd, csvData);
 
@@ -180,7 +181,7 @@ requirejs({paths:{
                             details.html(detailsHTML);
 
                             //Give functionality for the buttons generated
-							giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, dataPoint.code3);
+							giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, agriDef, dataPoint.code3);
                             //giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //fixed hover flags bug - now click instead of hover eventlistener
@@ -717,6 +718,19 @@ function findDataPointStation(dataSet, stationName) {
 	return 0;
 }
 
+//Find the definition
+function findCropDefinition(dataSet, cropName) {
+	var i = 0;
+	console.log(dataSet, cropName);
+	for(i = 0; i < dataSet.length; i++) {
+		if(dataSet[i].Item == cropName) {
+			
+			return dataSet[i].Description;
+		}
+	}
+	return 0;
+}
+
 //Given the conuntry code, find the data set involving countries
 function findDataPointCountry(dataSet, countryCode, codeNumber) {
     var i = 0;
@@ -1214,7 +1228,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
 
 
 //Gives the buttons funcitonality
-function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
+function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode) {
     //Do a search for all the buttons based on the data
     var dataPoint = findDataPointCountry(inputData, codeName, 3);
     if(dataPoint != 0) {
@@ -1277,6 +1291,25 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, codeName) {
 				$('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
 				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
+			
+			if(mode == 0) {
+				var definitionHTML = $('#definitionNumber' + i).button();
+				definitionHTML.click(function (event) {
+					//Grab id
+					var buttonID = this.id;
+					var buttonNumber = buttonID.slice('definitionNumber'.length);
+					
+					//Grab titleName
+					var cropName = $(this).text().slice('Get Definition '.length);
+					
+					//Do a CSV search
+					var description = findCropDefinition(agriDef, cropName);
+					console.log(description);
+					$('#messagePoint' + buttonNumber).html(description);
+					setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 10000);					
+					
+				});
+			} 
         }
 
 		$('#sortByName').click(function() {
@@ -1446,18 +1479,18 @@ function giveWeatherButtonFunctionality() {
 	});
 }
 
-        function timeConverter(UNIX_timestamp){
-            var unixTime = new Date(UNIX_timestamp * 1000);
-            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            var year = unixTime.getFullYear();
-            var month = months[unixTime.getMonth()];
-            var date = unixTime.getDate();
-            var hour = unixTime.getHours();
-            var min = unixTime.getMinutes();
-            var sec = unixTime.getSeconds();
-            var currentTime = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec + " (In Your Timezone)";
-            return currentTime;
-        }
+function timeConverter(UNIX_timestamp){
+	var unixTime = new Date(UNIX_timestamp * 1000);
+	var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+	var year = unixTime.getFullYear();
+	var month = months[unixTime.getMonth()];
+	var date = unixTime.getDate();
+	var hour = unixTime.getHours();
+	var min = unixTime.getMinutes();
+	var sec = unixTime.getSeconds();
+	var currentTime = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec + " (In Your Timezone)";
+	return currentTime;
+}
 
 
 //Based on z-score get a colour
@@ -1670,7 +1703,7 @@ function generateCountryButtons() {
 	return countryHTML;
 }
 
-function giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, codeName) {
+function giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, agriDef, codeName) {
 	var buttonAreaHTML = $('#buttonArea');
 	var agriButtons = $('#spawnAgri').button();
 	var priceButtons = $('#spawnPrice').button();
@@ -1680,22 +1713,22 @@ function giveCountryButtonsFunctionality(agriData, priceData, liveData, emission
 		//Generate agri culture buttons
 		buttonAreaHTML.html('');
 		buttonAreaHTML.html(generateDataButtons(agriData, codeName, 0));
-		giveDataButtonsFunctionality(buttonAreaHTML, agriData, codeName);
+		giveDataButtonsFunctionality(buttonAreaHTML, agriData, agriDef, codeName, 0);
 	});
 	priceButtons.on('click', function() {
 		buttonAreaHTML.html('');
 		buttonAreaHTML.html(generateDataButtons(priceData, codeName, 1));
-		giveDataButtonsFunctionality(buttonAreaHTML, priceData, codeName);
+		giveDataButtonsFunctionality(buttonAreaHTML, priceData, agriDef, codeName, 1);
 	});
 	liveButtons.on('click', function() {
 		buttonAreaHTML.html('');
 		buttonAreaHTML.html(generateDataButtons(liveData, codeName, 2));
-		giveDataButtonsFunctionality(buttonAreaHTML, liveData, codeName);
+		giveDataButtonsFunctionality(buttonAreaHTML, liveData, agriDef, codeName, 2);
 	});
 	emissionAgriButtons.on('click', function(){
 		buttonAreaHTML.html('');
 		buttonAreaHTML.html(generateDataButtons(emissionAgriData, codeName, 3));
-		giveDataButtonsFunctionality(buttonAreaHTML, emissionAgriData, codeName);
+		giveDataButtonsFunctionality(buttonAreaHTML, emissionAgriData, agriDef, codeName, 3);
 	});
 
 }
@@ -1748,6 +1781,13 @@ function generateDataButtons(inputData, codeName, mode) {
         for(i = 0; i < dataPoint.dataValues.length; i++) {
             //Generate the HTML
             dataHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
+			if(mode == 0) {
+				var tempTitleName = dataPoint.dataValues[i].typeName.slice(0, dataPoint.dataValues[i].typeName.length - 
+						' Production in tonnes'.length);
+				dataHTML += '<button class="btn-info" id="definitionNumber' + i + '">Get definition ' 
+						+ tempTitleName + '</button>';
+			}
+			
 			dataHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             dataHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
