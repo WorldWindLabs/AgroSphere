@@ -1775,7 +1775,7 @@ function generateCountryButtons() {
 	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Buttons</button>';
 	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Buttons</button>';
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Buttons</button>';
-	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Emission Agri Buttons</button>';
+	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Agriculture Emission Buttons</button>';
 	return countryHTML;
 }
 
@@ -1826,7 +1826,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many livestocks?" title="Search for datasets..">';
 		break;
 		case 3:
-			var dataHTML = '<h4>Emission Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Agriculture Emission Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crops?" title="Search for datasets..">';
 		break;
 	}
