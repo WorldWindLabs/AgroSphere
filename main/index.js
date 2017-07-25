@@ -205,6 +205,7 @@ requirejs({paths:{
                             otherTab6.hide();
 
                             $('.glyphicon-globe').css('color','white');
+                            $('.fa-map').css('color','white');
                             $('.glyphicon-cloud').css('color','white');
                             $('.fa-area-chart').css('color','white');
                             $('.glyphicon-briefcase').css('color','white');
@@ -258,6 +259,7 @@ requirejs({paths:{
                             otherTab6.hide();
 
                             $('.glyphicon-globe').css('color','white');
+                            $('.fa-map').css('color','white');
                             $('.glyphicon-cloud').css('color','lightgreen');
                             $('.fa-area-chart').css('color','white');
                             $('.glyphicon-briefcase').css('color','white');
@@ -2218,12 +2220,12 @@ function checkTabs() {
 	} else {
 		resizable.hide();
 	}
-    if($('#layers').css('display') == 'none') {
+    if($('#wms').css('display') == 'none') {
         $('.glyphicon-globe').css('color','white');
     } else {
         $('.glyphicon-globe').css('color','lightgreen');
     }
-    if($('#wms').css('display') == 'none') {
+    if($('#layers').css('display') == 'none') {
         $('.fa-map').css('color','white');
     } else {
         $('.fa-map').css('color','lightgreen');
