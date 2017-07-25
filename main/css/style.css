@@ -63,6 +63,10 @@ input[type="checkbox"]{
     font-size:14px !important;
 }
 
+button a:hover {
+    color:white;
+}
+
 .focustext {
     padding:20px 20px;
 }

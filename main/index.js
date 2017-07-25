@@ -163,6 +163,7 @@ requirejs({paths:{
                                     findDataPoint(csvData[0], placeLat, placeLon);
                             var details = $("#country");
                             var detailsHTML = '<h4>Country Details</h4>';
+
                             detailsHTML +=
                                     '<p>Country: ' + dataPoint.country + '</p>';
                             detailsHTML +=
@@ -171,6 +172,9 @@ requirejs({paths:{
                             //like
                             //Perhaps show everything? lol
                             //What we need to do is generate a button which plots the graph
+
+
+                            detailsHTML += '<button class="btn-info"><a href="http://www.fao.org/faostat/en/#data/" target="_blank">Download Raw Agriculture Data</a></button>';
 
                             //Generate the agri buttons
 
@@ -226,6 +230,7 @@ requirejs({paths:{
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 
 							detailsHTML += '<p>Station Name: ' + atmoDataPoint.stationName + '</p>';
+                            detailsHTML += '<button class="btn-info"><a href="https://fluxnet.fluxdata.org//data/download-data/" target="_blank">Download Raw Atmosphere Data (Fluxnet Account Required)</a></button>'
 							//Generate the station buttons
 							detailsHTML += generateAtmoButtons(atmoData, atmoDataMonthly, atmoDataPoint.stationName, agriDataPoint, ccode3);
 							
@@ -1229,6 +1234,8 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
                     plotHTML.html('');
 					selfHTML.button("option", "label", "Plot Graph");
                 }
+                $('#messagePoint' + buttonNumber).html('Plotted graph!');
+                setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
 			});
 			var combineButtonHTML = $('#combineButton' + i).button();
             combineButtonHTML.click(function(event) {
@@ -1244,6 +1251,8 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 							dataPoint2.dataValues[buttonNumber - offSetLength].timeValues,
 							'multiGraph', 1);					
 				}
+                $('#messagePoint' + buttonNumber).html('Combined graph! Please go to Data Graphs Tab');
+                setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
 
 			var addButtonHTML = $('#addButton' + i).button();
@@ -1267,6 +1276,8 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                             dataPoint.dataValues[buttonNumber].timeValues,
                             'subGraph' + graphNumber, 0);
+                $('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
+                setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
 			});
 		}
 
@@ -1775,7 +1786,7 @@ function generateCountryButtons() {
 	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Buttons</button>';
 	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Buttons</button>';
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Buttons</button>';
-	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Agriculture Emission Buttons</button>';
+	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Buttons</button>';
 	return countryHTML;
 }
 
@@ -2212,6 +2223,11 @@ function checkTabs() {
     } else {
         $('.glyphicon-globe').css('color','lightgreen');
     }
+    if($('#wms').css('display') == 'none') {
+        $('.fa-map').css('color','white');
+    } else {
+        $('.fa-map').css('color','lightgreen');
+    }
     if($('#country').css('display') == 'none') {
         $('.glyphicon-flag').css('color','white');
     } else {
@@ -2281,8 +2297,9 @@ $(function () {
 //sidebar toggle
 $(document).ready(function () {
 	checkTabs();
-    $(".toggle1").click(function () {
+    $(".togglelayers").click(function () {
         $("#layers").toggle('fast', 'swing');
+        $("#wms").hide('fast', 'swing');
         $("#graphs").hide('fast', 'swing');
         $("#country").hide('fast', 'swing');
         $("#station").hide('fast', 'swing');
@@ -2291,9 +2308,10 @@ $(document).ready(function () {
         $("#view").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
-    $(".toggle2").click(function () {
+    $(".togglecountry").click(function () {
         $("#country").toggle('fast', 'swing');
         $("#layers").hide('fast', 'swing');
+        $("#wms").hide('fast', 'swing');
         $("#graphs").hide('fast', 'swing');
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
@@ -2301,9 +2319,10 @@ $(document).ready(function () {
         $("#view").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
-    $(".toggle3").click(function () {
+    $(".togglestation").click(function () {
         $("#station").toggle('fast', 'swing');
         $("#layers").hide('fast', 'swing');
+        $("#wms").hide('fast', 'swing');
         $("#graphs").hide('fast', 'swing');
         $("#country").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
@@ -2311,9 +2330,10 @@ $(document).ready(function () {
         $("#view").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
-    $(".toggle4").click(function () {
+    $(".togglegraphs").click(function () {
         $("#graphs").toggle('fast', 'swing');
         $("#layers").hide('fast', 'swing');
+        $("#wms").hide('fast', 'swing');
         $("#station").hide('fast', 'swing');
         $("#country").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
@@ -2321,9 +2341,10 @@ $(document).ready(function () {
         $("#view").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
-    $(".toggle5").click(function () {
+    $(".togglecomp").click(function () {
         $("#comp").toggle('fast', 'swing');
         $("#layers").hide('fast', 'swing');
+        $("#wms").hide('fast', 'swing');
         $("#graphs").hide('fast', 'swing');
         $("#country").hide('fast', 'swing');
         $("#station").hide('fast', 'swing');
@@ -2331,9 +2352,10 @@ $(document).ready(function () {
         $("#view").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
-    $(".toggle6").click(function () {
+    $(".toggleweather").click(function () {
         $("#weather").toggle('fast', 'swing');
         $("#layers").hide('fast', 'swing');
+        $("#wms").hide('fast', 'swing');
         $("#graphs").hide('fast', 'swing');
         $("#country").hide('fast', 'swing');
         $("#station").hide('fast', 'swing');
@@ -2341,15 +2363,27 @@ $(document).ready(function () {
         $("#view").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
-    $(".toggle7").click(function () {
+    $(".toggleview").click(function () {
         $("#view").toggle('fast', 'swing');
         $("#layers").hide('fast', 'swing');
+        $("#wms").hide('fast', 'swing');
         $("#graphs").hide('fast', 'swing');
         $("#country").hide('fast', 'swing');
         $("#station").hide('fast', 'swing');
         $("#comp").hide('fast', 'swing');
         $("#weather").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
+    });
+    $(".togglewms").click(function () {
+        $("#wms").toggle('fast', 'swing');
+        $("#layers").hide('fast', 'swing');
+        $("#graphs").hide('fast', 'swing');
+        $("#country").hide('fast', 'swing');
+        $("#station").hide('fast', 'swing');
+        $("#comp").hide('fast', 'swing');
+        $("#weather").hide('fast', 'swing');
+        $("#view").hide('fast', 'swing');
+        setTimeout(function() {checkTabs()}, 250);
     });
 	checkTabs();
 });

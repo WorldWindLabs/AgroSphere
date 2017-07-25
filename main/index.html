@@ -192,16 +192,18 @@
 <div class="col-md-3 container">
     <div class="tabs-left draggable">
         <ul class="nav nav-tabs">
-            <li><a href="#layers" data-toggle="tab" data-tooltip="Available Layers" class="toggle1"><span class="glyphicon glyphicon-globe"></span></a></li>
-            <li><a href="#country" data-toggle="tab" data-tooltip="Country Details" class="toggle2"><span class="glyphicon glyphicon-flag"></span></a></li>
-            <li><a href="#station" data-toggle="tab" data-tooltip="Weather Station Details" class="toggle3"><span class="glyphicon glyphicon-cloud"></span></a></li>
-            <li><a href="#graphs" data-toggle="tab" data-tooltip="Data Graphs" class="toggle4"><span class="fa fa-area-chart"></span></a></li>
-            <li><a href="#comp" data-toggle="tab" data-tooltip="Geo Comparisons" class="toggle5"><span class="glyphicon glyphicon-briefcase"></span></a></li>
-            <li><a href="#weather" data-toggle="tab" data-tooltip="Current Weather" class="toggle6"><span class="fa fa-sun-o"></span></a></li>
-            <li><a href="#view" data-toggle="tab" data-tooltip="View Options" class="toggle7"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+            <li><a href="#layers" data-toggle="tab" data-tooltip="Available Layers" class="togglelayers"><span class="fa fa-map"></span></a></li>
+            <li><a href="#wms" data-toggle="tab" data-tooltip="WMS/WMTS Layers" class="togglewms"><span class="glyphicon glyphicon-globe"></span></a></li>
+            <li><a href="#country" data-toggle="tab" data-tooltip="Country Details" class="togglecountry"><span class="glyphicon glyphicon-flag"></span></a></li>
+            <li><a href="#station" data-toggle="tab" data-tooltip="Weather Station Details" class="togglestation"><span class="glyphicon glyphicon-cloud"></span></a></li>
+            <li><a href="#graphs" data-toggle="tab" data-tooltip="Data Graphs" class="togglegraphs"><span class="fa fa-area-chart"></span></a></li>
+            <li><a href="#comp" data-toggle="tab" data-tooltip="Geo Comparisons" class="togglecomp"><span class="glyphicon glyphicon-briefcase"></span></a></li>
+            <li><a href="#weather" data-toggle="tab" data-tooltip="Current Weather" class="toggleweather"><span class="fa fa-sun-o"></span></a></li>
+            <li><a href="#view" data-toggle="tab" data-tooltip="View Options" class="toggleview"><span class="glyphicon glyphicon-eye-open"></span></a></li>
         </ul>
         <div class="tab-content resizable">
             <div class="tab-pane" id="layers"><h4>Available Layers</h4><div class="list-group" id="layerList"></div></div>
+            <div class="tab-pane" id="wms"><h4>WMS/WMTS Data</h4></div>
             <div class="tab-pane" id="country">
                 <h4>Country Details</h4>
                 <p>Please click on a flag to see data specific to a country or territory.</p>
