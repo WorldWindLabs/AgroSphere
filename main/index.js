@@ -66,6 +66,7 @@ requirejs({paths:{
 		var priceData = convertArrayToDataSet(csvMultiData[2]);
 		var liveData = convertArrayToDataSet(csvMultiData[3]);
 		var emissionAgriData = convertArrayToDataSet(csvMultiData[4]);
+		var atmoDataMonthly = convertArrayToDataSet(csvMultiData[5]);
 		var agriDef = csvData[2];
         //Generate the placemark layers
         generatePlacemarkLayer(wwd, csvData);
@@ -226,14 +227,15 @@ requirejs({paths:{
 
 							detailsHTML += '<p>Station Name: ' + atmoDataPoint.stationName + '</p>';
 							//Generate the station buttons
-
-							detailsHTML += generateAtmoButtons(atmoData, atmoDataPoint.stationName, agriDataPoint, ccode3);
+							detailsHTML += generateAtmoButtons(atmoData, atmoDataMonthly, atmoDataPoint.stationName, agriDataPoint, ccode3);
+							
 							details.html(detailsHTML);
 
 							//Generate the plots
 							//Give functionality for buttons generated
 							giveAtmoButtonsFunctionality(detailsHTML, atmoData,
-									atmoDataPoint.stationName, agriDataPoint);
+									atmoDataMonthly, atmoDataPoint.stationName, 
+									agriDataPoint);
 
                             var otherTab = $("#layers");
                             var otherTab2 = $("#graphs");
@@ -752,7 +754,7 @@ function findDataPointCountry(dataSet, countryCode, codeNumber) {
 //Load the csvFile differently
 function loadCSVDataArray() {
     var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv',
-			'csvdata/livestock.csv', 'csvdata/emissionplants.csv'];
+			'csvdata/livestock.csv', 'csvdata/emissionplants.csv', 'csvdata/Monthly_AvgData1.csv'];
     //Find the file
     var csvString = "";
 
@@ -1033,9 +1035,9 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 	geoMode = 0;
     var sliderHTML = $('#geoSlider');
     sliderHTML.slider({
-        value: 1980,
+        value: 2014,
         min: 1960,
-        max: 2010,
+        max: 2014,
         step:1
     });
 
@@ -1185,11 +1187,15 @@ function generateGeoComparisonButton(agriData) {
 }
 
 //Gives the button functionality
-function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriDataPoint) {
+function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2, 
+		stationName, agriDataPoint) {
 	var dataPoint = findDataPointStation(inputData, stationName);
+	var dataPoint2 = findDataPointStation(inputData2, stationName);
+	console.log(dataPoint2);
+	var offSetLength = dataPoint.dataValues.length;
 	if(dataPoint != 0) {
 		var i = 0;
-		for(i = 0; i < dataPoint.dataValues.length; i++) {
+		for(i = 0; i < (dataPoint.dataValues.length + dataPoint2.dataValues.length); i++) {
             var buttonHTML = $('#plotWeatherButton' + i).button();
             buttonHTML.click(function(event) {
                 //Generate the plot based on things
@@ -1201,12 +1207,16 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
                 //Do we already have a plot?
                 var plotHTML = $('#' + plotID);
                 if(plotHTML.html() == '') {
-                    plotScatter(dataPoint.dataValues[buttonNumber].typeName, '',
-                            dataPoint.dataValues[buttonNumber].timeValues,
-                            plotID, 0);
-					/*getRegressionFunctionPlot(
-							dataPoint.dataValues[buttonNumber].timeValues, plotID,
-							dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);*/
+					console.log(buttonNumber, offSetLength);
+					if(buttonNumber < offSetLength) {
+						plotScatter(dataPoint.dataValues[buttonNumber].typeName, '',
+								dataPoint.dataValues[buttonNumber].timeValues,
+								plotID, 0);
+					} else {
+						plotScatter(dataPoint2.dataValues[buttonNumber - offSetLength].typeName, '',
+								dataPoint2.dataValues[buttonNumber - offSetLength].timeValues,
+								plotID, 0);
+					}
 					selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
@@ -1218,9 +1228,15 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
                 var buttonID = this.id;
                 var buttonNumber = buttonID.slice('combineButton'.length);
                 //Add to the graph
-                plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
-                        dataPoint.dataValues[buttonNumber].timeValues,
-                        'multiGraph', 1);
+				if(buttonNumber < offSetLength) {
+					plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
+							dataPoint.dataValues[buttonNumber].timeValues,
+							'multiGraph', 1);
+				} else {
+					plotScatter(dataPoint2.dataValues[buttonNumber - offSetLength].typeName, dataPoint.code3,
+							dataPoint2.dataValues[buttonNumber - offSetLength].timeValues,
+							'multiGraph', 1);					
+				}
             });
 
 			var addButtonHTML = $('#addButton' + i).button();
@@ -1240,6 +1256,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, stationName, agriD
 				$('#manyGraph').append(graphDiv);
 
 				//Graph it
+				//if(i < dataPoint)
 				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                             dataPoint.dataValues[buttonNumber].timeValues,
                             'subGraph' + graphNumber, 0);
@@ -1283,6 +1300,9 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
                     plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                         dataPoint.dataValues[buttonNumber].timeValues,
                         plotID, 0);
+					getRegressionFunctionPlot(
+							dataPoint.dataValues[buttonNumber].timeValues, plotID,
+							dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);
                     selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
@@ -1707,9 +1727,10 @@ function generateRemoveButton() {
     });
 }
 
-function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
+function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode3) {
     var atmoHTML = '<h4>Atmosphere Data</h4>';
     var dataPoint = findDataPointStation(inputData, stationName);
+	var dataPoint2 = findDataPointStation(inputData2, stationName);
 	atmoHTML += '<div id="allGraphStation"></div>';
 	atmoHTML += '<button class="btn-info" id="allButton">Graph Crops and Weather</button>';
     if (dataPoint != 0) {
@@ -1726,6 +1747,18 @@ function generateAtmoButtons(inputData, stationName, agriData, ccode3) {
             atmoHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
             atmoHTML += '<br></div>';
         }
+		for(i = 0; i < dataPoint2.dataValues.length; i++) {
+			var offSetLength = dataPoint.dataValues.length + i;
+            atmoHTML += '<div class="layerTitle" id="layerTitle' + offSetLength + '">';
+            atmoHTML += '<p>' + dataPoint2.dataValues[i].typeName + '</p>';
+            atmoHTML += '<div class="resizeGraph" id="graphWeatherPoint' + offSetLength + '"></div>';
+			atmoHTML += '<div id="messagePoint' + offSetLength + '"></div>';
+            atmoHTML += '<button'
+                + ' class="btn-info"' + ' id="plotWeatherButton' + offSetLength + '">Plot Graph</button>';
+			atmoHTML += '<button class="btn-info" id="combineButton' + offSetLength + '">Combine Graph </button>';
+            atmoHTML += '<button class="btn-info" id="addButton' + offSetLength + '">Add Graph</button>';
+            atmoHTML += '<br></div>';		
+		}
     }
     return atmoHTML;
 }
@@ -2082,7 +2115,11 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
     var yValues = [];
     var i = 0;
     for(i = 0; i < filteredData.length; i++) {
-        xValues.push(parseFloat(filteredData[i].year));
+		if(!isNaN(parseFloat(filteredData[i].year))) {
+			xValues.push(parseFloat(filteredData[i].year));
+		} else {
+			xValues.push(filteredData[i].year);
+		}
         yValues.push(parseFloat(filteredData[i].value));
     }
 
