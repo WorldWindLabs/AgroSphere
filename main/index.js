@@ -349,7 +349,7 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
     }
 	layerControlHTML += '</div>';
     //Place the HTML somewhere
-    $("#layers").append(layerControlHTML);
+    $("#wms").append(layerControlHTML);
 
     //Add functionality to opacity slider
     giveOpacitySliderFunctionality(wwd, layerName, layerNumber);
@@ -764,7 +764,7 @@ function findDataPointCountry(dataSet, countryCode, codeNumber) {
 //Load the csvFile differently
 function loadCSVDataArray() {
     var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv',
-			'csvdata/livestock.csv', 'csvdata/emissionplants.csv', 'csvdata/Monthly_AvgData1.csv',
+			'csvdata/livestock.csv', 'csvdata/emissionAll.csv', 'csvdata/Monthly_AvgData1.csv',
 			'csvdata/pesti.csv', 'csvdata/ferti.csv'];
     //Find the file
     var csvString = "";
@@ -867,6 +867,7 @@ function convertArrayToDataSet(csvData) {
 function loadWMTSLayers(wwd, layerManager) {
     var serviceWMTSAddress = "https://neowms.sci.gsfc.nasa.gov/wms/wms";
     var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA", "MOD11C1_D_LSTNI", "MOD_143D_RR"];
+	var totalLayers = [];
     // Called asynchronously to parse and create the WMS layer
     var createWMTSLayer = function (xmlDom) {
         // Create a WmsCapabilities object from the XML DOM
@@ -889,9 +890,38 @@ function loadWMTSLayers(wwd, layerManager) {
 
             // disable layer by default
             wmsLayer.enabled = false;
-
+			totalLayers.push(wmsLayer);
             // Add the layers to World Wind and update the layer manager
             wwd.addLayer(wmsLayer);
+			var layerButtonsHTML = '<button id="layerToggle' + i +'">' + wmsLayerCapabilities.title + '</button>';
+			$('#wms').append(layerButtonsHTML);
+			$('#layerToggle' + i).button();
+			$('#layerToggle' + i).click(function() {
+				var k = 0;
+				var buttonNumber = this.id.slice('layerToggle'.length);
+				totalLayers[buttonNumber].enabled = !totalLayers[buttonNumber].enabled;
+				var layerControlList = $('.toggleLayers');
+				var layerNumber = -1;
+				for(k = 0; k < layerControlList.length; k++) {
+					if($(layerControlList[k]).text().includes($(this).text())) {
+						layerNumber = k;
+						break;
+					}
+				}
+				//console.log(layerNumber);
+				if(layerNumber != -1) {
+					/*if($(this).hasClass('active')) {
+						//Active class for button, find the appropiate layer
+						$(layerControlList[k]).show();
+					} else {
+						//Hide the class
+						$(layerControlList[k]).hide();
+					}*/
+					//Find the button
+					$(layerControlList[k]).toggle();
+				}
+			});
+	
             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
             layerManager.synchronizeLayerList();
 			
