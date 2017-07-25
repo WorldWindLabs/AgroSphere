@@ -883,39 +883,9 @@ function loadWMTSLayers(wwd, layerManager) {
             wwd.addLayer(wmsLayer);
             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
             layerManager.synchronizeLayerList();
-			//Give the layer buttons extra funcitonality
-			var layerButtonList = $('#layerList button');
-			var layerControlList = $('.toggleLayers');
-			console.log(layerControlList);
-			var j = 0;
-			var k = 0;
-			for(j = 0; j < layerControlList.length; j++) {
-				$(layerControlList[j]).hide();
-			}
 			
-			
-			for(j = 0; j < layerButtonList.length; j++) {
-				$(layerButtonList[j]).button();
-				$(layerButtonList[j]).on('click', function(event) {
-					var layerNumber = -1;
-					for(k = 0; k < layerControlList.length; k++) {
-						if($(layerControlList[k]).text().includes($(this).text())) {
-							layerNumber = k;
-							break;
-						}
-					}
-					console.log(layerNumber);
-					if(layerNumber != -1) {
-						if($(this).hasClass('active')) {
-							//Active class for button, find the appropiate layer
-							$(layerControlList[k]).show();
-						} else {
-							//Hide the class
-							$(layerControlList[k]).hide();
-						}				
-					}
-				});
-			}
+			//Readd layercontrols
+			setLayerControls();
         }
     };
 
@@ -925,6 +895,42 @@ function loadWMTSLayers(wwd, layerManager) {
     };
 
     $.get(serviceWMTSAddress).done(createWMTSLayer).fail(logError);
+}
+
+function setLayerControls() {
+	//Give the layer buttons extra funcitonality
+	var layerButtonList = $('#layerList button');
+	var layerControlList = $('.toggleLayers');
+	console.log(layerControlList);
+	var j = 0;
+	var k = 0;
+	for(j = 0; j < layerControlList.length; j++) {
+		$(layerControlList[j]).hide();
+	}
+	
+	
+	for(j = 0; j < layerButtonList.length; j++) {
+		$(layerButtonList[j]).button();
+		$(layerButtonList[j]).on('click', function(event) {
+			var layerNumber = -1;
+			for(k = 0; k < layerControlList.length; k++) {
+				if($(layerControlList[k]).text().includes($(this).text())) {
+					layerNumber = k;
+					break;
+				}
+			}
+			console.log(layerNumber);
+			if(layerNumber != -1) {
+				if($(this).hasClass('active')) {
+					//Active class for button, find the appropiate layer
+					$(layerControlList[k]).show();
+				} else {
+					//Hide the class
+					$(layerControlList[k]).hide();
+				}				
+			}
+		});
+	}
 }
 
 function loadKMLLayers(wwd, layerManager) {
@@ -1104,6 +1110,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 			
 				wwd.addLayer(countryLayer);
 				layerManager.synchronizeLayerList();
+				setLayerControls();
 				var m = 0;
 				//Go through the entire country flag placemarks and change the label
 				console.log(flagLayer);
