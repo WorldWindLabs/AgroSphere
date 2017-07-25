@@ -1830,8 +1830,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crops?" title="Search for datasets..">';
 		break;
 	}
-	dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
-	dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Average</button>';
+
     var dataPoint = findDataPointCountry(inputData, codeName,3);
     if(dataPoint != 0) {
         var i = 0;
@@ -1850,7 +1849,8 @@ function generateDataButtons(inputData, codeName, mode) {
                 dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission</button>';
                 break;
         }
-
+        dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
+        dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Average</button>';
 		dataHTML += '<div id="allGraph"></div>';
 
 		//dataHTML = '<div id="allDiv">';
