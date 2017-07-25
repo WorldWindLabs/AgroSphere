@@ -367,7 +367,7 @@ function getLayerFromName(wwd, layerName) {
 function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
-    var legendHTML = '<br><h5>Legend for ' + layerName + '</h5>';
+    var legendHTML = '<br><h5><b>Legend for ' + layerName + '</b></h5>';
 	console.log(wmsLayerCapabilities, typeof(wmsLayerCapabilities.styles));
 	//if(typeof(wmsLayerCapabilities.styles) != 'undefined') {
 		if((wmsLayerCapabilities.styles
@@ -391,7 +391,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 //Given the HTML of the layerControl, generate the appropiate layer
 function generateOpacityControl(wwd, layerName, layerNumber) {
     //Create the general box
-    var opacityHTML = '<br><h5>Opacity for ' + layerName +'</h5>';
+    var opacityHTML = '<br><h5><b>Opacity for ' + layerName +'</b></h5>';
 
     //Create the slider
     opacityHTML += '<div id="opacity_slider_' + layerNumber + '"></div>';
@@ -456,7 +456,7 @@ function giveOpacitySliderFunctionality(wwd, layerName, layerNumber) {
 
 function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
     //Create the general box
-    var timeHTML = '<br><h5>Time for ' + layerName +'</h5>';
+    var timeHTML = '<br><h5><b>Time for ' + layerName +'</b></h5>';
 	console.log(wmsConfig);
     //Create the output
 	var startDate = wmsConfig.timeSequences[0].startTime;
@@ -466,7 +466,7 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
 	timeHTML += '<p>End Time: ' + endDate + '</p>';
 
     //Create the three buttons
-	timeHTML += '<h4>Time Scale</h4>';
+	timeHTML += '<h5><b>Time Scale</b></h5>';
 	timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
     //Wrap up the HTML
     timeHTML += '</div>';
