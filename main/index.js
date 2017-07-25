@@ -79,7 +79,7 @@ requirejs({paths:{
 
 		// Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(wwd);
-
+		layerManager.synchronizeLayerList();
         //Generate regression comparison and the provide functionality
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
@@ -99,7 +99,7 @@ requirejs({paths:{
 
 		//Generate WMS/WMTS Layers
 		loadWMTSLayers(wwd, layerManager);
-
+		
         var sunSimulationCheckBox = document.getElementById('stars-simulation');
         var doRunSimulation = false;
         var timeStamp = Date.now();
@@ -323,14 +323,10 @@ console.timeEnd('First');
 //functionality
 function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, layerNumber) {
     //Generate the div tags
-    var layerControlHTML = '<div id="' + layerNumber + '">';
+    var layerControlHTML = '<div class="toggleLayers" id="funcLayer' + layerNumber + '">';
 
     //Spawn opacity controller
     layerControlHTML += generateOpacityControl(wwd, layerName, layerNumber);
-    //Wrap it up
-
-    layerControlHTML += '</div>';
-
     //Spawn the legend
     layerControlHTML += generateLegend(wwd,
         wmsLayerCapabilities, layerName, layerNumber);
@@ -339,7 +335,7 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
     if (typeof(wmsConfig.timeSequences) != 'undefined') {
         layerControlHTML += generateTimeControl(wwd, layerName, layerNumber, wmsConfig);
     }
-
+	layerControlHTML += '</div>';
     //Place the HTML somewhere
     $("#layers").append(layerControlHTML);
 
@@ -400,10 +396,6 @@ function generateOpacityControl(wwd, layerName, layerNumber) {
 
     //Create the output
     opacityHTML += '<div id="opacity_amount_' + layerNumber + '">100%</div>';
-
-
-    //Wrap up the HTML
-    opacityHTML += '</div>';
 
 
     return opacityHTML;
@@ -889,6 +881,39 @@ function loadWMTSLayers(wwd, layerManager) {
             wwd.addLayer(wmsLayer);
             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
             layerManager.synchronizeLayerList();
+			//Give the layer buttons extra funcitonality
+			var layerButtonList = $('#layerList button');
+			var layerControlList = $('.toggleLayers');
+			console.log(layerControlList);
+			var j = 0;
+			var k = 0;
+			for(j = 0; j < layerControlList.length; j++) {
+				$(layerControlList[j]).hide();
+			}
+			
+			
+			for(j = 0; j < layerButtonList.length; j++) {
+				$(layerButtonList[j]).button();
+				$(layerButtonList[j]).on('click', function(event) {
+					var layerNumber = -1;
+					for(k = 0; k < layerControlList.length; k++) {
+						if($(layerControlList[k]).text().includes($(this).text())) {
+							layerNumber = k;
+							break;
+						}
+					}
+					console.log(layerNumber);
+					if(layerNumber != -1) {
+						if($(this).hasClass('active')) {
+							//Active class for button, find the appropiate layer
+							$(layerControlList[k]).show();
+						} else {
+							//Hide the class
+							$(layerControlList[k]).hide();
+						}				
+					}
+				});
+			}
         }
     };
 
@@ -1346,7 +1371,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			for(i = 0; i < newList.length; i++) {
 				$('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
 			}
-			giveDataButtonsFunctionality(detailsHTML, inputData, codeName);
+			giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode);
 		});
 
 		$('#sortByAverage').click(function() {
@@ -1391,7 +1416,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			for(i = 0; i < newList.length; i++) {
 				$('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
 			}
-			giveDataButtonsFunctionality(detailsHTML, inputData, codeName);
+			giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode);
 		});
 
         //Assign functionality to the search bar
@@ -1795,7 +1820,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			if(mode == 0) {
 				var tempTitleName = dataPoint.dataValues[i].typeName.slice(0, dataPoint.dataValues[i].typeName.length - 
 						' Production in tonnes'.length);
-				dataHTML += '<button class="btn-info" id="definitionNumber' + i + '">Get definition ' 
+				dataHTML += '<button class="btn-info" id="definitionNumber' + i + '">Get Definition for '
 						+ tempTitleName + '</button>';
 			}
 			
@@ -2282,5 +2307,6 @@ $(document).ready(function () {
         $("#weather").hide('fast', 'swing');
 		setTimeout(function() {checkTabs()}, 250);
     });
+	checkTabs();
 });
 });
