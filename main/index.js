@@ -893,7 +893,9 @@ function loadWMTSLayers(wwd, layerManager) {
 			totalLayers.push(wmsLayer);
             // Add the layers to World Wind and update the layer manager
             wwd.addLayer(wmsLayer);
-			var layerButtonsHTML = '<button id="layerToggle' + i +'" class="btn-info">' + wmsLayerCapabilities.title + '</button>';
+
+			var layerButtonsHTML = '<button class="btn-info" id="layerToggle' + i +'">' + wmsLayerCapabilities.title + '</button>';
+
 			$('#wms').append(layerButtonsHTML);
 			$('#layerToggle' + i).button();
 			$('#layerToggle' + i).click(function() {
