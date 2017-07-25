@@ -472,7 +472,7 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
 	var startDate = wmsConfig.timeSequences[0].startTime;
 	var endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime;
     timeHTML += '<div id="time_date_' + layerNumber + '">Current Time: </div>';
-	timeHTML += '<p>Start Time: '+ startDate + '</p>'; 
+	timeHTML += '<p>Start Time: '+ startDate + '</p>';
 	timeHTML += '<p>End Time: ' + endDate + '</p>';
 
     //Create the three buttons
@@ -732,7 +732,7 @@ function findCropDefinition(dataSet, cropName) {
 	console.log(dataSet, cropName);
 	for(i = 0; i < dataSet.length; i++) {
 		if(dataSet[i].Item == cropName) {
-			
+
 			return dataSet[i].Description;
 		}
 	}
@@ -893,7 +893,7 @@ function loadWMTSLayers(wwd, layerManager) {
 			totalLayers.push(wmsLayer);
             // Add the layers to World Wind and update the layer manager
             wwd.addLayer(wmsLayer);
-			var layerButtonsHTML = '<button id="layerToggle' + i +'">' + wmsLayerCapabilities.title + '</button>';
+			var layerButtonsHTML = '<button id="layerToggle' + i +'" class="btn-info">' + wmsLayerCapabilities.title + '</button>';
 			$('#wms').append(layerButtonsHTML);
 			$('#layerToggle' + i).button();
 			$('#layerToggle' + i).click(function() {
@@ -921,10 +921,10 @@ function loadWMTSLayers(wwd, layerManager) {
 					$(layerControlList[k]).toggle();
 				}
 			});
-	
+
             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
             layerManager.synchronizeLayerList();
-			
+
 			//Readd layercontrols
 			setLayerControls();
         }
@@ -948,8 +948,8 @@ function setLayerControls() {
 	for(j = 0; j < layerControlList.length; j++) {
 		$(layerControlList[j]).hide();
 	}
-	
-	
+
+
 	for(j = 0; j < layerButtonList.length; j++) {
 		$(layerButtonList[j]).button();
 		$(layerButtonList[j]).on('click', function(event) {
@@ -968,7 +968,7 @@ function setLayerControls() {
 				} else {
 					//Hide the class
 					$(layerControlList[k]).hide();
-				}				
+				}
 			}
 		});
 	}
@@ -1148,7 +1148,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
             }
 			console.log(currentLayerName);
 			if(currentLayerName != buttonName) {
-			
+
 				wwd.addLayer(countryLayer);
 				layerManager.synchronizeLayerList();
 				setLayerControls();
@@ -1235,7 +1235,7 @@ function generateGeoComparisonButton(agriData) {
 }
 
 //Gives the button functionality
-function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2, 
+function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 		stationName, agriDataPoint) {
 	var dataPoint = findDataPointStation(inputData, stationName);
 	var dataPoint2 = findDataPointStation(inputData2, stationName);
@@ -1285,7 +1285,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 				} else {
 					plotScatter(dataPoint2.dataValues[buttonNumber - offSetLength].typeName, dataPoint.code3,
 							dataPoint2.dataValues[buttonNumber - offSetLength].timeValues,
-							'multiGraph', 1);					
+							'multiGraph', 1);
 				}
                 $('#messagePoint' + buttonNumber).html('Combined graph! Please go to Data Graphs Tab');
                 setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
@@ -1400,25 +1400,25 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 				$('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
 				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
-			
+
 			if(mode == 0) {
 				var definitionHTML = $('#definitionNumber' + i).button();
 				definitionHTML.click(function (event) {
 					//Grab id
 					var buttonID = this.id;
 					var buttonNumber = buttonID.slice('definitionNumber'.length);
-					
+
 					//Grab titleName
 					var cropName = $(this).text().slice('Get Definition for '.length);
-					
+
 					//Do a CSV search
 					var description = findCropDefinition(agriDef, cropName);
 					console.log(description);
 					$('#messagePoint' + buttonNumber).html(description);
-					setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 10000);					
-					
+					setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 10000);
+
 				});
-			} 
+			}
         }
 
 		$('#sortByName').click(function() {
@@ -1811,7 +1811,7 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
                 + ' class="btn-info"' + ' id="plotWeatherButton' + offSetLength + '">Plot Graph</button>';
 			atmoHTML += '<button class="btn-info" id="combineButton' + offSetLength + '">Combine Graph </button>';
             atmoHTML += '<button class="btn-info" id="addButton' + offSetLength + '">Add Graph</button>';
-            atmoHTML += '<br></div>';		
+            atmoHTML += '<br></div>';
 		}
     }
     return atmoHTML;
@@ -1933,12 +1933,12 @@ function generateDataButtons(inputData, codeName, mode) {
             //Generate the HTML
             dataHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
 			if(mode == 0) {
-				var tempTitleName = dataPoint.dataValues[i].typeName.slice(0, dataPoint.dataValues[i].typeName.length - 
+				var tempTitleName = dataPoint.dataValues[i].typeName.slice(0, dataPoint.dataValues[i].typeName.length -
 						' Production in tonnes'.length);
 				dataHTML += '<button class="btn-info" id="definitionNumber' + i + '">Get Definition for '
 						+ tempTitleName + '</button>';
 			}
-			
+
 			dataHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             dataHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
