@@ -67,6 +67,7 @@ requirejs({paths:{
 		var liveData = convertArrayToDataSet(csvMultiData[3]);
 		var emissionAgriData = convertArrayToDataSet(csvMultiData[4]);
 		var atmoDataMonthly = convertArrayToDataSet(csvMultiData[5]);
+		var pestiData = convertArrayToDataSet(csvMultiData[6]);
 		var agriDef = csvData[2];
         //Generate the placemark layers
         generatePlacemarkLayer(wwd, csvData);
@@ -186,7 +187,8 @@ requirejs({paths:{
                             details.html(detailsHTML);
 
                             //Give functionality for the buttons generated
-							giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, agriDef, dataPoint.code3);
+							giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, pestiData,
+									agriDef, dataPoint.code3);
                             //giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //fixed hover flags bug - now click instead of hover eventlistener
@@ -761,7 +763,8 @@ function findDataPointCountry(dataSet, countryCode, codeNumber) {
 //Load the csvFile differently
 function loadCSVDataArray() {
     var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv',
-			'csvdata/livestock.csv', 'csvdata/emissionplants.csv', 'csvdata/Monthly_AvgData1.csv'];
+			'csvdata/livestock.csv', 'csvdata/emissionplants.csv', 'csvdata/Monthly_AvgData1.csv',
+			'csvdata/pesti.csv'];
     //Find the file
     var csvString = "";
 
@@ -1320,9 +1323,9 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
                     plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                         dataPoint.dataValues[buttonNumber].timeValues,
                         plotID, 0);
-					getRegressionFunctionPlot(
+					/*getRegressionFunctionPlot(
 							dataPoint.dataValues[buttonNumber].timeValues, plotID,
-							dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);
+							dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);*/
                     selfHTML.button("option", "label", "Hide Graph");
                 } else {
                     plotHTML.html('');
@@ -1789,15 +1792,17 @@ function generateCountryButtons() {
 	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Buttons</button>';
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Buttons</button>';
 	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Buttons</button>';
+	countryHTML += '<button class="btn-info" id="spawnPest">Show Pesticide Buttons</button>';
 	return countryHTML;
 }
 
-function giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, agriDef, codeName) {
+function giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, pestiData, agriDef, codeName) {
 	var buttonAreaHTML = $('#buttonArea');
 	var agriButtons = $('#spawnAgri').button();
 	var priceButtons = $('#spawnPrice').button();
 	var liveButtons = $('#spawnLive').button();
 	var emissionAgriButtons = $('#spawnEmissionAgri').button();
+	var pestiButtons = $('#spawnPest').button();
 	agriButtons.on('click', function(){
 		//Generate agri culture buttons
 		buttonAreaHTML.html('');
@@ -1819,6 +1824,11 @@ function giveCountryButtonsFunctionality(agriData, priceData, liveData, emission
 		buttonAreaHTML.html(generateDataButtons(emissionAgriData, codeName, 3));
 		giveDataButtonsFunctionality(buttonAreaHTML, emissionAgriData, agriDef, codeName, 3);
 	});
+	pestiButtons.on('click', function() {
+		buttonAreaHTML.html('');
+		buttonAreaHTML.html(generateDataButtons(pestiData, codeName, 4));
+		giveDataButtonsFunctionality(buttonAreaHTML, pestiData, agriDef, codeName, 4);
+	});
 
 }
 
@@ -1839,8 +1849,12 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many livestocks?" title="Search for datasets..">';
 		break;
 		case 3:
-			var dataHTML = '<h4>Agriculture Emission Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Emission Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crops?" title="Search for datasets..">';
+		break;
+		case 4:
+			var dataHTML = '<h4>Pesticide Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many pesticides?" title="Search for datasets..">';
 		break;
 	}
 
@@ -1861,6 +1875,9 @@ function generateDataButtons(inputData, codeName, mode) {
             case 3:
                 dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission</button>';
                 break;
+			case 4:
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticides</button>';
+				break;
         }
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
         dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Average</button>';
