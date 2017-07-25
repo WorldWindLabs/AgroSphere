@@ -2453,7 +2453,7 @@ $(document).ready(function () {
         setTimeout(function() {checkTabs()}, 250);
     });
 	checkTabs();
-    $(".btn-info").click(function() {
+    $(".ui-button").click(function() {
         $(this).toggleClass('active');
     });
 });
