@@ -1378,7 +1378,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 					var buttonNumber = buttonID.slice('definitionNumber'.length);
 					
 					//Grab titleName
-					var cropName = $(this).text().slice('Get Definition '.length);
+					var cropName = $(this).text().slice('Get Definition for '.length);
 					
 					//Do a CSV search
 					var description = findCropDefinition(agriDef, cropName);
