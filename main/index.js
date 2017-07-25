@@ -2421,5 +2421,8 @@ $(document).ready(function () {
         setTimeout(function() {checkTabs()}, 250);
     });
 	checkTabs();
+    $(".btn-info").click(function() {
+        $(this).toggleClass('active');
+    });
 });
 });
