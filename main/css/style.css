@@ -1,4 +1,4 @@
-button:focus, button:active {
+.btn-info.active {
     border: 2px solid lightgreen !important;
 }
 
@@ -566,6 +566,7 @@ input {
     font-size:1.2em;
 }
 
+/* carousel transition speed */
 .item {
     display: none;
     position: relative;
