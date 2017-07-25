@@ -566,6 +566,7 @@ input {
     font-size:1.2em;
 }
 
+/* carousel transition speed */
 .item {
     display: none;
     position: relative;
