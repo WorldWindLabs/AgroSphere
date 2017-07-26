@@ -382,14 +382,14 @@ function getLayerFromName(wwd, layerName) {
 function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
-    var legendHTML = '<br><h5><b>Legend for ' + layerName + '</b></h5>';
+    var legendHTML = '<br><h5><b>Legend</b> ' + layerName + '</h5>';
 	console.log(wmsLayerCapabilities, typeof(wmsLayerCapabilities.styles));
 	//if(typeof(wmsLayerCapabilities.styles) != 'undefined') {
 		if((wmsLayerCapabilities.styles
 			!= null) && (wmsLayerCapabilities.styles[0].legendUrls[0]) != null) {
 			//Create the legend tag
 			var legendURL = wmsLayerCapabilities.styles[0].legendUrls[0].url;
-			legendHTML += '<div><img src="'+ legendURL +'"></div>';
+			legendHTML += '<div><img src="'+ legendURL +'"></div><br><br>';
 		} else {
 			//Say it does not exist
 			legendHTML += '<div><p>A legend does not exist'  +
@@ -487,9 +487,9 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
         startDate = wmsConfig.timeSequences[0].startTime.toDateString();
         endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString();
     }
-    var timeHTML = '<h5><b>Time Scale: ' + startDate + ' - ' + endDate + '</b></h5>';
+    var timeHTML = '<h5><b>Time Scale:</b> ' + startDate + ' - ' + endDate + '</h5>';
     timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
-    timeHTML += '<div id="time_date_' + layerNumber + '">Current Time: </div>';
+    timeHTML += '<div id="time_date_' + layerNumber + '"><br>Current Time: </div>';
     //Wrap up the HTML
     timeHTML += '</div>';
     timeHTML += '<br>';
@@ -913,7 +913,6 @@ function loadWMTSLayers(wwd, layerManager) {
 			$('#wms').append(layerButtonsHTML);
 			$('#layerToggle' + i).button();
 			$('#layerToggle' + i).click(function() {
-                setTimeout(alert("Layer is loading..."), 3000);
 				var k = 0;
 				var buttonNumber = this.id.slice('layerToggle'.length);
 				totalLayers[buttonNumber].enabled = !totalLayers[buttonNumber].enabled;
