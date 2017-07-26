@@ -1558,7 +1558,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 
 //Generates a button which searches a city and code
 function generateWeatherHTML(countryData) {
-	var weatherHTML = '<h5><b>Weather Search</b></h5>';
+	var weatherHTML = '<h5><b class="fontsize">Weather Search</b></h5>';
 	weatherHTML += '<p><input type="text" class="form-control" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
 	weatherHTML += '<select id="countryNames" class="form-control">'
 	var i = 0;
@@ -1602,7 +1602,7 @@ function giveWeatherButtonFunctionality() {
 				tempHTML += '<p><b class="fontsize">Min Temperature Today (Celsius):</b> ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
 				tempHTML += '<p><b class="fontsize">Pressure (HPa):</b> ' + data.main.pressure + '</p>';
 				tempHTML += '<p><b class="fontsize">Humidity (%):</b> ' + data.main.humidity + '</p>';
-				tempHTML += '<p><b class="fontsize">Wind speed (m/s):</b>' + data.wind.speed + '</p>';
+				tempHTML += '<p><b class="fontsize">Wind speed (m/s):</b>' + data.wind.speed + '</p><br><br>';
 				dropArea.append(tempHTML);
 				console.log('success');
 			},
