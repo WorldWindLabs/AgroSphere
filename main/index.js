@@ -197,8 +197,9 @@ requirejs({paths:{
                             var otherTab2 = $("#graphs");
                             var otherTab3 = $("#station");
                             var otherTab4 = $("#comp");
-                            var otherTab5 = $("#weather");
-                            var otherTab6 = $("#view");
+                            var otherTab5 = $("#wms");
+                            var otherTab6 = $("#weather");
+                            var otherTab7 = $("#view");
                             details.show();
                             otherTab.hide();
                             otherTab2.hide();
@@ -206,6 +207,7 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+                            otherTab7.hide();
 
                             $('.glyphicon-globe').css('color','white');
                             $('.fa-map').css('color','white');
@@ -403,7 +405,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 //Given the HTML of the layerControl, generate the appropiate layer
 function generateOpacityControl(wwd, layerName, layerNumber) {
     //Create the general box
-    var opacityHTML = '<br><h5><b>Opacity for ' + layerName +'</b></h5>';
+    var opacityHTML = '<br><h5><b>Opacity';
 
     //Create the slider
     opacityHTML += '<div id="opacity_slider_' + layerNumber + '"></div>';
@@ -485,7 +487,8 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
         startDate = wmsConfig.timeSequences[0].startTime.toDateString();
         endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString();
     }
-
+	var startDate = wmsConfig.timeSequences[0].startTime.toDateString().substring(4, 15);
+	var endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(4, 15);
     timeHTML += '<div id="time_date_' + layerNumber + '">Current Time: </div>';
 
     //Create the three buttons
@@ -1112,6 +1115,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 
 	sliderHTML.on('slidestop', function(event, ui) {
 		var year = ui.value;
+		console.log(geoMode);
 		document.getElementById('geoCompType' + geoMode).click();
 	});
 
@@ -1124,6 +1128,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
             //Find the year based on the slider value
             var sliderValue = $('#geoSlider').slider("value");
 			geoMode = parseInt(this.id.slice('geoCompType'.length));
+			console.log("New Geo Mode", geoMode);
             var buttonName = $('#' + this.id).text().slice('Generate Geo Comparison for '.length);
 			console.log(buttonName);
             //Do some data stuff, go through the agridata based on the button
@@ -1145,10 +1150,12 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					}
 				}
             }
-
+			
             //Got all the data, colour it
             countryData = filterOutBlanks(countryData, 0);
+			//console.log(countryData);
             var countryLayer = colourizeCountries(countryData, geoJSONData, buttonName);
+			countryLayer.userObject.year = sliderValue;
             //Check if the country layer exist
 			var flagLayer;
             var l = 0;
@@ -1157,14 +1164,14 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
                 if(wwd.layers[l].displayName == 'Geo Country Data') {
 					console.log(wwd.layers[l]);
 					currentLayerName = wwd.layers[l].userObject.dataType;
+					var previousYear = wwd.layers[l].userObject.year;
                     wwd.removeLayer(wwd.layers[l]);
                 } else if(wwd.layers[l].displayName == 'countries Placemarks') {
 					flagLayer = wwd.layers[l];
 				}
             }
-			console.log(currentLayerName);
-			if(currentLayerName != buttonName) {
-
+			console.log(currentLayerName, previousYear, sliderValue);
+			if((currentLayerName != buttonName) || (previousYear != sliderValue)){
 				wwd.addLayer(countryLayer);
 				layerManager.synchronizeLayerList();
 				setLayerControls();
@@ -1173,7 +1180,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 				console.log(flagLayer);
 				for(l = 0; l < flagLayer.renderables.length; l++) {
 					var code3 = flagLayer.renderables[l].userObject.code3;
-					console.log(code3);
+					//console.log(code3);
 					//Find the agriData with the code3
 					for(j = 0; j < agriData.length; j++) {
 						if(agriData[j].code3 == code3) {
@@ -1225,7 +1232,7 @@ function generateGeoComparisonButton(agriData) {
 	var j = 0;
     var comparisonHTML = '';
     //Also implement the slider
-    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
+    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 2014</div></p>';
 	var buttonNames = [];
 	for(i = 0; i < agriData.length; i++) {
 		for(j = 0; j < agriData[i].dataValues.length; j++) {
@@ -1911,8 +1918,8 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many pesticides?" title="Search for datasets..">';
 		break;
 		case 5:
-			var dataHTML = '<h4>Fertilizer Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many fertilizers?" title="Search for datasets..">';
+			var dataHTML = '<h4>Fertiliser Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many fertilisers?" title="Search for datasets..">';
 		break;
 	}
 
