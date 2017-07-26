@@ -913,6 +913,7 @@ function loadWMTSLayers(wwd, layerManager) {
 			$('#wms').append(layerButtonsHTML);
 			$('#layerToggle' + i).button();
 			$('#layerToggle' + i).click(function() {
+                setTimeout(alert("Layer is loading..."), 3000);
 				var k = 0;
 				var buttonNumber = this.id.slice('layerToggle'.length);
 				totalLayers[buttonNumber].enabled = !totalLayers[buttonNumber].enabled;
