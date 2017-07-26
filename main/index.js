@@ -1573,16 +1573,16 @@ function giveWeatherButtonFunctionality() {
 				var dropArea = $('#searchDetails');
 				dropArea.html('');
 				var tempHTML = '<h5>Weather Details for ' + data.name + '</h5>';
-				tempHTML += '<p>Current Outlook: ' + data.weather[0].main + '</p>';
-				tempHTML += '<p>Current Outlook Description: ' + data.weather[0].description + '</p>';
-				tempHTML += '<p>Current Temperature (Celsius): ' + Math.round((data.main.temp - 272),2) + '</p>';
-				tempHTML += '<p>Sunrise: ' + timeConverter(data.sys.sunrise) + '</p>';
-                tempHTML += '<p>Sunset: ' + timeConverter(data.sys.sunset) + '</p>';
-				tempHTML += '<p>Max Temperature Today (Celsius): ' + Math.round((data.main.temp_max - 272),2) + '</p>';
-				tempHTML += '<p>Min Temperature Today (Celsius): ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
-				tempHTML += '<p>Pressure (HPa): ' + data.main.pressure + '</p>';
-				tempHTML += '<p>Humidity (%): ' + data.main.humidity + '</p>';
-				tempHTML += '<p>Wind speed (m/s)' + data.wind.speed + '</p>';
+				tempHTML += '<p><b class="fontsize">Current Outlook:</b> ' + data.weather[0].main + '</p>';
+				tempHTML += '<p><b class="fontsize">Current Outlook Description:</b> ' + data.weather[0].description + '</p>';
+				tempHTML += '<p><b class="fontsize">Current Temperature (Celsius):</b> ' + Math.round((data.main.temp - 272),2) + '</p>';
+				tempHTML += '<p><b class="fontsize">Sunrise:</b> ' + timeConverter(data.sys.sunrise) + '</p>';
+                tempHTML += '<p><b class="fontsize">Sunset:</b> ' + timeConverter(data.sys.sunset) + '</p>';
+				tempHTML += '<p><b class="fontsize">Max Temperature Today (Celsius):</b> ' + Math.round((data.main.temp_max - 272),2) + '</p>';
+				tempHTML += '<p><b class="fontsize">Min Temperature Today (Celsius):</b> ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
+				tempHTML += '<p><b class="fontsize">Pressure (HPa):</b> ' + data.main.pressure + '</p>';
+				tempHTML += '<p><b class="fontsize">Humidity (%):</b> ' + data.main.humidity + '</p>';
+				tempHTML += '<p><b class="fontsize">Wind speed (m/s):</b>' + data.wind.speed + '</p>';
 				dropArea.append(tempHTML);
 				console.log('success');
 			},
@@ -1823,7 +1823,7 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
 }
 
 function generateCountryButtons() {
-	var countryHTML = '<h4>Country Buttons</h4>';
+	var countryHTML = '<h5><b>Available Datasets</b></h5>';
 	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Data List</button>';
@@ -1930,7 +1930,7 @@ function generateDataButtons(inputData, codeName, mode) {
 				break;
         }
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
-        dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Average</button>';
+        dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Amount</button>';
 		dataHTML += '<div id="allGraph"></div>';
 
 		//dataHTML = '<div id="allDiv">';
