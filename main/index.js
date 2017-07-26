@@ -1930,7 +1930,7 @@ function generateDataButtons(inputData, codeName, mode) {
 				break;
         }
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
-        dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Average</button>';
+        dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Amount</button>';
 		dataHTML += '<div id="allGraph"></div>';
 
 		//dataHTML = '<div id="allDiv">';
