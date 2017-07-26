@@ -197,8 +197,9 @@ requirejs({paths:{
                             var otherTab2 = $("#graphs");
                             var otherTab3 = $("#station");
                             var otherTab4 = $("#comp");
-                            var otherTab5 = $("#weather");
-                            var otherTab6 = $("#view");
+                            var otherTab5 = $("#wms");
+                            var otherTab6 = $("#weather");
+                            var otherTab7 = $("#view");
                             details.show();
                             otherTab.hide();
                             otherTab2.hide();
@@ -206,6 +207,7 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+                            otherTab7.hide();
 
                             $('.glyphicon-globe').css('color','white');
                             $('.fa-map').css('color','white');
