@@ -1823,7 +1823,7 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
 }
 
 function generateCountryButtons() {
-	var countryHTML = '<h4>Country Buttons</h4>';
+	var countryHTML = '<h5><b>Country Buttons</b></h5>';
 	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Data List</button>';
