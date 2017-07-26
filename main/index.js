@@ -403,7 +403,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 //Given the HTML of the layerControl, generate the appropiate layer
 function generateOpacityControl(wwd, layerName, layerNumber) {
     //Create the general box
-    var opacityHTML = '<br><h5><b>Opacity for ' + layerName +'</b></h5>';
+    var opacityHTML = '<br><h5><b>Opacity';
 
     //Create the slider
     opacityHTML += '<div id="opacity_slider_' + layerNumber + '"></div>';
@@ -1214,7 +1214,7 @@ function generateGeoComparisonButton(agriData) {
 	var j = 0;
     var comparisonHTML = '';
     //Also implement the slider
-    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
+    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 2014</div></p>';
 	var buttonNames = [];
 	for(i = 0; i < agriData.length; i++) {
 		for(j = 0; j < agriData[i].dataValues.length; j++) {
