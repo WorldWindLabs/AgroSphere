@@ -69,6 +69,7 @@ requirejs({paths:{
 		var atmoDataMonthly = convertArrayToDataSet(csvMultiData[5]);
 		var pestiData = convertArrayToDataSet(csvMultiData[6]);
 		var fertiData = convertArrayToDataSet(csvMultiData[7]);
+		var yieldData = convertArrayToDataSet(csvMultiData[8]);
 		var agriDef = csvData[2];
         //Generate the placemark layers
         generatePlacemarkLayer(wwd, csvData);
@@ -189,7 +190,7 @@ requirejs({paths:{
 
                             //Give functionality for the buttons generated
 							giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, pestiData,
-									fertiData, agriDef, dataPoint.code3);
+									fertiData, yieldData, agriDef, dataPoint.code3);
                             //giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //fixed hover flags bug - now click instead of hover eventlistener
@@ -778,7 +779,7 @@ function findDataPointCountry(dataSet, countryCode, codeNumber) {
 function loadCSVDataArray() {
     var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv',
 			'csvdata/livestock.csv', 'csvdata/emissionAll.csv', 'csvdata/Monthly_AvgData1.csv',
-			'csvdata/pesti.csv', 'csvdata/ferti.csv'];
+			'csvdata/pesti.csv', 'csvdata/ferti.csv', 'csvdata/yield.csv'];
     //Find the file
     var csvString = "";
 
@@ -1844,11 +1845,12 @@ function generateCountryButtons() {
 	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPest">Show Pesticide Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnFerti">Show Fertilizer Data List</button>';
+	countryHTML += '<button class="btn-info" id ="spawnYield">Show Yield Data List</button>';
 	return countryHTML;
 }
 
 function giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, pestiData, fertiData,
-		agriDef, codeName) {
+		yieldData, agriDef, codeName) {
 	var buttonAreaHTML = $('#buttonArea');
 	var agriButtons = $('#spawnAgri').button();
 	var priceButtons = $('#spawnPrice').button();
@@ -1856,6 +1858,7 @@ function giveCountryButtonsFunctionality(agriData, priceData, liveData, emission
 	var emissionAgriButtons = $('#spawnEmissionAgri').button();
 	var pestiButtons = $('#spawnPest').button();
 	var fertiButtons = $('#spawnFerti').button();
+	var yieldButtons = $('#spawnYield').button();
 	agriButtons.on('click', function(){
 		//Generate agri culture buttons
 		buttonAreaHTML.html('');
@@ -1887,6 +1890,11 @@ function giveCountryButtonsFunctionality(agriData, priceData, liveData, emission
 		buttonAreaHTML.html(generateDataButtons(fertiData, codeName, 5));
 		giveDataButtonsFunctionality(buttonAreaHTML, fertiData, agriDef, codeName, 5);
 	});
+	yieldButtons.on('click', function() {
+		buttonAreaHTML.html('');
+		buttonAreaHTML.html(generateDataButtons(yieldData, codeName, 6));
+		giveDataButtonsFunctionality(buttonAreaHTML, yieldData, agriDef, codeName, 6);
+	});
 }
 
 function generateDataButtons(inputData, codeName, mode) {
@@ -1896,27 +1904,31 @@ function generateDataButtons(inputData, codeName, mode) {
 		case 0:
 			var dataHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
-		break;
+			break;
 		case 1:
 			var dataHTML = '<h4>Price Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of top prices?" title="Search for datasets..">';
-		break;
+			break;
 		case 2:
 			var dataHTML = '<h4>Livestock Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many livestocks?" title="Search for datasets..">';
-		break;
+			break;
 		case 3:
 			var dataHTML = '<h4>Agriculture Emission Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crops?" title="Search for datasets..">';
-		break;
+			break;
 		case 4:
 			var dataHTML = '<h4>Pesticide Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many pesticides?" title="Search for datasets..">';
-		break;
+			break;
 		case 5:
 			var dataHTML = '<h4>Fertiliser Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many fertilisers?" title="Search for datasets..">';
-		break;
+			break;
+		case 6:
+			var dataHTML = '<h4>Yield Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crop yields?" title="Search for datasets..">';
+			break;
 	}
 
     var dataPoint = findDataPointCountry(inputData, codeName,3);
@@ -1935,11 +1947,14 @@ function generateDataButtons(inputData, codeName, mode) {
                 break;
             case 3:
                 dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission Data</button>';
-                break;
+				break;
 			case 4:
 				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticide Data</button>';
 				break;
 			case 5:
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Data</button>';
+				break;
+			case 6:
 				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Data</button>';
 				break;
         }
