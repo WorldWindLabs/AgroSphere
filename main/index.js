@@ -340,7 +340,7 @@ console.timeEnd('First');
 function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, layerNumber) {
     //Generate the div tags
     var layerControlHTML = '<div class="toggleLayers" id="funcLayer' + layerNumber + '">';
-	layerControlHTML += '<h5>Layer control for ' + layerName + '</h5>'; 
+	layerControlHTML += '<h5>Layer Controls for ' + layerName + '</h5>';
     //Spawn opacity controller
     layerControlHTML += generateOpacityControl(wwd, layerName, layerNumber);
     //Spawn the legend
