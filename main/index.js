@@ -471,10 +471,8 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
     var timeHTML = '<br><h5><b>Time for ' + layerName +'</b></h5>';
 	console.log(wmsConfig);
     //Create the output
-	var startDate = wmsConfig.timeSequences[0].startTime.toDateString().substring(4, 7) + " " +
-        wmsConfig.timeSequences[0].startTime.toDateString().substring(11, 15);
-	var endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(4, 7) + " " +
-        wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(11, 15);
+	var startDate = wmsConfig.timeSequences[0].startTime.toDateString().substring(4, 15);
+	var endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(4, 15);
     timeHTML += '<div id="time_date_' + layerNumber + '">Current Time: </div>';
 
     //Create the three buttons
