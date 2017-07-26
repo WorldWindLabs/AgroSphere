@@ -2373,7 +2373,7 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
-		setTimeout(function() {checkTabs()}, 250);
+		setTimeout(function() {checkTabs()}, 125);
     });
     $(".togglecountry").click(function () {
         $("#country").toggle();
@@ -2384,7 +2384,7 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
-		setTimeout(function() {checkTabs()}, 250);
+		setTimeout(function() {checkTabs()}, 125);
     });
     $(".togglestation").click(function () {
         $("#station").toggle();
@@ -2395,7 +2395,7 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
-		setTimeout(function() {checkTabs()}, 250);
+		setTimeout(function() {checkTabs()}, 125);
     });
     $(".togglegraphs").click(function () {
         $("#graphs").toggle();
@@ -2406,7 +2406,7 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
-		setTimeout(function() {checkTabs()}, 250);
+		setTimeout(function() {checkTabs()}, 125);
     });
     $(".togglecomp").click(function () {
         $("#comp").toggle();
@@ -2417,7 +2417,7 @@ $(document).ready(function () {
         $("#station").hide();
         $("#weather").hide();
         $("#view").hide();
-		setTimeout(function() {checkTabs()}, 250);
+		setTimeout(function() {checkTabs()}, 125);
     });
     $(".toggleweather").click(function () {
         $("#weather").toggle();
@@ -2428,7 +2428,7 @@ $(document).ready(function () {
         $("#station").hide();
         $("#comp").hide();
         $("#view").hide();
-		setTimeout(function() {checkTabs()}, 250);
+		setTimeout(function() {checkTabs()}, 125);
     });
     $(".toggleview").click(function () {
         $("#view").toggle();
@@ -2439,7 +2439,7 @@ $(document).ready(function () {
         $("#station").hide();
         $("#comp").hide();
         $("#weather").hide();
-		setTimeout(function() {checkTabs()}, 250);
+		setTimeout(function() {checkTabs()}, 125);
     });
     $(".togglewms").click(function () {
         $("#wms").toggle();
@@ -2450,7 +2450,7 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
-        setTimeout(function() {checkTabs()}, 250);
+        setTimeout(function() {checkTabs()}, 125);
     });
 	checkTabs();
     $(".ui-button").click(function() {

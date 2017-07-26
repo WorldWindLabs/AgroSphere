@@ -47,6 +47,7 @@ input[type="checkbox"]{
     cursor: pointer;
     -webkit-appearance: none;
     appearance: none;
+    box-shadow: 1px 1px 1px black;
 }
 
 .btn {
@@ -54,7 +55,6 @@ input[type="checkbox"]{
     text-align:center !important;
     color:white !important;
     font-size:12px !important;
-    box-shadow: 1px 1px 1px black;
 }
 
 .btn:hover{
@@ -388,6 +388,7 @@ audio
     right: 15px;
     z-index: 99;
     width: 60px;
+    box-shadow: 1px 1px 1px black;
 }
 
 #nasalogo:hover {
@@ -406,6 +407,7 @@ input {
     border: 1px solid #ddd; /* Add a grey border */
     margin-bottom: 7px; /* Add some space below the input */
     color:black !important;
+    box-shadow: 1px 1px 1px black;
 }
 
 /* search bar */
@@ -469,6 +471,7 @@ input {
     border: none;
     background-color: #323232 !important;
     margin: 2.5px;
+    box-shadow: 1px 1px 1px black;
 }
 
 .btn-info:hover {
@@ -480,6 +483,7 @@ input {
 .btn-block {
     border-radius:5px;
     overflow-y:hidden;
+    box-shadow: 1px 1px 1px black;
 }
 
 
@@ -493,6 +497,11 @@ input {
 
 .ui-slider .ui-slider-handle {
     background:#313A7D;
+    box-shadow: 1px 1px 1px black;
+}
+
+.ui-slider {
+    box-shadow: 1px 1px 1px black;
 }
 
 .ui-slider .ui-slider-handle:hover {
