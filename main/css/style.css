@@ -24,6 +24,7 @@ div, h1, h2, h3, h4, h5, p, a {
     -ms-user-select: none;      /* IE 10+ */
     -o-user-select: none;
     user-select: none;
+    overflow: hidden;
 }
 
 body, html {
@@ -98,6 +99,7 @@ body {
 .nav-tabs {
     float: left;
     border-bottom: 0;
+    box-shadow: 2px 2px 2px black;
 }
 
 .nav-tabs li {
@@ -135,6 +137,7 @@ body {
 .tab-content {
     margin-left: 45px;
     height:500px;
+    box-shadow: 2px 2px 2px black;
 }
 
 .tab-content .tab-pane {
