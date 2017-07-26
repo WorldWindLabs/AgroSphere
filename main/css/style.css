@@ -54,6 +54,7 @@ input[type="checkbox"]{
     text-align:center !important;
     color:white !important;
     font-size:12px !important;
+    box-shadow: 1px 1px 1px black;
 }
 
 .btn:hover{
