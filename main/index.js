@@ -2451,6 +2451,7 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
+        setTimeout(function() {checkTabs()}, 50);
     });
 	checkTabs();
     $(".ui-button").click(function() {
