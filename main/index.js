@@ -473,12 +473,22 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
     var timeHTML = '<br><h5><b>Time for ' + layerName +'</b></h5>';
 	console.log(wmsConfig);
     //Create the output
-	var startDate = wmsConfig.timeSequences[0].startTime.toDateString().substring(4, 15);
-	var endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(4, 15);
+    var startDate;
+    var endDate;
+    if (layerName.indexOf("month") != -1)
+    {
+        startDate = wmsConfig.timeSequences[0].startTime.toDateString().substring(4, 7) + " " +
+            wmsConfig.timeSequences[0].startTime.toDateString().substring(11, 15);
+        endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(4, 7) + " " +
+            wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(11, 15);
+    }
+    else
+    {
+        startDate = wmsConfig.timeSequences[0].startTime.toDateString();
+        endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString();
+    }
+    timeHTML += '<h5><b>Time Scale: ' + startDate + ' - ' + endDate + '</b></h5>';
     timeHTML += '<div id="time_date_' + layerNumber + '">Current Time: </div>';
-
-    //Create the three buttons
-	timeHTML += '<h5><b>Time Scale: ' + startDate + ' - ' + endDate + '</b></h5>';
 	timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
     //Wrap up the HTML
     timeHTML += '</div>';
@@ -512,7 +522,8 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 
 	slider.on('slide', function(event, ui) {
 		var timeNumber = ui.value - Math.floor(ui.value);
-		$('#time_date_' + layerNumber).html('Current time for this layer: ' + wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber));
+		$('#time_date_' + layerNumber).html('Current time for this layer: ' +
+            wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber).toDateString().substring(4));
 	});
 
 	slider.on('slidestop', function(event, ui) {
