@@ -53,7 +53,8 @@ _Screenshot showing AgroSphere comparing potato data from around the world._
 
 ## Outreach
 
-We discussed our web app and work in progress with Martin C. Heller from the Center for Sustainable Systems at University of Michigan. He offered us critiques from a researcher's point of view.
+We discussed our web app and work-in-progress with Martin C. Heller from the Center for Sustainable Systems at University of Michigan. He offered us critiques from a researcher's point of view.
+We also tested our app on NASA interns from the STEM Teacher and Researcher (STAR) program to receive suggestions from an educational perspective.
 
 ## How to Run and Develop AgroSphere Locally
 
