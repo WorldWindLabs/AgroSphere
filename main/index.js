@@ -197,8 +197,9 @@ requirejs({paths:{
                             var otherTab2 = $("#graphs");
                             var otherTab3 = $("#station");
                             var otherTab4 = $("#comp");
-                            var otherTab5 = $("#weather");
-                            var otherTab6 = $("#view");
+                            var otherTab5 = $("#wms");
+                            var otherTab6 = $("#weather");
+                            var otherTab7 = $("#view");
                             details.show();
                             otherTab.hide();
                             otherTab2.hide();
@@ -206,6 +207,7 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+                            otherTab7.hide();
 
                             $('.glyphicon-globe').css('color','white');
                             $('.fa-map').css('color','white');
@@ -250,8 +252,9 @@ requirejs({paths:{
                             var otherTab2 = $("#graphs");
                             var otherTab3 = $("#country");
                             var otherTab4 = $("#comp");
-                            var otherTab5 = $("#weather");
-                            var otherTab6 = $("#view");
+                            var otherTab5 = $("#wms");
+                            var otherTab6 = $("#weather");
+                            var otherTab7 = $("#view");
                             details.show('fast','swing');
 							$('.resizable').show();
                             otherTab.hide();
@@ -260,6 +263,7 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+                            otherTab7.hide();
 
                             $('.glyphicon-globe').css('color','white');
                             $('.fa-map').css('color','white');
@@ -401,7 +405,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 //Given the HTML of the layerControl, generate the appropiate layer
 function generateOpacityControl(wwd, layerName, layerNumber) {
     //Create the general box
-    var opacityHTML = '<br><h5><b>Opacity for ' + layerName +'</b></h5>';
+    var opacityHTML = '<br><h5><b>Opacity';
 
     //Create the slider
     opacityHTML += '<div id="opacity_slider_' + layerNumber + '"></div>';
@@ -469,17 +473,16 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
     var timeHTML = '<br><h5><b>Time for ' + layerName +'</b></h5>';
 	console.log(wmsConfig);
     //Create the output
-	var startDate = wmsConfig.timeSequences[0].startTime;
-	var endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime;
+	var startDate = wmsConfig.timeSequences[0].startTime.toDateString().substring(4, 15);
+	var endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(4, 15);
     timeHTML += '<div id="time_date_' + layerNumber + '">Current Time: </div>';
-	timeHTML += '<p>Start Time: '+ startDate + '</p>'; 
-	timeHTML += '<p>End Time: ' + endDate + '</p>';
 
     //Create the three buttons
-	timeHTML += '<h5><b>Time Scale</b></h5>';
+	timeHTML += '<h5><b>Time Scale: ' + startDate + ' - ' + endDate + '</b></h5>';
 	timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
     //Wrap up the HTML
     timeHTML += '</div>';
+    timeHTML += '<br>';
 
 
     return timeHTML;
@@ -732,7 +735,7 @@ function findCropDefinition(dataSet, cropName) {
 	console.log(dataSet, cropName);
 	for(i = 0; i < dataSet.length; i++) {
 		if(dataSet[i].Item == cropName) {
-			
+
 			return dataSet[i].Description;
 		}
 	}
@@ -893,7 +896,9 @@ function loadWMTSLayers(wwd, layerManager) {
 			totalLayers.push(wmsLayer);
             // Add the layers to World Wind and update the layer manager
             wwd.addLayer(wmsLayer);
-			var layerButtonsHTML = '<button id="layerToggle' + i +'">' + wmsLayerCapabilities.title + '</button>';
+
+			var layerButtonsHTML = '<button class="btn-info" id="layerToggle' + i +'">' + wmsLayerCapabilities.title + '</button>';
+
 			$('#wms').append(layerButtonsHTML);
 			$('#layerToggle' + i).button();
 			$('#layerToggle' + i).click(function() {
@@ -921,10 +926,10 @@ function loadWMTSLayers(wwd, layerManager) {
 					$(layerControlList[k]).toggle();
 				}
 			});
-	
+
             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
-            layerManager.synchronizeLayerList();
-			
+            // layerManager.synchronizeLayerList();
+
 			//Readd layercontrols
 			setLayerControls();
         }
@@ -948,8 +953,8 @@ function setLayerControls() {
 	for(j = 0; j < layerControlList.length; j++) {
 		$(layerControlList[j]).hide();
 	}
-	
-	
+
+
 	for(j = 0; j < layerButtonList.length; j++) {
 		$(layerButtonList[j]).button();
 		$(layerButtonList[j]).on('click', function(event) {
@@ -968,7 +973,7 @@ function setLayerControls() {
 				} else {
 					//Hide the class
 					$(layerControlList[k]).hide();
-				}				
+				}
 			}
 		});
 	}
@@ -1013,47 +1018,47 @@ function loadGEOJsonData() {
     }
     return data;
 }
-
-function loadWMSLayers(wwd, layerManager) {
-    var serviceWMSAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
-    var layerName = ["povmap:povmap-global-subnational-infant-mortality-rates_2000", 'povmap:povmap-global-subnational-prevalence-child-malnutrition',
-            'gpw-v4:gpw-v4-population-count_2000', 'gpw-v4:gpw-v4-population-count_2005', 'gpw-v4:gpw-v4-population-count_2010', 'gpw-v4:gpw-v4-population-count_2015',
-            'gpw-v4:gpw-v4-population-count_2020'];
-    // Called asynchronously to parse and create the WMS layer
-    var createWMSLayer = function (xmlDom) {
-        // Create a WmsCapabilities object from the XML DOM
-        var wms = new WorldWind.WmsCapabilities(xmlDom);
-        // using for loop to add multiple layers to layer manager; SUCCESS!!!!
-        var i = 0;
-        for (i = 0; i < layerName.length; i++) {
-            // Retrieve a WmsLayerCapabilities object by the desired layer name
-            var wmsLayerCapabilities = wms.getNamedLayer(layerName[i]);
-
-            // Form a configuration object from the WmsLayerCapability object
-            var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
-            // Modify the configuration objects title property to a more user friendly title
-            wmsConfig.title = wmsLayerCapabilities.title;
-
-            var wmsLayer;
-            wmsLayer = new WorldWind.WmsLayer(wmsConfig);
-
-            // disable layer by default
-            wmsLayer.enabled = false;
-
-            // Add the layers to World Wind and update the layer manager
-            wwd.addLayer(wmsLayer);
-            generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
-            layerManager.synchronizeLayerList();
-        }
-    };
-
-    // Called if an error occurs during WMS Capabilities document retrieval
-    var logError = function (jqXhr, text, exception) {
-        console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
-    };
-
-    $.get(serviceWMSAddress).done(createWMSLayer).fail(logError);
-}
+//
+// function loadWMSLayers(wwd, layerManager) {
+//     var serviceWMSAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
+//     var layerName = ["povmap:povmap-global-subnational-infant-mortality-rates_2000", 'povmap:povmap-global-subnational-prevalence-child-malnutrition',
+//             'gpw-v4:gpw-v4-population-count_2000', 'gpw-v4:gpw-v4-population-count_2005', 'gpw-v4:gpw-v4-population-count_2010', 'gpw-v4:gpw-v4-population-count_2015',
+//             'gpw-v4:gpw-v4-population-count_2020'];
+//     // Called asynchronously to parse and create the WMS layer
+//     var createWMSLayer = function (xmlDom) {
+//         // Create a WmsCapabilities object from the XML DOM
+//         var wms = new WorldWind.WmsCapabilities(xmlDom);
+//         // using for loop to add multiple layers to layer manager; SUCCESS!!!!
+//         var i = 0;
+//         for (i = 0; i < layerName.length; i++) {
+//             // Retrieve a WmsLayerCapabilities object by the desired layer name
+//             var wmsLayerCapabilities = wms.getNamedLayer(layerName[i]);
+//
+//             // Form a configuration object from the WmsLayerCapability object
+//             var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
+//             // Modify the configuration objects title property to a more user friendly title
+//             wmsConfig.title = wmsLayerCapabilities.title;
+//
+//             var wmsLayer;
+//             wmsLayer = new WorldWind.WmsLayer(wmsConfig);
+//
+//             // disable layer by default
+//             wmsLayer.enabled = false;
+//
+//             // Add the layers to World Wind and update the layer manager
+//             wwd.addLayer(wmsLayer);
+//             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
+//             layerManager.synchronizeLayerList();
+//         }
+//     };
+//
+//     // Called if an error occurs during WMS Capabilities document retrieval
+//     var logError = function (jqXhr, text, exception) {
+//         console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
+//     };
+//
+//     $.get(serviceWMSAddress).done(createWMSLayer).fail(logError);
+// }
 
 //Assuming the value is an empty string, gets rid of it
 function filterOutBlanks(inputData, mode) {
@@ -1153,7 +1158,6 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
             }
 			console.log(currentLayerName, previousYear, sliderValue);
 			if((currentLayerName != buttonName) || (previousYear != sliderValue)){
-			
 				wwd.addLayer(countryLayer);
 				layerManager.synchronizeLayerList();
 				setLayerControls();
@@ -1214,7 +1218,7 @@ function generateGeoComparisonButton(agriData) {
 	var j = 0;
     var comparisonHTML = '';
     //Also implement the slider
-    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 1980</div></p>';
+    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 2014</div></p>';
 	var buttonNames = [];
 	for(i = 0; i < agriData.length; i++) {
 		for(j = 0; j < agriData[i].dataValues.length; j++) {
@@ -1240,7 +1244,7 @@ function generateGeoComparisonButton(agriData) {
 }
 
 //Gives the button functionality
-function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2, 
+function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 		stationName, agriDataPoint) {
 	var dataPoint = findDataPointStation(inputData, stationName);
 	var dataPoint2 = findDataPointStation(inputData2, stationName);
@@ -1290,7 +1294,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 				} else {
 					plotScatter(dataPoint2.dataValues[buttonNumber - offSetLength].typeName, dataPoint.code3,
 							dataPoint2.dataValues[buttonNumber - offSetLength].timeValues,
-							'multiGraph', 1);					
+							'multiGraph', 1);
 				}
                 $('#messagePoint' + buttonNumber).html('Combined graph! Please go to Data Graphs Tab');
                 setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
@@ -1405,25 +1409,25 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 				$('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
 				setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
             });
-			
+
 			if(mode == 0) {
 				var definitionHTML = $('#definitionNumber' + i).button();
 				definitionHTML.click(function (event) {
 					//Grab id
 					var buttonID = this.id;
 					var buttonNumber = buttonID.slice('definitionNumber'.length);
-					
+
 					//Grab titleName
 					var cropName = $(this).text().slice('Get Definition for '.length);
-					
+
 					//Do a CSV search
 					var description = findCropDefinition(agriDef, cropName);
 					console.log(description);
 					$('#messagePoint' + buttonNumber).html(description);
-					setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 10000);					
-					
+					setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 10000);
+
 				});
-			} 
+			}
         }
 
 		$('#sortByName').click(function() {
@@ -1573,16 +1577,16 @@ function giveWeatherButtonFunctionality() {
 				var dropArea = $('#searchDetails');
 				dropArea.html('');
 				var tempHTML = '<h5>Weather Details for ' + data.name + '</h5>';
-				tempHTML += '<p>Current Outlook: ' + data.weather[0].main + '</p>';
-				tempHTML += '<p>Current Outlook Description: ' + data.weather[0].description + '</p>';
-				tempHTML += '<p>Current Temperature (Celsius): ' + Math.round((data.main.temp - 272),2) + '</p>';
-				tempHTML += '<p>Sunrise: ' + timeConverter(data.sys.sunrise) + '</p>';
-                tempHTML += '<p>Sunset: ' + timeConverter(data.sys.sunset) + '</p>';
-				tempHTML += '<p>Max Temperature Today (Celsius): ' + Math.round((data.main.temp_max - 272),2) + '</p>';
-				tempHTML += '<p>Min Temperature Today (Celsius): ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
-				tempHTML += '<p>Pressure (HPa): ' + data.main.pressure + '</p>';
-				tempHTML += '<p>Humidity (%): ' + data.main.humidity + '</p>';
-				tempHTML += '<p>Wind speed (m/s)' + data.wind.speed + '</p>';
+				tempHTML += '<p><b class="fontsize">Current Outlook:</b> ' + data.weather[0].main + '</p>';
+				tempHTML += '<p><b class="fontsize">Current Outlook Description:</b> ' + data.weather[0].description + '</p>';
+				tempHTML += '<p><b class="fontsize">Current Temperature (Celsius):</b> ' + Math.round((data.main.temp - 272),2) + '</p>';
+				tempHTML += '<p><b class="fontsize">Sunrise:</b> ' + timeConverter(data.sys.sunrise) + '</p>';
+                tempHTML += '<p><b class="fontsize">Sunset:</b> ' + timeConverter(data.sys.sunset) + '</p>';
+				tempHTML += '<p><b class="fontsize">Max Temperature Today (Celsius):</b> ' + Math.round((data.main.temp_max - 272),2) + '</p>';
+				tempHTML += '<p><b class="fontsize">Min Temperature Today (Celsius):</b> ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
+				tempHTML += '<p><b class="fontsize">Pressure (HPa):</b> ' + data.main.pressure + '</p>';
+				tempHTML += '<p><b class="fontsize">Humidity (%):</b> ' + data.main.humidity + '</p>';
+				tempHTML += '<p><b class="fontsize">Wind speed (m/s):</b>' + data.wind.speed + '</p>';
 				dropArea.append(tempHTML);
 				console.log('success');
 			},
@@ -1816,20 +1820,20 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
                 + ' class="btn-info"' + ' id="plotWeatherButton' + offSetLength + '">Plot Graph</button>';
 			atmoHTML += '<button class="btn-info" id="combineButton' + offSetLength + '">Combine Graph </button>';
             atmoHTML += '<button class="btn-info" id="addButton' + offSetLength + '">Add Graph</button>';
-            atmoHTML += '<br></div>';		
+            atmoHTML += '<br></div>';
 		}
     }
     return atmoHTML;
 }
 
 function generateCountryButtons() {
-	var countryHTML = '<h4>Country Buttons</h4>';
-	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Buttons</button>';
-	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Buttons</button>';
-	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Buttons</button>';
-	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Buttons</button>';
-	countryHTML += '<button class="btn-info" id="spawnPest">Show Pesticide Buttons</button>';
-	countryHTML += '<button class="btn-info" id="spawnFerti">Show Fertiliser Buttons</button>';
+	var countryHTML = '<h5><b>Available Datasets</b></h5>';
+	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Data List</button>';
+	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Data List</button>';
+	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Data List</button>';
+	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Data List</button>';
+	countryHTML += '<button class="btn-info" id="spawnPest">Show Pesticide Data List</button>';
+	countryHTML += '<button class="btn-info" id="spawnFerti">Show Fertilizer Data List</button>';
 	return countryHTML;
 }
 
@@ -1892,7 +1896,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many livestocks?" title="Search for datasets..">';
 		break;
 		case 3:
-			var dataHTML = '<h4>Emission Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Agriculture Emission Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crops?" title="Search for datasets..">';
 		break;
 		case 4:
@@ -1914,23 +1918,23 @@ function generateDataButtons(inputData, codeName, mode) {
                 dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
                 break;
             case 1:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Price</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Price Data</button>';
             break;
             case 2:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Livestocks</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Livestock Data</button>';
                 break;
             case 3:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission Data</button>';
                 break;
 			case 4:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticides</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticide Data</button>';
 				break;
 			case 5:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertiliser</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Data</button>';
 				break;
         }
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
-        dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Average</button>';
+        dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Amount</button>';
 		dataHTML += '<div id="allGraph"></div>';
 
 		//dataHTML = '<div id="allDiv">';
@@ -1938,12 +1942,12 @@ function generateDataButtons(inputData, codeName, mode) {
             //Generate the HTML
             dataHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
 			if(mode == 0) {
-				var tempTitleName = dataPoint.dataValues[i].typeName.slice(0, dataPoint.dataValues[i].typeName.length - 
+				var tempTitleName = dataPoint.dataValues[i].typeName.slice(0, dataPoint.dataValues[i].typeName.length -
 						' Production in tonnes'.length);
 				dataHTML += '<button class="btn-info" id="definitionNumber' + i + '">Get Definition for '
 						+ tempTitleName + '</button>';
 			}
-			
+
 			dataHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
             dataHTML += '<button'
                 + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
@@ -2368,93 +2372,96 @@ $(function () {
 $(document).ready(function () {
 	checkTabs();
     $(".togglelayers").click(function () {
-        $("#layers").toggle('fast', 'swing');
-        $("#wms").hide('fast', 'swing');
-        $("#graphs").hide('fast', 'swing');
-        $("#country").hide('fast', 'swing');
-        $("#station").hide('fast', 'swing');
-        $("#comp").hide('fast', 'swing');
-        $("#weather").hide('fast', 'swing');
-        $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 250);
+        $("#layers").toggle();
+        $("#wms").hide();
+        $("#graphs").hide();
+        $("#country").hide();
+        $("#station").hide();
+        $("#comp").hide();
+        $("#weather").hide();
+        $("#view").hide();
+		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglecountry").click(function () {
-        $("#country").toggle('fast', 'swing');
-        $("#layers").hide('fast', 'swing');
-        $("#wms").hide('fast', 'swing');
-        $("#graphs").hide('fast', 'swing');
-        $("#station").hide('fast', 'swing');
-        $("#comp").hide('fast', 'swing');
-        $("#weather").hide('fast', 'swing');
-        $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 250);
+        $("#country").toggle();
+        $("#layers").hide();
+        $("#wms").hide();
+        $("#graphs").hide();
+        $("#station").hide();
+        $("#comp").hide();
+        $("#weather").hide();
+        $("#view").hide();
+		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglestation").click(function () {
-        $("#station").toggle('fast', 'swing');
-        $("#layers").hide('fast', 'swing');
-        $("#wms").hide('fast', 'swing');
-        $("#graphs").hide('fast', 'swing');
-        $("#country").hide('fast', 'swing');
-        $("#comp").hide('fast', 'swing');
-        $("#weather").hide('fast', 'swing');
-        $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 250);
+        $("#station").toggle();
+        $("#layers").hide();
+        $("#wms").hide();
+        $("#graphs").hide();
+        $("#country").hide();
+        $("#comp").hide();
+        $("#weather").hide();
+        $("#view").hide();
+		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglegraphs").click(function () {
-        $("#graphs").toggle('fast', 'swing');
-        $("#layers").hide('fast', 'swing');
-        $("#wms").hide('fast', 'swing');
-        $("#station").hide('fast', 'swing');
-        $("#country").hide('fast', 'swing');
-        $("#comp").hide('fast', 'swing');
-        $("#weather").hide('fast', 'swing');
-        $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 250);
+        $("#graphs").toggle();
+        $("#layers").hide();
+        $("#wms").hide();
+        $("#station").hide();
+        $("#country").hide();
+        $("#comp").hide();
+        $("#weather").hide();
+        $("#view").hide();
+		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglecomp").click(function () {
-        $("#comp").toggle('fast', 'swing');
-        $("#layers").hide('fast', 'swing');
-        $("#wms").hide('fast', 'swing');
-        $("#graphs").hide('fast', 'swing');
-        $("#country").hide('fast', 'swing');
-        $("#station").hide('fast', 'swing');
-        $("#weather").hide('fast', 'swing');
-        $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 250);
+        $("#comp").toggle();
+        $("#layers").hide();
+        $("#wms").hide();
+        $("#graphs").hide();
+        $("#country").hide();
+        $("#station").hide();
+        $("#weather").hide();
+        $("#view").hide();
+		setTimeout(function() {checkTabs()}, 50);
     });
     $(".toggleweather").click(function () {
-        $("#weather").toggle('fast', 'swing');
-        $("#layers").hide('fast', 'swing');
-        $("#wms").hide('fast', 'swing');
-        $("#graphs").hide('fast', 'swing');
-        $("#country").hide('fast', 'swing');
-        $("#station").hide('fast', 'swing');
-        $("#comp").hide('fast', 'swing');
-        $("#view").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 250);
+        $("#weather").toggle();
+        $("#layers").hide();
+        $("#wms").hide();
+        $("#graphs").hide();
+        $("#country").hide();
+        $("#station").hide();
+        $("#comp").hide();
+        $("#view").hide();
+		setTimeout(function() {checkTabs()}, 50);
     });
     $(".toggleview").click(function () {
-        $("#view").toggle('fast', 'swing');
-        $("#layers").hide('fast', 'swing');
-        $("#wms").hide('fast', 'swing');
-        $("#graphs").hide('fast', 'swing');
-        $("#country").hide('fast', 'swing');
-        $("#station").hide('fast', 'swing');
-        $("#comp").hide('fast', 'swing');
-        $("#weather").hide('fast', 'swing');
-		setTimeout(function() {checkTabs()}, 250);
+        $("#view").toggle();
+        $("#layers").hide();
+        $("#wms").hide();
+        $("#graphs").hide();
+        $("#country").hide();
+        $("#station").hide();
+        $("#comp").hide();
+        $("#weather").hide();
+		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglewms").click(function () {
-        $("#wms").toggle('fast', 'swing');
-        $("#layers").hide('fast', 'swing');
-        $("#graphs").hide('fast', 'swing');
-        $("#country").hide('fast', 'swing');
-        $("#station").hide('fast', 'swing');
-        $("#comp").hide('fast', 'swing');
-        $("#weather").hide('fast', 'swing');
-        $("#view").hide('fast', 'swing');
-        setTimeout(function() {checkTabs()}, 250);
+        $("#wms").toggle();
+        $("#layers").hide();
+        $("#graphs").hide();
+        $("#country").hide();
+        $("#station").hide();
+        $("#comp").hide();
+        $("#weather").hide();
+        $("#view").hide();
+        setTimeout(function() {checkTabs()}, 50);
     });
 	checkTabs();
+    $(".ui-button").click(function() {
+        $(this).toggleClass('active');
+    });
 });
 });

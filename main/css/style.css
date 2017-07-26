@@ -1,4 +1,4 @@
-.btn-info.active {
+.ui-button.active {
     border: 2px solid lightgreen !important;
 }
 
@@ -24,6 +24,7 @@ div, h1, h2, h3, h4, h5, p, a {
     -ms-user-select: none;      /* IE 10+ */
     -o-user-select: none;
     user-select: none;
+    overflow: hidden;
 }
 
 body, html {
@@ -46,6 +47,7 @@ input[type="checkbox"]{
     cursor: pointer;
     -webkit-appearance: none;
     appearance: none;
+    box-shadow: 1px 1px 1px black;
 }
 
 .btn {
@@ -98,6 +100,7 @@ body {
 .nav-tabs {
     float: left;
     border-bottom: 0;
+    box-shadow: 2px 2px 2px black;
 }
 
 .nav-tabs li {
@@ -135,6 +138,7 @@ body {
 .tab-content {
     margin-left: 45px;
     height:500px;
+    box-shadow: 2px 2px 2px black;
 }
 
 .tab-content .tab-pane {
@@ -402,6 +406,7 @@ input {
     border: 1px solid #ddd; /* Add a grey border */
     margin-bottom: 7px; /* Add some space below the input */
     color:black !important;
+    box-shadow: 1px 1px 1px black;
 }
 
 /* search bar */
@@ -465,6 +470,7 @@ input {
     border: none;
     background-color: #323232 !important;
     margin: 2.5px;
+    box-shadow: 1px 1px 1px black;
 }
 
 .btn-info:hover {
@@ -476,7 +482,9 @@ input {
 .btn-block {
     border-radius:5px;
     overflow-y:hidden;
+    box-shadow: 1px 1px 1px black;
 }
+
 
 /* adding space between each ag dataset */
 
@@ -488,6 +496,11 @@ input {
 
 .ui-slider .ui-slider-handle {
     background:#313A7D;
+    box-shadow: 1px 1px 1px black;
+}
+
+.ui-slider {
+    box-shadow: 1px 1px 1px black;
 }
 
 .ui-slider .ui-slider-handle:hover {
@@ -562,8 +575,8 @@ input {
     font-size: 1.5em;
 }
 
-#fontsize {
-    font-size:1.2em;
+.fontsize {
+    font-size:1.1em;
 }
 
 /* carousel transition speed */
