@@ -250,8 +250,9 @@ requirejs({paths:{
                             var otherTab2 = $("#graphs");
                             var otherTab3 = $("#country");
                             var otherTab4 = $("#comp");
-                            var otherTab5 = $("#weather");
-                            var otherTab6 = $("#view");
+                            var otherTab5 = $("#wms");
+                            var otherTab6 = $("#weather");
+                            var otherTab7 = $("#view");
                             details.show('fast','swing');
 							$('.resizable').show();
                             otherTab.hide();
@@ -260,6 +261,7 @@ requirejs({paths:{
                             otherTab4.hide();
                             otherTab5.hide();
                             otherTab6.hide();
+                            otherTab7.hide();
 
                             $('.glyphicon-globe').css('color','white');
                             $('.fa-map').css('color','white');
@@ -926,7 +928,7 @@ function loadWMTSLayers(wwd, layerManager) {
 			});
 
             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
-            layerManager.synchronizeLayerList();
+            // layerManager.synchronizeLayerList();
 
 			//Readd layercontrols
 			setLayerControls();
@@ -1016,47 +1018,47 @@ function loadGEOJsonData() {
     }
     return data;
 }
-
-function loadWMSLayers(wwd, layerManager) {
-    var serviceWMSAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
-    var layerName = ["povmap:povmap-global-subnational-infant-mortality-rates_2000", 'povmap:povmap-global-subnational-prevalence-child-malnutrition',
-            'gpw-v4:gpw-v4-population-count_2000', 'gpw-v4:gpw-v4-population-count_2005', 'gpw-v4:gpw-v4-population-count_2010', 'gpw-v4:gpw-v4-population-count_2015',
-            'gpw-v4:gpw-v4-population-count_2020'];
-    // Called asynchronously to parse and create the WMS layer
-    var createWMSLayer = function (xmlDom) {
-        // Create a WmsCapabilities object from the XML DOM
-        var wms = new WorldWind.WmsCapabilities(xmlDom);
-        // using for loop to add multiple layers to layer manager; SUCCESS!!!!
-        var i = 0;
-        for (i = 0; i < layerName.length; i++) {
-            // Retrieve a WmsLayerCapabilities object by the desired layer name
-            var wmsLayerCapabilities = wms.getNamedLayer(layerName[i]);
-
-            // Form a configuration object from the WmsLayerCapability object
-            var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
-            // Modify the configuration objects title property to a more user friendly title
-            wmsConfig.title = wmsLayerCapabilities.title;
-
-            var wmsLayer;
-            wmsLayer = new WorldWind.WmsLayer(wmsConfig);
-
-            // disable layer by default
-            wmsLayer.enabled = false;
-
-            // Add the layers to World Wind and update the layer manager
-            wwd.addLayer(wmsLayer);
-            generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
-            layerManager.synchronizeLayerList();
-        }
-    };
-
-    // Called if an error occurs during WMS Capabilities document retrieval
-    var logError = function (jqXhr, text, exception) {
-        console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
-    };
-
-    $.get(serviceWMSAddress).done(createWMSLayer).fail(logError);
-}
+//
+// function loadWMSLayers(wwd, layerManager) {
+//     var serviceWMSAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
+//     var layerName = ["povmap:povmap-global-subnational-infant-mortality-rates_2000", 'povmap:povmap-global-subnational-prevalence-child-malnutrition',
+//             'gpw-v4:gpw-v4-population-count_2000', 'gpw-v4:gpw-v4-population-count_2005', 'gpw-v4:gpw-v4-population-count_2010', 'gpw-v4:gpw-v4-population-count_2015',
+//             'gpw-v4:gpw-v4-population-count_2020'];
+//     // Called asynchronously to parse and create the WMS layer
+//     var createWMSLayer = function (xmlDom) {
+//         // Create a WmsCapabilities object from the XML DOM
+//         var wms = new WorldWind.WmsCapabilities(xmlDom);
+//         // using for loop to add multiple layers to layer manager; SUCCESS!!!!
+//         var i = 0;
+//         for (i = 0; i < layerName.length; i++) {
+//             // Retrieve a WmsLayerCapabilities object by the desired layer name
+//             var wmsLayerCapabilities = wms.getNamedLayer(layerName[i]);
+//
+//             // Form a configuration object from the WmsLayerCapability object
+//             var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
+//             // Modify the configuration objects title property to a more user friendly title
+//             wmsConfig.title = wmsLayerCapabilities.title;
+//
+//             var wmsLayer;
+//             wmsLayer = new WorldWind.WmsLayer(wmsConfig);
+//
+//             // disable layer by default
+//             wmsLayer.enabled = false;
+//
+//             // Add the layers to World Wind and update the layer manager
+//             wwd.addLayer(wmsLayer);
+//             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
+//             layerManager.synchronizeLayerList();
+//         }
+//     };
+//
+//     // Called if an error occurs during WMS Capabilities document retrieval
+//     var logError = function (jqXhr, text, exception) {
+//         console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
+//     };
+//
+//     $.get(serviceWMSAddress).done(createWMSLayer).fail(logError);
+// }
 
 //Assuming the value is an empty string, gets rid of it
 function filterOutBlanks(inputData, mode) {
