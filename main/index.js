@@ -487,11 +487,9 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
         startDate = wmsConfig.timeSequences[0].startTime.toDateString();
         endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString();
     }
+    timeHTML += '<h5><b>Time Scale: ' + startDate + ' - ' + endDate + '</b></h5>';
+    timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
     timeHTML += '<div id="time_date_' + layerNumber + '">Current Time: </div>';
-
-    //Create the three buttons
-	timeHTML += '<h5><b>Time Scale: ' + startDate + ' - ' + endDate + '</b></h5>';
-	timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
     //Wrap up the HTML
     timeHTML += '</div>';
     timeHTML += '<br>';
@@ -524,7 +522,8 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 
 	slider.on('slide', function(event, ui) {
 		var timeNumber = ui.value - Math.floor(ui.value);
-		$('#time_date_' + layerNumber).html('Current time for this layer: ' + wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber));
+		$('#time_date_' + layerNumber).html('Current time for this layer: ' +
+            wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber).toDateString().substring(4));
 	});
 
 	slider.on('slidestop', function(event, ui) {
@@ -914,6 +913,7 @@ function loadWMTSLayers(wwd, layerManager) {
 			$('#wms').append(layerButtonsHTML);
 			$('#layerToggle' + i).button();
 			$('#layerToggle' + i).click(function() {
+                setTimeout(alert("Layer is loading..."), 3000);
 				var k = 0;
 				var buttonNumber = this.id.slice('layerToggle'.length);
 				totalLayers[buttonNumber].enabled = !totalLayers[buttonNumber].enabled;
