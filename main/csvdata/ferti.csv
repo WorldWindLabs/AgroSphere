@@ -1522,26 +1522,26 @@ IDN,Superphosphate above 35% Consumption in tonnes,670775,1414091,789164,778706,
 IDN,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 IDN,Urea Consumption in tonnes,4022387,4336729,4656723,4842537,4851876,4900693,5133220,5411462,5131287,5245493,5119133,4771070,4993060
 IDN,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Ammonium nitrate Consumption in tonnes,0,141835,0,0,178261,136026,0,0,0,0,0,0,0
-#N/A,Ammonium sulphate Consumption in tonnes,53580,88301,0,0,153140,67513,0,0,0,0,0,0,0
-#N/A,Calcium ammonium nitrate Consumption in tonnes,1359962,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Diammonium phosphate (DAP) Consumption in tonnes,0,332221,0,0,478968,203168,0,0,0,0,0,0,0
-#N/A,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,NPK complex Consumption in tonnes,0,372976,0,0,438726,148929,0,0,0,0,0,0,0
-#N/A,NPK complex <=10kg Consumption in tonnes,0,411,0,0,0,0,0,0,0,0,0,0,0
-#N/A,NPK complex >10kg Consumption in tonnes,0,1904,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Potassium chloride (Muriate of potash) Consumption in tonnes,93100,115942,0,0,125987,63000,0,0,0,0,0,0,0
-#N/A,Potassium nitrate Consumption in tonnes,0,502,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Potassium sulphate Consumption in tonnes,62901,62649,0,0,131142,155921,0,0,0,0,0,0,0
-#N/A,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Superphosphate above 35% Consumption in tonnes,291545,345094,0,0,638046,709295,0,0,0,0,0,0,0
-#N/A,Superphosphate other Consumption in tonnes,33151,0,0,0,1600,2800,0,0,0,0,0,0,0
-#N/A,Urea Consumption in tonnes,79636,1453297,0,0,2089372,1847816,0,0,0,0,0,0,0
-#N/A,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+IRN,Ammonium nitrate Consumption in tonnes,0,141835,0,0,178261,136026,0,0,0,0,0,0,0
+IRN,Ammonium sulphate Consumption in tonnes,53580,88301,0,0,153140,67513,0,0,0,0,0,0,0
+IRN,Calcium ammonium nitrate Consumption in tonnes,1359962,0,0,0,0,0,0,0,0,0,0,0,0
+IRN,Diammonium phosphate (DAP) Consumption in tonnes,0,332221,0,0,478968,203168,0,0,0,0,0,0,0
+IRN,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+IRN,NPK complex Consumption in tonnes,0,372976,0,0,438726,148929,0,0,0,0,0,0,0
+IRN,NPK complex <=10kg Consumption in tonnes,0,411,0,0,0,0,0,0,0,0,0,0,0
+IRN,NPK complex >10kg Consumption in tonnes,0,1904,0,0,0,0,0,0,0,0,0,0,0
+IRN,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+IRN,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+IRN,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+IRN,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+IRN,Potassium chloride (Muriate of potash) Consumption in tonnes,93100,115942,0,0,125987,63000,0,0,0,0,0,0,0
+IRN,Potassium nitrate Consumption in tonnes,0,502,0,0,0,0,0,0,0,0,0,0,0
+IRN,Potassium sulphate Consumption in tonnes,62901,62649,0,0,131142,155921,0,0,0,0,0,0,0
+IRN,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+IRN,Superphosphate above 35% Consumption in tonnes,291545,345094,0,0,638046,709295,0,0,0,0,0,0,0
+IRN,Superphosphate other Consumption in tonnes,33151,0,0,0,1600,2800,0,0,0,0,0,0,0
+IRN,Urea Consumption in tonnes,79636,1453297,0,0,2089372,1847816,0,0,0,0,0,0,0
+IRN,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 IRQ,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 IRQ,Ammonium sulphate Consumption in tonnes,0,0,5666,0,0,0,0,0,0,0,0,0,0
 IRQ,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -1807,26 +1807,26 @@ LBN,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,205000,210000,2
 LBN,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,60000,60000,60000,60000,60000
 LBN,Urea Consumption in tonnes,5122,8936,10287,4512,0,481,113,123,4069,7933,3688,1087,6006
 LBN,Urea and ammonium nitrate solutions Consumption in tonnes,0,47,43,45,0,31,90,12,65,8,2546,5766,3778
-#N/A,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Ammonium sulphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Diammonium phosphate (DAP) Consumption in tonnes,0,0,80000,80000,80000,80000,8000,47000,67000,52020,16000,16000,16000
-#N/A,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,NPK complex Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,NPK complex <=10kg Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,NPK complex >10kg Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Potassium chloride (Muriate of potash) Consumption in tonnes,0,0,0,0,0,0,0,1122,2000,0,1000,0,870
-#N/A,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Potassium sulphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Urea Consumption in tonnes,127000,50000,71000,133000,49000,0,0,0,0,0,0,0,0
-#N/A,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Ammonium sulphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Diammonium phosphate (DAP) Consumption in tonnes,0,0,80000,80000,80000,80000,8000,47000,67000,52020,16000,16000,16000
+LBY,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,NPK complex Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,NPK complex <=10kg Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,NPK complex >10kg Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Potassium chloride (Muriate of potash) Consumption in tonnes,0,0,0,0,0,0,0,1122,2000,0,1000,0,870
+LBY,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Potassium sulphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+LBY,Urea Consumption in tonnes,127000,50000,71000,133000,49000,0,0,0,0,0,0,0,0
+LBY,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 LTU,Ammonium nitrate Consumption in tonnes,0,0,0,15037,0,0,233009,218089,203893,175655,278199,243407,249991
 LTU,Ammonium sulphate Consumption in tonnes,0,0,0,58327,0,83981,80642,70981,69500,87492,101870,125814,232968
 LTU,Calcium ammonium nitrate Consumption in tonnes,0,0,0,48960,0,0,5512,21321,43720,19704,43207,24714,41103
@@ -2536,47 +2536,47 @@ QAT,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 QAT,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 QAT,Urea Consumption in tonnes,0,0,0,0,0,0,0,83000,178000,311000,339000,209000,341000
 QAT,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Ammonium sulphate Consumption in tonnes,0,18125,18947,17333,14330,16176,15204,12486,10870,11217,10724,9953,0
-#N/A,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Diammonium phosphate (DAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,0
-#N/A,NPK blends Consumption in tonnes,0,1437012,1537821,2083678,1480517,1512446,0,0,0,0,0,0,
-#N/A,NPK complex Consumption in tonnes,0,0,0,0,0,0,1320097,926375,963261,910224,1408116,988911,0
-#N/A,NPK complex <=10kg Consumption in tonnes,0,0,0,0,93,0,0,0,0,0,0,,0
-#N/A,NPK complex >10kg Consumption in tonnes,0,0,0,0,16469,0,0,0,0,0,0,,0
-#N/A,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,6,0,0,265,0,0,0,,0
-#N/A,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,169,0,0,941,0,0,0,,0
-#N/A,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Potassium chloride (Muriate of potash) Consumption in tonnes,0,4358,9906,8855,7008,7285,0,0,0,0,0,0,0
-#N/A,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Potassium sulphate Consumption in tonnes,0,8559,15624,9105,9997,14599,10080,7834,4274,6229,9648,5985,0
-#N/A,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,0
-#N/A,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Superphosphate other Consumption in tonnes,0,21454,37443,26477,16253,18563,13325,11521,9985,10510,11143,12282,0
-#N/A,Urea Consumption in tonnes,0,253272,328872,219809,172430,254603,185444,182984,144671,176460,194000,190937,0
-#N/A,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,35121,43232,52739,43251,67432,29911
-#N/A,Ammonium sulphate Consumption in tonnes,0,0,0,0,0,0,0,22,87,985,104,15,384
-#N/A,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,238,239,751,1527,92,32
-#N/A,Diammonium phosphate (DAP) Consumption in tonnes,0,0,0,0,0,0,0,0,1,4,5,140,0
-#N/A,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,3197,314,3446,5156,13192,15442
-#N/A,NPK complex Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,NPK complex <=10kg Consumption in tonnes,0,0,0,0,0,0,0,153,57,25,130,0,0
-#N/A,NPK complex >10kg Consumption in tonnes,0,0,0,0,0,0,0,9493,16438,21828,15761,17512,20806
-#N/A,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,5,0,0,0,0
-#N/A,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,706,0,8492,18814,19068
-#N/A,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,2,10,0,5,6,6
-#N/A,Potassium chloride (Muriate of potash) Consumption in tonnes,0,0,0,0,0,0,0,0,669,491,962,1180,408
-#N/A,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,4,0,63,64,38,11
-#N/A,Potassium sulphate Consumption in tonnes,0,0,0,0,0,0,0,0,79,4,6,50,32
-#N/A,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,9,0
-#N/A,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Urea Consumption in tonnes,0,0,0,0,0,0,0,2161,5678,12182,16722,10971,34013
-#N/A,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,1413,1152,3232,4471
+KOR,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+KOR,Ammonium sulphate Consumption in tonnes,0,18125,18947,17333,14330,16176,15204,12486,10870,11217,10724,9953,0
+KOR,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+KOR,Diammonium phosphate (DAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+KOR,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,0
+KOR,NPK blends Consumption in tonnes,0,1437012,1537821,2083678,1480517,1512446,0,0,0,0,0,0,
+KOR,NPK complex Consumption in tonnes,0,0,0,0,0,0,1320097,926375,963261,910224,1408116,988911,0
+KOR,NPK complex <=10kg Consumption in tonnes,0,0,0,0,93,0,0,0,0,0,0,,0
+KOR,NPK complex >10kg Consumption in tonnes,0,0,0,0,16469,0,0,0,0,0,0,,0
+KOR,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,6,0,0,265,0,0,0,,0
+KOR,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,169,0,0,941,0,0,0,,0
+KOR,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+KOR,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+KOR,Potassium chloride (Muriate of potash) Consumption in tonnes,0,4358,9906,8855,7008,7285,0,0,0,0,0,0,0
+KOR,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+KOR,Potassium sulphate Consumption in tonnes,0,8559,15624,9105,9997,14599,10080,7834,4274,6229,9648,5985,0
+KOR,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,0
+KOR,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+KOR,Superphosphate other Consumption in tonnes,0,21454,37443,26477,16253,18563,13325,11521,9985,10510,11143,12282,0
+KOR,Urea Consumption in tonnes,0,253272,328872,219809,172430,254603,185444,182984,144671,176460,194000,190937,0
+KOR,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+MDA,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,35121,43232,52739,43251,67432,29911
+MDA,Ammonium sulphate Consumption in tonnes,0,0,0,0,0,0,0,22,87,985,104,15,384
+MDA,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,238,239,751,1527,92,32
+MDA,Diammonium phosphate (DAP) Consumption in tonnes,0,0,0,0,0,0,0,0,1,4,5,140,0
+MDA,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,3197,314,3446,5156,13192,15442
+MDA,NPK complex Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+MDA,NPK complex <=10kg Consumption in tonnes,0,0,0,0,0,0,0,153,57,25,130,0,0
+MDA,NPK complex >10kg Consumption in tonnes,0,0,0,0,0,0,0,9493,16438,21828,15761,17512,20806
+MDA,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,5,0,0,0,0
+MDA,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,706,0,8492,18814,19068
+MDA,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+MDA,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,2,10,0,5,6,6
+MDA,Potassium chloride (Muriate of potash) Consumption in tonnes,0,0,0,0,0,0,0,0,669,491,962,1180,408
+MDA,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,4,0,63,64,38,11
+MDA,Potassium sulphate Consumption in tonnes,0,0,0,0,0,0,0,0,79,4,6,50,32
+MDA,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,9,0
+MDA,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+MDA,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+MDA,Urea Consumption in tonnes,0,0,0,0,0,0,0,2161,5678,12182,16722,10971,34013
+MDA,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,1413,1152,3232,4471
 ROU,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,662825,594855,559707,648734,644947
 ROU,Ammonium sulphate Consumption in tonnes,0,0,0,0,0,0,1298,4251,27048,24403,20047,54145,48188
 ROU,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,9376,0,0,6453,34114,32442,96707,71368,59242
@@ -3292,50 +3292,50 @@ GBR,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 GBR,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 GBR,Urea Consumption in tonnes,324400,252100,230900,188500,0,0,0,0,0,0,0,0,0
 GBR,Urea and ammonium nitrate solutions Consumption in tonnes,259700,301600,325800,324300,0,0,0,0,0,0,0,0,0
-#N/A,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,15518,0,0,0,0,18560
-#N/A,Ammonium sulphate Consumption in tonnes,12600,4099,2593,1554,4877,4620,4620,3276,13351,4002,4126,3178,16490
-#N/A,Calcium ammonium nitrate Consumption in tonnes,12577,21494,12680,15460,25589,12079,12079,12936,23438,14359,12808,9853,21289
-#N/A,Diammonium phosphate (DAP) Consumption in tonnes,6515,3897,10551,26588,21438,19408,20000,0,41636,42909,69918,21000,30508
-#N/A,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,5143
-#N/A,NPK blends Consumption in tonnes,0,0,0,0,5199,3347,3347,0,0,0,0,0,
-#N/A,NPK complex Consumption in tonnes,0,0,0,3704,1239,6031,6031,0,54642,61369,53396,35886,0
-#N/A,NPK complex <=10kg Consumption in tonnes,0,0,0,0,134,0,54,0,21,1038,0,,43
-#N/A,NPK complex >10kg Consumption in tonnes,0,0,0,0,27680,34205,54282,0,43393,93443,0,,64193
-#N/A,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,75,0,0,,0
-#N/A,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,1876,53,279,0,0,0,0,,422
-#N/A,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,PK compounds Consumption in tonnes,0,0,0,2570,3847,23150,23150,0,0,0,0,0,0
-#N/A,Potassium chloride (Muriate of potash) Consumption in tonnes,2498,941,2007,1283,2638,460,460,1515,0,0,0,0,0
-#N/A,Potassium nitrate Consumption in tonnes,0,0,0,0,126,5560,3000,0,0,0,0,0,137
-#N/A,Potassium sulphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,209
-#N/A,Superphosphate Consumption in tonnes,0,0,0,0,0,1368,1040,1848,814,2329,1605,,0
-#N/A,Superphosphate above 35% Consumption in tonnes,309,2313,2479,2065,3675,140,140,0,0,0,0,0,1548
-#N/A,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Urea Consumption in tonnes,30334,36150,54674,46570,56822,69133,73200,107167,90851,100465,69000,65855,102177
-#N/A,Urea and ammonium nitrate solutions Consumption in tonnes,13,0,18,0,0,0,0,0,0,0,0,0,0
-#N/A,"Ammonia, anhydrous Consumption in tonnes",0,0,0,0,0,0,0,0,0,0,0,,
-#N/A,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,761870,677444,661081,709831,775479,777148,768436
-#N/A,Ammonium sulphate Consumption in tonnes,0,0,0,0,0,0,1170771,1108148,1217022,1367805,1384507,1387487,1371933
-#N/A,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Diammonium phosphate (DAP) Consumption in tonnes,0,0,0,0,0,0,2080619,1833097,2161905,2265925,2368939,2500133,2466612
-#N/A,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,2239768,2057636,2407018,2413184,2498053,,
-#N/A,NPK blends Consumption in tonnes,0,0,0,0,0,0,6667353,6306925,6745839,6767831,6817033,7090162,7305877
-#N/A,NPK complex Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,NPK complex <=10kg Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
-#N/A,NPK complex >10kg Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
-#N/A,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
-#N/A,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
-#N/A,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,2152268,2224462,2650184,2572255,2557739,2699389,2663197
-#N/A,Phosphate rock Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
-#N/A,PK compounds Consumption in tonnes,0,0,0,0,0,0,296796,290098,335086,332354,324586,341425,351813
-#N/A,Potassium chloride (Muriate of potash) Consumption in tonnes,0,0,0,0,0,0,4212342,3703251,4809949,4961553,5082126,5381284,5418915
-#N/A,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Potassium sulphate Consumption in tonnes,0,0,0,0,0,0,292951,231182,257597,274144,305917,323925,326190
-#N/A,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
-#N/A,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,92063,67790,78708,85916,81787,86316,85159
-#N/A,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,4628,5140,8155,14017,18768,19808,19542
-#N/A,Urea Consumption in tonnes,0,0,0,0,0,0,4931500,4844182,5138019,5584730,5726551,5738876,5674543
-#N/A,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,9251595,9297951,10377627,10659098,11331467,11355855,11228555
+TZA,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,15518,0,0,0,0,18560
+TZA,Ammonium sulphate Consumption in tonnes,12600,4099,2593,1554,4877,4620,4620,3276,13351,4002,4126,3178,16490
+TZA,Calcium ammonium nitrate Consumption in tonnes,12577,21494,12680,15460,25589,12079,12079,12936,23438,14359,12808,9853,21289
+TZA,Diammonium phosphate (DAP) Consumption in tonnes,6515,3897,10551,26588,21438,19408,20000,0,41636,42909,69918,21000,30508
+TZA,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,5143
+TZA,NPK blends Consumption in tonnes,0,0,0,0,5199,3347,3347,0,0,0,0,0,
+TZA,NPK complex Consumption in tonnes,0,0,0,3704,1239,6031,6031,0,54642,61369,53396,35886,0
+TZA,NPK complex <=10kg Consumption in tonnes,0,0,0,0,134,0,54,0,21,1038,0,,43
+TZA,NPK complex >10kg Consumption in tonnes,0,0,0,0,27680,34205,54282,0,43393,93443,0,,64193
+TZA,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,75,0,0,,0
+TZA,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,1876,53,279,0,0,0,0,,422
+TZA,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+TZA,PK compounds Consumption in tonnes,0,0,0,2570,3847,23150,23150,0,0,0,0,0,0
+TZA,Potassium chloride (Muriate of potash) Consumption in tonnes,2498,941,2007,1283,2638,460,460,1515,0,0,0,0,0
+TZA,Potassium nitrate Consumption in tonnes,0,0,0,0,126,5560,3000,0,0,0,0,0,137
+TZA,Potassium sulphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,209
+TZA,Superphosphate Consumption in tonnes,0,0,0,0,0,1368,1040,1848,814,2329,1605,,0
+TZA,Superphosphate above 35% Consumption in tonnes,309,2313,2479,2065,3675,140,140,0,0,0,0,0,1548
+TZA,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+TZA,Urea Consumption in tonnes,30334,36150,54674,46570,56822,69133,73200,107167,90851,100465,69000,65855,102177
+TZA,Urea and ammonium nitrate solutions Consumption in tonnes,13,0,18,0,0,0,0,0,0,0,0,0,0
+USA,"Ammonia, anhydrous Consumption in tonnes",0,0,0,0,0,0,0,0,0,0,0,,
+USA,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,761870,677444,661081,709831,775479,777148,768436
+USA,Ammonium sulphate Consumption in tonnes,0,0,0,0,0,0,1170771,1108148,1217022,1367805,1384507,1387487,1371933
+USA,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+USA,Diammonium phosphate (DAP) Consumption in tonnes,0,0,0,0,0,0,2080619,1833097,2161905,2265925,2368939,2500133,2466612
+USA,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,0,2239768,2057636,2407018,2413184,2498053,,
+USA,NPK blends Consumption in tonnes,0,0,0,0,0,0,6667353,6306925,6745839,6767831,6817033,7090162,7305877
+USA,NPK complex Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+USA,NPK complex <=10kg Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
+USA,NPK complex >10kg Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
+USA,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
+USA,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
+USA,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,2152268,2224462,2650184,2572255,2557739,2699389,2663197
+USA,Phosphate rock Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
+USA,PK compounds Consumption in tonnes,0,0,0,0,0,0,296796,290098,335086,332354,324586,341425,351813
+USA,Potassium chloride (Muriate of potash) Consumption in tonnes,0,0,0,0,0,0,4212342,3703251,4809949,4961553,5082126,5381284,5418915
+USA,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+USA,Potassium sulphate Consumption in tonnes,0,0,0,0,0,0,292951,231182,257597,274144,305917,323925,326190
+USA,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
+USA,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,92063,67790,78708,85916,81787,86316,85159
+USA,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,4628,5140,8155,14017,18768,19808,19542
+USA,Urea Consumption in tonnes,0,0,0,0,0,0,4931500,4844182,5138019,5584730,5726551,5738876,5674543
+USA,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,9251595,9297951,10377627,10659098,11331467,11355855,11228555
 URY,Ammonium nitrate Consumption in tonnes,441,7026,0,9860,9000,17897,9637,11873,1793,12945,14946,,12952
 URY,Ammonium sulphate Consumption in tonnes,1487,5109,0,96,78,5094,11734,327,6324,8733,13942,,9550
 URY,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,3857,1097,,2500
@@ -3376,27 +3376,27 @@ UZB,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 UZB,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 UZB,Urea Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 UZB,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Ammonium sulphate Consumption in tonnes,0,0,0,0,87000,32000,35000,24000,39000,0,0,0,0
-#N/A,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Diammonium phosphate (DAP) Consumption in tonnes,0,0,0,0,0,0,0,0,145050,0,0,0,0
-#N/A,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,53000,45000,14000,0,0,0,0,0
-#N/A,NPK blends Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
-#N/A,NPK complex Consumption in tonnes,0,0,0,0,246000,338000,393000,360000,302000,0,0,0,0
-#N/A,NPK complex <=10kg Consumption in tonnes,0,0,0,0,0,0,241,0,0,0,0,0,0
-#N/A,NPK complex >10kg Consumption in tonnes,0,0,0,0,0,0,101919,0,0,0,0,0,0
-#N/A,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,15,0,0,0,0,0,0
-#N/A,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Potassium chloride (Muriate of potash) Consumption in tonnes,80922,88601,145924,0,84000,31000,48000,78000,77000,0,0,0,0
-#N/A,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Potassium sulphate Consumption in tonnes,16753,9464,5526,0,11000,11000,34000,14000,22000,0,0,0,0
-#N/A,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
-#N/A,Urea Consumption in tonnes,0,0,0,0,285000,313000,483000,440000,484000,0,0,0,0
-#N/A,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,Ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,Ammonium sulphate Consumption in tonnes,0,0,0,0,87000,32000,35000,24000,39000,0,0,0,0
+VEN,Calcium ammonium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,Diammonium phosphate (DAP) Consumption in tonnes,0,0,0,0,0,0,0,0,145050,0,0,0,0
+VEN,Monoammonium phosphate (MAP) Consumption in tonnes,0,0,0,0,0,53000,45000,14000,0,0,0,0,0
+VEN,NPK blends Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,,
+VEN,NPK complex Consumption in tonnes,0,0,0,0,246000,338000,393000,360000,302000,0,0,0,0
+VEN,NPK complex <=10kg Consumption in tonnes,0,0,0,0,0,0,241,0,0,0,0,0,0
+VEN,NPK complex >10kg Consumption in tonnes,0,0,0,0,0,0,101919,0,0,0,0,0,0
+VEN,Other nitrogen & phosphates compounds Consumption in tonnes,0,0,0,0,0,0,15,0,0,0,0,0,0
+VEN,Other nitrogen & phosphorus compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,Other NP compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,PK compounds Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,Potassium chloride (Muriate of potash) Consumption in tonnes,80922,88601,145924,0,84000,31000,48000,78000,77000,0,0,0,0
+VEN,Potassium nitrate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,Potassium sulphate Consumption in tonnes,16753,9464,5526,0,11000,11000,34000,14000,22000,0,0,0,0
+VEN,Superphosphate Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,Superphosphate above 35% Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,Superphosphate other Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
+VEN,Urea Consumption in tonnes,0,0,0,0,285000,313000,483000,440000,484000,0,0,0,0
+VEN,Urea and ammonium nitrate solutions Consumption in tonnes,0,0,0,0,0,0,0,0,0,0,0,0,0
 VNM,Ammonium nitrate Consumption in tonnes,0,0,0,38037,0,0,0,68676,85721,113429,95130,112528,121278
 VNM,Ammonium sulphate Consumption in tonnes,0,0,0,731804,0,0,0,1164518,681092,885085,1148655,1101144,918185
 VNM,Calcium ammonium nitrate Consumption in tonnes,0,0,0,49,0,0,0,1191,421,23,145,1737,875

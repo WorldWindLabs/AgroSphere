@@ -1096,6 +1096,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 
 	sliderHTML.on('slidestop', function(event, ui) {
 		var year = ui.value;
+		console.log(geoMode);
 		document.getElementById('geoCompType' + geoMode).click();
 	});
 
@@ -1108,6 +1109,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
             //Find the year based on the slider value
             var sliderValue = $('#geoSlider').slider("value");
 			geoMode = parseInt(this.id.slice('geoCompType'.length));
+			console.log("New Geo Mode", geoMode);
             var buttonName = $('#' + this.id).text().slice('Generate Geo Comparison for '.length);
 			console.log(buttonName);
             //Do some data stuff, go through the agridata based on the button
@@ -1129,10 +1131,12 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					}
 				}
             }
-
+			
             //Got all the data, colour it
             countryData = filterOutBlanks(countryData, 0);
+			//console.log(countryData);
             var countryLayer = colourizeCountries(countryData, geoJSONData, buttonName);
+			countryLayer.userObject.year = sliderValue;
             //Check if the country layer exist
 			var flagLayer;
             var l = 0;
@@ -1141,13 +1145,14 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
                 if(wwd.layers[l].displayName == 'Geo Country Data') {
 					console.log(wwd.layers[l]);
 					currentLayerName = wwd.layers[l].userObject.dataType;
+					var previousYear = wwd.layers[l].userObject.year;
                     wwd.removeLayer(wwd.layers[l]);
                 } else if(wwd.layers[l].displayName == 'countries Placemarks') {
 					flagLayer = wwd.layers[l];
 				}
             }
-			console.log(currentLayerName);
-			if(currentLayerName != buttonName) {
+			console.log(currentLayerName, previousYear, sliderValue);
+			if((currentLayerName != buttonName) || (previousYear != sliderValue)){
 			
 				wwd.addLayer(countryLayer);
 				layerManager.synchronizeLayerList();
@@ -1157,7 +1162,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 				console.log(flagLayer);
 				for(l = 0; l < flagLayer.renderables.length; l++) {
 					var code3 = flagLayer.renderables[l].userObject.code3;
-					console.log(code3);
+					//console.log(code3);
 					//Find the agriData with the code3
 					for(j = 0; j < agriData.length; j++) {
 						if(agriData[j].code3 == code3) {
@@ -1824,7 +1829,7 @@ function generateCountryButtons() {
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Buttons</button>';
 	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Buttons</button>';
 	countryHTML += '<button class="btn-info" id="spawnPest">Show Pesticide Buttons</button>';
-	countryHTML += '<button class="btn-info" id="spawnFerti">Show Fertilizer Buttons</button>';
+	countryHTML += '<button class="btn-info" id="spawnFerti">Show Fertiliser Buttons</button>';
 	return countryHTML;
 }
 
@@ -1895,8 +1900,8 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many pesticides?" title="Search for datasets..">';
 		break;
 		case 5:
-			var dataHTML = '<h4>Fertilizer Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many fertilizers?" title="Search for datasets..">';
+			var dataHTML = '<h4>Fertiliser Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many fertilisers?" title="Search for datasets..">';
 		break;
 	}
 
@@ -1921,7 +1926,7 @@ function generateDataButtons(inputData, codeName, mode) {
 				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticides</button>';
 				break;
 			case 5:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertiliser</button>';
 				break;
         }
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
@@ -2451,8 +2456,5 @@ $(document).ready(function () {
         setTimeout(function() {checkTabs()}, 250);
     });
 	checkTabs();
-    $(".btn-info").click(function() {
-        $(this).toggleClass('active');
-    });
 });
 });
