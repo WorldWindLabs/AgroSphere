@@ -55,6 +55,7 @@ input[type="checkbox"]{
     text-align:center !important;
     color:white !important;
     font-size:12px !important;
+    margin-bottom:8px;
 }
 
 .btn:hover{
@@ -471,6 +472,7 @@ input {
     background-color: #323232 !important;
     margin: 2.5px;
     box-shadow: 1px 1px 1px black;
+    margin-bottom:8px;
 }
 
 .btn-info:hover {

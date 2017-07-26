@@ -2486,7 +2486,8 @@ $(document).ready(function () {
     });
 	checkTabs();
     $(".ui-button").click(function() {
-        $(this).toggleClass('active');
+        $('.ui-button.active').removeClass('active');
+        $(this).addClass('active');
     });
 });
 });
