@@ -1177,6 +1177,8 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 				console.log(flagLayer);
 				for(l = 0; l < flagLayer.renderables.length; l++) {
 					var code3 = flagLayer.renderables[l].userObject.code3;
+					var flagName = flagLayer.renderables[l].userObject.country + ' ' +
+							code3;
 					//console.log(code3);
 					//Find the agriData with the code3
 					for(j = 0; j < agriData.length; j++) {
@@ -1186,14 +1188,17 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 								if(agriData[j].dataValues[k].typeName == buttonName) {
 									for(m = 0; m < agriData[j].dataValues[k].timeValues.length; m++) {
 										if(agriData[j].dataValues[k].timeValues[m].year == sliderValue) {
-											flagLayer.renderables[l].label = flagLayer.renderables[l].userObject.country + '\n - ' + buttonName + '\n' +
-													agriData[j].dataValues[k].timeValues[m].value;
+											if(agriData[j].dataValues[k].timeValues[m].value != '') {
+												flagName = flagLayer.renderables[l].userObject.country + '\n - ' + buttonName + '\n' +
+														agriData[j].dataValues[k].timeValues[m].value;
+											}
 										}
 									}
 								}
 							}
 						}
 					}
+					flagLayer.renderables[l].label = flagName;
 				}
 			}
         });
