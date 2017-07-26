@@ -488,7 +488,7 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
     }
     var timeHTML = '<h5><b>Time Scale:</b> ' + startDate + ' - ' + endDate + '</h5>';
     timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
-    timeHTML += '<div id="time_date_' + layerNumber + '"><br>Current Time: </div>';
+    timeHTML += '<div id="time_date_' + layerNumber + '"><br>Current Time: Use the Time Scale</div>';
     //Wrap up the HTML
     timeHTML += '</div>';
     timeHTML += '<br>';
@@ -521,7 +521,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 
 	slider.on('slide', function(event, ui) {
 		var timeNumber = ui.value - Math.floor(ui.value);
-		$('#time_date_' + layerNumber).html('Current time for this layer: ' +
+		$('#time_date_' + layerNumber).html('<br>Current time for this layer: ' +
             wmsConfig.timeSequences[Math.floor(ui.value)].getTimeForScale(timeNumber).toDateString().substring(4));
 	});
 
