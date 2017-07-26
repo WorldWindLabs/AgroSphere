@@ -470,7 +470,6 @@ function giveOpacitySliderFunctionality(wwd, layerName, layerNumber) {
 
 function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
     //Create the general box
-    var timeHTML = '<br><h5><b>Time for ' + layerName +'</b></h5>';
 	console.log(wmsConfig);
     //Create the output
     var startDate;
@@ -487,7 +486,7 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
         startDate = wmsConfig.timeSequences[0].startTime.toDateString();
         endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString();
     }
-    timeHTML += '<h5><b>Time Scale: ' + startDate + ' - ' + endDate + '</b></h5>';
+    var timeHTML = '<h5><b>Time Scale: ' + startDate + ' - ' + endDate + '</b></h5>';
     timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
     timeHTML += '<div id="time_date_' + layerNumber + '">Current Time: </div>';
     //Wrap up the HTML
