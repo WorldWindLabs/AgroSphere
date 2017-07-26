@@ -480,6 +480,7 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
 	timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
     //Wrap up the HTML
     timeHTML += '</div>';
+    timeHTML += '<br>';
 
 
     return timeHTML;
