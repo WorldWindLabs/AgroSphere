@@ -575,8 +575,8 @@ input {
     font-size: 1.5em;
 }
 
-#fontsize {
-    font-size:1.2em;
+.fontsize {
+    font-size:1.1em;
 }
 
 /* carousel transition speed */
