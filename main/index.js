@@ -103,7 +103,6 @@ requirejs({paths:{
 
 		//Generate WMS/WMTS Layers
 		loadWMTSLayers(wwd, layerManager);
-		
         var sunSimulationCheckBox = document.getElementById('stars-simulation');
         var doRunSimulation = false;
         var timeStamp = Date.now();
@@ -341,7 +340,7 @@ console.timeEnd('First');
 function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, layerNumber) {
     //Generate the div tags
     var layerControlHTML = '<div class="toggleLayers" id="funcLayer' + layerNumber + '">';
-
+	layerControlHTML += '<h5>Layer control for ' + layerName + '</h5>'; 
     //Spawn opacity controller
     layerControlHTML += generateOpacityControl(wwd, layerName, layerNumber);
     //Spawn the legend
@@ -382,7 +381,7 @@ function getLayerFromName(wwd, layerName) {
 function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
-    var legendHTML = '<br><h5><b>Legend</b> ' + layerName + '</h5>';
+    var legendHTML = '<br><h5><b>Legend</b></h5>';
 	console.log(wmsLayerCapabilities, typeof(wmsLayerCapabilities.styles));
 	//if(typeof(wmsLayerCapabilities.styles) != 'undefined') {
 		if((wmsLayerCapabilities.styles
@@ -943,6 +942,7 @@ function loadWMTSLayers(wwd, layerManager) {
 
 			//Readd layercontrols
 			setLayerControls();
+			layerManager.synchronizeLayerList();
         }
     };
 
