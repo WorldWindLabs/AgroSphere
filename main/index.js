@@ -239,13 +239,13 @@ requirejs({paths:{
                             detailsHTML += '<button class="btn-info"><a href="https://fluxnet.fluxdata.org//data/download-data/" target="_blank">Download Raw Atmosphere Data (Fluxnet Account Required)</a></button>'
 							//Generate the station buttons
 							detailsHTML += generateAtmoButtons(atmoData, atmoDataMonthly, atmoDataPoint.stationName, agriDataPoint, ccode3);
-							
+
 							details.html(detailsHTML);
 
 							//Generate the plots
 							//Give functionality for buttons generated
 							giveAtmoButtonsFunctionality(detailsHTML, atmoData,
-									atmoDataMonthly, atmoDataPoint.stationName, 
+									atmoDataMonthly, atmoDataPoint.stationName,
 									agriDataPoint);
 
                             var otherTab = $("#layers");
@@ -340,7 +340,8 @@ console.timeEnd('First');
 function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, layerNumber) {
     //Generate the div tags
     var layerControlHTML = '<div class="toggleLayers" id="funcLayer' + layerNumber + '">';
-	layerControlHTML += '<h5>Layer Controls for ' + layerName + '</h5>';
+
+  layerControlHTML += '<span style="display:none">Layer Controls for ' + layerName + '</span>';
     //Spawn opacity controller
     layerControlHTML += generateOpacityControl(wwd, layerName, layerNumber);
     //Spawn the legend
@@ -1147,7 +1148,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					}
 				}
             }
-			
+
             //Got all the data, colour it
             countryData = filterOutBlanks(countryData, 0);
 			//console.log(countryData);
