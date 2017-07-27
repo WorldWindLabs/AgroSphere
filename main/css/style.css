@@ -588,7 +588,11 @@ input {
 }
 
 .geoCompButton.active {
-    border: 2px solid lightgreen !important;
+     border: 2px solid lightgreen;
+ }
+
+.geoCompButton.activebefore {
+    border: none;
 }
 
 /* projection menu css fix */

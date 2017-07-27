@@ -2534,6 +2534,7 @@ $(document).ready(function () {
     });
 	checkTabs();
     $(".geoCompButton").click(function() {
+        $('.geoCompButton.active').addClass('activebefore');
         $('.geoCompButton.active').removeClass('active');
         $(this).addClass('active');
     });
