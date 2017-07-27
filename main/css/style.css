@@ -591,3 +591,20 @@ input {
     border: 2px solid lightgreen !important;
     display:none;
 }
+
+/* projection menu css fix */
+.dropdown-menu li a{
+  color:white;
+}
+
+.dropdown-menu li a:hover{
+  background:lightgreen;
+}
+
+.dropdown-menu {
+  background: #313A7D;
+}
+
+#geoSlideValue {
+  color:white;
+}
