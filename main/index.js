@@ -908,7 +908,7 @@ function loadWMTSLayers(wwd, layerManager) {
             // Add the layers to World Wind and update the layer manager
             wwd.addLayer(wmsLayer);
 
-			var layerButtonsHTML = '<button class="btn-info" id="layerToggle' + i +'">' + wmsLayerCapabilities.title + '</button>';
+			var layerButtonsHTML = '<button class="btn-info wms-button" id="layerToggle' + i +'">' + wmsLayerCapabilities.title + '</button>';
 
 			$('#wms').append(layerButtonsHTML);
 			$('#layerToggle' + i).button();
@@ -1251,7 +1251,7 @@ function generateGeoComparisonButton(agriData) {
 	comparisonHTML += '<div>';
     for(i = 0; i < buttonNames.length; i++) {
         var buttonTempName = buttonNames[i];
-        comparisonHTML += '<div class="buttonDiv"><button class="btn-info" id="geoCompType' + i +
+        comparisonHTML += '<div class="buttonDiv"><button class="btn-info geoCompButton" id="geoCompType' + i +
             '">Generate Geo Comparison for ' + buttonTempName + '</button><br></div>';
     }
 
@@ -2492,8 +2492,12 @@ $(document).ready(function () {
         setTimeout(function() {checkTabs()}, 50);
     });
 	checkTabs();
-    $(".ui-button").click(function() {
-        $('.ui-button.active').removeClass('active');
+    $(".geoCompButton").click(function() {
+        $('.geoCompButton.active').removeClass('active');
+        $(this).addClass('active');
+    });
+    $(".wms-button").click(function() {
+        $('.wms-button.active').removeClass('active');
         $(this).addClass('active');
     });
 });
