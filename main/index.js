@@ -1567,7 +1567,7 @@ function generateWeatherHTML(countryData) {
 	for(i = 0; i < countryData.length; i++) {
 		weatherHTML += '<option>' + countryData[i].code2 + ' - ' + countryData[i].country + '</option>';
 	}
-	weatherHTML += '</select>';
+	weatherHTML += '</select><br>';
 	weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
   weatherHTML += '<div id="searchDetails"></div>'
 	$('#weather').append(weatherHTML);

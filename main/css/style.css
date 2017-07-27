@@ -605,6 +605,13 @@ input {
   background: #313A7D;
 }
 
+/* geocomparison time slider text fix */
 #geoSlideValue {
   color:white;
+}
+
+#countryNames {
+  background:black;
+  color:#313A7D;
+  box-shadow:1px 1px 1px black;
 }
