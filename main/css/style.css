@@ -359,9 +359,9 @@ audio:hover, audio:focus, audio:active
     -webkit-box-shadow: 3px 3px 5px rgba(0,0, 0, 0.4);
     -moz-box-shadow: 3px 3px 5px rgba(0,0, 0, 0.4);
     box-shadow: 3px 3px 5px rgba(0,0, 0, 0.4);
-    -webkit-transform: scale(1.03);
-    -moz-transform: scale(1.03);
-    transform: scale(1.03);
+    -webkit-transform: scale(1.01);
+    -moz-transform: scale(1.01);
+    transform: scale(1.01);
 }
 audio
 {
@@ -464,6 +464,7 @@ input {
 
 .btn-info {
     border: none;
+    border-radius:none;
     background-color: #323232 !important;
     margin: 2.5px;
     box-shadow: 1px 1px 1px black;
@@ -477,7 +478,6 @@ input {
 }
 
 .btn-block {
-    border-radius:5px;
     overflow-y:hidden;
     box-shadow: 1px 1px 1px black;
 }
@@ -510,20 +510,21 @@ input {
 
 .modal-content {
     border-radius:0;
+    background:#313A7D;
 }
 
 .modal-body h4, .modal-body p, .modal-body a, .modal-body h5 {
-    color:black;
+    color:white;
 }
 
 .modal-header h4 {
-    color:black;
+    color:white;
     text-align:center;
 }
 
 .carousel-caption p{
     font-size: 150%;
-    background: rgba(0, 0, 0, 0.8);
+    background: #313A7D;
     border-radius:10px;
     color:white;
 }
@@ -536,7 +537,7 @@ input {
 }
 
 .carousel-inner {
-    background:black;
+    background:#313A7D;
 }
 
 .carousel {
@@ -568,7 +569,7 @@ input {
 }
 
 #github {
-    color:black;
+    color:white;
     font-size: 1.5em;
 }
 
