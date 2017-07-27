@@ -1947,7 +1947,7 @@ function generateDataButtons(inputData, codeName, mode) {
                 break;
             case 1:
                 dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Price Data</button>';
-            break;
+                break;
             case 2:
                 dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Livestock Data</button>';
                 break;
@@ -1961,7 +1961,7 @@ function generateDataButtons(inputData, codeName, mode) {
 				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Data</button>';
 				break;
 			case 6:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Data</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Yield</button>';
 				break;
         }
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
