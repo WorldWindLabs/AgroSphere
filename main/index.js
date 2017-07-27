@@ -1595,16 +1595,16 @@ function giveWeatherButtonFunctionality() {
 				var dropArea = $('#searchDetails');
 				dropArea.html('');
 				var tempHTML = '<h5 class="fontsize"><b>Weather Details for ' + data.name + '</b></h5>';
-				tempHTML += '<p><b class="smallerfontsize">Current Outlook:</b> ' + data.weather[0].main + '</p>';
-				tempHTML += '<p><b class="smallerfontsize">Current Outlook Description:</b> ' + data.weather[0].description + '</p>';
-				tempHTML += '<p><b class="smallerfontsize">Current Temperature (Celsius):</b> ' + Math.round((data.main.temp - 272),2) + '</p>';
-				tempHTML += '<p><b class="smallerfontsize">Sunrise:</b> ' + timeConverter(data.sys.sunrise) + '</p>';
-                tempHTML += '<p><b class="smallerfontsize">Sunset:</b> ' + timeConverter(data.sys.sunset) + '</p>';
-				tempHTML += '<p><b class="smallerfontsize">Max Temperature Today (Celsius):</b> ' + Math.round((data.main.temp_max - 272),2) + '</p>';
-				tempHTML += '<p><b class="smallerfontsize">Min Temperature Today (Celsius):</b> ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
-				tempHTML += '<p><b class="smallerfontsize">Pressure (HPa):</b> ' + data.main.pressure + '</p>';
-				tempHTML += '<p><b class="smallerfontsize">Humidity (%):</b> ' + data.main.humidity + '</p>';
-				tempHTML += '<p><b class="smallerfontsize">Wind speed (m/s):</b>' + data.wind.speed + '</p><br><br>';
+				tempHTML += '<p><b>Current Outlook:</b> ' + data.weather[0].main + '</p>';
+				tempHTML += '<p><b>Current Outlook Description:</b> ' + data.weather[0].description + '</p>';
+				tempHTML += '<p><b>Current Temperature (Celsius):</b> ' + Math.round((data.main.temp - 272),2) + '</p>';
+				tempHTML += '<p><b>Sunrise:</b> ' + timeConverter(data.sys.sunrise) + '</p>';
+                tempHTML += '<p><b>Sunset:</b> ' + timeConverter(data.sys.sunset) + '</p>';
+				tempHTML += '<p><b>Max Temperature Today (Celsius):</b> ' + Math.round((data.main.temp_max - 272),2) + '</p>';
+				tempHTML += '<p><b>Min Temperature Today (Celsius):</b> ' + Math.round(data.main.temp_min  - 272, 2) + '</p>';
+				tempHTML += '<p><b>Pressure (HPa):</b> ' + data.main.pressure + '</p>';
+				tempHTML += '<p><b>Humidity (%):</b> ' + data.main.humidity + '</p>';
+				tempHTML += '<p><b>Wind speed (m/s):</b>' + data.wind.speed + '</p><br><br>';
 				dropArea.append(tempHTML);
 				console.log('success');
 			},
