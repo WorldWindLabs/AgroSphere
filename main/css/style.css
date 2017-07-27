@@ -587,9 +587,8 @@ input {
     .transition(.15s ease-in-out left);
 }
 
-.ui-button.active {
+.geoCompButton.active {
     border: 2px solid lightgreen !important;
-    display:none;
 }
 
 /* projection menu css fix */
