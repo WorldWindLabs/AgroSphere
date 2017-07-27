@@ -356,9 +356,9 @@ li{
 /* audio effects */
 audio:hover, audio:focus, audio:active
 {
-    -webkit-box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
-    -moz-box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
-    box-shadow: 10px 10px 15px rgba(0,0, 0, 0.4);
+    -webkit-box-shadow: 3px 3px 5px rgba(0,0, 0, 0.4);
+    -moz-box-shadow: 3px 3px 5px rgba(0,0, 0, 0.4);
+    box-shadow: 3px 3px 5px rgba(0,0, 0, 0.4);
     -webkit-transform: scale(1.03);
     -moz-transform: scale(1.03);
     transform: scale(1.03);
@@ -463,7 +463,6 @@ input {
 /* button css */
 
 .btn-info {
-    border-radius:5px;
     border: none;
     background-color: #323232 !important;
     margin: 2.5px;
@@ -611,7 +610,9 @@ input {
 }
 
 #countryNames {
-  background:black;
-  color:#313A7D;
+  background:#313A7D;
+  color:white;
   box-shadow:1px 1px 1px black;
+  border:1px solid black;
+  border-radius:0;
 }
