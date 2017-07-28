@@ -1,7 +1,6 @@
 <img src="images/nasalogo.png" height="100"/>
-<p>in partnership with the <a href="http://www.esa.int" target="_blank">European Space Agency</a></p>
 
-# NASA AgroSphere
+# AgroSphere
 
 ### NASA World Wind is a free, open-source API that provides the tools to create interactive
 visualizations of the world in 4D, such as satellite tracking and seismic history. The NASA
@@ -22,12 +21,8 @@ The World Wind intern team utilized technologies including HTML5, CSS, and JavaS
  click on the respective weather and nation placemarks for statistical data specific to that
  country’s history for atmosphere and agriculture, and for a specified timeframe. Users can
  also control each dataset on the globe by adjusting opacity, time, and other options, for
- comparing crop production versus climate. This web app is intended for use in the classrooms by
-  teachers, science centers and home schoolers, as well as citizens of the world. Children and
-  adults alike will be able to learn about climate issues by visually experiencing the data
-  according to their interests. Users will learn about the effect of weather over time on
-  agriculture, and impact to national economies, and more.
-
+ comparing crop production versus climate. This web app is intended for use in classrooms by teachers and students as well as citizens of the world. Children and adults alike will be able to learn about climate issues by visually experiencing the data according to their interests. Users will learn about the effect of weather over time on agriculture, and impact to national economies, and more.
+ 
 _Screenshot showing the available data for a selected country, which includes lists of crops,
 price, livestocks, and agricultural emission._
 
