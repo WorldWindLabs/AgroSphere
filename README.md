@@ -20,7 +20,7 @@ The World Wind intern team utilized technologies including HTML5, CSS, and JavaS
 _Screenshot showing the available data for a selected country, which includes lists of crops,
 price, livestocks, and agricultural emission._
 
-<img src="images/RM1.png" />
+<img src="images/RM1.jpg" />
 
 _Screenshot comparing historical agricultural and weather data on a plot for USA._
 
