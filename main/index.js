@@ -88,8 +88,8 @@ requirejs({paths:{
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
 
 
-        //Automatically zoom into NASA Ames
-        wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 10e5));
+        //Automatically zoom into Helsinki, Finland
+        wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 20e6));
 
         var starFieldLayer = new WorldWind.StarFieldLayer();
         var atmosphereLayer = new WorldWind.AtmosphereLayer();
