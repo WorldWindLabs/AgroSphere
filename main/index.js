@@ -37,9 +37,9 @@ requirejs({paths:{
 
         var layers = [
             {layer: new WorldWind.BMNGLayer(), enabled: false},
-            {layer: new WorldWind.BMNGLandsatLayer(), enabled: true},
+            {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},
             {layer: new WorldWind.BingAerialLayer(null), enabled: false},
-            {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},
+            {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: true},
             {layer: new WorldWind.BingRoadsLayer(null), enabled: false},
             {layer: new WorldWind.CompassLayer(), enabled: false},
             {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
@@ -89,7 +89,7 @@ requirejs({paths:{
 
 
         //Automatically zoom into Helsinki, Finland
-        wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 20e6));
+        wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 16e5));
 
         var starFieldLayer = new WorldWind.StarFieldLayer();
         var atmosphereLayer = new WorldWind.AtmosphereLayer();
