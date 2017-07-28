@@ -20,7 +20,7 @@ The World Wind intern team utilized technologies including HTML5, CSS, and JavaS
 _Screenshot showing the available data for a selected country, which includes lists of crops,
 price, livestocks, and agricultural emission._
 
-<img src="images/RM1.jpg" />
+<img src="images/RM1.png" />
 
 _Screenshot comparing historical agricultural and weather data on a plot for USA._
 
@@ -28,7 +28,7 @@ _Screenshot comparing historical agricultural and weather data on a plot for USA
 
 _Screenshot showing AgroSphere comparing potato data from around the world._
 
-<img src="images/RM3.jpg">
+<img src="images/RM3.png">
 
 ## Features of AgroSphere
 
