@@ -1,7 +1,6 @@
 <img src="images/nasalogo.png" height="100"/>
-<p>in partnership with the <a href="http://www.esa.int" target="_blank">European Space Agency</a></p>
 
-# NASA AgroSphere
+# AgroSphere
 
 ### NASA World Wind is a free, open-source API that provides the tools to create interactive
 visualizations of the world in 4D, such as satellite tracking and seismic history. The NASA
