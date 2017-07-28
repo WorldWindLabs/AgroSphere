@@ -592,17 +592,14 @@ input {
     .transition(.15s ease-in-out left);
 }
 
+.geoCompButton.activebefore {
+    border: none !important;
+}
+
 .geoCompButton.active {
      border: 2px solid lightgreen;
  }
 
-.geoCompButton.activebefore {
-    border: none;
-}
-
-.geoCompButton.active {
-    border: 2px solid lightgreen;
-}
 
 /* projection menu css fix */
 .dropdown-menu li a{
