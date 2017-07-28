@@ -9,8 +9,8 @@ climate change on agriculture by nation, using the Web World Wind Software Devel
 
 ## Video Tutorial
 
-<a href="https://www.youtube.com/watch?v=WMYI1UcgFr4">
-<img src="http://i.imgur.com/GTxfgk7.png" />
+<a href="#">
+<img src="#" />
 </a>
 
 ## Introduction
