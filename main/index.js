@@ -1369,7 +1369,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 		}
 
 		//Assign functionality to the allButton
-		var allButtonHTML = $('#allButton').button();
+		var allButtonHTML = $('#allButtonAtmo').button();
 		allButtonHTML.on('click', function() {
 			//Plots a stacked bar
 			var topX = $('#amount').val();
@@ -1848,7 +1848,7 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
     var dataPoint = findDataPointStation(inputData, stationName);
 	var dataPoint2 = findDataPointStation(inputData2, stationName);
 	atmoHTML += '<div id="allGraphStation"></div>';
-	atmoHTML += '<button class="btn-info" id="allButton">Graph Crops and Weather</button>';
+	atmoHTML += '<button class="btn-info" id="allButtonAtmo">Graph Crops and Weather</button>';
     if (dataPoint != 0) {
         var i = 0;
 		//Yearly data
