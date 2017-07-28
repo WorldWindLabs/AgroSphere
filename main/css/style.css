@@ -1,4 +1,4 @@
-iv, h1, h2, h3, h4, h5, p, a {
+div, h1, h2, h3, h4, h5, p, a {
     color:white;
 }
 
@@ -21,6 +21,7 @@ iv, h1, h2, h3, h4, h5, p, a {
     -o-user-select: none;
     user-select: none;
     overflow: hidden;
+    font-family: SFDisplay;
 }
 
 body, html {
@@ -30,10 +31,6 @@ body, html {
 @font-face {
     font-family: SFDisplay;
     src: url(../font/SFDisplayRegular.ttf);
-}
-
-div {
-    font-family: SFDisplay;
 }
 
 
@@ -66,9 +63,6 @@ button a:hover {
     color:white;
 }
 
-.focustext {
-    padding:20px 20px;
-}
 /* bg image - mobile only */
 
 body {
@@ -138,6 +132,13 @@ body {
     box-shadow: 2px 2px 2px black;
 }
 
+/* mobile media queries */
+@media only screen and (max-width: 553px) {
+    .tab-content {
+        width:300px;
+    }
+}
+
 .tab-content .tab-pane {
     display: none;
     background-color: #313A7D;
@@ -194,6 +195,11 @@ li{
     position: relative;
     cursor: pointer;
     z-index:1001;
+}
+@media only screen and (max-width: 414px) {
+    [data-tooltip] {
+        display:none;
+    }
 }
 
 /* Hide the tooltip content by default */
@@ -445,10 +451,6 @@ input {
     background-color: #eee; /* Add a hover effect to all links, except for headers */
 }
 
-/* modal carousel styling */
-#myModal p, #myModal h4, #myModal2 h4,#myModal a, #myModal2 a {
-    color:black !important;
-}
 
 .img-responsive {
     width:100%;
@@ -489,6 +491,9 @@ input {
     padding: 12px 0 12px 0;
 }
 
+.layerTitle li {
+    color:white;
+}
 /* slider CSS */
 
 .ui-slider .ui-slider-handle {
@@ -587,9 +592,16 @@ input {
     .transition(.15s ease-in-out left);
 }
 
-.ui-button.active {
-    border: 2px solid lightgreen !important;
-    display:none;
+.geoCompButton.active {
+     border: 2px solid lightgreen;
+ }
+
+.geoCompButton.activebefore {
+    border: none;
+}
+
+.geoCompButton.active {
+    border: 2px solid lightgreen;
 }
 
 /* projection menu css fix */

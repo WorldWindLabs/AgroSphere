@@ -54,7 +54,7 @@ requirejs({paths:{
         // Web Map Service information from NASA's Near Earth Observations WMS
         // Named layer displaying Average Temperature data
         //Load the WMTS layers
-        
+
         var geoJSONData = loadGEOJsonData();
 
         //Load the country data
@@ -88,8 +88,8 @@ requirejs({paths:{
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
 
 
-        //Automatically zoom into NASA Ames
-        wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 10e5));
+        //Automatically zoom into Helsinki, Finland
+        wwd.goTo(new WorldWind.Position(60.1870, 24.8296, 16e5));
 
         var starFieldLayer = new WorldWind.StarFieldLayer();
         var atmosphereLayer = new WorldWind.AtmosphereLayer();
@@ -159,7 +159,7 @@ requirejs({paths:{
                                 pickList.objects[i].userObject.position.longitude;
 
                         //Find the country
-                        if(pickList.objects[i].userObject.type == 'countries') {
+                        if(pickList.objects[i].userObject.type == 'Country') {
                             var dataPoint =
                                     findDataPoint(csvData[0], placeLat, placeLon);
                             var details = $("#country");
@@ -219,7 +219,7 @@ requirejs({paths:{
 
 							$('.resizable').show();
 
-                        } else if(pickList.objects[i].userObject.type == 'station') {
+                        } else if(pickList.objects[i].userObject.type == 'Weather Station') {
 							var atmoDataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
 
@@ -252,7 +252,7 @@ requirejs({paths:{
                             var otherTab5 = $("#wms");
                             var otherTab6 = $("#weather");
                             var otherTab7 = $("#view");
-                            details.show('fast','swing');
+                            details.show();
 							$('.resizable').show();
                             otherTab.hide();
                             otherTab2.hide();
@@ -363,7 +363,7 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
 
 //wwd is the world window
 //layerName is the layer we are searching for
-//Given the wwd and layername, return the 
+//Given the wwd and layername, return the
 //the appropiate layer object
 function getLayerFromName(wwd, layerName) {
     var i = 0;
@@ -381,13 +381,13 @@ function getLayerFromName(wwd, layerName) {
 //wmsLayerCapabilities is the object representing what the wms layer can do
 //layerName is simply the name of the layer
 //layerNumber represents where it should be generated among the other layers
-//Given these variables, return a string that contains the html 
+//Given these variables, return a string that contains the html
 //to set up a legend
 function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
     var legendHTML = '<br><h5><b>Legend</b></h5>';
-	
+
 	//Be thorough on checking the existence
 	if((wmsLayerCapabilities.styles
 		!= null) && (wmsLayerCapabilities.styles[0].legendUrls[0]) != null) {
@@ -404,7 +404,7 @@ function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
 
 //layerNumber is the identifier to place on the html
-//simply generate the opacity html control 
+//simply generate the opacity html control
 function generateOpacityControl(wwd, layerName, layerNumber) {
     //Create the general box
     var opacityHTML = '<br><h5><b>Opacity';
@@ -459,7 +459,7 @@ function giveOpacitySliderFunctionality(wwd, layerName, layerNumber) {
                     if (!(document.wwd_duplicate instanceof Array))
                         document.wwd_duplicate.redraw();
                     else {
-                        document.wwd_duplicate.forEach(function (element, 
+                        document.wwd_duplicate.forEach(function (element,
 								index, array) {
                             element.redraw();
                         });
@@ -479,11 +479,11 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
     //Create the output
     var startDate;
     var endDate;
-	
+
 	//Basically modify the string based on whether it is monthly or daily
     if (layerName.indexOf("month") != -1){
 		//Forcibly remove the month format (though)
-        startDate = 
+        startDate =
 				wmsConfig.timeSequences[0].startTime.toDateString().substring(4, 7) + " " +
 				wmsConfig.timeSequences[0].startTime.toDateString().substring(11, 15);
         endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(4, 7) + " " +
@@ -494,7 +494,7 @@ function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
         startDate = wmsConfig.timeSequences[0].startTime.toDateString();
         endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString();
     }
-	
+
 	//Generate the appropiate html with our dates
     var timeHTML = '<h5><b>Time Scale:</b> ' + startDate + ' - ' + endDate + '</h5>';
     timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
@@ -519,7 +519,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 	var targetLayer = getLayerFromName(wwd, layerName);
 	var slider = $('#time_scale_' + layerNumber).slider();
 	var length;
-	
+
 	//As of now, the time is stored into sequences
 	//We split the slider up into pieces which is based on the array length
 	if(wmsConfig.timeSequences.length > 1) {
@@ -527,7 +527,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 	} else {
 		length = 1;
 	}
-	
+
 	//We vary our range based on these values
 	slider.slider({
         value: Math.round(wmsConfig.timeSequences.length/2),
@@ -535,8 +535,8 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
         max: length - 0.01,
         step: 0.01
 	});
-	
-	//Get the time using inbuilts of time sequences 
+
+	//Get the time using inbuilts of time sequences
 	//(see worldwind documentation)
 	slider.on('slide', function(event, ui) {
 		var timeNumber = ui.value - Math.floor(ui.value);
@@ -548,33 +548,10 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 	slider.on('slidestop', function(event, ui) {
 		var timeNumber = ui.value - Math.floor(ui.value);
 		var segmentNumber = Math.floor(ui.value);
-		targetLayer.time = 
+		targetLayer.time =
 				wmsConfig.timeSequences[segmentNumber].getTimeForScale(timeNumber);
 	});
 }
-
-$(document).ready(function(){
-    $(".focustext").hide();
-});
-
-$(document).ready(function(){
-    $(".togglebutton").click(function(){
-        $(".focustext").slideToggle();
-    });
-});
-
-$(document).ready(function(){
-    $(".focustext2").hide();
-});
-
-
-$(document).ready(function(){
-    $(".togglebutton2").click(function(){
-        $(".focustext2").slideToggle();
-    });
-});
-
-
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
@@ -593,7 +570,7 @@ $(document).ready(function () {
 //Assumption is dataType 1 maps to csvData 1
 function generatePlacemarkLayer(wwd, csvData){
     //Data type list
-    var dataTypes = ['countries', 'station'];
+    var dataTypes = ['Country', 'Weather Station'];
 
     //Common features
     var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/",
@@ -635,11 +612,11 @@ function generatePlacemarkLayer(wwd, csvData){
                     (parseFloat(csvData[i][j].lat),
                     parseFloat(csvData[i][j].lon), 1e2), true, null);
             var labelString = '';
-			
+
 			//How we handle the string is based on the type we determine
-            if(dataTypes[i] == 'countries') {
+            if(dataTypes[i] == 'Country') {
                 labelString = csvData[i][j].country + ' ' + csvData[i][j].code3;
-            } else if(dataTypes[i] == 'stations') {
+            } else if(dataTypes[i] == 'Weather Station') {
 				labelString = csvData[i][j].code3;
 			}
 
@@ -652,13 +629,13 @@ function generatePlacemarkLayer(wwd, csvData){
                     WorldWind.PlacemarkAttributes(placemarkAttributes);
             placemarkAttributes.imageSource = pinLibrary + images[9 - 2*i];
             //Use flag if it is a country
-            if(dataTypes[i] == 'countries') {
+            if(dataTypes[i] == 'Country') {
                 //Image would be a flag
                 placemarkAttributes.imageSource = './flags/' +
                         csvData[i][j].iconCode + '.png';
 				placemark.userObject = {code3: csvData[i][j].code3,
 						country: csvData[i][j].country};
-            } else if(dataTypes[i] == 'station') {
+            } else if(dataTypes[i] == 'Weather Station') {
 				placemarkAttributes.imageSource = '../images/pushpins/push-pin-yellow.png';
 			}
 
@@ -835,7 +812,7 @@ function findDataBaseName(inputArray, name) {
 
 
 //Given a csv data array, convert the segment into objects
-//Assumes the csv file is in the format of id, paramatertype, year1 value, 
+//Assumes the csv file is in the format of id, paramatertype, year1 value,
 //year2 value..
 //year end value. This will return an array of objects containing the ids
 //and an array of year-value pairs
@@ -934,13 +911,13 @@ function loadWMTSLayers(wwd, layerManager) {
             // Add the layers to World Wind and update the layer manager
             wwd.addLayer(wmsLayer);
 			//Generate the html
-			var layerButtonsHTML = 
-					'<button class="btn-info wms-button" id="layerToggle' + i 
+			var layerButtonsHTML =
+					'<button class="btn-info" id="layerToggle' + i
 							+'">' + wmsLayerCapabilities.title + '</button>';
 			//Append html somehwere
 			$('#wms').append(layerButtonsHTML);
 			$('#layerToggle' + i).button();
-			
+
 			//Basically turn the controls on and off
 			$('#layerToggle' + i).click(function() {
 				var k = 0;
@@ -1175,7 +1152,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 
             //Got all the data, colour it
             countryData = filterOutBlanks(countryData, 0);
-			
+
             var countryLayer = colourizeCountries(countryData, geoJSONData, buttonName);
 			countryLayer.userObject.year = sliderValue;
             //Check if the country layer exist
@@ -1184,15 +1161,15 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 			var currentLayerName;
             for(l = 0; l < wwd.layers.length; l++) {
                 if(wwd.layers[l].displayName == 'Geo Country Data') {
-					
+
 					currentLayerName = wwd.layers[l].userObject.dataType;
 					var previousYear = wwd.layers[l].userObject.year;
                     wwd.removeLayer(wwd.layers[l]);
-                } else if(wwd.layers[l].displayName == 'countries Placemarks') {
+                } else if(wwd.layers[l].displayName == 'Country Placemarks') {
 					flagLayer = wwd.layers[l];
 				}
             }
-		
+
 			if((currentLayerName != buttonName) || (previousYear != sliderValue)){
 				wwd.addLayer(countryLayer);
 				layerManager.synchronizeLayerList();
@@ -1269,10 +1246,10 @@ function generateGeoComparisonButton(agriData) {
 	}
 
     var dropArea = $('#comp');
-	
+
     dropArea.append('<input type="text" class="form-control" id="geoCompareSearch" placeholder="Search for datasets..." title="Search for datasets...">');
 	comparisonHTML += '<div>';
-	
+
 	//Generic button template
     for(i = 0; i < buttonNames.length; i++) {
         var buttonTempName = buttonNames[i];
@@ -1290,7 +1267,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 		stationName, agriDataPoint) {
 	var dataPoint = findDataPointStation(inputData, stationName);
 	var dataPoint2 = findDataPointStation(inputData2, stationName);
-	
+
 	var offSetLength = dataPoint.dataValues.length;
 	if(dataPoint != 0) {
 		var i = 0;
@@ -1306,7 +1283,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
                 //Do we already have a plot?
                 var plotHTML = $('#' + plotID);
                 if(plotHTML.html() == '') {
-					
+
 					if(buttonNumber < offSetLength) {
 						plotScatter(dataPoint.dataValues[buttonNumber].typeName, '',
 								dataPoint.dataValues[buttonNumber].timeValues,
@@ -1466,7 +1443,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 
 					//Do a CSV search
 					var description = findCropDefinition(agriDef, cropName);
-					
+
 					$('#messagePoint' + buttonNumber).html(description);
 					setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 10000);
 
@@ -1532,7 +1509,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 				}
 				return 0;
 			});
-			
+
 			//Now that things are sorted, make a duplicate
 			var newList = [];
 			for(i = 0; i < divList.length; i++) {
@@ -1589,7 +1566,7 @@ function generateWeatherHTML(countryData) {
 	weatherHTML += '<p><input type="text" class="form-control" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
 	weatherHTML += '<select id="countryNames" class="form-control">'
 	var i = 0;
-	
+
 	for(i = 0; i < countryData.length; i++) {
 		weatherHTML += '<option>' + countryData[i].code2 + ' - ' + countryData[i].country + '</option>';
 	}
@@ -1608,11 +1585,11 @@ function giveWeatherButtonFunctionality() {
 		var cityInput = $('#cityInput').val();
 		var country = $('#countryNames :selected').val();
 		var countryInput = country.slice(0,2);
-		
+
 		//Make an api request
 		var apiURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ','
 				+ countryInput + '&appid=' + APIKEY;
-		
+
 		//Make an ajax request
 		//Note that api attempst to return the closet result possible
 		$.ajax({
@@ -1635,10 +1612,10 @@ function giveWeatherButtonFunctionality() {
 				tempHTML += '<p><b>Humidity (%):</b> ' + data.main.humidity + '</p><br>';
 				tempHTML += '<p><b>Wind speed (m/s):</b>' + data.wind.speed + '</p><br><br>';
 				dropArea.append(tempHTML);
-				
+
 			},
 			fail: function() {
-				
+
 			}
 		})
 	});
@@ -1670,7 +1647,7 @@ function getColour(zScore) {
     //Could use exponential decay function or something
     var red = 0;
     var green = 0;
-	
+
     if (zScore < 0) {
         red = 1;
         green = Math.exp(zScore);
@@ -1740,7 +1717,7 @@ function colourizeCountries(valueCountryPair, geoJSONData, dataName) {
             }
         }
     }
-	
+
     //Returns a renderable layer
     return countryLayers;
 }
@@ -1763,7 +1740,7 @@ function getXYPairs(incomingData) {
 function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
                                    titleName) {
     var regressionFunction;
-	
+
     //Filter out the data
     var tempDataArray = filterOutBlanks(incomingData, 0);
     incomingData = tempDataArray;
@@ -1897,7 +1874,7 @@ function generateCountryButtons() {
 
 //Gives funcitonality to the country buttons
 //Basically they spawn another set of buttons to plot
-function giveCountryButtonsFunctionality(agriData, priceData, liveData, 
+function giveCountryButtonsFunctionality(agriData, priceData, liveData,
 		emissionAgriData, pestiData, fertiData,
 		yieldData, agriDef, codeName) {
 	var buttonAreaHTML = $('#buttonArea');
@@ -1908,7 +1885,7 @@ function giveCountryButtonsFunctionality(agriData, priceData, liveData,
 	var pestiButtons = $('#spawnPest').button();
 	var fertiButtons = $('#spawnFerti').button();
 	var yieldButtons = $('#spawnYield').button();
-	
+
 	//Just generate the buttons for each type
 	agriButtons.on('click', function(){
 		//Generate agri culture buttons
@@ -2040,7 +2017,7 @@ function generateDataButtons(inputData, codeName, mode) {
 }
 
 //Finds the closest country (centre based) and station based on click
-//location 
+//location
 function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
 	//Go through every country
 	var i = 0;
@@ -2052,7 +2029,7 @@ function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
 		var location1 = new WorldWind.Location(countryData[i].lat, countryData[i].lon);
 		var location2 = new WorldWind.Location(lat, lon);
 		var distance = WorldWind.Location.greatCircleDistance(location1, location2) * wwd.globe.equatorialRadius;
-		
+
 		if(distance < smallestCountryDistance) {
 			smallestCountryDistance = distance;
 			countryCode = countryData[i].code3;
@@ -2066,7 +2043,7 @@ function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
 		var location1 = new WorldWind.Location(stationData[i].lat, stationData[i].lon);
 		var location2 = new WorldWind.Location(lat, lon);
 		var distance = WorldWind.Location.greatCircleDistance(location1, location2) * wwd.globe.equatorialRadius;
-		
+
 		if(distance < smallestStationDistance) {
 			smallestStationDistance = distance;
 			stationName = stationData[i].stationName;
@@ -2093,7 +2070,7 @@ function createSubPlot(inputData, htmlID) {
 			xValues.push(parseInt(dataPoint[j].year));
 			yValues.push(parseFloat(dataPoint[j].value));
 		}
-	
+
 		var tempTrace = {
 			x: xValues,
 			y: yValues,
@@ -2299,7 +2276,7 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
     var xAxis = {
         title: 'Year'
     }
-	
+
 	if(mode == 0) {
 		var yAxis = {
 			title: titleName
@@ -2327,7 +2304,7 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
 
     //Check if the htmlID is empty
     var plotHTML = $('#'+ htmlID);
-	
+
     if((mode == 0) || ((mode == 1) && plotHTML.html() == '')){
         //Indicates new plot
         Plotly.newPlot(htmlID, [graph], layout);
@@ -2339,7 +2316,7 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
         var multiGraphUpdate = {
             title: 'Multiple Graphs'
         }
-		
+
         Plotly.update(htmlID, multiGraphUpdate);
         Plotly.relayout(htmlID, dimensions);
     }
@@ -2534,11 +2511,8 @@ $(document).ready(function () {
     });
 	checkTabs();
     $(".geoCompButton").click(function() {
+        $('.geoCompButton.active').addClass('activebefore');
         $('.geoCompButton.active').removeClass('active');
-        $(this).addClass('active');
-    });
-    $(".wms-button").click(function() {
-        $('.wms-button.active').removeClass('active');
         $(this).addClass('active');
     });
 });
