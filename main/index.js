@@ -159,7 +159,7 @@ requirejs({paths:{
                                 pickList.objects[i].userObject.position.longitude;
 
                         //Find the country
-                        if(pickList.objects[i].userObject.type == 'countries') {
+                        if(pickList.objects[i].userObject.type == 'Country') {
                             var dataPoint =
                                     findDataPoint(csvData[0], placeLat, placeLon);
                             var details = $("#country");
@@ -219,7 +219,7 @@ requirejs({paths:{
 
 							$('.resizable').show();
 
-                        } else if(pickList.objects[i].userObject.type == 'station') {
+                        } else if(pickList.objects[i].userObject.type == 'Weather Station') {
 							var atmoDataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
 
@@ -570,7 +570,7 @@ $(document).ready(function () {
 //Assumption is dataType 1 maps to csvData 1
 function generatePlacemarkLayer(wwd, csvData){
     //Data type list
-    var dataTypes = ['countries', 'station'];
+    var dataTypes = ['Country', 'Weather Station'];
 
     //Common features
     var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/",
@@ -614,9 +614,9 @@ function generatePlacemarkLayer(wwd, csvData){
             var labelString = '';
 
 			//How we handle the string is based on the type we determine
-            if(dataTypes[i] == 'countries') {
+            if(dataTypes[i] == 'Country') {
                 labelString = csvData[i][j].country + ' ' + csvData[i][j].code3;
-            } else if(dataTypes[i] == 'stations') {
+            } else if(dataTypes[i] == 'Weather Station') {
 				labelString = csvData[i][j].code3;
 			}
 
@@ -629,13 +629,13 @@ function generatePlacemarkLayer(wwd, csvData){
                     WorldWind.PlacemarkAttributes(placemarkAttributes);
             placemarkAttributes.imageSource = pinLibrary + images[9 - 2*i];
             //Use flag if it is a country
-            if(dataTypes[i] == 'countries') {
+            if(dataTypes[i] == 'Country') {
                 //Image would be a flag
                 placemarkAttributes.imageSource = './flags/' +
                         csvData[i][j].iconCode + '.png';
 				placemark.userObject = {code3: csvData[i][j].code3,
 						country: csvData[i][j].country};
-            } else if(dataTypes[i] == 'station') {
+            } else if(dataTypes[i] == 'Weather Station') {
 				placemarkAttributes.imageSource = '../images/pushpins/push-pin-yellow.png';
 			}
 
@@ -1165,7 +1165,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					currentLayerName = wwd.layers[l].userObject.dataType;
 					var previousYear = wwd.layers[l].userObject.year;
                     wwd.removeLayer(wwd.layers[l]);
-                } else if(wwd.layers[l].displayName == 'countries Placemarks') {
+                } else if(wwd.layers[l].displayName == 'Country Placemarks') {
 					flagLayer = wwd.layers[l];
 				}
             }
