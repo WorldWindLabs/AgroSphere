@@ -252,7 +252,7 @@ requirejs({paths:{
                             var otherTab5 = $("#wms");
                             var otherTab6 = $("#weather");
                             var otherTab7 = $("#view");
-                            details.show('fast','swing');
+                            details.show();
 							$('.resizable').show();
                             otherTab.hide();
                             otherTab2.hide();

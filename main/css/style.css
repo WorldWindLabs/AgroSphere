@@ -1,4 +1,4 @@
-iv, h1, h2, h3, h4, h5, p, a {
+div, h1, h2, h3, h4, h5, p, a {
     color:white;
 }
 
@@ -21,6 +21,7 @@ iv, h1, h2, h3, h4, h5, p, a {
     -o-user-select: none;
     user-select: none;
     overflow: hidden;
+    font-family: SFDisplay;
 }
 
 body, html {
@@ -30,10 +31,6 @@ body, html {
 @font-face {
     font-family: SFDisplay;
     src: url(../font/SFDisplayRegular.ttf);
-}
-
-div {
-    font-family: SFDisplay;
 }
 
 
@@ -454,10 +451,6 @@ input {
     background-color: #eee; /* Add a hover effect to all links, except for headers */
 }
 
-/* modal carousel styling */
-#myModal p, #myModal h4, #myModal2 h4,#myModal a, #myModal2 a {
-    color:black !important;
-}
 
 .img-responsive {
     width:100%;
@@ -498,6 +491,9 @@ input {
     padding: 12px 0 12px 0;
 }
 
+.layerTitle li {
+    color:white;
+}
 /* slider CSS */
 
 .ui-slider .ui-slider-handle {
