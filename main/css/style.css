@@ -135,6 +135,13 @@ body {
     box-shadow: 2px 2px 2px black;
 }
 
+/* mobile media queries */
+@media only screen and (max-width: 553px) {
+    .tab-content {
+        width:300px;
+    }
+}
+
 .tab-content .tab-pane {
     display: none;
     background-color: #313A7D;
@@ -191,6 +198,11 @@ li{
     position: relative;
     cursor: pointer;
     z-index:1001;
+}
+@media only screen and (max-width: 414px) {
+    [data-tooltip] {
+        display:none;
+    }
 }
 
 /* Hide the tooltip content by default */
