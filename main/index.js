@@ -615,7 +615,7 @@ function generatePlacemarkLayer(wwd, csvData){
 
 			//How we handle the string is based on the type we determine
             if(dataTypes[i] == 'Country') {
-                labelString = csvData[i][j].country + ' ' + csvData[i][j].code3;
+                labelString = csvData[i][j].country + ' - ' + csvData[i][j].code3;
             } else if(dataTypes[i] == 'Weather Station') {
 				labelString = csvData[i][j].code3;
 			}
@@ -1178,7 +1178,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 				//Go through the entire country flag placemarks and change the label
 				for(l = 0; l < flagLayer.renderables.length; l++) {
 					var code3 = flagLayer.renderables[l].userObject.code3;
-					var flagName = flagLayer.renderables[l].userObject.country + ' ' +
+					var flagName = flagLayer.renderables[l].userObject.country + '- ' +
 							code3;
 					//Find the agriData with the code3
 					for(j = 0; j < agriData.length; j++) {
