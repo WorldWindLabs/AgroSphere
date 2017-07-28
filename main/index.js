@@ -1624,6 +1624,7 @@ function giveWeatherButtonFunctionality() {
 				var dropArea = $('#searchDetails');
 				dropArea.html('');
 				var tempHTML = '<h5 class="fontsize"><b>Weather Details for ' + data.name + '</b></h5>';
+				tempHTML += '<p><b>Country:</b> ' + data.sys.country + '</p><br>';  
 				tempHTML += '<p><b>Current Outlook:</b> ' + data.weather[0].main + '</p><br>';
 				tempHTML += '<p><b>Current Outlook Description:</b> ' + data.weather[0].description + '</p><br>';
 				tempHTML += '<p><b>Current Temperature (Celsius):</b> ' + Math.round((data.main.temp - 272),2) + '</p><br>';
