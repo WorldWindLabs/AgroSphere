@@ -66,9 +66,6 @@ button a:hover {
     color:white;
 }
 
-.focustext {
-    padding:20px 20px;
-}
 /* bg image - mobile only */
 
 body {
@@ -593,6 +590,10 @@ input {
 
 .geoCompButton.activebefore {
     border: none;
+}
+
+.geoCompButton.active {
+    border: 2px solid lightgreen;
 }
 
 /* projection menu css fix */

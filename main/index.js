@@ -552,29 +552,6 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 				wmsConfig.timeSequences[segmentNumber].getTimeForScale(timeNumber);
 	});
 }
-
-$(document).ready(function(){
-    $(".focustext").hide();
-});
-
-$(document).ready(function(){
-    $(".togglebutton").click(function(){
-        $(".focustext").slideToggle();
-    });
-});
-
-$(document).ready(function(){
-    $(".focustext2").hide();
-});
-
-
-$(document).ready(function(){
-    $(".togglebutton2").click(function(){
-        $(".focustext2").slideToggle();
-    });
-});
-
-
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
