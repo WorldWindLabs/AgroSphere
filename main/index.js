@@ -37,9 +37,9 @@ requirejs({paths:{
 
         var layers = [
             {layer: new WorldWind.BMNGLayer(), enabled: false},
-            {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},
+            {layer: new WorldWind.BMNGLandsatLayer(), enabled: true},
             {layer: new WorldWind.BingAerialLayer(null), enabled: false},
-            {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: true},
+            {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: false},
             {layer: new WorldWind.BingRoadsLayer(null), enabled: false},
             {layer: new WorldWind.CompassLayer(), enabled: false},
             {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true},
