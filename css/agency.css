@@ -248,7 +248,7 @@ fieldset[disabled] .btn-xl.active {
   }
 }
 header {
-  background-image: url('../img/Pictures-Neptune.jpg');
+  background-image: url('../images/Pictures-Neptune.jpg');
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -578,7 +578,7 @@ aside.clients img {
 }
 section#contact {
   background-color: #313A7D;
-  background-image: url('../img/map-image.png');
+  background-image: url('../images/map-image.png');
   background-position: center;
   background-repeat: no-repeat;
 }
