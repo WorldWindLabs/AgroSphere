@@ -5,7 +5,7 @@
 ### NASA World Wind is a free, open-source API that provides the tools to create interactive - 
 - visualizations of the world in 4D, such as satellite tracking and seismic history. The NASA
 World Wind 2017 Intern team has designed an educational web app that visualizes the effects of
-climate change on agriculture by nation, using the Web World Wind Software Development Kit (SDK).
+climate change on agriculture using a large collection of global agriculture and weather station data and the Web World Wind Software Development Kit (SDK).
 
 ## Video Tutorial
 
