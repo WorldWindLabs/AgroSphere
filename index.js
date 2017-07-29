@@ -2511,10 +2511,20 @@ $(document).ready(function () {
         setTimeout(function() {checkTabs()}, 50);
     });
 	checkTabs();
-    $(".geoCompButton").click(function() {
-        $('.geoCompButton.active').addClass('activebefore');
-        $('.geoCompButton.active').removeClass('active');
-        $(this).addClass('active');
-    });
+  $('.geoCompButton').click(function() {
+      if ($('.geoCompButton').hasClass('active')) {
+          var clickedButtonIsActive = $(this).hasClass('active');
+
+          $('.geoCompButton.active').removeClass('active');
+
+          if (!clickedButtonIsActive) {
+              $(this).addClass('active');
+          }
+  }
+      else {
+          $(this).addClass('active');
+      }
+  });
+
 });
 });
