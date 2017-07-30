@@ -2528,6 +2528,6 @@ $(document).ready(function () {
   $('input:checkbox').click(function() {
       $(this).toggleClass('active');
   });
-
+$('list-group'):nth-child(14).hide();
 });
 });
