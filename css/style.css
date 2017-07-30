@@ -46,6 +46,9 @@ input[type="checkbox"]{
     appearance: none;
     box-shadow: 1px 1px 1px black;
 }
+input[type="checkbox"].active {
+  border:7px solid lightgreen;
+}
 
 .btn {
     background-color:#323232 !important;
@@ -631,6 +634,6 @@ input {
   border-radius:0;
 }
 
-button:focus {
+button:focus,.list-group-item:focus,.btn:focus {
   outline:none;
 }
