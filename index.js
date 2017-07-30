@@ -912,7 +912,7 @@ function loadWMTSLayers(wwd, layerManager) {
             wwd.addLayer(wmsLayer);
 			//Generate the html
 			var layerButtonsHTML =
-					'<button class="btn-info" id="layerToggle' + i
+					'<button class="btn-info wmsButton" id="layerToggle' + i
 							+'">' + wmsLayerCapabilities.title + '</button>';
 			//Append html somehwere
 			$('#wms').append(layerButtonsHTML);
@@ -2511,6 +2511,8 @@ $(document).ready(function () {
         setTimeout(function() {checkTabs()}, 50);
     });
 	checkTabs();
+
+  /* highlighting correct button for geocomparison and wms layers */
   $('.geoCompButton').click(function() {
       if ($('.geoCompButton').hasClass('active')) {
           var clickedButtonIsActive = $(this).hasClass('active');
@@ -2525,9 +2527,22 @@ $(document).ready(function () {
           $(this).addClass('active');
       }
   });
+  $('.wmsButton').click(function() {
+      if ($('.wmsButton').hasClass('active')) {
+          var clickedButtonIsActive = $(this).hasClass('active');
+
+          $('.wmsButton.active').removeClass('active');
+
+          if (!clickedButtonIsActive) {
+              $(this).addClass('active');
+          }
+  }
+      else {
+          $(this).addClass('active');
+      }
+  });
   $('input:checkbox').click(function() {
       $(this).toggleClass('active');
   });
-$('list-group'):nth-child(14).hide();
 });
 });

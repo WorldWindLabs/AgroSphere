@@ -599,12 +599,12 @@ input {
     .transition(.15s ease-in-out left);
 }
 
-.geoCompButton.activebefore {
-    border: none !important;
-}
-
-.geoCompButton.active {
+.geoCompButton.active, .wmsButton.active {
      border: 2px solid lightgreen;
+ }
+
+ .wmsButton.active {
+   border: 2px solid lightgreen;
  }
 
 
