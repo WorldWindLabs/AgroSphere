@@ -591,13 +591,6 @@ input {
     font-size:1.1em;
 }
 
-/* carousel transition speed */
-.item {
-    display: none;
-    position: relative;
-    .transition(.15s ease-in-out left);
-}
-
 .geoCompButton.active, .wmsButton.active {
      border: 2px solid lightgreen;
  }
