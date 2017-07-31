@@ -1339,7 +1339,6 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 				$('#manyGraph').append(graphDiv);
 
 				//Graph it
-				//if(i < dataPoint)
 				plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                             dataPoint.dataValues[buttonNumber].timeValues,
                             'subGraph' + graphNumber, 0);
@@ -1810,14 +1809,7 @@ function generateRemoveButton() {
 		var almightyGraphDiv = $('#almightyGraph > div');
 		var i = 0;
 		for(i = 0; i < almightyGraphDiv.length; i++) {
-			if(almightyGraphDiv[i].childNodes.length == 1) {
-				Plotly.purge(almightyGraphDiv[i].id);
-			} else {
-				var j = 0;
-				for(j = 0; j < almightyGraphDiv[i].childNodes.length; j++) {
-				    Plotly.purge(almightyGraphDiv[i].childNodes[j].id);
-				}
-			}
+			$(almightyGraphDiv[i]).html('');
 		}
     });
 }
@@ -2111,6 +2103,13 @@ function createSubPlot(inputData, htmlID) {
 		'xaxis.autorange': true,
 		'yaxis.autorange': true
 	});
+	
+	new ResizeSensor($('#' + htmlID), function() {
+		var d3 = Plotly.d3;
+		var gd3 = d3.select('#' + htmlID + '> div');
+		gd = gd3.node();
+		Plotly.Plots.resize(gd);
+	});
 }
 
 //Plots a stacked bar given all the set of data
@@ -2247,7 +2246,17 @@ function plotStack(inputData, htmlID, amount) {
 		},
 		autosize: true
 	}
-	Plotly.newPlot(htmlID, traces, layout);
+	var d3 = Plotly.d3;
+	var size = 80;
+	var gd3 = d3.select('#' + htmlID).append('div').style({
+		width: size + '%', 'margin-left': ((100 - size)/2) + '%',
+		height: size + 'vh', 'margin-top': ((100 - size)/2) + 'vh'
+	});
+	var gd = gd3.node();
+	Plotly.plot(gd, traces, layout);
+	new ResizeSensor($('#' + htmlID), function() {
+		Plotly.Plots.resize(gd);
+	});
 }
 
 //Creates a scatter plot based on the input data
@@ -2312,18 +2321,21 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
 	var d3 = Plotly.d3;
 	var size = 80;
 	var plotID = '#' + htmlID;
-	var gd3 = d3.select(plotID).append('div').style({
-		width: size + '%', 'margin-left': ((100 - size)/2) + '%',
-		height: size + 'vh', 'margin-top': ((100 - size)/2) + 'vh'
-	});
-	console.log(gd3);
-	console.log(gd);
-	var gd = gd3.node();	
     if((mode == 0) || ((mode == 1) && plotHTML.html() == '')){
         //Indicates new plot
+		var gd3 = d3.select(plotID).append('div').style({
+			width: size + '%', 'margin-left': ((100 - size)/2) + '%',
+			height: size + '%', 'margin-top': ((100 - size)/2) + '%'
+		});
+		var gd = gd3.node();
+		$(gd).css('min-width','300px');
+		$(gd).css('min-height', '300px');
+		console.log(gd);
         Plotly.plot(gd, [graph], layout);
     } else if(mode == 1) {
-        Plotly.addTraces(htmlID, [graph]);
+		var gd3 = d3.select(plotID + '> div');
+		var gd = gd3[0][0];
+        Plotly.addTraces(gd, [graph]);
         var dimensions = {
             width: '100%'
         }
@@ -2331,13 +2343,15 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
             title: 'Multiple Graphs'
         }
 
-        Plotly.update(htmlID, multiGraphUpdate);
-        Plotly.relayout(htmlID, dimensions);
+        Plotly.update(gd, multiGraphUpdate);
+        Plotly.relayout(gd, dimensions);
     }
-	new ResizeSensor(plotHTML, function() {
-		console.log('Hello');
-		Plotly.Plots.resize(gd);
-	});
+	console.log(plotHTML);
+	if(!(htmlID.includes('sub') || htmlID.includes('multi'))){
+		new ResizeSensor(plotHTML, function() {
+			Plotly.Plots.resize(gd);
+		});
+	}
 	/*plotHTML.resize(function() {
 		console.log('Hello');
 		Plotly.Plots.resize(gd);
@@ -2485,6 +2499,37 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
+		//This is amazing but apparently you can't use the resize sensor
+		//unless the thing is present, go figure
+		var i = 0;
+		var j = 0;
+		var manyGraphs = $('#manyGraph > div');
+		for(i = 0; i < manyGraphs.length; i++) {
+			//Assume 2 child nodes if resize exists
+			if(manyGraphs[i].childNodes.length == 1) {
+				//Add the resize
+				console.log($(manyGraphs[i]).attr('id'));
+				new ResizeSensor($('#' + $(manyGraphs[i]).attr('id')), function(){
+					for(j = 0; j < manyGraphs.length; j++) {
+						var gd = $(manyGraphs[j]).children()[0];
+						Plotly.Plots.resize(gd);
+						console.log('melo');
+					}
+				});
+				var gd = $(manyGraphs[i]).children()[0];
+				Plotly.Plots.resize(gd);
+			}
+		}
+		var multiGraph = $('#multiGraph');
+		if(multiGraph[0].childNodes.length == 1) {
+			new ResizeSensor($(multiGraph), function() {
+				var gd = $(multiGraph).children()[0];
+				Plotly.Plots.resize(gd);
+			});
+			var gd = $(multiGraph).children()[0];
+			Plotly.Plots.resize(gd);
+		}
+		
 		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglecomp").click(function () {
