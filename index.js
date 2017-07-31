@@ -1254,7 +1254,7 @@ function generateGeoComparisonButton(agriData) {
     for(i = 0; i < buttonNames.length; i++) {
         var buttonTempName = buttonNames[i];
         comparisonHTML += '<div class="buttonDiv"><button class="btn-info geoCompButton" id="geoCompType' + i +
-            '">Generate Geo Comparison for ' + buttonTempName + '</button><br></div>';
+            '">'+ buttonTempName + '</button><br></div>';
     }
 
 
