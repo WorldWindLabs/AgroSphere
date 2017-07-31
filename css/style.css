@@ -403,6 +403,7 @@ audio
     -moz-transform: scale(1.3);
     -webkit-transform: scale(1.3);
     transform: scale(1.3);
+    cursor:pointer;
 }
 
 /* search bar */
