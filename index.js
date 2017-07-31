@@ -2103,7 +2103,7 @@ function createSubPlot(inputData, htmlID) {
 		'xaxis.autorange': true,
 		'yaxis.autorange': true
 	});
-	
+
 	new ResizeSensor($('#' + htmlID), function() {
 		var d3 = Plotly.d3;
 		var gd3 = d3.select('#' + htmlID + '> div');
@@ -2247,10 +2247,11 @@ function plotStack(inputData, htmlID, amount) {
 		autosize: true
 	}
 	var d3 = Plotly.d3;
-	var size = 80;
+	var size = 100;
+  var ysize = 70;
 	var gd3 = d3.select('#' + htmlID).append('div').style({
 		width: size + '%', 'margin-left': ((100 - size)/2) + '%',
-		height: size + 'vh', 'margin-top': ((100 - size)/2) + 'vh'
+		height: ysize + 'vh', 'margin-top': ((100 - size)/2) + 'vh'
 	});
 	var gd = gd3.node();
 	Plotly.plot(gd, traces, layout);
@@ -2319,7 +2320,7 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
     //Check if the htmlID is empty
     var plotHTML = $('#'+ htmlID);
 	var d3 = Plotly.d3;
-	var size = 80;
+	var size = 100;
 	var plotID = '#' + htmlID;
     if((mode == 0) || ((mode == 1) && plotHTML.html() == '')){
         //Indicates new plot
@@ -2442,7 +2443,7 @@ var tabsFn = (function() {
         stop:setHeight,
         // animation removed - stops resizing from working
         maxHeight: 800,
-        maxWidth: 1200,
+        maxWidth: 1400,
         minHeight: 250,
         minWidth: 280
     });
@@ -2529,7 +2530,7 @@ $(document).ready(function () {
 			var gd = $(multiGraph).children()[0];
 			Plotly.Plots.resize(gd);
 		}
-		
+
 		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglecomp").click(function () {
