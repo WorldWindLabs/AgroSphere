@@ -1128,7 +1128,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
             //Find the year based on the slider value
             var sliderValue = $('#geoSlider').slider("value");
 			geoMode = parseInt(this.id.slice('geoCompType'.length));
-            var buttonName = $('#' + this.id).text().slice('Generate Geo Comparison for '.length);
+            var buttonName = $('#' + this.id).text().slice();
 
             //Do some data stuff, go through the agridata based on the button
             //number for every country
@@ -1863,6 +1863,7 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
 //Each button should spawn its own data set
 function generateCountryButtons() {
 	var countryHTML = '<h5><b>Available Datasets</b></h5>';
+  var isanEmptyDataset =
 	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Data List</button>';
