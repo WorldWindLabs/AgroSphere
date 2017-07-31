@@ -2542,9 +2542,6 @@ $(document).ready(function () {
           $(this).addClass('active');
       }
   });
-  $('.geoslidevalue').change(function() {
-      $(this).addClass('active');
-  });
   $('input:checkbox').click(function() {
       $(this).toggleClass('active');
   });
