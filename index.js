@@ -31,6 +31,7 @@ requirejs({paths:{
         "use strict";
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
+		WorldWind.configuration.baseUrl = '';
 		var regression = require("regression");
 		var derivative = require("math");
         var wwd = new WorldWind.WorldWindow("canvasOne");
