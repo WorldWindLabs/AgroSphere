@@ -20,12 +20,13 @@ requirejs({paths:{
     "jquery-csv": "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/jquery.csv",
     "simple-stats": "https://unpkg.com/simple-statistics@4.1.0/dist/simple-statistics.min",
 	"regression": "src/regression/regression",
-	"math": "src/math/math.min"
+	"math": "src/math/math.min",
+	"resizejs" : "js/resizejs/src/ResizeSensor"
 }
 },['src/WorldWind',
         './LayerManager', 'src/formats/kml/KmlFile',
         'src/formats/kml/controls/KmlTreeVisibility', './Pin', 'jquery', 'jqueryui', 'jquery-csv',
-        'simple-stats', 'regression', 'math'],
+        'simple-stats', 'regression', 'math', "resizejs"],
     function (ww,
               LayerManager, KmlFile, KmlTreeVisibility) {
         "use strict";
@@ -34,6 +35,7 @@ requirejs({paths:{
 		WorldWind.configuration.baseUrl = '';
 		var regression = require("regression");
 		var derivative = require("math");
+		var ResizeSensor = require("resizejs");
         var wwd = new WorldWind.WorldWindow("canvasOne");
 
         var layers = [
@@ -2307,10 +2309,19 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
 
     //Check if the htmlID is empty
     var plotHTML = $('#'+ htmlID);
-
+	var d3 = Plotly.d3;
+	var size = 80;
+	var plotID = '#' + htmlID;
+	var gd3 = d3.select(plotID).append('div').style({
+		width: size + '%', 'margin-left': ((100 - size)/2) + '%',
+		height: size + 'vh', 'margin-top': ((100 - size)/2) + 'vh'
+	});
+	console.log(gd3);
+	console.log(gd);
+	var gd = gd3.node();	
     if((mode == 0) || ((mode == 1) && plotHTML.html() == '')){
         //Indicates new plot
-        Plotly.newPlot(htmlID, [graph], layout);
+        Plotly.plot(gd, [graph], layout);
     } else if(mode == 1) {
         Plotly.addTraces(htmlID, [graph]);
         var dimensions = {
@@ -2323,6 +2334,14 @@ function plotScatter(titleName, secondName, inputData, htmlID, mode) {
         Plotly.update(htmlID, multiGraphUpdate);
         Plotly.relayout(htmlID, dimensions);
     }
+	new ResizeSensor(plotHTML, function() {
+		console.log('Hello');
+		Plotly.Plots.resize(gd);
+	});
+	/*plotHTML.resize(function() {
+		console.log('Hello');
+		Plotly.Plots.resize(gd);
+	});*/
 }
 
 //Checks if there is anything visible
