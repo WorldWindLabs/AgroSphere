@@ -29,3 +29,7 @@
 .align {
   text-align:left;
 }
+
+.modal-content {
+  background:rgba(255,255,255,.95)
+}
