@@ -558,7 +558,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 8000);
+}, 4000);
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
