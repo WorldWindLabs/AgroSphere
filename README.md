@@ -45,30 +45,6 @@ _Screenshot showing AgroSphere comparing potato data from around the world._
 We discussed our web app and work-in-progress with Martin C. Heller from the Center for Sustainable Systems at University of Michigan. He offered us critiques from a researcher's point of view.
 We also tested our app on NASA interns from the STEM Teacher and Researcher (STAR) program to receive suggestions from an educational perspective.
 
-## How to Run and Develop AgroSphere Locally
-
-Start by cloning the repository to your local system. You can do this through the terminal by using the ```git``` command, as outlined below.
-
-```
-git clone https://github.com/WorldWind-2017/AgroSphere.git
-```
-
-The above code should clone the repository to a folder called AgroSphere. To navigate to the main folder specific to AgroSphere, you can use the command outlined below.
-
-```
-cd AgroSphere/main
-```
-
-The main heart of the Javascript functions associated with AgroSphere are contained within the ```index.js``` file in the main folder. One example of editing this file is through the program vim, which can be used through the following command.
-
-```
-vim index.js
-```
-
-
-
-
-
 ***
 
 **Organization:** NASA Ames Research Center
