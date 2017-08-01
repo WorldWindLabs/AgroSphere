@@ -1251,7 +1251,7 @@ function generateGeoComparisonButton(agriData) {
     var dropArea = $('#comp');
 
     dropArea.append('<input type="text" class="form-control" id="geoCompareSearch" placeholder="Search for datasets..." title="Search for datasets...">');
-	comparisonHTML += '<div>';
+	comparisonHTML += '<div><b>Generate Geo-Comparison Data for...</b>';
 
 	//Generic button template
     for(i = 0; i < buttonNames.length; i++) {
