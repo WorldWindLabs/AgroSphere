@@ -1203,6 +1203,13 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					}
 					flagLayer.renderables[l].label = flagName;
 				}
+			} else {
+				//Just go through the flag layer and relabel it to default
+				for(l = 0; l < flagLayer.renderables.length; l++) {
+					flagLayer.renderables[l].label = 
+							flagLayer.renderables[l].userObject.country + 
+							'-' + flagLayer.renderables[l].userObject.code3;
+				}
 			}
         });
     }
