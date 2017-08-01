@@ -33,6 +33,7 @@ requirejs({paths:{
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 		WorldWind.configuration.baseUrl = '';
+    console.time('First');
 		var regression = require("regression");
 		var derivative = require("math");
 		var ResizeSensor = require("resizejs");
@@ -319,7 +320,7 @@ requirejs({paths:{
             if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                 var position = pickList.objects[0].position;
 
-
+        console.timeEnd('First');
 				//Find the closest country and placemark
 				findInformationUsingLocation(wwd, position.latitude, position.longitude, csvData[0], csvData[1]);
             }
@@ -558,7 +559,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 8000);
+}, 4000);
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
@@ -1210,8 +1211,8 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 			} else {
 				//Just go through the flag layer and relabel it to default
 				for(l = 0; l < flagLayer.renderables.length; l++) {
-					flagLayer.renderables[l].label = 
-							flagLayer.renderables[l].userObject.country + 
+					flagLayer.renderables[l].label =
+							flagLayer.renderables[l].userObject.country +
 							'-' + flagLayer.renderables[l].userObject.code3;
 				}
 				if($(this).hasClass('active')) {
@@ -2468,10 +2469,9 @@ var tabsFn = (function() {
 
 $(function () {
     $(".draggable").draggable({
+      containment:"window"
     });
 });
-
-
 //sidebar toggle
 $(document).ready(function () {
 	checkTabs();
@@ -2596,6 +2596,9 @@ $(document).ready(function () {
     });
 	checkTabs();
 
+  $('.legendButton').click(function() {
+    $('.legend').toggle();
+  });
   /* highlighting correct button for geocomparison and wms layers */
   /*$('.geoCompButton').click(function() {
       if ($('.geoCompButton').hasClass('active')) {

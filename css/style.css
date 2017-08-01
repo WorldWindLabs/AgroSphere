@@ -25,11 +25,12 @@ body {
     -o-user-select: none;
     user-select: none;
     overflow: hidden;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Libre Franklin', 'PT Sans', sans-serif;
 }
 
 body, html {
     height: 100%;
+    overflow:hidden;
 }
 
 
@@ -85,7 +86,6 @@ body {
 
 /* z-index added to make draggable appear correctly */
 .tabs-left {
-    margin-top:6rem;
     z-index:1000;
 }
 
