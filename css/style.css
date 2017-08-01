@@ -136,6 +136,7 @@ body {
     margin-left: 45px;
     height:500px;
     box-shadow: 2px 2px 2px black;
+    width:450px;
 }
 
 /* mobile media queries */

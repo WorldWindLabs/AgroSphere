@@ -1237,7 +1237,7 @@ function generateGeoComparisonButton(agriData) {
 	var j = 0;
     var comparisonHTML = '';
     //Also implement the slider
-    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 2014</div></p>';
+    comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 2014</div></p><br>';
 	var buttonNames = [];
 	//Create the buttons, grab all the names for every crop known
 	for(i = 0; i < agriData.length; i++) {
