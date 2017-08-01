@@ -75,7 +75,7 @@
                     <a class="smallerfontsize" href="https://github.com/atreya-iyer" target="_blank">Atreya Iyer,</a>
                         and <a class="smallerfontsize" href="https://github.com/nar5093" target="_blank">Nick Rubel.</a></b>
 
-                <p>Link to our website: <a target="_blank" href="https://github.com/WorldWind-2017/AgroSphere"><b>AgroSphere</b></a></p>
+                <p>Link to our website: <a target="_blank" href="http://worldwind.arc.nasa.gov/AgroSphere/about.html"><b>AgroSphere</b></a></p>
                 <p>Rights of country agriculture data goes to Food and Agriculture Organization of United Nations: <a target="_blank" href="http://www.fao.org/home/en/"><b>Source</b></a></p>
                 <p>Rights of atmosphere data goes to FluxNet: <a target="_blank" href="https://fluxnet.ornl.gov/"><b>Source</b></a></p>
                 <p>Rights of country border coordinates goes to Johan Sundström: <a target="_blank" href="https://github.com/johan/world.geo.json"><b>Source</b></a></p>
@@ -226,7 +226,7 @@
             </div>
             <div class="tab-pane" id="comp">
                 <h4>Geo-Comparison Data</h4>
-                <button class="btn btn-info legendButton" type="button">Toggle Legend</button>
+                <button class="btn btn-info legendButton" type="button">Legend</button>
                 <div class="legend" style="display:none;">
                   <b>Legend (Amount of Crops Produced)</b>
                   <div>Note: Color scheme is based on other countries' data, so there is no numeric data.
@@ -268,7 +268,7 @@
         </div><!-- /tab-content -->
     </div><!-- /tabbable -->
 </div><!-- /col -->
-<img class="legend" src="./images/legend.png" style="z-index: 1001; position:absolute; bottom:0; right:120px; width:35%; display:none;">
+<img class="legend" id="draggablelegend" src="./images/legend.png" style="z-index: 1001; position:absolute; bottom:300px; right:20px; width:25%; display:none;">
 <div class="col-xs-9" id="globe" style="width: 100%; height: 100%; position: fixed; left: 0">
     <canvas id="canvasOne" width="1920" height="1080" style="position: fixed; left: 0; width: 100%; height: 100%">
         Your browser does not support HTML5 Canvas.

@@ -1206,8 +1206,8 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 			} else {
 				//Just go through the flag layer and relabel it to default
 				for(l = 0; l < flagLayer.renderables.length; l++) {
-					flagLayer.renderables[l].label = 
-							flagLayer.renderables[l].userObject.country + 
+					flagLayer.renderables[l].label =
+							flagLayer.renderables[l].userObject.country +
 							'-' + flagLayer.renderables[l].userObject.code3;
 				}
 			}
@@ -2463,7 +2463,10 @@ $(function () {
     });
 });
 
-
+$(function () {
+    $("#draggablelegend").draggable({
+    });
+});
 //sidebar toggle
 $(document).ready(function () {
 	checkTabs();
