@@ -2009,7 +2009,9 @@ function generateDataButtons(inputData, codeName, mode) {
         }
 		//dataHTML += '</div>';
         dataHTML += '</ul>';
-    }
+    } else {
+		dataHTML += '<p>No data avaliable!</p>';
+	}
     return dataHTML;
 }
 
