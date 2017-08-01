@@ -2462,11 +2462,6 @@ $(function () {
     $(".draggable").draggable({
     });
 });
-
-$(function () {
-    $("#draggablelegend").draggable({
-    });
-});
 //sidebar toggle
 $(document).ready(function () {
 	checkTabs();
