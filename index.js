@@ -2460,6 +2460,7 @@ var tabsFn = (function() {
 
 $(function () {
     $(".draggable").draggable({
+      containment:"window"
     });
 });
 //sidebar toggle
