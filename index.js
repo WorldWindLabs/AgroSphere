@@ -2579,9 +2579,11 @@ $(document).ready(function () {
     });
 	checkTabs();
 
+  $('.legendButton').click(function() {
+    $('.legend').toggle();
+  });
   /* highlighting correct button for geocomparison and wms layers */
   $('.geoCompButton').click(function() {
-      $('#legend').toggle();
       if ($('.geoCompButton').hasClass('active')) {
           var clickedButtonIsActive = $(this).hasClass('active');
 
