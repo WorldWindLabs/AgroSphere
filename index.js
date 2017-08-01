@@ -558,7 +558,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 8000);
+}, 4000);
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
@@ -2460,11 +2460,7 @@ var tabsFn = (function() {
 
 $(function () {
     $(".draggable").draggable({
-    });
-});
-
-$(function () {
-    $("#draggablelegend").draggable({
+      containment:"window"
     });
 });
 //sidebar toggle

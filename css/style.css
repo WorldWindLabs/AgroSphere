@@ -30,6 +30,7 @@ body {
 
 body, html {
     height: 100%;
+    overflow:hidden;
 }
 
 
@@ -85,7 +86,6 @@ body {
 
 /* z-index added to make draggable appear correctly */
 .tabs-left {
-    margin-top:6rem;
     z-index:1000;
 }
 
