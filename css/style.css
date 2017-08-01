@@ -18,23 +18,18 @@ div, h1, h2, h3, h4, h5, p, a {
 }
 
 /* disable right clicking */
-.body {
+body {
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
     -o-user-select: none;
     user-select: none;
     overflow: hidden;
-    font-family: SFDisplay;
+    font-family: 'PT Sans', sans-serif;
 }
 
 body, html {
     height: 100%;
-}
-
-@font-face {
-    font-family: SFDisplay;
-    src: url(../font/SFDisplayRegular.ttf);
 }
 
 
