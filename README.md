@@ -36,14 +36,15 @@ _Screenshot showing AgroSphere comparing potato data from around the world._
 * Graph agricultural data from 1961-2014 and atmospheric data from 1989-2014 and view both simultaneously.
 * Adjust time and opacity of layers displayed on the globe and thereby integrate layers to study groups of information together.
 * National agricultural output can be examined closely and also compared to one another.
-* Search for current weather data for many cities around the globe.
-* Load in any number of spatiotemporal geographically accurate data from multiple sources, using a variety of formats including WMTS, WMS, KML, TIFF, and CSV.
-* Use the Destination tool to immediately visit any desired location.
+* Search for current weather data for any city around the globe.
+* Load in any number of spatiotemporal geographically accurate data from multiple sources, using data formats such as WMS and CSV.
+* Use the location Search Tool in the View Options tab to immediately visit any desired location.
 
 ## Outreach
 
 We discussed our web app and work-in-progress with Martin C. Heller from the Center for Sustainable Systems at University of Michigan. He offered us critiques from a researcher's point of view.
 We also tested our app on NASA interns from the STEM Teacher and Researcher (STAR) program to receive suggestions from an educational perspective.
+Finally, we showcased our app to professional web app developers from institutions such as the University of Pennsylvania.
 
 ## How to Run and Develop AgroSphere
 

@@ -312,7 +312,7 @@ section h3.section-subheading {
   font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: none;
   font-weight: 400;
-  margin-bottom: 75px;
+  margin-bottom: 40px;
 }
 @media (min-width: 768px) {
   section {
