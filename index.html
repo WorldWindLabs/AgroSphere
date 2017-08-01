@@ -218,12 +218,13 @@
             </div>
             <div class="tab-pane" id="comp">
                 <h4>Geo-Comparison Data</h4>
-                <b>Legend (Amount of Crops Produced)</b>
-                <div>Note: Color scheme is based on other countries' data, so there is no numeric data.
-                   To clarify, for example, if USA has 5 and is the average, its color would be yellow.
-                   If China has 8, its color would be green.</div>
-                  <br>
-                <img id="legendPicture" src="./images/legend.png" style="z-index: 1001; max-width:100%; max-height:100%; padding-bottom:20px;">
+                <div id="legend" style="display:none;">
+                  <b>Legend (Amount of Crops Produced)</b>
+                  <div>Note: Color scheme is based on other countries' data, so there is no numeric data.
+                     To clarify, for example, if USA has 5 and is the average, its color would be yellow.
+                     If China has 8, its color would be green.</div>
+                    <br>
+                </div>
 					<div id="colour-legend">
 					</div>
             </div>
@@ -258,6 +259,7 @@
         </div><!-- /tab-content -->
     </div><!-- /tabbable -->
 </div><!-- /col -->
+<img id="legend" src="./images/legend.png" style="display:none; z-index: 1001; position:absolute; bottom:0; right:50px;">
 <div class="col-xs-9" id="globe" style="width: 100%; height: 100%; position: fixed; left: 0">
     <canvas id="canvasOne" width="1920" height="1080" style="position: fixed; left: 0; width: 100%; height: 100%">
         Your browser does not support HTML5 Canvas.

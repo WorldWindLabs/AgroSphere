@@ -2581,6 +2581,7 @@ $(document).ready(function () {
 
   /* highlighting correct button for geocomparison and wms layers */
   $('.geoCompButton').click(function() {
+      $('#legend').toggle();
       if ($('.geoCompButton').hasClass('active')) {
           var clickedButtonIsActive = $(this).hasClass('active');
 
