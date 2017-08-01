@@ -1202,6 +1202,10 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 						}
 					}
 					flagLayer.renderables[l].label = flagName;
+					if(!$(this).hasClass('active')) {
+						console.log('I am not active');
+						$(this).addClass('active');
+					}
 				}
 			} else {
 				//Just go through the flag layer and relabel it to default
@@ -1209,6 +1213,10 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					flagLayer.renderables[l].label = 
 							flagLayer.renderables[l].userObject.country + 
 							'-' + flagLayer.renderables[l].userObject.code3;
+				}
+				if($(this).hasClass('active')) {
+					console.log('Activation');
+					$(this).removeClass('active');
 				}
 			}
         });
@@ -2589,7 +2597,7 @@ $(document).ready(function () {
 	checkTabs();
 
   /* highlighting correct button for geocomparison and wms layers */
-  $('.geoCompButton').click(function() {
+  /*$('.geoCompButton').click(function() {
       if ($('.geoCompButton').hasClass('active')) {
           var clickedButtonIsActive = $(this).hasClass('active');
 
@@ -2602,7 +2610,7 @@ $(document).ready(function () {
       else {
           $(this).addClass('active');
       }
-  });
+  });*/
   $('.wmsButton').click(function() {
       if ($('.wmsButton').hasClass('active')) {
           var clickedButtonIsActive = $(this).hasClass('active');
