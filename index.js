@@ -1153,7 +1153,13 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					}
 				}
             }
-
+			
+			//Turn off all the buttons
+			for(j = 0; j < agriData.length; j++) {
+				var tempButton = $('#geoCompType' + j);
+				tempButton.removeClass('active');
+			}
+			
             //Got all the data, colour it
             countryData = filterOutBlanks(countryData, 0);
 
