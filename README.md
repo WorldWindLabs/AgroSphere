@@ -1,8 +1,7 @@
 <img src="images/nasalogo.png" height="100"/>
 
 # AgroSphere
-## <a href="https://worldwind.arc.nasa.gov/agrosphere/">Application</a>
-## <a href="https://worldwind.arc.nasa.gov/agrosphere/about.html">About Page</a>
+## <a href="https://worldwind.arc.nasa.gov/agrosphere/about.html">Link to Our Application</a>
 
 ### NASA World Wind is a free, open-source API that provides the tools to create interactive - 
 
