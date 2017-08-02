@@ -33,7 +33,7 @@ requirejs({paths:{
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 		WorldWind.configuration.baseUrl = '';
-    console.time('First');
+    console.time('First);
 		var regression = require("regression");
 		var derivative = require("math");
 		var ResizeSensor = require("resizejs");
@@ -1153,13 +1153,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					}
 				}
             }
-			
-			//Turn off all the buttons
-			for(j = 0; j < agriData.length; j++) {
-				var tempButton = $('#geoCompType' + j);
-				tempButton.removeClass('active');
-			}
-			
+
             //Got all the data, colour it
             countryData = filterOutBlanks(countryData, 0);
 
@@ -1209,10 +1203,6 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 						}
 					}
 					flagLayer.renderables[l].label = flagName;
-					if(!$(this).hasClass('active')) {
-						console.log('I am not active');
-						$(this).addClass('active');
-					}
 				}
 			} else {
 				//Just go through the flag layer and relabel it to default
@@ -1220,10 +1210,6 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					flagLayer.renderables[l].label =
 							flagLayer.renderables[l].userObject.country +
 							'-' + flagLayer.renderables[l].userObject.code3;
-				}
-				if($(this).hasClass('active')) {
-					console.log('Activation');
-					$(this).removeClass('active');
 				}
 			}
         });
@@ -1881,13 +1867,13 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
 function generateCountryButtons() {
 	var countryHTML = '<h5><b>Available Datasets</b></h5>';
   var isanEmptyDataset =
-	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Data List</button>';
+	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Production Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPest">Show Pesticide Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnFerti">Show Fertilizer Data List</button>';
-	countryHTML += '<button class="btn-info" id ="spawnYield">Show Yield Data List</button>';
+	countryHTML += '<button class="btn-info" id ="spawnYield">Show Agriculture Yield Data List</button>';
 	return countryHTML;
 }
 
@@ -1951,7 +1937,7 @@ function generateDataButtons(inputData, codeName, mode) {
 	//Mode dictates what to call the title or search bar
 	switch(mode) {
 		case 0:
-			var dataHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Production Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
 			break;
 		case 1:
@@ -2606,7 +2592,7 @@ $(document).ready(function () {
     $('.legend').toggle();
   });
   /* highlighting correct button for geocomparison and wms layers */
-  /*$('.geoCompButton').click(function() {
+  $('.geoCompButton').click(function() {
       if ($('.geoCompButton').hasClass('active')) {
           var clickedButtonIsActive = $(this).hasClass('active');
 
@@ -2619,7 +2605,7 @@ $(document).ready(function () {
       else {
           $(this).addClass('active');
       }
-  });*/
+  });
   $('.wmsButton').click(function() {
       if ($('.wmsButton').hasClass('active')) {
           var clickedButtonIsActive = $(this).hasClass('active');
