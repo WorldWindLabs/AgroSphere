@@ -93,7 +93,7 @@
                 <p>NASA World Wind is a free, open-source API that provides the tools to create interactive
                      visualizations of Earth in 4D. At Ames Research Center, the NASA WorldWind 2017
                      Intern team has designed an educational web application that visualizes the effects of climate change
-                     on agriculture using a large collection of global agriculture and weather station data and the Web World Wind Source Development Kit (SDK). </p>
+                     on agriculture using a large collection of global agriculture and climate data and the Web World Wind Source Development Kit (SDK). </p>
                 <p>The team utilized technologies including HTML5, CSS, JavaScript, and jQuery to develop the application,
                     incorporating and analyzing spatial data for agriculture and atmosphere. Data in various formats are organized,
                     analyzed and visualized on the globe. </p>
@@ -152,7 +152,10 @@
                             <img class="img-responsive" src="images/gif/geoComp2.gif" alt="...">
                             <div class="carousel-caption">
                                 <p>Search for crop Geo-Comparison data and toggle the layers. Use time slider to control the year to be displayed.
-                                    Zoom into a country to view the specified amount of production in tonnes. </p>
+                                    Zoom into a country to view the specified amount of production in tonnes. The legend is based on standard deviations.
+                                    Red means that the country's amount of production is three SDs below the average. Green means that the country's amount
+                                    of production is three SDs above the average.
+                                </p>
                             </div>
                         </div>
                         <div class="item">
@@ -275,7 +278,7 @@
 </div><!-- /col -->
 
 <!-- Geo-Comparison Legend -->
-<img class="legend draggable" src="./images/legend.png" style="z-index: 1001; position:absolute; bottom:300px; right:20px; width:28%; display:none;">
+<img class="legend draggable" src="./images/legend.png" style="z-index: 1001; position:absolute; bottom:300px; right:20px; width:30%; display:none;">
 
 <!-- Web World Wind Globe-->
 <div class="col-xs-9" id="globe" style="width: 100%; height: 100%; position: fixed; left: 0">
