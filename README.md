@@ -39,7 +39,7 @@ _Screenshot showing AgroSphere comparing potato data from around the world._
 * Adjust time and opacity of layers displayed on the globe and thereby integrate layers to study groups of information together.
 * National agricultural output can be examined closely and also compared to one another.
 * Search for current weather data for any city around the globe.
-* Load in any number of spatiotemporal geographically accurate data from multiple sources, using data formats such as WMS and CSV.
+* Load in any number of spatiotemporal geographically accurate data from multiple sources, using data formats such as GeoJSON, WMS, and CSV.
 * Use the location Search Tool in the View Options tab to immediately visit any desired location.
 
 ## Outreach
