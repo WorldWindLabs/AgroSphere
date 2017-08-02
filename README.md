@@ -53,8 +53,10 @@ Finally, we showcased our app to professional web app developers from institutio
 1) Visit http://worldwind.arc.nasa.gov/AgroSphere to use the app on your webpage.
 2) Download or clone the repository in to local storage and run the index.html in a webserver using WebStorm, which has a built in webserver (https://blog.jetbrains.com/webstorm/2013/03/built-in-server-in-webstorm-6/), or by using MAMP (https://www.mamp.info/en/), a free, local server environment).
 
+## Future Directions
+You are welcome to add more climate and agriculture data using our built-in CSV reading functionality and the WebWorldWind Placemarks feature. For example, drought and flood data can be added and displayed on our app to examine how agriculture has been affected by those particular disasters.
 
-#### Updated as of 8/1/17
+#### Updated as of 8/2/17
 
 ***
 
