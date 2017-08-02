@@ -22,13 +22,12 @@ requirejs({paths:{
     "jquery-csv": "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/jquery.csv",
     "simple-stats": "https://unpkg.com/simple-statistics@4.1.0/dist/simple-statistics.min",
 	"regression": "src/regression/regression",
-	"math": "src/math/math.min",
 	"resizejs" : "js/resizejs/src/ResizeSensor"
 }
 },['src/WorldWind',
         './LayerManager', 'src/formats/kml/KmlFile',
         'src/formats/kml/controls/KmlTreeVisibility', './Pin', 'jquery', 'jqueryui', 'jquery-csv',
-        'simple-stats', 'regression', 'math', "resizejs"],
+        'simple-stats', 'regression', "resizejs"],
     function (ww,
               LayerManager, KmlFile, KmlTreeVisibility) {
         "use strict";
@@ -37,7 +36,6 @@ requirejs({paths:{
 		WorldWind.configuration.baseUrl = '';
 		console.time('First');
 		var regression = require("regression");
-		var derivative = require("math");
 		var ResizeSensor = require("resizejs");
         var wwd = new WorldWind.WorldWindow("canvasOne");
 
@@ -1373,6 +1371,23 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 				$('#allGraphStation').html('');
 			}
 		});
+		var legendButtonHTML = $('#toggleLegendStation').button();
+		legendButtonHTML.off();
+		legendButtonHTML.on('click', function() {
+			//Check if the plot exist
+			if($('#allGraphStation').html() != '' ) {
+				var layout = {};
+				if($(this).hasClass('legendoff')) {
+					
+					layout.showlegend = true;
+					$(this).removeClass('legendoff');
+				} else {
+					layout.showlegend = false;
+					$(this).addClass('legendoff');
+				}
+				Plotly.relayout($('#allGraphStation').children()[0], layout);
+			}
+		});
 	}
 }
 
@@ -1582,6 +1597,23 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 				$(this).addClass('plotted');
 				plotStack(dataPoint, 'allGraph', amount);
 				
+			}
+		});
+		var legendButtonHTML = $('#toggleLegend').button();
+		legendButtonHTML.off();
+		legendButtonHTML.on('click', function() {
+			//Check if the plot exist
+			if($('#allGraph').html() != '') {
+				var layout = {};
+				if($(this).hasClass('legendoff')) {
+					
+					layout.showlegend = true;
+					$(this).removeClass('legendoff');
+				} else {
+					layout.showlegend = false;
+					$(this).addClass('legendoff');
+				}
+				Plotly.relayout($('#allGraph').children()[0], layout);
 			}
 		});
     }
@@ -1850,6 +1882,7 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
 	var dataPoint2 = findDataPointStation(inputData2, stationName);
 	atmoHTML += '<div id="allGraphStation"></div>';
 	atmoHTML += '<button class="btn-info" id="allButtonStation">Graph Crops and Weather</button>';
+	atmoHTML += '<button class="btn-info" id="toggleLegendStation">Toggle Legend</button>';
     if (dataPoint != 0) {
         var i = 0;
 		//Yearly data
@@ -2013,6 +2046,7 @@ function generateDataButtons(inputData, codeName, mode) {
 				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Yield Datasets</button>';
 				break;
         }
+		dataHTML += '<br><button class="btn-info" id="toggleLegend">Toggle Legend</button>';
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
         dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Amount</button>';
 		dataHTML += '<div id="allGraph"></div>';
