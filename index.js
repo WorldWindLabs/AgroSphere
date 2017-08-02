@@ -1358,7 +1358,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 		}
 
 		//Assign functionality to the allButton
-		var allButtonHTML = $('#allButton').button();
+		var allButtonHTML = $('#allButtonStation').button();
 		allButtonHTML.on('click', function() {
 			//Plots a stacked bar
 			var topX = $('#amount').val();
@@ -1466,7 +1466,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 				});
 			}
         }
-
+		$('#sortByName').off();
 		$('#sortByName').click(function() {
 			//Go through the entire button list and sort them
 			var divList = $('.layerTitle');
@@ -1493,7 +1493,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			}
 			giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode);
 		});
-
+		$('#sortByAverage').off();
 		$('#sortByAverage').click(function() {
 			var divList = $('.layerTitle');
 			var newList = [];
@@ -1539,6 +1539,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 		});
 
         //Assign functionality to the search bar
+		$('#searchinput').off();
         $('#searchinput').keyup(function (event) {
             //if (event.which == 13) {
                 var input = $('#searchinput');
@@ -1564,6 +1565,9 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 
 		//Assign functionality to the allButton
 		var allButtonHTML = $('#allButton').button();
+		//Remember in the case of regiving functionality, gotta remove 
+		//the listener
+		allButtonHTML.off();
 		allButtonHTML.on('click', function() {
 			//Plots a stacked bar
 			var topX = $('#amount').val();
@@ -1571,10 +1575,13 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			if(!Number.isNaN(parseInt(topX))) {
 				amount = parseInt(topX);
 			}
-			if($('#allGraph').html() == '') {
-				plotStack(dataPoint, 'allGraph', amount);
-			} else {
+			if($(this).hasClass('plotted')) {
+				$(this).removeClass('plotted');
 				$('#allGraph').html('');
+			} else {
+				$(this).addClass('plotted');
+				plotStack(dataPoint, 'allGraph', amount);
+				
 			}
 		});
     }
@@ -1668,7 +1675,7 @@ function getColour(zScore) {
     //Could use exponential decay function or something
     var red = 0;
     var green = 0;
-
+	console.log(zScore);
     if (zScore < 0) {
         red = 1;
         green = Math.exp(zScore);
@@ -1678,7 +1685,10 @@ function getColour(zScore) {
     } else if (zScore > 0) {
         green = 1;
         red = Math.exp(-1 * zScore);
-    }
+    } else if(isNan(zScore)) {
+		red = 0;
+		green = 0;
+	}
     configuration.attributes.interiorColor =
         new WorldWind.Color(red, green, 0, 1);
     configuration.attributes.outlineColor =
@@ -1839,7 +1849,7 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
     var dataPoint = findDataPointStation(inputData, stationName);
 	var dataPoint2 = findDataPointStation(inputData2, stationName);
 	atmoHTML += '<div id="allGraphStation"></div>';
-	atmoHTML += '<button class="btn-info" id="allButton">Graph Crops and Weather</button>';
+	atmoHTML += '<button class="btn-info" id="allButtonStation">Graph Crops and Weather</button>';
     if (dataPoint != 0) {
         var i = 0;
 		//Yearly data
@@ -2165,7 +2175,7 @@ function plotStack(inputData, htmlID, amount) {
 	var topPercentages = [];
 	var numRanks = 5;
 	var k = 0;
-
+	console.log(inputData);
 	//Array of top values
 	var showDataValues = [];
 	for(i = 0; i < inputData.dataValues[0].timeValues.length; i++) {
@@ -2271,12 +2281,14 @@ function plotStack(inputData, htmlID, amount) {
 	}
 	var d3 = Plotly.d3;
 	var size = 100;
-  var ysize = 70;
+    var ysize = 70;
+	console.log(htmlID);
 	var gd3 = d3.select('#' + htmlID).append('div').style({
 		width: size + '%', 'margin-left': ((100 - size)/2) + '%',
 		height: ysize + 'vh', 'margin-top': ((100 - size)/2) + 'vh'
 	});
 	var gd = gd3.node();
+	console.log(gd);
 	Plotly.plot(gd, traces, layout);
 	new ResizeSensor($('#' + htmlID), function() {
 		Plotly.Plots.resize(gd);
