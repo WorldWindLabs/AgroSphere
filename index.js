@@ -12,7 +12,9 @@
 
 var APIKEY = '26fb68df7323284ea4430d8e4d3c60b1';
 var geoMode = 0;
-
+requirejs.config({
+	waitSeconds: 0
+});
 
 requirejs({paths:{
     "jquery":"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min",
