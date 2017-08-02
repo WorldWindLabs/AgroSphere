@@ -19,8 +19,8 @@ climate change on agriculture using a large collection of global agriculture and
 
 The World Wind intern team utilized technologies including HTML5, CSS, and JavaScript to develop our application, incorporating and analyzing spatial data for agriculture and atmosphere. Data in various file formats are organized, analyzed and visualized on the globe. Users can click on the respective weather and nation placemarks for statistical information. This includes details specific to that country’s history for atmosphere and agriculture and for a specified timeframe. Users can also control each dataset on the globe by adjusting opacity, time and other options for comparing crop production versus climate. This web app is intended for use in classrooms by teachers and students, as well as citizens of the world. Children and adults alike will be able to learn about climate issues by visually experiencing the data according to their interests. Users will learn about the effects of weather over time on agriculture, the impact to national economies and much more.
  
-_Screenshot showing the available data for a selected country, which includes lists of crops,
-price, livestocks, and agricultural emission._
+_Screenshot showing the available data for a selected country, which includes lists of crop production and yield,
+prices, livestocks, agricultural emission, fertilizer and pesticides._
 
 <img src="images/RM1.png" />
 
@@ -39,8 +39,9 @@ _Screenshot showing AgroSphere comparing potato data from around the world._
 * Adjust time and opacity of layers displayed on the globe and thereby integrate layers to study groups of information together.
 * National agricultural output can be examined closely and also compared to one another.
 * Search for current weather data for any city around the globe.
-* Load in any number of spatiotemporal geographically accurate data from multiple sources, using data formats such as WMS and CSV.
+* Load in any number of spatiotemporal geographically accurate data from multiple sources, using data formats such as GeoJSON, WMS, and CSV.
 * Use the location Search Tool in the View Options tab to immediately visit any desired location.
+* The app and most of its functionalities are available on mobile devices (smartphones and tablets).
 
 ## Outreach
 
