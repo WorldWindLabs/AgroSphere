@@ -33,7 +33,7 @@ requirejs({paths:{
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 		WorldWind.configuration.baseUrl = '';
-    console.time('First);
+    console.time('First');
 		var regression = require("regression");
 		var derivative = require("math");
 		var ResizeSensor = require("resizejs");
