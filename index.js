@@ -561,7 +561,7 @@ function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
 //loading screen
 setTimeout(function () {
     $("#loading_modal").fadeOut();
-}, 4000);
+}, 3000);
 
 $(document).ready(function () {
     $('#sidebarCollapse').on('click', function () {
@@ -1565,7 +1565,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 
 		//Assign functionality to the allButton
 		var allButtonHTML = $('#allButton').button();
-		//Remember in the case of regiving functionality, gotta remove 
+		//Remember in the case of regiving functionality, gotta remove
 		//the listener
 		allButtonHTML.off();
 		allButtonHTML.on('click', function() {
@@ -1581,7 +1581,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			} else {
 				$(this).addClass('plotted');
 				plotStack(dataPoint, 'allGraph', amount);
-				
+
 			}
 		});
     }
