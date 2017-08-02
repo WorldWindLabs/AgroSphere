@@ -41,6 +41,7 @@ _Screenshot showing AgroSphere comparing potato data from around the world._
 * Search for current weather data for any city around the globe.
 * Load in any number of spatiotemporal geographically accurate data from multiple sources, using data formats such as GeoJSON, WMS, and CSV.
 * Use the location Search Tool in the View Options tab to immediately visit any desired location.
+* The app and most of its functionalities are available on mobile devices (smartphones and tablets).
 
 ## Outreach
 
