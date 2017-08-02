@@ -135,9 +135,21 @@ body {
 }
 
 /* mobile media queries */
-@media only screen and (max-width: 553px) {
+@media only screen and (max-width: 1024px) {
     .tab-content {
-        width:300px;
+        width:950px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .tab-content {
+        width:700px;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .tab-content {
+        width:360px;
     }
 }
 
