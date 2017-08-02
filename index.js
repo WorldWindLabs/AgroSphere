@@ -35,7 +35,7 @@ requirejs({paths:{
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 		WorldWind.configuration.baseUrl = '';
-    console.time('First');
+		console.time('First');
 		var regression = require("regression");
 		var derivative = require("math");
 		var ResizeSensor = require("resizejs");
@@ -307,7 +307,7 @@ requirejs({paths:{
 
         // Listen for taps on mobile devices.
         var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
-
+		console.timeEnd('First');
 
         // The common gesture-handling function.
         var handleClick = function (recognizer) {
@@ -322,7 +322,6 @@ requirejs({paths:{
             if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                 var position = pickList.objects[0].position;
 
-        console.timeEnd('First');
 				//Find the closest country and placemark
 				findInformationUsingLocation(wwd, position.latitude, position.longitude, csvData[0], csvData[1]);
             }
