@@ -1867,13 +1867,13 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
 function generateCountryButtons() {
 	var countryHTML = '<h5><b>Available Datasets</b></h5>';
   var isanEmptyDataset =
-	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Production Data List</button>';
+	countryHTML += '<button class="btn-info" id="spawnAgri">Show Ag. Production Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPest">Show Pesticide Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnFerti">Show Fertilizer Data List</button>';
-	countryHTML += '<button class="btn-info" id ="spawnYield">Show Agriculture Yield Data List</button>';
+	countryHTML += '<button class="btn-info" id ="spawnYield">Show Ag. Yield Data List</button>';
 	return countryHTML;
 }
 
@@ -1937,7 +1937,7 @@ function generateDataButtons(inputData, codeName, mode) {
 	//Mode dictates what to call the title or search bar
 	switch(mode) {
 		case 0:
-			var dataHTML = '<h4>Production Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Ag. Production Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
 			break;
 		case 1:
@@ -1949,7 +1949,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many livestocks?" title="Search for datasets..">';
 			break;
 		case 3:
-			var dataHTML = '<h4>Agriculture Emission Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Ag. Emission Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crops?" title="Search for datasets..">';
 			break;
 		case 4:
@@ -1961,7 +1961,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many fertilisers?" title="Search for datasets..">';
 			break;
 		case 6:
-			var dataHTML = '<h4>Yield Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Ag. Yield Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crop yields?" title="Search for datasets..">';
 			break;
 	}
