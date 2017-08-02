@@ -12,7 +12,9 @@
 
 var APIKEY = '26fb68df7323284ea4430d8e4d3c60b1';
 var geoMode = 0;
-
+requirejs.config({
+	waitSeconds: 0
+});
 
 requirejs({paths:{
     "jquery":"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min",
@@ -33,7 +35,7 @@ requirejs({paths:{
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 		WorldWind.configuration.baseUrl = '';
-    console.time('First');
+		console.time('First');
 		var regression = require("regression");
 		var derivative = require("math");
 		var ResizeSensor = require("resizejs");
@@ -133,9 +135,7 @@ requirejs({paths:{
 
         //Handle a pick (only placemarks shall be)
         var highlightedItems = [];
-        var handlePick = function(o) {
-            var x = o.clientX;
-            var y = o.clientY;
+        var handlePick = function(x,y) {
 
             var redrawRequired = highlightedItems.length > 0; // must redraw if we de-highlight previously picked items
 
@@ -280,7 +280,8 @@ requirejs({paths:{
             }
         };
 
-        wwd.addEventListener('click', handlePick);
+        //wwd.addEventListener('click', handlePick);
+		//wwd.addEventListener('touchend', handlePick);
         // Set up to handle clicks and taps.
 
         // The common gesture-handling function.
@@ -297,7 +298,9 @@ requirejs({paths:{
             if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                 var position = pickList.objects[0].position;
                 wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
-            }
+            } else {
+				handlePick(x,y);
+			}
         };
 
         // Listen for mouse clicks.
@@ -305,7 +308,7 @@ requirejs({paths:{
 
         // Listen for taps on mobile devices.
         var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
-
+		console.timeEnd('First');
 
         // The common gesture-handling function.
         var handleClick = function (recognizer) {
@@ -320,7 +323,6 @@ requirejs({paths:{
             if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                 var position = pickList.objects[0].position;
 
-        console.timeEnd('First');
 				//Find the closest country and placemark
 				findInformationUsingLocation(wwd, position.latitude, position.longitude, csvData[0], csvData[1]);
             }
@@ -1153,13 +1155,7 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					}
 				}
             }
-			
-			//Turn off all the buttons
-			for(j = 0; j < agriData.length; j++) {
-				var tempButton = $('#geoCompType' + j);
-				tempButton.removeClass('active');
-			}
-			
+
             //Got all the data, colour it
             countryData = filterOutBlanks(countryData, 0);
 
@@ -1209,10 +1205,6 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 						}
 					}
 					flagLayer.renderables[l].label = flagName;
-					if(!$(this).hasClass('active')) {
-						console.log('I am not active');
-						$(this).addClass('active');
-					}
 				}
 			} else {
 				//Just go through the flag layer and relabel it to default
@@ -1220,10 +1212,6 @@ function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager
 					flagLayer.renderables[l].label =
 							flagLayer.renderables[l].userObject.country +
 							'-' + flagLayer.renderables[l].userObject.code3;
-				}
-				if($(this).hasClass('active')) {
-					console.log('Activation');
-					$(this).removeClass('active');
 				}
 			}
         });
@@ -1378,8 +1366,12 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 			if(!Number.isNaN(parseInt(topX))) {
 				amount = parseInt(topX);
 			}
-			plotStack(agriDataPoint, 'allGraphStation', amount);
-			createSubPlot(dataPoint.dataValues, 'allGraphStation');
+			if($('#allGraphStation').html() == '') {
+				plotStack(agriDataPoint, 'allGraphStation', amount);
+				createSubPlot(dataPoint.dataValues, 'allGraphStation');
+			} else {
+				$('#allGraphStation').html('');
+			}
 		});
 	}
 }
@@ -1579,7 +1571,11 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			if(!Number.isNaN(parseInt(topX))) {
 				amount = parseInt(topX);
 			}
-			plotStack(dataPoint, 'allGraph', amount);
+			if($('#allGraph').html() == '') {
+				plotStack(dataPoint, 'allGraph', amount);
+			} else {
+				$('#allGraph').html('');
+			}
 		});
     }
 }
@@ -1881,13 +1877,13 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
 function generateCountryButtons() {
 	var countryHTML = '<h5><b>Available Datasets</b></h5>';
   var isanEmptyDataset =
-	countryHTML += '<button class="btn-info" id="spawnAgri">Show Agriculture Data List</button>';
+	countryHTML += '<button class="btn-info" id="spawnAgri">Show Ag. Production Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnPest">Show Pesticide Data List</button>';
 	countryHTML += '<button class="btn-info" id="spawnFerti">Show Fertilizer Data List</button>';
-	countryHTML += '<button class="btn-info" id ="spawnYield">Show Yield Data List</button>';
+	countryHTML += '<button class="btn-info" id ="spawnYield">Show Ag. Yield Data List</button>';
 	return countryHTML;
 }
 
@@ -1951,7 +1947,7 @@ function generateDataButtons(inputData, codeName, mode) {
 	//Mode dictates what to call the title or search bar
 	switch(mode) {
 		case 0:
-			var dataHTML = '<h4>Agriculture Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Ag. Production Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
 			break;
 		case 1:
@@ -1963,7 +1959,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many livestocks?" title="Search for datasets..">';
 			break;
 		case 3:
-			var dataHTML = '<h4>Agriculture Emission Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Ag. Emission Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crops?" title="Search for datasets..">';
 			break;
 		case 4:
@@ -1975,7 +1971,7 @@ function generateDataButtons(inputData, codeName, mode) {
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many fertilisers?" title="Search for datasets..">';
 			break;
 		case 6:
-			var dataHTML = '<h4>Yield Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
+			var dataHTML = '<h4>Ag. Yield Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crop yields?" title="Search for datasets..">';
 			break;
 	}
@@ -1986,25 +1982,25 @@ function generateDataButtons(inputData, codeName, mode) {
         dataHTML += '<ul id="myUL">';
 		switch(mode) {
             case 0:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crop Production Datasets</button>';
                 break;
             case 1:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Price Data</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Price Datasets</button>';
                 break;
             case 2:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Livestock Data</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Livestock Datasets</button>';
                 break;
             case 3:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission Data</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission Datasets</button>';
 				break;
 			case 4:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticide Data</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticide Datasets</button>';
 				break;
 			case 5:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Data</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Datasets</button>';
 				break;
 			case 6:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Yield</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Yield Datasets</button>';
 				break;
         }
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
@@ -2121,9 +2117,12 @@ function createSubPlot(inputData, htmlID) {
 		newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain - 0.01],
 				title: yTitle, side: plotSide};
 	}
-	Plotly.addTraces(htmlID, traces);
-	Plotly.relayout(htmlID, newLayout);
-	Plotly.relayout( htmlID, {
+	var d3 = Plotly.d3;
+	var gd3 = d3.select('#' + htmlID + '> div');
+	var gd = gd3.node();
+	Plotly.addTraces(gd, traces);
+	Plotly.relayout(gd, newLayout);
+	Plotly.relayout(gd, {
 		'xaxis.autorange': true,
 		'yaxis.autorange': true
 	});
@@ -2131,7 +2130,7 @@ function createSubPlot(inputData, htmlID) {
 	new ResizeSensor($('#' + htmlID), function() {
 		var d3 = Plotly.d3;
 		var gd3 = d3.select('#' + htmlID + '> div');
-		gd = gd3.node();
+		var gd = gd3.node();
 		Plotly.Plots.resize(gd);
 	});
 }
@@ -2606,7 +2605,7 @@ $(document).ready(function () {
     $('.legend').toggle();
   });
   /* highlighting correct button for geocomparison and wms layers */
-  /*$('.geoCompButton').click(function() {
+  $('.geoCompButton').click(function() {
       if ($('.geoCompButton').hasClass('active')) {
           var clickedButtonIsActive = $(this).hasClass('active');
 
@@ -2619,7 +2618,7 @@ $(document).ready(function () {
       else {
           $(this).addClass('active');
       }
-  });*/
+  });
   $('.wmsButton').click(function() {
       if ($('.wmsButton').hasClass('active')) {
           var clickedButtonIsActive = $(this).hasClass('active');
