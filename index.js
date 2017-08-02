@@ -1972,25 +1972,25 @@ function generateDataButtons(inputData, codeName, mode) {
         dataHTML += '<ul id="myUL">';
 		switch(mode) {
             case 0:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crops</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crop Production Datasets</button>';
                 break;
             case 1:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Price Data</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Price Datasets</button>';
                 break;
             case 2:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Livestock Data</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Livestock Datasets</button>';
                 break;
             case 3:
-                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission Data</button>';
+                dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission Datasets</button>';
 				break;
 			case 4:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticide Data</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticide Datasets</button>';
 				break;
 			case 5:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Data</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Datasets</button>';
 				break;
 			case 6:
-				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Yield</button>';
+				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Yield Datasets</button>';
 				break;
         }
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
