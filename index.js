@@ -135,9 +135,7 @@ requirejs({paths:{
 
         //Handle a pick (only placemarks shall be)
         var highlightedItems = [];
-        var handlePick = function(o) {
-            var x = o.clientX;
-            var y = o.clientY;
+        var handlePick = function(x,y) {
 
             var redrawRequired = highlightedItems.length > 0; // must redraw if we de-highlight previously picked items
 
@@ -282,7 +280,8 @@ requirejs({paths:{
             }
         };
 
-        wwd.addEventListener('click', handlePick);
+        //wwd.addEventListener('click', handlePick);
+		//wwd.addEventListener('touchend', handlePick);
         // Set up to handle clicks and taps.
 
         // The common gesture-handling function.
@@ -299,7 +298,9 @@ requirejs({paths:{
             if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
                 var position = pickList.objects[0].position;
                 wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
-            }
+            } else {
+				handlePick(x,y);
+			}
         };
 
         // Listen for mouse clicks.
@@ -1365,8 +1366,12 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 			if(!Number.isNaN(parseInt(topX))) {
 				amount = parseInt(topX);
 			}
-			plotStack(agriDataPoint, 'allGraphStation', amount);
-			createSubPlot(dataPoint.dataValues, 'allGraphStation');
+			if($('#allGraphStation').html() == '') {
+				plotStack(agriDataPoint, 'allGraphStation', amount);
+				createSubPlot(dataPoint.dataValues, 'allGraphStation');
+			} else {
+				$('#allGraphStation').html('');
+			}
 		});
 	}
 }
@@ -1566,7 +1571,11 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			if(!Number.isNaN(parseInt(topX))) {
 				amount = parseInt(topX);
 			}
-			plotStack(dataPoint, 'allGraph', amount);
+			if($('#allGraph').html() == '') {
+				plotStack(dataPoint, 'allGraph', amount);
+			} else {
+				$('#allGraph').html('');
+			}
 		});
     }
 }
@@ -2108,9 +2117,12 @@ function createSubPlot(inputData, htmlID) {
 		newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain - 0.01],
 				title: yTitle, side: plotSide};
 	}
-	Plotly.addTraces(htmlID, traces);
-	Plotly.relayout(htmlID, newLayout);
-	Plotly.relayout( htmlID, {
+	var d3 = Plotly.d3;
+	var gd3 = d3.select('#' + htmlID + '> div');
+	var gd = gd3.node();
+	Plotly.addTraces(gd, traces);
+	Plotly.relayout(gd, newLayout);
+	Plotly.relayout(gd, {
 		'xaxis.autorange': true,
 		'yaxis.autorange': true
 	});
@@ -2118,7 +2130,7 @@ function createSubPlot(inputData, htmlID) {
 	new ResizeSensor($('#' + htmlID), function() {
 		var d3 = Plotly.d3;
 		var gd3 = d3.select('#' + htmlID + '> div');
-		gd = gd3.node();
+		var gd = gd3.node();
 		Plotly.Plots.resize(gd);
 	});
 }
