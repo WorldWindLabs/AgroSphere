@@ -137,21 +137,41 @@ body {
 }
 
 /* mobile media queries for tab width*/
+/* ipad pro */
 @media only screen and (max-width: 1024px) {
     .tab-content {
         width:950px;
     }
 }
-
+/* ipad */
 @media only screen and (max-width: 768px) {
     .tab-content {
         width:700px;
     }
 }
-
+/* iphone 6plus, nexus 5x, nexus 6p */
 @media only screen and (max-width: 414px) {
     .tab-content {
         width:360px;
+    }
+}
+
+/* iphone 6, galaxy s5 */
+@media only screen and (max-width: 375px) {
+    .tab-content {
+        width:310px;
+    }
+}
+/* galaxy 5s */
+@media only screen and (max-width: 360px) {
+    .tab-content {
+        width:290px;
+    }
+}
+/* iphone 5 */
+@media only screen and (max-width: 320px) {
+    .tab-content {
+        width:260px;
     }
 }
 
