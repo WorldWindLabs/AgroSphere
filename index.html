@@ -233,7 +233,7 @@
             <div class="tab-pane" id="comp">
                 <h4>Geo-Comparison Data</h4>
                 <button class="btn btn-info legendButton" type="button">Legend</button>
-                <div class="legend" style="display:none;">
+                <div class="legend">
                   <b>Legend (Amount of Crops Produced)</b>
                   <div>Note: Color scheme is based on other countries' data, so there is no numeric data.
                      To clarify, for example, if USA has 5 and is the average, its color would be yellow.
@@ -276,11 +276,11 @@
 </div><!-- /col -->
 
 <!-- Geo-Comparison Legend -->
-<img class="legend draggable" src="./images/legend.png" style="z-index: 1001; position:absolute; bottom:300px; right:20px; width:30%; display:none;">
+<img class="legend draggable" src="./images/legend.png">
 
 <!-- Web World Wind Globe-->
-<div class="col-xs-9" id="globe" style="width: 100%; height: 100%; position: fixed; left: 0">
-    <canvas id="canvasOne" width="1920" height="1080" style="position: fixed; left: 0; width: 100%; height: 100%">
+<div class="col-xs-9" id="globe">
+    <canvas id="canvasOne" width="1920" height="1080">
         Your browser does not support HTML5 Canvas.
     </canvas>
 </div>

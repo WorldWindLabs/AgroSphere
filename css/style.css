@@ -34,6 +34,17 @@ body {
 #canvasOne {
     width: 100%;
     height: auto;
+    position: fixed;
+    left: 0;
+    height: 100%
+}
+
+/* globe position */
+#globe{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0
 }
 
 /* loading screen before all else */
@@ -54,7 +65,7 @@ body {
     border-radius:100px;
 }
 
-#loading_modal img figcaption{
+#loading_modal figcaption{
   position:absolute;
   z-index: 1100;
   margin-left: 49%;
@@ -373,6 +384,7 @@ audio
     transition:all 0.5s linear;
 }
 
+/* button right tutorial button */
 #tutorial {
     position: fixed;
     bottom: 20px;
@@ -380,6 +392,7 @@ audio
     z-index:99;
 }
 
+/* top right nasa logo */
 #nasalogo {
     position: fixed;
     top: 15px;
@@ -577,6 +590,16 @@ button a:hover {
 
 .layerTitle li {
     color:white;
+}
+
+/* legend */
+.legend {
+  display:none;
+  z-index: 1001;
+  position:absolute;
+  bottom:300px;
+  right:20px;
+  width:30%;
 }
 
 /* MODAL STYLES */
