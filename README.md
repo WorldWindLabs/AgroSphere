@@ -24,11 +24,11 @@ prices, livestocks, agricultural emission, fertilizer and pesticides._
 
 <img src="images/RM1.png" />
 
-_Screenshot comparing historical agricultural and weather data on a plot for USA._
+_Screenshot comparing historical agricultural and weather data on a plot for Finland._
 
 <img src="images/RM2.png" />
 
-_Screenshot showing AgroSphere comparing potato data from around the world._
+_Screenshot showing Geo-Comparison potato production data displayed from multiple countries around the world._
 
 <img src="images/RM3.png">
 
