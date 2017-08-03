@@ -89,6 +89,9 @@ body {
 /* z-index added to make draggable appear correctly */
 .tabs-left {
     z-index:1000;
+    position:absolute;
+    top:0;
+    left:0;
 }
 
 .nav-tabs {
