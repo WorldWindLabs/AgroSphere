@@ -18,7 +18,7 @@ climate change on agriculture using a large collection of global agriculture and
 ## Introduction
 
 The World Wind intern team utilized technologies including HTML5, CSS, and JavaScript to develop our application, incorporating and analyzing spatial data for agriculture and atmosphere. Data in various file formats are organized, analyzed and visualized on the globe. Users can click on the respective weather and nation placemarks for statistical information. This includes details specific to that country’s history for atmosphere and agriculture and for a specified timeframe. Users can also control each dataset on the globe by adjusting opacity, time and other options for comparing crop production versus climate. This web app is intended for use in classrooms by teachers and students, as well as citizens of the world. Children and adults alike will be able to learn about climate issues by visually experiencing the data according to their interests. Users will learn about the effects of weather over time on agriculture, the impact to national economies and much more.
- 
+
 _Screenshot showing the available data for a selected country, which includes lists of crop production and yield,
 prices, livestocks, agricultural emission, fertilizer and pesticides._
 
@@ -32,6 +32,11 @@ _Screenshot showing Geo-Comparison potato production data displayed from multipl
 
 <img src="images/RM3.png">
 
+## Lesson Plan
+
+For a guide on how this app may be used in the classroom, click the button below. This lesson plan focuses on the use of the app in a larger unit on climate change. It is based on 90-minute classes.
+<a href="AgroSphere_LessonPlan.pdf" target="_blank">Link to the Lesson Plan</a>
+                    
 ## Features of AgroSphere
 
 * Dynamically visualize various types of agriculture and climate data, such as rainfall, crop production and prices, and much more, from hundreds of countries across the globe.
