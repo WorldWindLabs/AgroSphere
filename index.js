@@ -1628,7 +1628,7 @@ function giveWeatherButtonFunctionality() {
 		var countryInput = country.slice(0,2);
 
 		//Make an api request
-		var apiURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ','
+		var apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ','
 				+ countryInput + '&appid=' + APIKEY;
 
 		//Make an ajax request
