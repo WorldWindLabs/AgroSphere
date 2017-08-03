@@ -294,7 +294,7 @@ requirejs({paths:{
 			for(i = 0; i < pickList.objects.length; i++) {
 				console.log(pickList.objects[i]);
 				if(pickList.objects[i].isTerrain) {
-					
+
 					var position = pickList.objects[i].position;
 					wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
 				}
@@ -1360,7 +1360,7 @@ function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
 			if($('#allGraphStation').html() != '' ) {
 				var layout = {};
 				if($(this).hasClass('legendoff')) {
-					
+
 					layout.showlegend = true;
 					$(this).removeClass('legendoff');
 				} else {
@@ -1588,7 +1588,7 @@ function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName,
 			if($('#allGraph').html() != '') {
 				var layout = {};
 				if($(this).hasClass('legendoff')) {
-					
+
 					layout.showlegend = true;
 					$(this).removeClass('legendoff');
 				} else {
@@ -2592,6 +2592,8 @@ $(document).ready(function () {
         $("#station").hide();
         $("#weather").hide();
         $("#view").hide();
+				$('#legend').toggle();
+				$('#legendtext').toggle();
 		setTimeout(function() {checkTabs()}, 50);
     });
     $(".toggleweather").click(function () {
@@ -2628,10 +2630,6 @@ $(document).ready(function () {
         setTimeout(function() {checkTabs()}, 50);
     });
 	checkTabs();
-
-  $('.legendButton').click(function() {
-    $('.legend').toggle();
-  });
   /* highlighting correct button for geocomparison and wms layers */
   $('.geoCompButton').click(function() {
       if ($('.geoCompButton').hasClass('active')) {

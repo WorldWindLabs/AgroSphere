@@ -593,13 +593,31 @@ button a:hover {
 }
 
 /* legend */
-.legend {
+#legend {
   display:none;
   z-index: 1001;
   position:absolute;
-  bottom:300px;
-  right:20px;
-  width:30%;
+  bottom:10px;
+  right:110px;
+  width:35%;
+}
+
+@media only screen and (max-width: 1024px) {
+    #legend {
+        width:70%
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #legend {
+        width:65%;
+    }
+}
+
+
+#legendtext {
+  display:none;
+  z-index: 1001;
 }
 
 /* MODAL STYLES */
