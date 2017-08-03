@@ -24,11 +24,11 @@ prices, livestocks, agricultural emission, fertilizer and pesticides._
 
 <img src="images/RM1.png" />
 
-_Screenshot comparing historical agricultural and weather data on a plot for USA._
+_Screenshot comparing historical agricultural and weather data on a plot for Finland._
 
 <img src="images/RM2.png" />
 
-_Screenshot showing AgroSphere comparing potato data from around the world._
+_Screenshot showing Geo-Comparison potato production data displayed from multiple countries around the world._
 
 <img src="images/RM3.png">
 
@@ -41,7 +41,7 @@ _Screenshot showing AgroSphere comparing potato data from around the world._
 * Search for current weather data for any city around the globe.
 * Load in any number of spatiotemporal geographically accurate data from multiple sources, using data formats such as GeoJSON, WMS, and CSV.
 * Use the location Search Tool in the View Options tab to immediately visit any desired location.
-* The app and most of its functionalities are available on mobile devices (smartphones and tablets).
+* The app fully functions on mobile devices (smartphones and tablets).
 
 ## Outreach
 

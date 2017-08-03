@@ -281,8 +281,6 @@ requirejs({paths:{
         //wwd.addEventListener('click', handlePick);
 		//wwd.addEventListener('touchend', handlePick);
         // Set up to handle clicks and taps.
-
-        // The common gesture-handling function.
         var handleClick = function (recognizer) {
             // Obtain the event location.
             var x = recognizer.clientX,
@@ -291,40 +289,24 @@ requirejs({paths:{
             // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
             // relative to the upper left corner of the canvas rather than the upper left corner of the page.
             var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-
             // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
-            if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
-                var position = pickList.objects[0].position;
-                wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
-            } else {
-				handlePick(x,y);
+			var i = 0;
+			for(i = 0; i < pickList.objects.length; i++) {
+				console.log(pickList.objects[i]);
+				if(pickList.objects[i].isTerrain) {
+					
+					var position = pickList.objects[i].position;
+					wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
+				}
 			}
+			handlePick(x,y);
         };
-
         // Listen for mouse clicks.
         var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
 
         // Listen for taps on mobile devices.
         var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
 		console.timeEnd('First');
-
-        // The common gesture-handling function.
-        var handleClick = function (recognizer) {
-            // Obtain the event location.
-            var x = recognizer.clientX,
-                y = recognizer.clientY;
-
-            // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
-            // relative to the upper left corner of the canvas rather than the upper left corner of the page.
-            var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-            // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
-            if (pickList.objects.length == 1 && pickList.objects[0].isTerrain) {
-                var position = pickList.objects[0].position;
-
-				//Find the closest country and placemark
-				findInformationUsingLocation(wwd, position.latitude, position.longitude, csvData[0], csvData[1]);
-            }
-        };
 
 // Listen for mouse clicks.
 var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
@@ -1710,13 +1692,13 @@ function getColour(zScore) {
 	console.log(zScore);
     if (zScore < 0) {
         red = 1;
-        green = Math.exp(zScore);
+        green = Math.exp(1.5*zScore);
     } else if (zScore == 0) {
         red = 1;
         green = 1;
     } else if (zScore > 0) {
         green = 1;
-        red = Math.exp(-1 * zScore);
+        red = Math.exp(-1.5 * zScore);
     } else if(isNan(zScore)) {
 		red = 0;
 		green = 0;
