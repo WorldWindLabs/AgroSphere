@@ -7,7 +7,7 @@
 
 visualizations of the world in 4D, such as satellite tracking and seismic history. The NASA
 World Wind 2017 Intern team has designed an educational web app that visualizes the effects of
-climate change on agriculture using a large collection of global agriculture and weather station data and the Web World Wind Software Development Kit (SDK).
+climate change on agriculture using a large collection of global agriculture and climate data and the Web World Wind Software Development Kit (SDK).
 
 ## Video Tutorial
 
@@ -34,14 +34,14 @@ _Screenshot showing Geo-Comparison potato production data displayed from multipl
 
 ## Features of AgroSphere
 
-* Dynamically visualize various types of data, such as rainfall, crop production and prices.
-* Graph agricultural data from 1961-2014 and atmospheric data from 1989-2014 and view both simultaneously.
-* Adjust time and opacity of layers displayed on the globe and thereby integrate layers to study groups of information together.
-* National agricultural output can be examined closely and also compared to one another.
-* Search for current weather data for any city around the globe.
-* Load in any number of spatiotemporal geographically accurate data from multiple sources, using data formats such as GeoJSON, WMS, and CSV.
-* Use the location Search Tool in the View Options tab to immediately visit any desired location.
-* The app fully functions on mobile devices (smartphones and tablets).
+* Dynamically visualize various types of agriculture and climate data, such as rainfall, crop production and prices, and much more, from hundreds of countries across the globe.
+* Graph agriculture data from 1961-2014 and climate data from 1989-2014 to view them simultaneously.
+* Adjust time and opacity of image layers displayed on the globe and compare the given visual data with plotted agriculture and climate data.
+* Explore the Geo-Comparison Agriculture data visualized on the globe for hundreds crop production datasets. Juxtapose data between any number of colors using a simple color scheme legend created using standard deviation formulas.
+* Search for current weather data for any city around the globe. Results include temperature, sunrise/sunset, 
+* Load in any number of spatiotemporal geographically-accurate data from multiple sources, using data formats such as GeoJSON, WMS, and CSV.
+* Use the location Search tool in the View Options tab to immediately visit any desired location.
+* This web application is fully functional on mobile devices (smartphones and tablets).
 
 ## Outreach
 
@@ -55,9 +55,10 @@ Finally, we showcased our app to professional web app developers from institutio
 2) Download or clone the repository in to local storage and run the index.html in a webserver using WebStorm, which has a built in webserver (https://blog.jetbrains.com/webstorm/2013/03/built-in-server-in-webstorm-6/), or by using MAMP (https://www.mamp.info/en/), a free, local server environment).
 
 ## Future Directions
+
 You are welcome to add more climate and agriculture data using our built-in CSV reading functionality and the WebWorldWind Placemarks feature. For example, drought and flood data can be added and displayed on our app to examine how agriculture has been affected by those particular disasters.
 
-#### Updated as of 8/2/17
+#### Updated as of 8/3/17
 
 ***
 
