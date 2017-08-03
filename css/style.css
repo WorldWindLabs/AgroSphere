@@ -1,24 +1,7 @@
-div, h1, h2, h3, h4, h5, p, a {
-    color:white;
-}
+/* GENERAL STYLES */
 
-#info-img {
-    width:50%;
-    padding:10px;
-    text-align:center;
-    position:relative;
-    left: 25%;
-    top: 50%;
-}
-
-
-#canvasOne {
-    width: 100%;
-    height: auto;
-}
-
-/* disable right clicking */
 body {
+    /* disable right clicking */
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -33,51 +16,34 @@ body, html {
     overflow:hidden;
 }
 
-
-input[type="checkbox"]{
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-    -webkit-appearance: none;
-    appearance: none;
-    box-shadow: 1px 1px 1px black;
-}
-input[type="checkbox"].active {
-  border:7px solid lightgreen;
-}
-
-.btn {
-    background-color:#323232 !important;
-    text-align:center !important;
-    color:white !important;
-    font-size:12px !important;
-    margin-bottom:8px;
-}
-
-.btn:hover{
-    background-color:black !important;
-    -moz-transform: scale(1.03);
-    -webkit-transform: scale(1.03);
-    transform: scale(1.03);
-}
-
-button a:hover {
+div, h1, h2, h3, h4, h5, p, a {
     color:white;
 }
 
 /* bg image - mobile only */
-
 body {
 
     /* The image used */
     background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("../images/bg.jpg");
-
-
     /* Center and scale the image nicely */
     background-position: center;
     background-size: cover;
 }
 
+/*globe size */
+#canvasOne {
+    width: 100%;
+    height: auto;
+}
+
+.fontsize {
+    font-size:1.2em;
+}
+.smallerfontsize {
+    font-size:1.1em;
+}
+
+/* MENU NAV STYLES */
 /* sidebar */
 
 .badge {
@@ -134,7 +100,7 @@ body {
     width:450px;
 }
 
-/* mobile media queries */
+/* mobile media queries for tab width*/
 @media only screen and (max-width: 1024px) {
     .tab-content {
         width:950px;
@@ -203,7 +169,6 @@ li{
 
 
 /* tooltip hover */
-
 /* Add this attribute to the element that needs a tooltip */
 [data-tooltip] {
     position: relative;
@@ -427,7 +392,22 @@ input {
     box-shadow: 1px 1px 1px black;
 }
 
-/* search bar */
+
+/* starfield checkbox */
+input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: 1px 1px 1px black;
+}
+input[type="checkbox"].active {
+  border:7px solid lightgreen;
+}
+
+
+/* search bar style */
 #amount {
     background-position: 10px 12px; /* Position the search icon */
     background-repeat: no-repeat; /* Do not repeat the icon image */
@@ -477,7 +457,42 @@ input {
 
 }
 
-/* button css */
+/* slider CSS */
+
+.ui-slider .ui-slider-handle {
+    background:#313A7D;
+    box-shadow: 1px 1px 1px black;
+}
+
+.ui-slider {
+    box-shadow: 1px 1px 1px black;
+}
+
+.ui-slider .ui-slider-handle:hover {
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
+/* BUTTON STYLES */
+.btn {
+    background-color:#323232 !important;
+    text-align:center !important;
+    color:white !important;
+    font-size:12px !important;
+    margin-bottom:8px;
+}
+
+.btn:hover{
+    background-color:black !important;
+    -moz-transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    transform: scale(1.03);
+}
+
+button a:hover {
+    color:white;
+}
 
 .btn-info {
     border: none;
@@ -499,9 +514,47 @@ input {
     box-shadow: 1px 1px 1px black;
 }
 
+.geoCompButton.active, .wmsButton.active {
+     border: 2px solid lightgreen;
+ }
 
-/* adding space between each ag dataset */
+ .wmsButton.active {
+   border: 2px solid lightgreen;
+ }
 
+ /* removing outline glow for buttons */
+ button:focus,.list-group-item:focus,.btn:focus {
+   outline:none;
+ }
+
+/* projection menu css fix */
+.dropdown-menu li a{
+  color:white;
+}
+
+.dropdown-menu li a:hover{
+  background:lightgreen;
+}
+
+.dropdown-menu {
+  background: #313A7D;
+}
+
+/* geocomparison time slider text fix */
+#geoSlideValue {
+  color:white;
+}
+
+/* weather dropdown style */
+#countryNames {
+  background:#313A7D;
+  color:white;
+  box-shadow:1px 1px 1px black;
+  border:1px solid black;
+  border-radius:0;
+}
+
+/* adding space between each graphable dataset */
 .layerTitle {
     padding: 12px 0 12px 0;
 }
@@ -509,24 +562,8 @@ input {
 .layerTitle li {
     color:white;
 }
-/* slider CSS */
 
-.ui-slider .ui-slider-handle {
-    background:#313A7D;
-    box-shadow: 1px 1px 1px black;
-}
-
-.ui-slider {
-    box-shadow: 1px 1px 1px black;
-}
-
-.ui-slider .ui-slider-handle:hover {
-    -moz-transform: scale(1.03);
-    -webkit-transform: scale(1.03);
-    transform: scale(1.03);
-}
-
-/* modal css */
+/* MODAL STYLES */
 
 .modal-content {
     border-radius:0;
@@ -560,8 +597,6 @@ input {
     background:#313A7D;
 }
 
-.carousel {
-}
 .carousel-control {
     width:3%;
 }
@@ -593,48 +628,12 @@ input {
     font-size: 1.5em;
 }
 
-.fontsize {
-    font-size:1.2em;
-}
-.smallerfontsize {
-    font-size:1.1em;
-}
-
-.geoCompButton.active, .wmsButton.active {
-     border: 2px solid lightgreen;
- }
-
- .wmsButton.active {
-   border: 2px solid lightgreen;
- }
-
-
-/* projection menu css fix */
-.dropdown-menu li a{
-  color:white;
-}
-
-.dropdown-menu li a:hover{
-  background:lightgreen;
-}
-
-.dropdown-menu {
-  background: #313A7D;
-}
-
-/* geocomparison time slider text fix */
-#geoSlideValue {
-  color:white;
-}
-
-#countryNames {
-  background:#313A7D;
-  color:white;
-  box-shadow:1px 1px 1px black;
-  border:1px solid black;
-  border-radius:0;
-}
-
-button:focus,.list-group-item:focus,.btn:focus {
-  outline:none;
+/* nasa logo in app info */
+#info-img {
+    width:50%;
+    padding:10px;
+    text-align:center;
+    position:relative;
+    left: 25%;
+    top: 50%;
 }
