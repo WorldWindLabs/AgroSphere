@@ -1333,9 +1333,15 @@ requirejs({paths:{
                         $('#manyGraph').append(graphDiv);
 
                         //Graph it
-                        plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
-                                    dataPoint.dataValues[buttonNumber].timeValues,
-                                    'subGraph' + graphNumber, 0);
+						if(buttonNumber < offSetLength) {
+							plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
+										dataPoint.dataValues[buttonNumber].timeValues,
+										'subGraph' + graphNumber, 0);
+						} else {
+							plotScatter(dataPoint.dataValues[buttonNumber - offSetLength].typeName, dataPoint.code3,
+										dataPoint.dataValues[buttonNumber - offSetLength].timeValues,
+										'subGraph' + graphNumber, 0);
+						}
                         $('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
                         setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
                     });
