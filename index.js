@@ -2232,16 +2232,22 @@ requirejs({paths:{
             return dataHTML;
         }
 
-        //Helper function for plotting the stack.
-        //In short, plots the crop, percentage and atmo data on the same graph
+        /**
+         * Helps plot stack - plots crop, percentage, and atmosphere together
+         *
+         * @param inputData - data to input
+         * @param htmlID - id in html code
+         */
         function createSubPlot(inputData, htmlID) {
-            //In essence create subplots
+            //Create subplots
             var i = 0;
             var traces = [];
             var newLayout = {};
             var incAmounts = (0.5/(inputData.length)).toFixed(2);
-            newLayout['yaxis'] = {domain: [0, 0.5], title: 'Production In Tons'};
-            newLayout['yaxis2'] = {domain: [0, 0.5], side: 'right', title: 'Percent'};
+            newLayout['yaxis'] = {domain: [0, 0.5], title: 'Production In' +
+            ' Tons'};
+            newLayout['yaxis2'] = {domain: [0, 0.5], side: 'right', title:
+                'Percent'};
             for(i = 0; i < inputData.length; i++) {
                 var dataPoint = filterOutBlanks(inputData[i].timeValues, 0);
                 var j = 0;
@@ -2278,8 +2284,8 @@ requirejs({paths:{
                         plotSide = 'left';
                     break;
                 }
-                newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain - 0.01],
-                        title: yTitle, side: plotSide};
+                newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain
+                    - 0.01], title: yTitle, side: plotSide};
             }
             var d3 = Plotly.d3;
             var gd3 = d3.select('#' + htmlID + '> div');
@@ -2299,8 +2305,13 @@ requirejs({paths:{
             });
         }
 
-        //Plots a stacked bar given all the set of data
-        //Amount is how many of the top we want
+        /**
+         * Plots a stacked bar given all the set of data
+         *
+         * @param inputData - data to be used
+         * @param htmlID - id in html code
+         * @param amount - how many of top types are wanted
+         */
         function plotStack(inputData, htmlID, amount) {
             var i = 0;
             var filteredDataSet = [];
@@ -2349,14 +2360,16 @@ requirejs({paths:{
                 //Grab the 5th highest value
                 var threshold = tempAmounts[tempAmounts.length - amount - 1];
                 var top5 = 0;
-                //Now find every data set that has a value that is the 5th or higher (not 0)
+                //Now find every data set that has a value that is the 5th or
+                // higher (not 0)
                 for(j = 0; j < filteredDataSet.length; j++) {
                     var value = parseFloat(filteredDataSet[j][i].value);
                     if((value > threshold) && (value != 0)) {
                         //Check if item is already in the array
                         var isIn = false;
                         for(k = 0; k < showDataValues.length; k++) {
-                            if(showDataValues[k].typeName == inputData.dataValues[j].typeName) {
+                            if(showDataValues[k].typeName ==
+                                inputData.dataValues[j].typeName) {
                                 isIn = true;
                                 break;
                             }
@@ -2365,7 +2378,7 @@ requirejs({paths:{
                         if(isIn == false) {
                             //Not in, create a new object
                             var tempObj = {};
-                            tempObj.typeName = inputData.dataValues[j].typeName;
+                            tempObj.typeName =inputData.dataValues[j].typeName;
                             tempObj.xValues = [];
                             tempObj.yValues = [];
                             tempObj.yValues.push(value);
@@ -2379,7 +2392,6 @@ requirejs({paths:{
                         top5 += value;
                     }
                 }
-
                 //Find the percentage
                 topPercentages.push((top5/tempValue) * 100);
             }
@@ -2423,7 +2435,8 @@ requirejs({paths:{
             }
 
             var layout = {
-                title: 'Top ' + amount + ' amounts for ' + inputData.code3 + ' vs Year',
+                title: 'Top ' + amount + ' amounts for ' +
+                inputData.code3 + ' vs Year',
                 barmode: 'stack',
                 xaxis: xAxis,
                 yaxis: yAxis,
