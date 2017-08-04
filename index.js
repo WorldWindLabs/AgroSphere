@@ -2102,7 +2102,7 @@ function createSubPlot(inputData, htmlID) {
 	var traces = [];
 	var newLayout = {};
 	var incAmounts = (0.5/(inputData.length)).toFixed(2);
-	newLayout['yaxis'] = {domain: [0, 0.5], title: 'Production in tonnes'};
+	newLayout['yaxis'] = {domain: [0, 0.5], title: 'Production In Tonn'};
 	newLayout['yaxis2'] = {domain: [0, 0.5], side: 'right', title: 'Percent'};
 	for(i = 0; i < inputData.length; i++) {
 		var dataPoint = filterOutBlanks(inputData[i].timeValues, 0);
