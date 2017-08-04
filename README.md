@@ -11,7 +11,7 @@ climate change on agriculture using a large collection of global agriculture and
 
 ## Video Tutorial
 
-<a href="#">
+<a href="https://www.youtube.com/embed/h66dFV3Qu5E">
 <img src="images/videotutorial.png"/>
 </a>
 
@@ -54,7 +54,7 @@ For a guide on how this app may be used in the classroom, click the button below
 
 This is AgroSphere running on mobile. All of the functionalities of the app are available in your hands!
 
-<a href="https://www.youtube.com/embed/h66dFV3Qu5E">
+<a href="https://www.youtube.com/watch?v=Fyn4-Hgkip0">
 <img src="images/mobiledemo.png" />
 </a>
 
