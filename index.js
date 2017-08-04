@@ -1987,18 +1987,38 @@ requirejs({paths:{
         function generateCountryButtons() {
             var countryHTML = '<h5><b>Available Datasets</b></h5>';
 
-            countryHTML += '<button class="btn-info" id="spawnAgri">Show Ag. Production Data List</button>';
-            countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Data List</button>';
-            countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Data List</button>';
-            countryHTML += '<button class="btn-info" id="spawnEmissionAgri">Show Ag. Emission Data List</button>';
-            countryHTML += '<button class="btn-info" id="spawnPest">Show Pesticide Data List</button>';
-            countryHTML += '<button class="btn-info" id="spawnFerti">Show Fertilizer Data List</button>';
-            countryHTML += '<button class="btn-info" id ="spawnYield">Show Ag. Yield Data List</button>';
+            countryHTML += '<button class="btn-info" id="spawnAgri">' +
+                'Show Ag. Production Data List</button>';
+            countryHTML += '<button class="btn-info" id="spawnPrice">' +
+                'Show Price Data List</button>';
+            countryHTML += '<button class="btn-info" id="spawnLive">' +
+                'Show Livestock Data List</button>';
+            countryHTML += '<button class="btn-info" id="spawnEmissionAgri">' +
+                'Show Ag. Emission Data List</button>';
+            countryHTML += '<button class="btn-info" id="spawnPest">' +
+                'Show Pesticide Data List</button>';
+            countryHTML += '<button class="btn-info" id="spawnFerti">' +
+                'Show Fertilizer Data List</button>';
+            countryHTML += '<button class="btn-info" id ="spawnYield">' +
+                'Show Ag. Yield Data List</button>';
             return countryHTML;
         }
 
         //Gives funcitonality to the country buttons
         //Basically they spawn another set of buttons to plot
+        /**
+         * gives buttons for country data functionality
+         *
+         * @param agriData - agriculture
+         * @param priceData - price
+         * @param liveData - livestock
+         * @param emissionAgriData - emissions
+         * @param pestiData - pesticides
+         * @param fertiData - fertilizer
+         * @param yieldData - yield
+         * @param agriDef - agriculture definitions
+         * @param codeName - country 3 letter code
+         */
         function giveCountryButtonsFunctionality(agriData, priceData, liveData,
                 emissionAgriData, pestiData, fertiData,
                 yieldData, agriDef, codeName) {
@@ -2015,38 +2035,46 @@ requirejs({paths:{
             agriButtons.on('click', function(){
                 //Generate agri culture buttons
                 buttonAreaHTML.html('');
-                buttonAreaHTML.html(generateDataButtons(agriData, codeName, 0));
-                giveDataButtonsFunctionality(buttonAreaHTML, agriData, agriDef, codeName, 0);
+                buttonAreaHTML.html(generateDataButtons(agriData, codeName,0));
+                giveDataButtonsFunctionality(buttonAreaHTML, agriData, agriDef,
+                    codeName, 0);
             });
             priceButtons.on('click', function() {
                 buttonAreaHTML.html('');
-                buttonAreaHTML.html(generateDataButtons(priceData, codeName, 1));
-                giveDataButtonsFunctionality(buttonAreaHTML, priceData, agriDef, codeName, 1);
+                buttonAreaHTML.html(generateDataButtons(priceData,codeName,1));
+                giveDataButtonsFunctionality(buttonAreaHTML, priceData, agriDef,
+                    codeName, 1);
             });
             liveButtons.on('click', function() {
                 buttonAreaHTML.html('');
-                buttonAreaHTML.html(generateDataButtons(liveData, codeName, 2));
-                giveDataButtonsFunctionality(buttonAreaHTML, liveData, agriDef, codeName, 2);
+                buttonAreaHTML.html(generateDataButtons(liveData, codeName,2));
+                giveDataButtonsFunctionality(buttonAreaHTML, liveData, agriDef,
+                    codeName, 2);
             });
             emissionAgriButtons.on('click', function(){
                 buttonAreaHTML.html('');
-                buttonAreaHTML.html(generateDataButtons(emissionAgriData, codeName, 3));
-                giveDataButtonsFunctionality(buttonAreaHTML, emissionAgriData, agriDef, codeName, 3);
+                buttonAreaHTML.html(generateDataButtons(emissionAgriData,
+                    codeName, 3));
+                giveDataButtonsFunctionality(buttonAreaHTML, emissionAgriData,
+                    agriDef, codeName, 3);
             });
             pestiButtons.on('click', function() {
                 buttonAreaHTML.html('');
-                buttonAreaHTML.html(generateDataButtons(pestiData, codeName, 4));
-                giveDataButtonsFunctionality(buttonAreaHTML, pestiData, agriDef, codeName, 4);
+                buttonAreaHTML.html(generateDataButtons(pestiData,codeName,4));
+                giveDataButtonsFunctionality(buttonAreaHTML, pestiData,agriDef,
+                    codeName, 4);
             });
             fertiButtons.on('click', function() {
                 buttonAreaHTML.html('');
-                buttonAreaHTML.html(generateDataButtons(fertiData, codeName, 5));
-                giveDataButtonsFunctionality(buttonAreaHTML, fertiData, agriDef, codeName, 5);
+                buttonAreaHTML.html(generateDataButtons(fertiData,codeName,5));
+                giveDataButtonsFunctionality(buttonAreaHTML, fertiData,
+                    agriDef, codeName, 5);
             });
             yieldButtons.on('click', function() {
                 buttonAreaHTML.html('');
-                buttonAreaHTML.html(generateDataButtons(yieldData, codeName, 6));
-                giveDataButtonsFunctionality(buttonAreaHTML, yieldData, agriDef, codeName, 6);
+                buttonAreaHTML.html(generateDataButtons(yieldData,codeName,6));
+                giveDataButtonsFunctionality(buttonAreaHTML, yieldData,
+                    agriDef, codeName, 6);
             });
         }
 
