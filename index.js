@@ -1693,24 +1693,34 @@ requirejs({paths:{
             }
         }
 
-        //Generates the html for the weather search
+        /**
+         * Generates the html for the weather search
+         * @param countryData - country name for search
+         */
         function generateWeatherHTML(countryData) {
             var weatherHTML = '<h5class="smallerfontsize">Weather Search</h5>';
-            weatherHTML += '<p><input type="text" class="form-control" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
+            weatherHTML += '<p><input type="text" class="form-control" ' +
+                'id="cityInput" placeholder="Search for city" title=' +
+                '"Type in a layer"></p>';
             weatherHTML += '<select id="countryNames" class="form-control">'
             var i = 0;
 
             for(i = 0; i < countryData.length; i++) {
-                weatherHTML += '<option>' + countryData[i].code2 + ' - ' + countryData[i].country + '</option>';
+                weatherHTML += '<option>' + countryData[i].code2 + ' - ' +
+                    countryData[i].country + '</option>';
             }
             weatherHTML += '</select><br>';
-            weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
+            weatherHTML += '<p><button class="btn-info" id="searchWeather">' +
+                'Search Weather</button></p>';
           weatherHTML += '<div id="searchDetails"></div>'
             $('#weather').append(weatherHTML);
         }
 
 
         //Provides functionality for the weather button search
+        /**
+         * Weather search functionality
+         */
         function giveWeatherButtonFunctionality() {
             var weatherButton = $('#searchWeather').button();
             weatherButton.on('click', function() {
@@ -1720,7 +1730,8 @@ requirejs({paths:{
                 var countryInput = country.slice(0,2);
 
                 //Make an api request
-                var apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ','
+                var apiURL = 'https://api.openweathermap.org/' +
+                    'data/2.5/weather?q=' + cityInput + ','
                         + countryInput + '&appid=' + APIKEY;
 
                 //Make an ajax request
@@ -1733,24 +1744,35 @@ requirejs({paths:{
                         //Create some html
                         var dropArea = $('#searchDetails');
                         dropArea.html('');
-                        var tempHTML = '<h5 class="fontsize"><b>Weather Details for ' + data.name + '</b></h5>';
-                        tempHTML += '<p><b>Country:</b> ' + data.sys.country + '</p><br>';
-                        tempHTML += '<p><b>Current Outlook:</b> ' + data.weather[0].main + '</p><br>';
-                        tempHTML += '<p><b>Current Outlook Description:</b> ' + data.weather[0].description + '</p><br>';
-                        tempHTML += '<p><b>Current Temperature (Celsius):</b> ' + Math.round((data.main.temp - 272),2) + '</p><br>';
-                        tempHTML += '<p><b>Sunrise:</b> ' + timeConverter(data.sys.sunrise) + '</p><br>';
-                        tempHTML += '<p><b>Sunset:</b> ' + timeConverter(data.sys.sunset) + '</p><br>';
-                        tempHTML += '<p><b>Max Temperature Today (Celsius):</b> ' + Math.round((data.main.temp_max - 272),2) + '</p><br>';
-                        tempHTML += '<p><b>Min Temperature Today (Celsius):</b> ' + Math.round(data.main.temp_min  - 272, 2) + '</p><br>';
-                        tempHTML += '<p><b>Pressure (HPa):</b> ' + data.main.pressure + '</p><br>';
-                        tempHTML += '<p><b>Humidity (%):</b> ' + data.main.humidity + '</p><br>';
-                        tempHTML += '<p><b>Wind speed (m/s):</b>' + data.wind.speed + '</p><br><br>';
+                        var tempHTML = '<h5 class="fontsize"><b>Weather' +
+                            ' Details for ' + data.name + '</b></h5>';
+                        tempHTML += '<p><b>Country:</b> ' + data.sys.country
+                            + '</p><br>';
+                        tempHTML += '<p><b>Current Outlook:</b> ' +
+                            data.weather[0].main + '</p><br>';
+                        tempHTML += '<p><b>Current Outlook Description:</b> '
+                            + data.weather[0].description + '</p><br>';
+                        tempHTML += '<p><b>Current Temperature (Celsius):</b> '
+                            + Math.round((data.main.temp - 272),2) +'</p><br>';
+                        tempHTML += '<p><b>Sunrise:</b> ' + timeConverter(
+                            data.sys.sunrise) + '</p><br>';
+                        tempHTML += '<p><b>Sunset:</b> ' + timeConverter(
+                            data.sys.sunset) + '</p><br>';
+                        tempHTML += '<p><b>Max Temperature Today (Celsius)' +
+                            ':</b> ' + Math.round((data.main.temp_max - 272),2)
+                            + '</p><br>';
+                        tempHTML += '<p><b>Min Temperature Today (Celsius):' +
+                            '</b> ' + Math.round(data.main.temp_min  - 272, 2)
+                            + '</p><br>';
+                        tempHTML += '<p><b>Pressure (HPa):</b> ' +
+                            data.main.pressure + '</p><br>';
+                        tempHTML += '<p><b>Humidity (%):</b> ' +
+                            data.main.humidity + '</p><br>';
+                        tempHTML += '<p><b>Wind speed (m/s):</b>' +
+                            data.wind.speed + '</p><br><br>';
                         dropArea.append(tempHTML);
-
                     },
-                    fail: function() {
-
-                    }
+                    fail: function() {}
                 })
             });
         }
