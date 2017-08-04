@@ -1247,14 +1247,19 @@ requirejs({paths:{
             });
         }
 
-        //Generates the html for geo location comparison
+        /**
+         * Generates the html for geo location comparison
+         *
+         * @param agriData - agriculture data to compare by
+         */
         function generateGeoComparisonButton(agriData) {
-             var count = 4;
+            var count = 4;
             var i = 0;
             var j = 0;
             var comparisonHTML = '';
             //Also implement the slider
-            comparisonHTML += '<p><div id="geoSlider"></div><div id="geoSlideValue">Year Select: 2014</div></p><br>';
+            comparisonHTML += '<p><div id="geoSlider"></div><div ' +
+                'id="geoSlideValue">Year Select: 2014</div></p><br>';
             var buttonNames = [];
             //Create the buttons, grab all the names for every crop known
             for(i = 0; i < agriData.length; i++) {
@@ -1267,23 +1272,25 @@ requirejs({paths:{
 
             var dropArea = $('#comp');
 
-            dropArea.append('<input type="text" class="form-control" id="geoCompareSearch" placeholder="Search for datasets..." title="Search for datasets...">');
-            comparisonHTML += '<div><b>Generate Geo-Comparison Data for...</b>';
+            dropArea.append('<input type="text" class="form-control" ' +
+                'id="geoCompareSearch" placeholder="Search for datasets..."' +
+                ' title="Search for datasets...">');
+            comparisonHTML +='<div><b>Generate Geo-Comparison Data for...</b>';
 
             //Generic button template
             for(i = 0; i < buttonNames.length; i++) {
                 var buttonTempName = buttonNames[i];
-                comparisonHTML += '<div class="buttonDiv"><button class="btn-info geoCompButton" id="geoCompType' + i +
+                comparisonHTML += '<div class="buttonDiv"><button ' +
+                    'class="btn-info geoCompButton" id="geoCompType' + i +
                     '">'+ buttonTempName + '</button><br></div>';
             }
-
 
             var dropArea = $('#comp')
             dropArea.append(comparisonHTML);
         }
 
         //Gives the button functionality for weather station
-        function giveAtmoButtonsFunctionality(detailsHTML, inputData, inputData2,
+        function giveAtmoButtonsFunctionality(inputData, inputData2,
                 stationName, agriDataPoint) {
             var dataPoint = findDataPointStation(inputData, stationName);
             var dataPoint2 = findDataPointStation(inputData2, stationName);
