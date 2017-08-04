@@ -48,6 +48,12 @@ For a guide on how this app may be used in the classroom, click the button below
 * Use the location Search tool in the View Options tab to immediately visit any desired location.
 * This web application is fully functional on mobile devices (smartphones and tablets).
 
+## Mobile Demo
+
+<a href="https://www.youtube.com/watch?v=Fyn4-Hgkip0">
+<img src="images/mobiledemo.png" />
+</a>
+
 ## Outreach
 
 We discussed our web app and work-in-progress with Martin C. Heller from the Center for Sustainable Systems at University of Michigan. He offered us critiques from a researcher's point of view.
