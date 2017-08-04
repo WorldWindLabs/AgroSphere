@@ -533,7 +533,8 @@ requirejs({paths:{
         }
 
         //Provides basic functionality for the time slider
-        function giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig) {
+        function giveTimeButtonFunctionality(wwd, layerName, layerNumber,
+                                             wmsConfig) {
             var leftButtonTemplate= "#time_left_";
             var leftButtonString = leftButtonTemplate.concat(layerNumber);
             var rightButtonTemplate = "#time_right_";
@@ -546,7 +547,7 @@ requirejs({paths:{
             var length;
 
             //As of now, the time is stored into sequences
-            //We split the slider up into pieces which is based on the array length
+            //We split the slider up into pieces based on the array length
             if(wmsConfig.timeSequences.length > 1) {
                 length = wmsConfig.timeSequences.length;
             } else {
@@ -598,8 +599,8 @@ requirejs({paths:{
             var dataTypes = ['Country', 'Weather Station'];
 
             //Common features
-            var pinLibrary = WorldWind.configuration.baseUrl + "images/pushpins/",
-                placemark,
+            var pinLibrary = WorldWind.configuration.baseUrl +
+                    "images/pushpins/",
                 placemarkAttributes = new WorldWind.PlacemarkAttributes(null),
                 highlightAttributes;
             placemarkAttributes.imageScale = 1;
@@ -612,7 +613,8 @@ requirejs({paths:{
                 WorldWind.OFFSET_FRACTION, 1.0);
             placemarkAttributes.labelAttributes.color = WorldWind.Color.WHITE;
             placemarkAttributes.drawLeaderLine = true;
-            placemarkAttributes.leaderLineAttributes.outlineColor = WorldWind.Color.RED;
+            placemarkAttributes.leaderLineAttributes.outlineColor =
+                WorldWind.Color.RED;
 
             // Define the images we'll use for the placemarks.
             var images = [
@@ -620,27 +622,29 @@ requirejs({paths:{
                 "plain-gray.png", "plain-green.png", "plain-orange.png",
                 "plain-purple.png", "plain-red.png", "plain-teal.png",
                 "plain-white.png", "plain-yellow.png", "castshadow-black.png",
-                "castshadow-blue.png", "castshadow-brown.png", "castshadow-gray.png",
+                "castshadow-blue.png", "castshadow-brown.png",
+                "castshadow-gray.png",
                 "castshadow-green.png", "castshadow-orange.png",
-                "castshadow-purple.png", "castshadow-red.png", "castshadow-teal.png",
-                "castshadow-white.png"
+                "castshadow-purple.png", "castshadow-red.png",
+                "castshadow-teal.png", "castshadow-white.png"
             ];
             var i = 0;
             for(i = 0; i < dataTypes.length; i++) {
-                var placemarkLayer = new WorldWind.RenderableLayer(dataTypes[i] +
-                        " Placemarks");
+                var placemarkLayer = new WorldWind.RenderableLayer(dataTypes[i]
+                        + " Placemarks");
                 //Create the pins
                 var j = 0;
                 for(j = 0; j < csvData[i].length; j++) {
                     // Create the placemark and its label.
-                    var placemark = new WorldWind.Placemark(new WorldWind.Position
-                            (parseFloat(csvData[i][j].lat),
+                    var placemark = new WorldWind.Placemark(new
+                            WorldWind.Position(parseFloat(csvData[i][j].lat),
                             parseFloat(csvData[i][j].lon), 1e2), true, null);
                     var labelString = '';
 
-                    //How we handle the string is based on the type we determine
+                    //Handle the string is based on the type we determine
                     if(dataTypes[i] == 'Country') {
-                        labelString = csvData[i][j].country + ' - ' + csvData[i][j].code3;
+                        labelString = csvData[i][j].country + ' - '
+                            + csvData[i][j].code3;
                     } else if(dataTypes[i] == 'Weather Station') {
                         labelString = csvData[i][j].code3;
                     }
@@ -648,11 +652,12 @@ requirejs({paths:{
                     placemark.label = labelString;
                     placemark.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 
-                    // Create the placemark attributes for this placemark. Note that
+                    // Create the placemark attributes for this placemark.
                     //the attributes differ only by their image URL.
                     placemarkAttributes = new
                             WorldWind.PlacemarkAttributes(placemarkAttributes);
-                    placemarkAttributes.imageSource = pinLibrary + images[9 - 2*i];
+                    placemarkAttributes.imageSource =
+                        pinLibrary + images[9 - 2*i];
                     //Use flag if it is a country
                     if(dataTypes[i] == 'Country') {
                         //Image would be a flag
@@ -661,16 +666,17 @@ requirejs({paths:{
                         placemark.userObject = {code3: csvData[i][j].code3,
                                 country: csvData[i][j].country};
                     } else if(dataTypes[i] == 'Weather Station') {
-                        placemarkAttributes.imageSource = 'images/pushpins/push-pin-yellow.png';
+                        placemarkAttributes.imageSource =
+                            'images/pushpins/push-pin-yellow.png';
                     }
 
                     placemark.attributes = placemarkAttributes;
 
                     // Create the highlight attributes for this placemark.
                     //Note that the normal attributes are specified as
-                    // the default highlight attributes so that all properties are
+                    // the default highlight attributes so all properties are
                     //identical except the image scale. You could
-                    // instead vary the color, image, or other property to control
+                    // vary the color, image, or other property to control
                     //the highlight representation.
                     highlightAttributes = new
                             WorldWind.PlacemarkAttributes(placemarkAttributes);
@@ -696,7 +702,7 @@ requirejs({paths:{
         }
 
         //Loads all the data
-        //Essentially all the data is loaded before hand if it is part of the CSV lit
+        //All the data is loaded before hand if it is part of the CSV list
         function loadCSVData(){
             var csvList = ['csvdata/countries.csv', 'csvdata/weatherstations.csv',
                     'csvdata/cropAcros.csv'];
