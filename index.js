@@ -223,9 +223,11 @@ requirejs({paths:{
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 
 							detailsHTML += '<p>Station Name: ' + atmoDataPoint.stationName + '</p>';
-                            detailsHTML += '<button class="btn-info"><a href="https://fluxnet.fluxdata.org//data/download-data/" target="_blank">Download Raw Atmosphere Data (Fluxnet Account Required)</a></button>'
+                            detailsHTML += '<button class="btn-info"><a href="https://fluxnet.fluxdata.org//data/download-data/" ' +
+                                'target="_blank">Download Raw Atmosphere Data (Fluxnet Account Required)</a></button>'
 							//Generate the station buttons
-							detailsHTML += generateAtmoButtons(atmoData, atmoDataMonthly, atmoDataPoint.stationName, agriDataPoint, ccode3);
+							detailsHTML += generateAtmoButtons(atmoData, atmoDataMonthly, atmoDataPoint.stationName,
+                                agriDataPoint, ccode3);
 
 							details.html(detailsHTML);
 
@@ -353,6 +355,7 @@ function getLayerFromName(wwd, layerName) {
 //layerNumber represents where it should be generated among the other layers
 //Given these variables, return a string that contains the html
 //to set up a legend
+
 function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
