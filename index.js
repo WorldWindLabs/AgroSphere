@@ -2038,7 +2038,7 @@ function generateDataButtons(inputData, codeName, mode) {
             dataHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
 			if(mode == 0) {
 				var tempTitleName = dataPoint.dataValues[i].typeName.slice(0, dataPoint.dataValues[i].typeName.length -
-						' Production in tonnes'.length);
+						' Production In Tons'.length);
 				dataHTML += '<button class="btn-info" id="definitionNumber' + i + '">Get Definition for '
 						+ tempTitleName + '</button>';
 			}
