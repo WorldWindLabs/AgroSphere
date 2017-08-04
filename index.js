@@ -1897,25 +1897,6 @@ requirejs({paths:{
             return countryLayers;
         }
 
-
-        //Helps out with the regression function, given an
-        // array of time-values pairs convert them to x-y pairs
-
-        /**
-         * 
-         * @param incomingData
-         * @returns {Array}
-         */
-        function getXYPairs(incomingData) {
-            var xyPairs = [];
-            var i = 0;
-            for (i = 0; i < incomingData.length; i++) {
-                xyPairs.push([parseFloat(incomingData[i].year),
-                    parseFloat(incomingData[i].value)]);
-            }
-            return xyPairs;
-        }
-
         //Generate the button to remove the multigraphs and combine graphs
         function generateRemoveButton() {
             //Generate the remove button for the graphs
