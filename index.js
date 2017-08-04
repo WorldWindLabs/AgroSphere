@@ -992,6 +992,11 @@ requirejs({paths:{
                     layerManager.synchronizeLayerList();
                 }
             };
+            // Called if an error occurs during WMS Capabilities document retrieval
+            var logError = function (jqXhr, text, exception) {
+                console.log("There was a failure retrieving the capabilities" +
+                    " document: " + text + " exception: " + exception);
+            };
             $.get(serviceWMTSAddress).done(createWMTSLayer).fail(logError);
         }
 
@@ -1064,14 +1069,12 @@ requirejs({paths:{
             return data;
         }
 
-        //Assuming the value is an empty string, gets rid of it
-        //Filters out blanks in an array. 0 mode means skip
-        //1 mode means set value to 0 in case of blank
         /**
-         * 
-         * @param inputData
-         * @param mode
-         * @returns {Array}
+         * filters out nonexistent values in an array
+         *
+         * @param inputData - array to be filtered
+         * @param mode - 1 mode means set value to 0 in case of blank
+         * @returns {filtered array}
          */
         function filterOutBlanks(inputData, mode) {
             var i = 0;
@@ -1093,9 +1096,16 @@ requirejs({paths:{
             return tempArray;
         }
 
-        //Applies functionality for the buttons for geo comparison
-        //agridata only so far
-        function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager) {
+        /**
+         * Makes GeoComparison buttons work
+         *
+         * @param agriData - data for comparisons
+         * @param geoJSONData - borders to color in
+         * @param wwd - world window
+         * @param layerManager - manage layers - comparison is a layer
+         */
+        function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd,
+                                                layerManager) {
             //Generate the slider first
             geoMode = 0;
             var sliderHTML = $('#geoSlider');
@@ -1128,7 +1138,7 @@ requirejs({paths:{
                     geoMode = parseInt(this.id.slice('geoCompType'.length));
                     var buttonName = $('#' + this.id).text().slice();
 
-                    //Do some data stuff, go through the agridata based on the button
+                    //Go through the agridata based on the button
                     //number for every country
                     var countryData = [];
                     var j = 0;
@@ -1136,7 +1146,8 @@ requirejs({paths:{
                     var l = 0;
                     for(j = 0; j < agriData.length; j++) {
                         for(k = 0; k < agriData[j].dataValues.length; k++) {
-                            if(agriData[j].dataValues[k].typeName == buttonName) {
+                            if(agriData[j].dataValues[k].typeName ==
+                                buttonName) {
                                 for(l = 0; l < agriData[j].dataValues[k].timeValues.length; l++) {
                                     if(agriData[j].dataValues[k].timeValues[l].year == sliderValue) {
                                         var tempObject = {value: agriData[j].dataValues[k].timeValues[l].value,
