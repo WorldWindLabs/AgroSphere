@@ -2462,9 +2462,16 @@ requirejs({paths:{
             });
         }
 
-        //Creates a scatter plot based on the input data
-        //It is assumed that the input data is an array of timeValue pair
-        //Mode 0 assumes its an individual plot, 1 is otherwise
+        /**
+         * Creates a scatter plot based on the input data
+         * It is assumed that the input data is an array of timeValue pair
+         *
+         * @param titleName - title of plot
+         * @param secondName - other name
+         * @param inputData - data to be used
+         * @param htmlID - id in html file
+         * @param mode - 0 = individual plot, otherwise it is a type
+         */
         function plotScatter(titleName, secondName, inputData, htmlID, mode) {
             //Filter the input data, we may get some blanks
             var filteredData = filterOutBlanks(inputData, 0);
@@ -2545,7 +2552,6 @@ requirejs({paths:{
                 var multiGraphUpdate = {
                     title: 'Multiple Graphs'
                 }
-
                 Plotly.update(gd, multiGraphUpdate);
                 Plotly.relayout(gd, dimensions);
             }
@@ -2555,10 +2561,6 @@ requirejs({paths:{
                     Plotly.Plots.resize(gd);
                 });
             }
-            /*plotHTML.resize(function() {
-                console.log('Hello');
-                Plotly.Plots.resize(gd);
-            });*/
         }
 
 //Checks if there is anything visible
