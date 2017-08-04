@@ -2462,9 +2462,16 @@ requirejs({paths:{
             });
         }
 
-        //Creates a scatter plot based on the input data
-        //It is assumed that the input data is an array of timeValue pair
-        //Mode 0 assumes its an individual plot, 1 is otherwise
+        /**
+         * Creates a scatter plot based on the input data
+         * It is assumed that the input data is an array of timeValue pair
+         *
+         * @param titleName - title of plot
+         * @param secondName - other name
+         * @param inputData - data to be used
+         * @param htmlID - id in html file
+         * @param mode - 0 = individual plot, otherwise it is a type
+         */
         function plotScatter(titleName, secondName, inputData, htmlID, mode) {
             //Filter the input data, we may get some blanks
             var filteredData = filterOutBlanks(inputData, 0);
@@ -2480,7 +2487,6 @@ requirejs({paths:{
                 }
                 yValues.push(parseFloat(filteredData[i].value));
             }
-
             //Create the plotly graph
             var graph = {
                 name: titleName + ' ' + secondName,
@@ -2489,11 +2495,9 @@ requirejs({paths:{
                 mode: 'markers',
                 type: 'scatter'
             };
-
             var xAxis = {
                 title: 'Year'
             }
-
             if(mode == 0) {
                 var yAxis = {
                     title: titleName
@@ -2504,21 +2508,18 @@ requirejs({paths:{
                     title: 'Unitless'
                 };
             }
-
             var titleString = '';
             if(mode == 0) {
                 titleString = titleName + ' vs Year';
             } else {
                 titleString = 'Legend vs Year';
             }
-
             var layout = {
                 xaxis: xAxis,
                 yaxis: yAxis,
                 title: titleString,
                 showlegend: true
             };
-
             //Check if the htmlID is empty
             var plotHTML = $('#'+ htmlID);
             var d3 = Plotly.d3;
@@ -2545,7 +2546,6 @@ requirejs({paths:{
                 var multiGraphUpdate = {
                     title: 'Multiple Graphs'
                 }
-
                 Plotly.update(gd, multiGraphUpdate);
                 Plotly.relayout(gd, dimensions);
             }
@@ -2555,282 +2555,251 @@ requirejs({paths:{
                     Plotly.Plots.resize(gd);
                 });
             }
-            /*plotHTML.resize(function() {
-                console.log('Hello');
-                Plotly.Plots.resize(gd);
-            });*/
         }
 
-//Checks if there is anything visible
-function checkTabs() {
-	var allTabs = $('.tab-content > .tab-pane');
+        //Checks if there is anything visible
+        function checkTabs() {
+            var allTabs = $('.tab-content > .tab-pane');
 
-	var i = 0;
-	var isDisplay = false;
+            var i = 0;
+            var isDisplay = false;
 
-	for(i = 0; i < allTabs.length; i++) {
-		if($(allTabs[i]).css('display') != 'none') {
-			isDisplay = true;
+            for(i = 0; i < allTabs.length; i++) {
+                if($(allTabs[i]).css('display') != 'none') {
+                    isDisplay = true;
 
-		}
-	}
-	var resizable = $('.resizable');
+                }
+            }
+            var resizable = $('.resizable');
 
-	if(isDisplay) {
-		resizable.show();
-	} else {
-		resizable.hide();
-	}
-    if($('#wms').css('display') == 'none') {
-        $('.glyphicon-globe').css('color','white');
-    } else {
-        $('.glyphicon-globe').css('color','lightgreen');
-    }
-    if($('#layers').css('display') == 'none') {
-        $('.fa-map').css('color','white');
-    } else {
-        $('.fa-map').css('color','lightgreen');
-    }
-    if($('#country').css('display') == 'none') {
-        $('.glyphicon-flag').css('color','white');
-    } else {
-        $('.glyphicon-flag').css('color','lightgreen');
-    }
-    if($('#station').css('display') == 'none') {
-        $('.glyphicon-cloud').css('color','white');
-    } else {
-        $('.glyphicon-cloud').css('color','lightgreen');
-    }
-    if($('#graphs').css('display') == 'none') {
-        $('.fa-area-chart').css('color','white');
-    } else {
-        $('.fa-area-chart').css('color','lightgreen');
-    }
-    if($('#comp').css('display') == 'none') {
-        $('.glyphicon-briefcase').css('color','white');
-    } else {
-        $('.glyphicon-briefcase').css('color','lightgreen');
-    }
-    if($('#weather').css('display') == 'none') {
-        $('.fa-sun-o').css('color','white');
-    } else {
-        $('.fa-sun-o').css('color','lightgreen');
-    }
-    if($('#view').css('display') == 'none') {
-        $('.glyphicon-eye-open').css('color','white');
-    } else {
-        $('.glyphicon-eye-open').css('color','lightgreen');
-    }
-}
+            if(isDisplay) {
+                resizable.show();
+            } else {
+                resizable.hide();
+            }
+            if($('#wms').css('display') == 'none') {
+                $('.glyphicon-globe').css('color','white');
+            } else {
+                $('.glyphicon-globe').css('color','lightgreen');
+            }
+            if($('#layers').css('display') == 'none') {
+                $('.fa-map').css('color','white');
+            } else {
+                $('.fa-map').css('color','lightgreen');
+            }
+            if($('#country').css('display') == 'none') {
+                $('.glyphicon-flag').css('color','white');
+            } else {
+                $('.glyphicon-flag').css('color','lightgreen');
+            }
+            if($('#station').css('display') == 'none') {
+                $('.glyphicon-cloud').css('color','white');
+            } else {
+                $('.glyphicon-cloud').css('color','lightgreen');
+            }
+            if($('#graphs').css('display') == 'none') {
+                $('.fa-area-chart').css('color','white');
+            } else {
+                $('.fa-area-chart').css('color','lightgreen');
+            }
+            if($('#comp').css('display') == 'none') {
+                $('.glyphicon-briefcase').css('color','white');
+            } else {
+                $('.glyphicon-briefcase').css('color','lightgreen');
+            }
+            if($('#weather').css('display') == 'none') {
+                $('.fa-sun-o').css('color','white');
+            } else {
+                $('.fa-sun-o').css('color','lightgreen');
+            }
+            if($('#view').css('display') == 'none') {
+                $('.glyphicon-eye-open').css('color','white');
+            } else {
+                $('.glyphicon-eye-open').css('color','lightgreen');
+            }
+        }
 
-// sidebar functions
-var tabsFn = (function() {
-
-    function init() {
-        setHeight();
-    }
-
-    function setHeight() {
-        var $tabPane = $('.tab-pane'),
-            tabsHeight = $('.resizable').height();
-
-        $tabPane.css({
-            height: tabsHeight
+        $(function () {
+            $(".draggable").draggable({
+              containment:"window"
+            });
         });
-    }
 
-    $(init);
+        //sidebar toggle functions
+        $(document).ready(function () {
+            checkTabs();
+            $(".togglelayers").click(function () {
+                $("#layers").toggle();
+                $("#wms").hide();
+                $("#graphs").hide();
+                $("#country").hide();
+                $("#station").hide();
+                $("#comp").hide();
+                $("#weather").hide();
+                $("#view").hide();
+                        $('#legend').hide();
+                        $('#legendtext').hide();
+                setTimeout(function() {checkTabs()}, 50);
+            });
+            $(".togglecountry").click(function () {
+                $("#country").toggle();
+                $("#layers").hide();
+                $("#wms").hide();
+                $("#graphs").hide();
+                $("#station").hide();
+                $("#comp").hide();
+                $("#weather").hide();
+                $("#view").hide();
+                        $('#legend').hide();
+                        $('#legendtext').hide();
+                setTimeout(function() {checkTabs()}, 50);
+            });
+            $(".togglestation").click(function () {
+                $("#station").toggle();
+                $("#layers").hide();
+                $("#wms").hide();
+                $("#graphs").hide();
+                $("#country").hide();
+                $("#comp").hide();
+                $("#weather").hide();
+                $("#view").hide();
+                        $('#legend').hide();
+                        $('#legendtext').hide();
+                setTimeout(function() {checkTabs()}, 50);
+            });
+            $(".togglegraphs").click(function () {
+                $("#graphs").toggle();
+                $("#layers").hide();
+                $("#wms").hide();
+                $("#station").hide();
+                $("#country").hide();
+                $("#comp").hide();
+                $("#weather").hide();
+                $("#view").hide();
+                        $('#legend').hide();
+                        $('#legendtext').hide();
+                //This is amazing but apparently you can't use the resize sensor
+                //unless the thing is present, go figure
+                var i = 0;
+                var j = 0;
+                var manyGraphs = $('#manyGraph > div');
+                for(i = 0; i < manyGraphs.length; i++) {
+                    //Assume 2 child nodes if resize exists
+                    if(manyGraphs[i].childNodes.length == 1) {
+                        //Add the resize
+                        console.log($(manyGraphs[i]).attr('id'));
+                        new ResizeSensor($('#' + $(manyGraphs[i]).attr('id')), function(){
+                            for(j = 0; j < manyGraphs.length; j++) {
+                                var gd = $(manyGraphs[j]).children()[0];
+                                Plotly.Plots.resize(gd);
+                                console.log('melo');
+                            }
+                        });
+                        var gd = $(manyGraphs[i]).children()[0];
+                        Plotly.Plots.resize(gd);
+                    }
+                }
+                var multiGraph = $('#multiGraph');
+                if(multiGraph[0].childNodes.length == 1) {
+                    new ResizeSensor($(multiGraph), function() {
+                        var gd = $(multiGraph).children()[0];
+                        Plotly.Plots.resize(gd);
+                    });
+                    var gd = $(multiGraph).children()[0];
+                    Plotly.Plots.resize(gd);
+                }
 
-    $( ".resizable" ).resizable({
-        stop:setHeight,
-        // animation removed - stops resizing from working
-        maxHeight: 800,
-        maxWidth: 1400,
-        minHeight: 250,
-        minWidth: 280
-    });
-})();
+                setTimeout(function() {checkTabs()}, 50);
+            });
+            $(".togglecomp").click(function () {
+                $("#comp").toggle();
+                $("#layers").hide();
+                $("#wms").hide();
+                $("#graphs").hide();
+                $("#country").hide();
+                $("#station").hide();
+                $("#weather").hide();
+                $("#view").hide();
+                        $('#legend').toggle();
+                        $('#legendtext').toggle();
+                setTimeout(function() {checkTabs()}, 50);
+            });
+            $(".toggleweather").click(function () {
+                $("#weather").toggle();
+                $("#layers").hide();
+                $("#wms").hide();
+                $("#graphs").hide();
+                $("#country").hide();
+                $("#station").hide();
+                $("#comp").hide();
+                $("#view").hide();
+                        $('#legend').hide();
+                        $('#legendtext').hide();
+                setTimeout(function() {checkTabs()}, 50);
+            });
+            $(".toggleview").click(function () {
+                $("#view").toggle();
+                $("#layers").hide();
+                $("#wms").hide();
+                $("#graphs").hide();
+                $("#country").hide();
+                $("#station").hide();
+                $("#comp").hide();
+                $("#weather").hide();
+                        $('#legend').hide();
+                        $('#legendtext').hide();
+                setTimeout(function() {checkTabs()}, 50);
+            });
+            $(".togglewms").click(function () {
+                $("#wms").toggle();
+                $("#layers").hide();
+                $("#graphs").hide();
+                $("#country").hide();
+                $("#station").hide();
+                $("#comp").hide();
+                $("#weather").hide();
+                $("#view").hide();$('#legend').hide();
+                        $('#legendtext').hide();
+                setTimeout(function() {checkTabs()}, 50);
+            });
+            checkTabs();
+          /* highlighting correct button for geocomparison and wms layers */
+          $('.geoCompButton').click(function() {
+              if ($('.geoCompButton').hasClass('active')) {
+                  var clickedButtonIsActive = $(this).hasClass('active');
 
-$(function () {
-    $(".draggable").draggable({
-      containment:"window"
-    });
-});
-//sidebar toggle functions
-$(document).ready(function () {
-	checkTabs();
-    $(".togglelayers").click(function () {
-        $("#layers").toggle();
-        $("#wms").hide();
-        $("#graphs").hide();
-        $("#country").hide();
-        $("#station").hide();
-        $("#comp").hide();
-        $("#weather").hide();
-        $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
-		setTimeout(function() {checkTabs()}, 50);
-    });
-    $(".togglecountry").click(function () {
-        $("#country").toggle();
-        $("#layers").hide();
-        $("#wms").hide();
-        $("#graphs").hide();
-        $("#station").hide();
-        $("#comp").hide();
-        $("#weather").hide();
-        $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
-		setTimeout(function() {checkTabs()}, 50);
-    });
-    $(".togglestation").click(function () {
-        $("#station").toggle();
-        $("#layers").hide();
-        $("#wms").hide();
-        $("#graphs").hide();
-        $("#country").hide();
-        $("#comp").hide();
-        $("#weather").hide();
-        $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
-		setTimeout(function() {checkTabs()}, 50);
-    });
-    $(".togglegraphs").click(function () {
-        $("#graphs").toggle();
-        $("#layers").hide();
-        $("#wms").hide();
-        $("#station").hide();
-        $("#country").hide();
-        $("#comp").hide();
-        $("#weather").hide();
-        $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
-		//This is amazing but apparently you can't use the resize sensor
-		//unless the thing is present, go figure
-		var i = 0;
-		var j = 0;
-		var manyGraphs = $('#manyGraph > div');
-		for(i = 0; i < manyGraphs.length; i++) {
-			//Assume 2 child nodes if resize exists
-			if(manyGraphs[i].childNodes.length == 1) {
-				//Add the resize
-				console.log($(manyGraphs[i]).attr('id'));
-				new ResizeSensor($('#' + $(manyGraphs[i]).attr('id')), function(){
-					for(j = 0; j < manyGraphs.length; j++) {
-						var gd = $(manyGraphs[j]).children()[0];
-						Plotly.Plots.resize(gd);
-						console.log('melo');
-					}
-				});
-				var gd = $(manyGraphs[i]).children()[0];
-				Plotly.Plots.resize(gd);
-			}
-		}
-		var multiGraph = $('#multiGraph');
-		if(multiGraph[0].childNodes.length == 1) {
-			new ResizeSensor($(multiGraph), function() {
-				var gd = $(multiGraph).children()[0];
-				Plotly.Plots.resize(gd);
-			});
-			var gd = $(multiGraph).children()[0];
-			Plotly.Plots.resize(gd);
-		}
+                  $('.geoCompButton.active').removeClass('active');
 
-		setTimeout(function() {checkTabs()}, 50);
-    });
-    $(".togglecomp").click(function () {
-        $("#comp").toggle();
-        $("#layers").hide();
-        $("#wms").hide();
-        $("#graphs").hide();
-        $("#country").hide();
-        $("#station").hide();
-        $("#weather").hide();
-        $("#view").hide();
-				$('#legend').toggle();
-				$('#legendtext').toggle();
-		setTimeout(function() {checkTabs()}, 50);
-    });
-    $(".toggleweather").click(function () {
-        $("#weather").toggle();
-        $("#layers").hide();
-        $("#wms").hide();
-        $("#graphs").hide();
-        $("#country").hide();
-        $("#station").hide();
-        $("#comp").hide();
-        $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
-		setTimeout(function() {checkTabs()}, 50);
-    });
-    $(".toggleview").click(function () {
-        $("#view").toggle();
-        $("#layers").hide();
-        $("#wms").hide();
-        $("#graphs").hide();
-        $("#country").hide();
-        $("#station").hide();
-        $("#comp").hide();
-        $("#weather").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
-		setTimeout(function() {checkTabs()}, 50);
-    });
-    $(".togglewms").click(function () {
-        $("#wms").toggle();
-        $("#layers").hide();
-        $("#graphs").hide();
-        $("#country").hide();
-        $("#station").hide();
-        $("#comp").hide();
-        $("#weather").hide();
-        $("#view").hide();$('#legend').hide();
-				$('#legendtext').hide();
-        setTimeout(function() {checkTabs()}, 50);
-    });
-	checkTabs();
-  /* highlighting correct button for geocomparison and wms layers */
-  $('.geoCompButton').click(function() {
-      if ($('.geoCompButton').hasClass('active')) {
-          var clickedButtonIsActive = $(this).hasClass('active');
-
-          $('.geoCompButton.active').removeClass('active');
-
-          if (!clickedButtonIsActive) {
-              $(this).addClass('active');
+                  if (!clickedButtonIsActive) {
+                      $(this).addClass('active');
+                  }
           }
-  }
-      else {
-          $(this).addClass('active');
-      }
-  });
-  $('.wmsButton').click(function() {
-      if ($('.wmsButton').hasClass('active')) {
-          var clickedButtonIsActive = $(this).hasClass('active');
+              else {
+                  $(this).addClass('active');
+              }
+          });
+          $('.wmsButton').click(function() {
+              if ($('.wmsButton').hasClass('active')) {
+                  var clickedButtonIsActive = $(this).hasClass('active');
 
-          $('.wmsButton.active').removeClass('active');
+                  $('.wmsButton.active').removeClass('active');
 
-          if (!clickedButtonIsActive) {
-              $(this).addClass('active');
+                  if (!clickedButtonIsActive) {
+                      $(this).addClass('active');
+                  }
           }
-  }
-      else {
-          $(this).addClass('active');
-      }
-  });
-  $('input:checkbox').click(function() {
-      $(this).toggleClass('active');
-  });
-	$('#allButton').click(function() {
-      $('#toggleLegend').toggle();
-  });
-	$('#allButtonStation').click(function() {
-      $('#toggleLegendStation').toggle();
-  });
-});
+              else {
+                  $(this).addClass('active');
+              }
+          });
+          $('input:checkbox').click(function() {
+              $(this).toggleClass('active');
+          });
+            $('#allButton').click(function() {
+              $('#toggleLegend').toggle();
+          });
+            $('#allButtonStation').click(function() {
+              $('#toggleLegendStation').toggle();
+          });
+        });
 });
