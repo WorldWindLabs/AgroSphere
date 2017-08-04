@@ -348,7 +348,7 @@ requirejs({paths:{
 
             //Spawn the time if it has it
             if (typeof(wmsConfig.timeSequences) != 'undefined') {
-                layerControlHTML += generateTimeControl(wwd, layerName,
+                layerControlHTML += generateTimeControl(layerName,
                     layerNumber, wmsConfig);
             }
             layerControlHTML += '</div>';
@@ -992,7 +992,8 @@ requirejs({paths:{
                     layerManager.synchronizeLayerList();
                 }
             };
-            // Called if an error occurs during WMS Capabilities document retrieval
+            // Called if an error occurs during WMS Capabilities
+            // document retrieval
             var logError = function (jqXhr, text, exception) {
                 console.log("There was a failure retrieving the capabilities" +
                     " document: " + text + " exception: " + exception);
@@ -1289,21 +1290,30 @@ requirejs({paths:{
             dropArea.append(comparisonHTML);
         }
 
-        //Gives the button functionality for weather station
+        /**
+         * Gives the button functionality for weather station
+         *
+         * @param inputData - first data type
+         * @param inputData2 - second data type
+         * @param stationName - name of station
+         * @param agriDataPoint - agriculture data to check
+         */
         function giveAtmoButtonsFunctionality(inputData, inputData2,
-                stationName, agriDataPoint) {
+                                                stationName, agriDataPoint) {
             var dataPoint = findDataPointStation(inputData, stationName);
             var dataPoint2 = findDataPointStation(inputData2, stationName);
 
             var offSetLength = dataPoint.dataValues.length;
             if(dataPoint != 0) {
                 var i = 0;
-                for(i = 0; i < (dataPoint.dataValues.length + dataPoint2.dataValues.length); i++) {
+                for(i = 0; i < (dataPoint.dataValues.length +
+                    dataPoint2.dataValues.length); i++) {
                     var buttonHTML = $('#plotWeatherButton' + i).button();
                     buttonHTML.click(function(event) {
                         //Generate the plot based on things
                         var buttonID = this.id;
-                        var buttonNumber = buttonID.slice('plotWeatherButton'.length);
+                        var buttonNumber = buttonID.slice(
+                            'plotWeatherButton'.length);
                         var selfHTML = $('#' + buttonID);
                         var plotID = 'graphWeatherPoint' + buttonNumber;
 
@@ -1316,34 +1326,42 @@ requirejs({paths:{
                                         dataPoint.dataValues[buttonNumber].timeValues,
                                         plotID, 0);
                             } else {
-                                plotScatter(dataPoint2.dataValues[buttonNumber - offSetLength].typeName, '',
-                                        dataPoint2.dataValues[buttonNumber - offSetLength].timeValues,
-                                        plotID, 0);
+                                plotScatter(dataPoint2.dataValues[buttonNumber
+                                        - offSetLength].typeName, '',
+                                        dataPoint2.dataValues[buttonNumber -
+                                        offSetLength].timeValues, plotID, 0);
                             }
                             selfHTML.button("option", "label", "Hide Graph");
                         } else {
                             plotHTML.html('');
                             selfHTML.button("option", "label", "Plot Graph");
                         }
-                        $('#messagePoint' + buttonNumber).html('Plotted graph!');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('' +
+                            'Plotted graph!');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
                     var combineButtonHTML = $('#combineButton' + i).button();
                     combineButtonHTML.click(function(event) {
                         var buttonID = this.id;
-                        var buttonNumber = buttonID.slice('combineButton'.length);
+                        var buttonNumber = buttonID.slice(
+                            'combineButton'.length);
                         //Add to the graph
                         if(buttonNumber < offSetLength) {
                             plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                                     dataPoint.dataValues[buttonNumber].timeValues,
                                     'multiGraph', 1);
                         } else {
-                            plotScatter(dataPoint2.dataValues[buttonNumber - offSetLength].typeName, dataPoint.code3,
-                                    dataPoint2.dataValues[buttonNumber - offSetLength].timeValues,
+                            plotScatter(dataPoint2.dataValues[buttonNumber
+                                - offSetLength].typeName, dataPoint.code3,
+                                    dataPoint2.dataValues[buttonNumber
+                                    - offSetLength].timeValues,
                                     'multiGraph', 1);
                         }
-                        $('#messagePoint' + buttonNumber).html('Combined graph! Please go to Data Graphs Tab');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('Combined ' +
+                            'graph! Please go to Data Graphs Tab');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
 
                     var addButtonHTML = $('#addButton' + i).button();
@@ -1358,22 +1376,28 @@ requirejs({paths:{
                         var graphNumber = manyGraphDivChildren.length;
 
                         //Generate the html
-                        var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
+                        var graphDiv = '<div id="subGraph' + graphNumber
+                            + '"></div>';
 
                         $('#manyGraph').append(graphDiv);
 
                         //Graph it
 						if(buttonNumber < offSetLength) {
-							plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
+							plotScatter(dataPoint.dataValues[buttonNumber].typeName,
+                                        dataPoint.code3,
 										dataPoint.dataValues[buttonNumber].timeValues,
 										'subGraph' + graphNumber, 0);
 						} else {
-							plotScatter(dataPoint.dataValues[buttonNumber - offSetLength].typeName, dataPoint.code3,
-										dataPoint.dataValues[buttonNumber - offSetLength].timeValues,
+							plotScatter(dataPoint.dataValues[buttonNumber
+                                - offSetLength].typeName, dataPoint.code3,
+										dataPoint.dataValues[buttonNumber
+                                        - offSetLength].timeValues,
 										'subGraph' + graphNumber, 0);
 						}
-                        $('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('Added graph!' +
+                            ' Please go to Data Graphs Tab');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
                 }
 
@@ -1407,15 +1431,25 @@ requirejs({paths:{
                             layout.showlegend = false;
                             $(this).addClass('legendoff');
                         }
-                        Plotly.relayout($('#allGraphStation').children()[0], layout);
+                        Plotly.relayout($('#allGraphStation').children()[0],
+                            layout);
                     }
                 });
             }
         }
 
 
-        //Gives the data buttons funcitonality
-        function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode) {
+        /**
+         * Gives the data buttons functionality
+         *
+         * @param detailsHTML - details for agriculture
+         * @param inputData - data inputted to use
+         * @param agriDef - definitions of agriculture
+         * @param codeName - country code name
+         * @param mode - type of data like agriculture/livestock/fert...
+         */
+        function giveDataButtonsFunctionality(detailsHTML, inputData,
+                                              agriDef, codeName, mode) {
             //Do a search for all the buttons based on the data
             var dataPoint = findDataPointCountry(inputData, codeName, 3);
             //Check for existing data point
@@ -1436,28 +1470,30 @@ requirejs({paths:{
                             plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                                 dataPoint.dataValues[buttonNumber].timeValues,
                                 plotID, 0);
-                            /*getRegressionFunctionPlot(
-                                    dataPoint.dataValues[buttonNumber].timeValues, plotID,
-                                    dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);*/
                             selfHTML.button("option", "label", "Hide Graph");
                         } else {
                             plotHTML.html('');
                             selfHTML.button("option", "label", "Plot Graph");
                         }
-                        $('#messagePoint' + buttonNumber).html('Plotted graph!');
-                        //In short, create a temporary message indicating success
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('' +
+                            'Plotted graph!');
+                        //Create a temporary message indicating success
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     })
                     var combineButtonHTML = $('#combineButton' + i).button();
                     combineButtonHTML.click(function (event) {
                         var buttonID = this.id;
-                        var buttonNumber = buttonID.slice('combineButton'.length);
+                        var buttonNumber = buttonID.slice(
+                            'combineButton'.length);
                         //Add to the graph
                         plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                             dataPoint.dataValues[buttonNumber].timeValues,
                             'multiGraph', 1);
-                        $('#messagePoint' + buttonNumber).html('Combined graph! Please go to Data Graphs Tab');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('Combined' +
+                            ' graph! Please go to Data Graphs Tab');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
 
                     var addButtonHTML = $('#addButton' + i).button();
@@ -1472,7 +1508,8 @@ requirejs({paths:{
                         var graphNumber = manyGraphDivChildren.length;
 
                         //Generate the html
-                        var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
+                        var graphDiv = '<div id="subGraph' + graphNumber
+                            + '"></div>';
 
                         $('#manyGraph').append(graphDiv);
 
@@ -1480,25 +1517,32 @@ requirejs({paths:{
                         plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                             dataPoint.dataValues[buttonNumber].timeValues,
                             'subGraph' + graphNumber, 0);
-                        $('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('Added graph!' +
+                            ' Please go to Data Graphs Tab');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
 
                     if(mode == 0) {
-                        var definitionHTML = $('#definitionNumber' + i).button();
+                        var definitionHTML = $('#definitionNumber'
+                            + i).button();
                         definitionHTML.click(function (event) {
                             //Grab id
                             var buttonID = this.id;
-                            var buttonNumber = buttonID.slice('definitionNumber'.length);
+                            var buttonNumber = buttonID.slice('' +
+                                'definitionNumber'.length);
 
                             //Grab titleName
-                            var cropName = $(this).text().slice('Get Definition for '.length);
+                            var cropName = $(this).text().slice('Get' +
+                                ' Definition for '.length);
 
                             //Do a CSV search
-                            var description = findCropDefinition(agriDef, cropName);
+                            var description = findCropDefinition(agriDef,
+                                cropName);
 
-                            $('#messagePoint' + buttonNumber).html(description);
-                            setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 10000);
+                            $('#messagePoint' +buttonNumber).html(description);
+                            setTimeout(function(){ $('#messagePoint'+
+                                buttonNumber).html('')}, 10000);
 
                         });
                     }
@@ -1512,7 +1556,8 @@ requirejs({paths:{
                         //Compare with the list element
                         if(a.firstChild.innerText < b.firstChild.innerText) {
                             return -1;
-                        } else if(a.firstChild.innerText > b.firstChild.innerText) {
+                        } else if(a.firstChild.innerText >
+                            b.firstChild.innerText) {
                             return 1;
                         }
                         return 0;
@@ -1526,9 +1571,12 @@ requirejs({paths:{
                     }
                     $('#myUL > .layerTitle').remove();
                     for(i = 0; i < newList.length; i++) {
-                        $('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
+                        $('#myUL').append('<div class="layerTitle" id="'
+                            +$(newList[i]).attr('id')+'">' +
+                            $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode);
+                    giveDataButtonsFunctionality(detailsHTML, inputData,
+                        agriDef, codeName, mode);
                 });
                 $('#sortByAverage').off();
                 $('#sortByAverage').click(function() {
@@ -1536,11 +1584,15 @@ requirejs({paths:{
                     var newList = [];
                     divList.sort(function(a, b) {
                         //Get the buttons
-                        var buttonNumber1 = $(a).attr('id').slice('layerTitle'.length);
-                        var buttonNumber2 = $(b).attr('id').slice('layerTitle'.length);
-                        var data1 = dataPoint.dataValues[buttonNumber1].timeValues;
+                        var buttonNumber1 = $(a).attr('id').slice(
+                            'layerTitle'.length);
+                        var buttonNumber2 = $(b).attr('id').slice(
+                            'layerTitle'.length);
+                        var data1 =
+                            dataPoint.dataValues[buttonNumber1].timeValues;
                         data1 = filterOutBlanks(data1, 0);
-                        var data2 = dataPoint.dataValues[buttonNumber2].timeValues;
+                        var data2 =
+                            dataPoint.dataValues[buttonNumber2].timeValues;
                         data2 = filterOutBlanks(data2, 0);
                         //Got the number
                         var sum1 = 0;
@@ -1570,34 +1622,34 @@ requirejs({paths:{
                     }
                     $('#myUL > .layerTitle').remove();
                     for(i = 0; i < newList.length; i++) {
-                        $('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
+                        $('#myUL').append('<div class="layerTitle"' +
+                            ' id="'+$(newList[i]).attr('id')+'">' +
+                            $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode);
+                    giveDataButtonsFunctionality(detailsHTML, inputData,
+                        agriDef, codeName, mode);
                 });
 
                 //Assign functionality to the search bar
                 $('#searchinput').off();
                 $('#searchinput').keyup(function (event) {
                     //if (event.which == 13) {
-                        var input = $('#searchinput');
-                        var textValue = input.val().toUpperCase();
-
-                        //Iterate through the entire list and hide if it doesn't contain the
-                        //thing
-                        var i = 0;
-                        var layerTitles = $('div .layerTitle');
-                        var layerTitleList = $('div .layerTitle > li');
-                        for (i = 0; i < layerTitleList.length; i++) {
-                            if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                                $(layerTitles[i]).hide();
-                            } else if (textValue == '') {
-                                $(layerTitles[i]).show();
-                            } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                                $(layerTitles[i]).show();
-                            }
+                    var input = $('#searchinput');
+                    var textValue = input.val().toUpperCase();
+                    //Iterate through the entire list and hide if
+                    //value is not contained
+                    var i = 0;
+                    var layerTitles = $('div .layerTitle');
+                    var layerTitleList = $('div .layerTitle > li');
+                    for (i = 0; i < layerTitleList.length; i++) {
+                        if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                            $(layerTitles[i]).hide();
+                        } else if (textValue == '') {
+                            $(layerTitles[i]).show();
+                        } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                            $(layerTitles[i]).show();
                         }
-                   // }
-
+                    }
                 });
 
                 //Assign functionality to the allButton
@@ -1641,24 +1693,34 @@ requirejs({paths:{
             }
         }
 
-        //Generates the html for the weather search
+        /**
+         * Generates the html for the weather search
+         * @param countryData - country name for search
+         */
         function generateWeatherHTML(countryData) {
             var weatherHTML = '<h5class="smallerfontsize">Weather Search</h5>';
-            weatherHTML += '<p><input type="text" class="form-control" id="cityInput" placeholder="Search for city" title="Type in a layer"></p>';
+            weatherHTML += '<p><input type="text" class="form-control" ' +
+                'id="cityInput" placeholder="Search for city" title=' +
+                '"Type in a layer"></p>';
             weatherHTML += '<select id="countryNames" class="form-control">'
             var i = 0;
 
             for(i = 0; i < countryData.length; i++) {
-                weatherHTML += '<option>' + countryData[i].code2 + ' - ' + countryData[i].country + '</option>';
+                weatherHTML += '<option>' + countryData[i].code2 + ' - ' +
+                    countryData[i].country + '</option>';
             }
             weatherHTML += '</select><br>';
-            weatherHTML += '<p><button class="btn-info" id="searchWeather">Search Weather</button></p>';
+            weatherHTML += '<p><button class="btn-info" id="searchWeather">' +
+                'Search Weather</button></p>';
           weatherHTML += '<div id="searchDetails"></div>'
             $('#weather').append(weatherHTML);
         }
 
 
         //Provides functionality for the weather button search
+        /**
+         * Weather search functionality
+         */
         function giveWeatherButtonFunctionality() {
             var weatherButton = $('#searchWeather').button();
             weatherButton.on('click', function() {
@@ -1668,7 +1730,8 @@ requirejs({paths:{
                 var countryInput = country.slice(0,2);
 
                 //Make an api request
-                var apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityInput + ','
+                var apiURL = 'https://api.openweathermap.org/' +
+                    'data/2.5/weather?q=' + cityInput + ','
                         + countryInput + '&appid=' + APIKEY;
 
                 //Make an ajax request
@@ -1681,24 +1744,35 @@ requirejs({paths:{
                         //Create some html
                         var dropArea = $('#searchDetails');
                         dropArea.html('');
-                        var tempHTML = '<h5 class="fontsize"><b>Weather Details for ' + data.name + '</b></h5>';
-                        tempHTML += '<p><b>Country:</b> ' + data.sys.country + '</p><br>';
-                        tempHTML += '<p><b>Current Outlook:</b> ' + data.weather[0].main + '</p><br>';
-                        tempHTML += '<p><b>Current Outlook Description:</b> ' + data.weather[0].description + '</p><br>';
-                        tempHTML += '<p><b>Current Temperature (Celsius):</b> ' + Math.round((data.main.temp - 272),2) + '</p><br>';
-                        tempHTML += '<p><b>Sunrise:</b> ' + timeConverter(data.sys.sunrise) + '</p><br>';
-                        tempHTML += '<p><b>Sunset:</b> ' + timeConverter(data.sys.sunset) + '</p><br>';
-                        tempHTML += '<p><b>Max Temperature Today (Celsius):</b> ' + Math.round((data.main.temp_max - 272),2) + '</p><br>';
-                        tempHTML += '<p><b>Min Temperature Today (Celsius):</b> ' + Math.round(data.main.temp_min  - 272, 2) + '</p><br>';
-                        tempHTML += '<p><b>Pressure (HPa):</b> ' + data.main.pressure + '</p><br>';
-                        tempHTML += '<p><b>Humidity (%):</b> ' + data.main.humidity + '</p><br>';
-                        tempHTML += '<p><b>Wind speed (m/s):</b>' + data.wind.speed + '</p><br><br>';
+                        var tempHTML = '<h5 class="fontsize"><b>Weather' +
+                            ' Details for ' + data.name + '</b></h5>';
+                        tempHTML += '<p><b>Country:</b> ' + data.sys.country
+                            + '</p><br>';
+                        tempHTML += '<p><b>Current Outlook:</b> ' +
+                            data.weather[0].main + '</p><br>';
+                        tempHTML += '<p><b>Current Outlook Description:</b> '
+                            + data.weather[0].description + '</p><br>';
+                        tempHTML += '<p><b>Current Temperature (Celsius):</b> '
+                            + Math.round((data.main.temp - 272),2) +'</p><br>';
+                        tempHTML += '<p><b>Sunrise:</b> ' + timeConverter(
+                            data.sys.sunrise) + '</p><br>';
+                        tempHTML += '<p><b>Sunset:</b> ' + timeConverter(
+                            data.sys.sunset) + '</p><br>';
+                        tempHTML += '<p><b>Max Temperature Today (Celsius)' +
+                            ':</b> ' + Math.round((data.main.temp_max - 272),2)
+                            + '</p><br>';
+                        tempHTML += '<p><b>Min Temperature Today (Celsius):' +
+                            '</b> ' + Math.round(data.main.temp_min  - 272, 2)
+                            + '</p><br>';
+                        tempHTML += '<p><b>Pressure (HPa):</b> ' +
+                            data.main.pressure + '</p><br>';
+                        tempHTML += '<p><b>Humidity (%):</b> ' +
+                            data.main.humidity + '</p><br>';
+                        tempHTML += '<p><b>Wind speed (m/s):</b>' +
+                            data.wind.speed + '</p><br><br>';
                         dropArea.append(tempHTML);
-
                     },
-                    fail: function() {
-
-                    }
+                    fail: function() {}
                 })
             });
         }
