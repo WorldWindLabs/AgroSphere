@@ -11,7 +11,7 @@ climate change on agriculture using a large collection of global agriculture and
 
 ## Video Tutorial
 
-<a href="https://www.youtube.com/embed/h66dFV3Qu5E">
+<a href="https://www.youtube.com/watch?v=h66dFV3Qu5E&t=102s">
 <img src="images/videotutorial.png"/>
 </a>
 
