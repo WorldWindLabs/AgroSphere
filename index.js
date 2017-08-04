@@ -348,7 +348,7 @@ requirejs({paths:{
 
             //Spawn the time if it has it
             if (typeof(wmsConfig.timeSequences) != 'undefined') {
-                layerControlHTML += generateTimeControl(wwd, layerName,
+                layerControlHTML += generateTimeControl(layerName,
                     layerNumber, wmsConfig);
             }
             layerControlHTML += '</div>';
@@ -992,7 +992,8 @@ requirejs({paths:{
                     layerManager.synchronizeLayerList();
                 }
             };
-            // Called if an error occurs during WMS Capabilities document retrieval
+            // Called if an error occurs during WMS Capabilities
+            // document retrieval
             var logError = function (jqXhr, text, exception) {
                 console.log("There was a failure retrieving the capabilities" +
                     " document: " + text + " exception: " + exception);
@@ -1289,21 +1290,30 @@ requirejs({paths:{
             dropArea.append(comparisonHTML);
         }
 
-        //Gives the button functionality for weather station
+        /**
+         * Gives the button functionality for weather station
+         *
+         * @param inputData - first data type
+         * @param inputData2 - second data type
+         * @param stationName - name of station
+         * @param agriDataPoint - agriculture data to check
+         */
         function giveAtmoButtonsFunctionality(inputData, inputData2,
-                stationName, agriDataPoint) {
+                                                stationName, agriDataPoint) {
             var dataPoint = findDataPointStation(inputData, stationName);
             var dataPoint2 = findDataPointStation(inputData2, stationName);
 
             var offSetLength = dataPoint.dataValues.length;
             if(dataPoint != 0) {
                 var i = 0;
-                for(i = 0; i < (dataPoint.dataValues.length + dataPoint2.dataValues.length); i++) {
+                for(i = 0; i < (dataPoint.dataValues.length +
+                    dataPoint2.dataValues.length); i++) {
                     var buttonHTML = $('#plotWeatherButton' + i).button();
                     buttonHTML.click(function(event) {
                         //Generate the plot based on things
                         var buttonID = this.id;
-                        var buttonNumber = buttonID.slice('plotWeatherButton'.length);
+                        var buttonNumber = buttonID.slice(
+                            'plotWeatherButton'.length);
                         var selfHTML = $('#' + buttonID);
                         var plotID = 'graphWeatherPoint' + buttonNumber;
 
@@ -1316,34 +1326,42 @@ requirejs({paths:{
                                         dataPoint.dataValues[buttonNumber].timeValues,
                                         plotID, 0);
                             } else {
-                                plotScatter(dataPoint2.dataValues[buttonNumber - offSetLength].typeName, '',
-                                        dataPoint2.dataValues[buttonNumber - offSetLength].timeValues,
-                                        plotID, 0);
+                                plotScatter(dataPoint2.dataValues[buttonNumber
+                                        - offSetLength].typeName, '',
+                                        dataPoint2.dataValues[buttonNumber -
+                                        offSetLength].timeValues, plotID, 0);
                             }
                             selfHTML.button("option", "label", "Hide Graph");
                         } else {
                             plotHTML.html('');
                             selfHTML.button("option", "label", "Plot Graph");
                         }
-                        $('#messagePoint' + buttonNumber).html('Plotted graph!');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('' +
+                            'Plotted graph!');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
                     var combineButtonHTML = $('#combineButton' + i).button();
                     combineButtonHTML.click(function(event) {
                         var buttonID = this.id;
-                        var buttonNumber = buttonID.slice('combineButton'.length);
+                        var buttonNumber = buttonID.slice(
+                            'combineButton'.length);
                         //Add to the graph
                         if(buttonNumber < offSetLength) {
                             plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                                     dataPoint.dataValues[buttonNumber].timeValues,
                                     'multiGraph', 1);
                         } else {
-                            plotScatter(dataPoint2.dataValues[buttonNumber - offSetLength].typeName, dataPoint.code3,
-                                    dataPoint2.dataValues[buttonNumber - offSetLength].timeValues,
+                            plotScatter(dataPoint2.dataValues[buttonNumber
+                                - offSetLength].typeName, dataPoint.code3,
+                                    dataPoint2.dataValues[buttonNumber
+                                    - offSetLength].timeValues,
                                     'multiGraph', 1);
                         }
-                        $('#messagePoint' + buttonNumber).html('Combined graph! Please go to Data Graphs Tab');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('Combined ' +
+                            'graph! Please go to Data Graphs Tab');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
 
                     var addButtonHTML = $('#addButton' + i).button();
@@ -1358,22 +1376,28 @@ requirejs({paths:{
                         var graphNumber = manyGraphDivChildren.length;
 
                         //Generate the html
-                        var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
+                        var graphDiv = '<div id="subGraph' + graphNumber
+                            + '"></div>';
 
                         $('#manyGraph').append(graphDiv);
 
                         //Graph it
 						if(buttonNumber < offSetLength) {
-							plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
+							plotScatter(dataPoint.dataValues[buttonNumber].typeName,
+                                        dataPoint.code3,
 										dataPoint.dataValues[buttonNumber].timeValues,
 										'subGraph' + graphNumber, 0);
 						} else {
-							plotScatter(dataPoint.dataValues[buttonNumber - offSetLength].typeName, dataPoint.code3,
-										dataPoint.dataValues[buttonNumber - offSetLength].timeValues,
+							plotScatter(dataPoint.dataValues[buttonNumber
+                                - offSetLength].typeName, dataPoint.code3,
+										dataPoint.dataValues[buttonNumber
+                                        - offSetLength].timeValues,
 										'subGraph' + graphNumber, 0);
 						}
-                        $('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('Added graph!' +
+                            ' Please go to Data Graphs Tab');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
                 }
 
@@ -1407,15 +1431,25 @@ requirejs({paths:{
                             layout.showlegend = false;
                             $(this).addClass('legendoff');
                         }
-                        Plotly.relayout($('#allGraphStation').children()[0], layout);
+                        Plotly.relayout($('#allGraphStation').children()[0],
+                            layout);
                     }
                 });
             }
         }
 
 
-        //Gives the data buttons funcitonality
-        function giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode) {
+        /**
+         * Gives the data buttons functionality
+         *
+         * @param detailsHTML
+         * @param inputData
+         * @param agriDef
+         * @param codeName
+         * @param mode
+         */
+        function giveDataButtonsFunctionality(detailsHTML, inputData,
+                                              agriDef, codeName, mode) {
             //Do a search for all the buttons based on the data
             var dataPoint = findDataPointCountry(inputData, codeName, 3);
             //Check for existing data point
