@@ -502,8 +502,8 @@ requirejs({paths:{
             var endDate;
 
             //modify the string based on whether it is monthly or daily
-            if (layerName.indexOf("month") != -1){
-                //Forcibly remove the month format (though)
+            if (layerName.indexOf("month") != -1) {
+                //Forcibly remove the month format
                 startDate =
                         wmsConfig.timeSequences[0].startTime.toDateString().substring(4, 7) + " " +
                         wmsConfig.timeSequences[0].startTime.toDateString().substring(11, 15);
@@ -1039,7 +1039,7 @@ requirejs({paths:{
         }
 
         /**
-         * hardvoded link: loads appropriate geoJSON data
+         * hardcoded link: loads appropriate geoJSON data
          * @returns {geoJSON data}
          */
         function loadGEOJsonData() {
@@ -1081,8 +1081,7 @@ requirejs({paths:{
             var tempArray = [];
             for(i = 0; i < inputData.length; i++) {
                 //Check for empty string
-                if((inputData[i].value != "") && (mode == 0)){
-
+                if((inputData[i].value != "") && (mode == 0)) {
                     tempArray.push(inputData[i]);
                 } else if(mode == 1) {
                     if(inputData[i].value == "") {
@@ -1162,7 +1161,8 @@ requirejs({paths:{
                     //Got all the data, colour it
                     countryData = filterOutBlanks(countryData, 0);
 
-                    var countryLayer = colourizeCountries(countryData, geoJSONData, buttonName);
+                    var countryLayer = colourizeCountries(countryData,
+                        geoJSONData, buttonName);
                     countryLayer.userObject.year = sliderValue;
                     //Check if the country layer exist
                     var flagLayer;
@@ -1170,29 +1170,32 @@ requirejs({paths:{
                     var currentLayerName;
                     for(l = 0; l < wwd.layers.length; l++) {
                         if(wwd.layers[l].displayName == 'Geo Country Data') {
-
-                            currentLayerName = wwd.layers[l].userObject.dataType;
+                            currentLayerName =
+                                wwd.layers[l].userObject.dataType;
                             var previousYear = wwd.layers[l].userObject.year;
                             wwd.removeLayer(wwd.layers[l]);
-                        } else if(wwd.layers[l].displayName == 'Country Placemarks') {
+                        } else if(wwd.layers[l].displayName ==
+                            'Country Placemarks') {
                             flagLayer = wwd.layers[l];
                         }
                     }
 
-                    if((currentLayerName != buttonName) || (previousYear != sliderValue)){
+                    if((currentLayerName != buttonName) || (previousYear
+                        != sliderValue)){
                         wwd.addLayer(countryLayer);
                         layerManager.synchronizeLayerList();
                         setLayerControls();
                         var m = 0;
-                        //Go through the entire country flag placemarks and change the label
+                        //Go through the entire country flag placemarks
+                        // and change the label
                         for(l = 0; l < flagLayer.renderables.length; l++) {
                             var code3 = flagLayer.renderables[l].userObject.code3;
-                            var flagName = flagLayer.renderables[l].userObject.country + '- ' +
-                                    code3;
+                            var flagName = flagLayer.renderables[l].userObject.country + '- ' + code3;
                             //Find the agriData with the code3
                             for(j = 0; j < agriData.length; j++) {
                                 if(agriData[j].code3 == code3) {
-                                    //Go through the timeValue that matches the year
+                                    //Go through the timeValue that matches
+                                    //the year
                                     for(k = 0; k < agriData[j].dataValues.length; k++) {
                                         if(agriData[j].dataValues[k].typeName == buttonName) {
                                             for(m = 0; m < agriData[j].dataValues[k].timeValues.length; m++) {
@@ -1210,7 +1213,8 @@ requirejs({paths:{
                             flagLayer.renderables[l].label = flagName;
                         }
                     } else {
-                        //Just go through the flag layer and relabel it to default
+                        //Just go through the flag layer and relabel it
+                        // to default
                         for(l = 0; l < flagLayer.renderables.length; l++) {
                             flagLayer.renderables[l].label =
                                     flagLayer.renderables[l].userObject.country +
