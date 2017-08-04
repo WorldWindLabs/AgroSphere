@@ -701,11 +701,13 @@ requirejs({paths:{
 
         }
 
-        //Loads all the data
-        //All the data is loaded before hand if it is part of the CSV list
+        /**
+         * Loads all CSV Files
+         * @returns {Array of CSV data}
+         */
         function loadCSVData(){
-            var csvList = ['csvdata/countries.csv', 'csvdata/weatherstations.csv',
-                    'csvdata/cropAcros.csv'];
+            var csvList = ['csvdata/countries.csv',
+                'csvdata/weatherstations.csv', 'csvdata/cropAcros.csv'];
             //Find the file
             var csvString = "";
 
@@ -724,34 +726,14 @@ requirejs({paths:{
             return csvData;
         }
 
-        //Filters the data based on a particular parameter
-        //Assumes its an object that contains a paramter type or value pair
-        function filterCSVData(csvData, parameterType, thresholdValue) {
-            //Since we already have the data, just go through it and pop each one
-            //that we don't need
-
-            //Duplicate it
-            var tempData = csvData.slice(0);
-
-            var i = 0;
-            var returnData = [];
-            for(i = 0; i < tempData.length; i++) {
-                //A paramterType of 0 corresponds to year
-                //And its a less than
-                if(parameterType == 0) {
-                    //Filter by year
-                    returnData.push(tempData[i].filter(
-                        function(data) {
-                            return data.year < thresholdValue;
-                        }));
-                }
-
-            }
-
-            return returnData;
-        }
-
-        //Given the lon and lat, find the data
+        /**
+         * Get data given latitude and longitude of a location
+         *
+         * @param dataSet - data to get from location
+         * @param lat - latitude value of location
+         * @param lon - longitude value of location
+         * @returns {Data for specified location}
+         */
         function findDataPoint(dataSet, lat, lon) {
             var i = 0;
             for(i = 0; i < dataSet.length; i++){
@@ -761,7 +743,13 @@ requirejs({paths:{
             }
         }
 
-        //Given the stationName, find the respective dataSet
+        /**
+         * Find data given name of station
+         *
+         * @param dataSet - type of data to get for
+         * @param stationName - name of station to get data for
+         * @returns {data for specified station}
+         */
         function findDataPointStation(dataSet, stationName) {
             var i = 0;
             for(i = 0; i < dataSet.length; i++) {
@@ -772,19 +760,30 @@ requirejs({paths:{
             return 0;
         }
 
-        //Find the definition of the crop based on the name
+        /**
+         * Get definition of crop given name
+         * @param dataSet - data from which to search
+         * @param cropName - name of crop to get definition for
+         * @returns {definition and statement of crop from FAO}
+         */
         function findCropDefinition(dataSet, cropName) {
             var i = 0;
             for(i = 0; i < dataSet.length; i++) {
                 if(dataSet[i].Item == cropName) {
-
                     return dataSet[i].Description;
                 }
             }
             return 0;
         }
 
-        //Given the conuntry code, find the data set involving countries
+        /**
+         * find all data for a country given its code
+         *
+         * @param dataSet - all the data to get
+         * @param countryCode - country's 2 or 3 letter code
+         * @param codeNumber - number of code
+         * @returns {*}
+         */
         function findDataPointCountry(dataSet, countryCode, codeNumber) {
             var i = 0;
             if(codeNumber == 2) {
@@ -804,6 +803,7 @@ requirejs({paths:{
         }
 
         //Load the csvFile differently
+
         function loadCSVDataArray() {
             var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv',
                     'csvdata/livestock.csv', 'csvdata/emissionAll.csv', 'csvdata/Monthly_AvgData1.csv',
