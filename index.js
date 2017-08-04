@@ -995,8 +995,10 @@ requirejs({paths:{
             $.get(serviceWMTSAddress).done(createWMTSLayer).fail(logError);
         }
 
-        //Refreshes the control or the functionality of the layerManager buttons
-        //every time it is called for wmts layers
+        /**
+         * Refreshes the control or the functionality of the layerManager
+         * buttons every time it is called for wmts layers
+         */
         function setLayerControls() {
             //Give the layer buttons extra funcitonality
             var layerButtonList = $('#layerList button');
@@ -1020,7 +1022,7 @@ requirejs({paths:{
                     }
                     if(layerNumber != -1) {
                         if($(this).hasClass('active')) {
-                            //Active class for button, find the appropiate layer
+                            //Active class for button, find appropriate layer
                             $(layerControlList[k]).show();
                         } else {
                             //Hide the class
@@ -1031,8 +1033,10 @@ requirejs({paths:{
             }
         }
 
-        //The link is hardcoded. Loads the appropiated geojson data
-        //no arguments because only one link so far
+        /**
+         * hardvoded link: loads appropriate geoJSON data
+         * @returns {geoJSON data}
+         */
         function loadGEOJsonData() {
             //Load GEOJSON
             var data;
@@ -1063,6 +1067,12 @@ requirejs({paths:{
         //Assuming the value is an empty string, gets rid of it
         //Filters out blanks in an array. 0 mode means skip
         //1 mode means set value to 0 in case of blank
+        /**
+         * 
+         * @param inputData
+         * @param mode
+         * @returns {Array}
+         */
         function filterOutBlanks(inputData, mode) {
             var i = 0;
             var tempArray = [];
