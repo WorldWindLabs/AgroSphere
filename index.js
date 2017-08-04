@@ -277,8 +277,8 @@ requirejs({paths:{
             }
         };
 
-        //wwd.addEventListener('click', handlePick);
-		//wwd.addEventListener('touchend', handlePick);
+        wwd.addEventListener('click', handlePick);
+		wwd.addEventListener('touchend', handlePick);
         // Set up to handle clicks and taps.
         var handleClick = function (recognizer) {
             // Obtain the event location.
@@ -291,7 +291,6 @@ requirejs({paths:{
             // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
 			var i = 0;
 			for(i = 0; i < pickList.objects.length; i++) {
-				console.log(pickList.objects[i]);
 				if(pickList.objects[i].isTerrain) {
 
 					var position = pickList.objects[i].position;
