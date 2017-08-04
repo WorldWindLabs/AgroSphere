@@ -487,48 +487,48 @@ requirejs({paths:{
 
         }
 
-
-        //Given the world window, layerName, number and the wmslayer config object,
-        //Return the html to spawn a time control slider
         /**
+         * Generates time HTML control for specified layer
          *
-         *
-         * @param wwd
-         * @param layerName
-         * @param layerNumber
-         * @param wmsConfig
-         * @returns {string}
+         * @param layerName - name of layer to give time control
+         * @param layerNumber - number id for layer
+         * @param wmsConfig - WMS configuration for layer control
+         * @returns {string containing HTML code for time control}
          */
-        function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
+        function generateTimeControl(layerName, layerNumber, wmsConfig) {
             //Create the general box
             //Create the output
             var startDate;
             var endDate;
 
-            //Basically modify the string based on whether it is monthly or daily
+            //modify the string based on whether it is monthly or daily
             if (layerName.indexOf("month") != -1){
                 //Forcibly remove the month format (though)
                 startDate =
                         wmsConfig.timeSequences[0].startTime.toDateString().substring(4, 7) + " " +
                         wmsConfig.timeSequences[0].startTime.toDateString().substring(11, 15);
-                endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(4, 7) + " " +
-                    wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString().substring(11, 15);
+                endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length
+                    - 1].endTime.toDateString().substring(4, 7) + " " +
+                    wmsConfig.timeSequences[wmsConfig.timeSequences.length
+                    - 1].endTime.toDateString().substring(11, 15);
             }
             else {
                 //Simply output the date time stamp
-                startDate = wmsConfig.timeSequences[0].startTime.toDateString();
-                endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length - 1].endTime.toDateString();
+                startDate =wmsConfig.timeSequences[0].startTime.toDateString();
+                endDate = wmsConfig.timeSequences[wmsConfig.timeSequences.length
+                    - 1].endTime.toDateString();
             }
 
             //Generate the appropiate html with our dates
-            var timeHTML = '<h5><b>Time Scale:</b> ' + startDate + ' - ' + endDate + '</h5>';
+            var timeHTML = '<h5><b>Time Scale:</b> ' + startDate + ' - '
+                + endDate + '</h5>';
             timeHTML += '<div id="time_scale_' + layerNumber + '"></div>';
-            timeHTML += '<div id="time_date_' + layerNumber + '"><br>Current Time: Use the Time Scale</div>';
+            timeHTML += '<div id="time_date_' + layerNumber + '"><br>' +
+                'Current Time: Use the Time Scale</div>';
+
             //Wrap up the HTML
             timeHTML += '</div>';
             timeHTML += '<br>';
-
-
             return timeHTML;
         }
 
