@@ -2505,7 +2505,7 @@ $(function () {
       containment:"window"
     });
 });
-//sidebar toggle
+//sidebar toggle functions
 $(document).ready(function () {
 	checkTabs();
     $(".togglelayers").click(function () {
@@ -2517,6 +2517,8 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
+				$('#legend').hide();
+				$('#legendtext').hide();
 		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglecountry").click(function () {
@@ -2528,6 +2530,8 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
+				$('#legend').hide();
+				$('#legendtext').hide();
 		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglestation").click(function () {
@@ -2539,6 +2543,8 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
+				$('#legend').hide();
+				$('#legendtext').hide();
 		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglegraphs").click(function () {
@@ -2550,6 +2556,8 @@ $(document).ready(function () {
         $("#comp").hide();
         $("#weather").hide();
         $("#view").hide();
+				$('#legend').hide();
+				$('#legendtext').hide();
 		//This is amazing but apparently you can't use the resize sensor
 		//unless the thing is present, go figure
 		var i = 0;
@@ -2605,6 +2613,8 @@ $(document).ready(function () {
         $("#station").hide();
         $("#comp").hide();
         $("#view").hide();
+				$('#legend').hide();
+				$('#legendtext').hide();
 		setTimeout(function() {checkTabs()}, 50);
     });
     $(".toggleview").click(function () {
@@ -2616,6 +2626,8 @@ $(document).ready(function () {
         $("#station").hide();
         $("#comp").hide();
         $("#weather").hide();
+				$('#legend').hide();
+				$('#legendtext').hide();
 		setTimeout(function() {checkTabs()}, 50);
     });
     $(".togglewms").click(function () {
@@ -2626,7 +2638,8 @@ $(document).ready(function () {
         $("#station").hide();
         $("#comp").hide();
         $("#weather").hide();
-        $("#view").hide();
+        $("#view").hide();$('#legend').hide();
+				$('#legendtext').hide();
         setTimeout(function() {checkTabs()}, 50);
     });
 	checkTabs();
