@@ -802,12 +802,17 @@ requirejs({paths:{
             return 0;
         }
 
-        //Load the csvFile differently
-
+        /**
+         * Loads CSV file in a different format (for FAO data)
+         * @returns {Array of data sets from FAO}
+         */
         function loadCSVDataArray() {
-            var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv', 'csvdata/prices2.csv',
-                    'csvdata/livestock.csv', 'csvdata/emissionAll.csv', 'csvdata/Monthly_AvgData1.csv',
-                    'csvdata/pesti.csv', 'csvdata/ferti.csv', 'csvdata/yield.csv'];
+            var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv',
+                'csvdata/prices2.csv', 'csvdata/livestock.csv',
+                'csvdata/emissionAll.csv', 'csvdata/Monthly_AvgData1.csv',
+                'csvdata/pesti.csv', 'csvdata/ferti.csv',
+                'csvdata/yield.csv'];
+
             //Find the file
             var csvString = "";
 
@@ -1021,18 +1026,6 @@ requirejs({paths:{
             }
         }
 
-        //Loads kml layers (not used)
-        function loadKMLLayers(wwd, layerManager) {
-            var kmlFilePromise = new KmlFile('doc.kml', [new KmlTreeVisibility('kmltree', wwd)]);
-            kmlFilePromise.then(function (kmlFile) {
-                var renderableLayer = new WorldWind.RenderableLayer("Rice Yield Data");
-                renderableLayer.addRenderable(kmlFile);
-
-                wwd.addLayer(renderableLayer);
-                layerManager.synchronizeLayerList();
-            });
-        }
-
         //The link is hardcoded. Loads the appropiated geojson data
         //no arguments because only one link so far
         function loadGEOJsonData() {
@@ -1061,47 +1054,6 @@ requirejs({paths:{
             }
             return data;
         }
-        //
-        // function loadWMSLayers(wwd, layerManager) {
-        //     var serviceWMSAddress = "http://sedac.ciesin.org/geoserver/ows?service=wms&version=1.3.0&request=GetCapabilities";
-        //     var layerName = ["povmap:povmap-global-subnational-infant-mortality-rates_2000", 'povmap:povmap-global-subnational-prevalence-child-malnutrition',
-        //             'gpw-v4:gpw-v4-population-count_2000', 'gpw-v4:gpw-v4-population-count_2005', 'gpw-v4:gpw-v4-population-count_2010', 'gpw-v4:gpw-v4-population-count_2015',
-        //             'gpw-v4:gpw-v4-population-count_2020'];
-        //     // Called asynchronously to parse and create the WMS layer
-        //     var createWMSLayer = function (xmlDom) {
-        //         // Create a WmsCapabilities object from the XML DOM
-        //         var wms = new WorldWind.WmsCapabilities(xmlDom);
-        //         // using for loop to add multiple layers to layer manager; SUCCESS!!!!
-        //         var i = 0;
-        //         for (i = 0; i < layerName.length; i++) {
-        //             // Retrieve a WmsLayerCapabilities object by the desired layer name
-        //             var wmsLayerCapabilities = wms.getNamedLayer(layerName[i]);
-        //
-        //             // Form a configuration object from the WmsLayerCapability object
-        //             var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
-        //             // Modify the configuration objects title property to a more user friendly title
-        //             wmsConfig.title = wmsLayerCapabilities.title;
-        //
-        //             var wmsLayer;
-        //             wmsLayer = new WorldWind.WmsLayer(wmsConfig);
-        //
-        //             // disable layer by default
-        //             wmsLayer.enabled = false;
-        //
-        //             // Add the layers to World Wind and update the layer manager
-        //             wwd.addLayer(wmsLayer);
-        //             generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
-        //             layerManager.synchronizeLayerList();
-        //         }
-        //     };
-        //
-        //     // Called if an error occurs during WMS Capabilities document retrieval
-        //     var logError = function (jqXhr, text, exception) {
-        //         console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
-        //     };
-        //
-        //     $.get(serviceWMSAddress).done(createWMSLayer).fail(logError);
-        // }
 
         //Assuming the value is an empty string, gets rid of it
         //Filters out blanks in an array. 0 mode means skip
