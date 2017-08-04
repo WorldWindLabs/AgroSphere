@@ -25,10 +25,25 @@
   color:#D3D3D3;
 }
 
-.align {
+.alignLeft {
   text-align:left;
 }
 
 .modal-content {
   background:rgba(255,255,255,.95)
 }
+
+.extraBigMargins {
+  padding-bottom:100px
+}
+
+.extraSmallMargins {
+  padding-bottom:20px
+}
+
+`iframe {
+  height: 432px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}`
