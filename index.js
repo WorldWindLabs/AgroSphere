@@ -1,6 +1,7 @@
 /*
- * Copyright (C) 2014 United States Government as represented by the Administrator of the
- * National Aeronautics and Space Administration. All Rights Reserved.
+ * Copyright (C) 2014 United States Government as represented by the
+ * Administrator of the National Aeronautics and Space Administration.
+ * All Rights Reserved.
  */
 
 var APIKEY = '26fb68df7323284ea4430d8e4d3c60b1';
@@ -317,15 +318,25 @@ var clickRecognizer = new WorldWind.ClickRecognizer(wwd, handleClick);
 // Listen for taps on mobile devices.
 var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
 
-//Given a layerName and its layernumber, generate a layer control block
-
-//Key Notes: This function generates the HTML first then supplies
-//functionality
-function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, layerNumber) {
+/**
+ * This function generates the HTML first then supplies functionality
+ * Given a layerName and its layernumber, generate a layer control block
+ *
+ * @param wwd - world window
+ * @param wmsConfig - object containing how layer should look
+ * @param wmsLayerCapabilities - object representing what the wms layer can do
+ * @param layerName - name of layer
+ * @param layerNumber - number of layer in list
+ */
+function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName,
+                              layerNumber) {
     //Generate the div tags
-    var layerControlHTML = '<div class="toggleLayers" id="funcLayer' + layerNumber + '">';
+    var layerControlHTML = '<div class="toggleLayers" id="funcLayer' +
+        layerNumber + '">';
 
-  layerControlHTML += '<span style="display:none">Layer Controls for ' + layerName + '</span>';
+  layerControlHTML += '<span style="display:none">Layer Controls for ' +
+      layerName + '</span>';
+
     //Spawn opacity controller
     layerControlHTML += generateOpacityControl(wwd, layerName, layerNumber);
     //Spawn the legend
@@ -334,7 +345,8 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
 
     //Spawn the time if it has it
     if (typeof(wmsConfig.timeSequences) != 'undefined') {
-        layerControlHTML += generateTimeControl(wwd, layerName, layerNumber, wmsConfig);
+        layerControlHTML += generateTimeControl(wwd, layerName, layerNumber,
+            wmsConfig);
     }
 	layerControlHTML += '</div>';
     //Place the HTML somewhere
@@ -349,12 +361,14 @@ function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName, l
     }
 }
 
-
-//wwd is the world window
-//layerName is the layer we are searching for
-//Given the wwd and layername, return the
-//the appropiate layer object
-function getLayerFromName(wwd, layerName) {
+/**
+ * Searches for a layer given name and returns the layer object
+ *
+ * @param wwd - world window
+ * @param layerName - name of layer to search for
+ * @returns the correct layer object
+ */
+        function getLayerFromName(wwd, layerName) {
     var i = 0;
 
     for(i = 0; i < wwd.layers.length; i++) {
@@ -365,14 +379,15 @@ function getLayerFromName(wwd, layerName) {
     return 0;
 }
 
-
-//wwd is the worldwindow
-//wmsLayerCapabilities is the object representing what the wms layer can do
-//layerName is simply the name of the layer
-//layerNumber represents where it should be generated among the other layers
-//Given these variables, return a string that contains the html
-//to set up a legend
-
+/**
+ * creates a legend for a layer given its name and number
+ *
+ * @param wwd - worldwindow
+ * @param wmsLayerCapabilities - object representing what the wms layer can do
+ * @param layerName - name of layer
+ * @param layerNumber - where it should be generated among other layers
+ * @returns {string containing HTML code to create a legend}
+ */
 function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
 
     //Check if a legend exists for a given layer this
