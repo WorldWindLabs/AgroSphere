@@ -851,13 +851,14 @@ requirejs({paths:{
             return 0;
         }
 
-
-        //Given a csv data array, convert the segment into objects
-        //Assumes the csv file is in the format of id, paramatertype, year1 value,
-        //year2 value..
-        //year end value. This will return an array of objects containing the ids
-        //and an array of year-value pairs
-
+        /**
+         * Given a csv data array, convert the segment into objects
+         *
+         * @param csvData - in the format of id, paramatertype, year1 value,
+         * year2 value...
+         * @returns {Array of objects containing the ids and an array of year-
+         *          value pairs}
+         */
         function convertArrayToDataSet(csvData) {
             //Create the temporary object
             var objectList = [];
@@ -908,7 +909,6 @@ requirejs({paths:{
                         } else {
                             timeValue.value = "";
                         }
-
                         dataValueObject.timeValues.push(timeValue);
                     }
                 }
@@ -917,7 +917,6 @@ requirejs({paths:{
                 if(needPushToObj) {
                     objectList.push(tempObject);
                 }
-
             }
             return objectList;
         }
