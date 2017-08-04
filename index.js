@@ -2004,10 +2004,8 @@ requirejs({paths:{
             return countryHTML;
         }
 
-        //Gives funcitonality to the country buttons
-        //Basically they spawn another set of buttons to plot
         /**
-         * gives buttons for country data functionality
+         * Gives buttons for country data functionality
          *
          * @param agriData - agriculture
          * @param priceData - price
@@ -2078,133 +2076,160 @@ requirejs({paths:{
             });
         }
 
-
-        //Generates the HTML for each data type
+        /**
+         * Creates data buttons
+         *
+         * @param inputData - data
+         * @param codeName - 3 letter code
+         * @param mode - which type of data
+         * @returns {string containing buttons in HTML}
+         */
         function generateDataButtons(inputData, codeName, mode) {
             //Based on the input data, generate the buttons/html
             //Mode dictates what to call the title or search bar
-            switch(mode) {
+            switch (mode) {
                 case 0:
-                    var dataHTML = '<h4>Ag. Production Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-                    dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of the biggest crops?" title="Search for datasets..">';
+                    var dataHTML = '<h4>Ag. Production Data</h4>' +
+                        '<input type="text" class="form-control" id="' +
+                        'searchinput" placeholder="Search for datasets.."' +
+                        ' title="Search for datasets..">';
+                    dataHTML += '<input type="text" class="form-control"' +
+                        ' id="amount" placeholder="How many of the biggest ' +
+                        'crops?" title="Search for datasets..">';
                     break;
                 case 1:
-                    var dataHTML = '<h4>Price Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-                    dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many of top prices?" title="Search for datasets..">';
+                    var dataHTML = '<h4>Price Data</h4>' + '<input type="text"' +
+                        ' class="form-control" id="searchinput" placeholder="' +
+                        'Search for datasets.."title="Search for datasets..">';
+                    dataHTML += '<input type="text" class="form-control"id="' +
+                        'amount"placeholder="How many of top prices?"title="' +
+                        'Search for datasets..">';
                     break;
                 case 2:
-                    var dataHTML = '<h4>Livestock Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-                    dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many livestocks?" title="Search for datasets..">';
+                    var dataHTML = '<h4>Livestock Data</h4>' + '<input type=' +
+                        '"text" class="form-control" id="searchinput" ' +
+                        'placeholder="Search for datasets.." title="Search' +
+                        ' for datasets..">';
+                    dataHTML += '<input type="text" class="form-control"' +
+                        ' id="amount" placeholder="How many livestocks?"' +
+                        ' title="Search for datasets..">';
                     break;
                 case 3:
-                    var dataHTML = '<h4>Ag. Emission Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-                    dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crops?" title="Search for datasets..">';
+                    var dataHTML = '<h4>Ag. Emission Data</h4>' + '<input' +
+                        ' type="text" class="form-control" id="searchinput"' +
+                        ' placeholder="Search for datasets.." title="Search' +
+                        ' for datasets..">';
+                    dataHTML += '<input type="text" class="form-control"' +
+                        ' id="amount" placeholder="How many crops?" ' +
+                        'title="Search for datasets..">';
                     break;
                 case 4:
-                    var dataHTML = '<h4>Pesticide Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-                    dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many pesticides?" title="Search for datasets..">';
+                    var dataHTML = '<h4>Pesticide Data</h4>' +
+                        '<input type="text" class="form-control" ' +
+                        'id="searchinput"placeholder="Search for datasets.."' +
+                        ' title="Search for datasets..">';
+                    dataHTML += '<input type="text" class="form-control"' +
+                        ' id="amount" placeholder="How many pesticides?"' +
+                        ' title="Search for datasets..">';
                     break;
                 case 5:
-                    var dataHTML = '<h4>Fertiliser Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-                    dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many fertilisers?" title="Search for datasets..">';
+                    var dataHTML = '<h4>Fertiliser Data</h4>' + '<input ' +
+                        'type="text" class="form-control" id="searchinput"' +
+                        ' placeholder="Search for datasets.." title="' +
+                        'Search for datasets..">';
+                    dataHTML += '<input type="text" class="form-control"' +
+                        ' id="amount" placeholder="How many fertilisers?"' +
+                        ' title="Search for datasets..">';
                     break;
                 case 6:
-                    var dataHTML = '<h4>Ag. Yield Data</h4>' + '<input type="text" class="form-control" id="searchinput" placeholder="Search for datasets.." title="Search for datasets..">';
-                    dataHTML += '<input type="text" class="form-control" id="amount" placeholder="How many crop yields?" title="Search for datasets..">';
+                    var dataHTML = '<h4>Ag. Yield Data</h4>' + '<input' +
+                        ' type="text" class="form-control" id="searchinput"' +
+                        ' placeholder="Search for datasets.." title="Search' +
+                        ' for datasets..">';
+                    dataHTML += '<input type="text" class="form-control"' +
+                        ' id="amount" placeholder="How many crop yields?"' +
+                        ' title="Search for datasets..">';
                     break;
             }
+
             //Find the appropiate data point to use for the buttons
-            var dataPoint = findDataPointCountry(inputData, codeName,3);
-            if(dataPoint != 0) {
+            var dataPoint = findDataPointCountry(inputData, codeName, 3);
+            if (dataPoint != 0) {
                 var i = 0;
                 dataHTML += '<ul id="myUL">';
-                switch(mode) {
+                switch (mode) {
                     case 0:
-                        dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Crop Production Datasets</button>';
+                        dataHTML += '<button class="btn-info"id="allButton">' +
+                            'Graph Specified # of Crop Production Datasets' +
+                            '</button>';
                         break;
                     case 1:
-                        dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Price Datasets</button>';
+                        dataHTML += '<button class="btn-info"id="allButton">' +
+                            'Graph Specified # of Price Datasets</button>';
                         break;
                     case 2:
-                        dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Livestock Datasets</button>';
+                        dataHTML += '<button class="btn-info"id="allButton">' +
+                            'Graph Specified # of Livestock Datasets</button>';
                         break;
                     case 3:
-                        dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Ag Emission Datasets</button>';
+                        dataHTML += '<button class="btn-info"id="allButton">' +
+                            'Graph Specified # of Ag Emission Datasets' +
+                            '</button>';
                         break;
                     case 4:
-                        dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Pesticide Datasets</button>';
+                        dataHTML += '<button class="btn-info"id="allButton">' +
+                            'Graph Specified # of Pesticide Datasets</button>';
                         break;
                     case 5:
-                        dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Fertilizer Datasets</button>';
+                        dataHTML += '<button class="btn-info"id="allButton">' +
+                            'Graph Specified # of Fertilizer Datasets' +
+                            '</button>';
                         break;
                     case 6:
-                        dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Yield Datasets</button>';
+                        dataHTML += '<button class="btn-info"id="allButton">' +
+                            'Graph Specified # of Yield Datasets</button>';
                         break;
                 }
-								dataHTML += '<br><button class="btn-info" id="toggleLegend" style="display:none">Toggle Graph Legend</button>';
-                dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
-                dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Amount</button>';
+                dataHTML += '<br><button class="btn-info" id="toggleLegend"' +
+                    ' style="display:none">Toggle Graph Legend</button>';
+                dataHTML += '<br><button class="btn-info" id="sortByName">' +
+                    'Sort by Name</button>';
+                dataHTML += '<br><button class="btn-info" id="sortByAverage">' +
+                    'Sort by Amount</button>';
                 dataHTML += '<div id="allGraph"></div>';
 
-                for(i = 0; i < dataPoint.dataValues.length; i++) {
+                for (i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the HTML to show for plots
-                    dataHTML += '<div class="layerTitle" id="layerTitle' + i + '"><li>' + dataPoint.dataValues[i].typeName + '</li>';
-                    if(mode == 0) {
-                        var tempTitleName = dataPoint.dataValues[i].typeName.slice(0, dataPoint.dataValues[i].typeName.length -
+                    dataHTML += '<div class="layerTitle" id="layerTitle'
+                        + i + '"><li>' + dataPoint.dataValues[i].typeName
+                        + '</li>';
+                    if (mode == 0) {
+                        var tempTitleName =
+                            dataPoint.dataValues[i].typeName.slice(0,
+                                dataPoint.dataValues[i].typeName.length -
                                 '  Production In Tons'.length);
-                        dataHTML += '<button class="btn-info" id="definitionNumber' + i + '">Get Definition for '
-                                + tempTitleName + '</button>';
+                        dataHTML += '<button class="btn-info" ' +
+                            'id="definitionNumber' + i + '">Get Definition for' +
+                            ' ' + tempTitleName + '</button>';
                     }
 
-                    dataHTML += '<div class="resizeGraph" id="graphPoint' + i + '"></div>';
+                    dataHTML += '<div class="resizeGraph" id="graphPoint'
+                        + i + '"></div>';
                     dataHTML += '<button'
-                        + ' class="btn-info"' + ' id="plotButton' + i + '">Plot Graph</button>';
+                        + ' class="btn-info"' + ' id="plotButton' + i
+                        + '">Plot Graph</button>';
                     dataHTML += '<div id="messagePoint' + i + '"></div>';
-                    dataHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
-                    dataHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
+                    dataHTML += '<button class="btn-info" id="combineButton'
+                        + i + '">Combine Graph </button>';
+                    dataHTML += '<button class="btn-info" id="addButton'
+                        + i + '">Add Graph</button>';
                     dataHTML += '<br></div>';
                 }
-                //dataHTML += '</div>';
                 dataHTML += '</ul>';
             } else {
                 dataHTML += '<p>No data avaliable!</p>';
             }
             return dataHTML;
-        }
-
-        //Finds the closest country (centre based) and station based on click
-        //location
-        function findInformationUsingLocation(wwd, lat, lon, countryData, stationData) {
-            //Go through every country
-            var i = 0;
-            var smallestCountryDistance = 10e10;
-            var countryCode;
-            //var locationChecker = new WorldWind.Location()
-            for(i = 0; i < countryData.length; i++) {
-                //Determine the distance
-                var location1 = new WorldWind.Location(countryData[i].lat, countryData[i].lon);
-                var location2 = new WorldWind.Location(lat, lon);
-                var distance = WorldWind.Location.greatCircleDistance(location1, location2) * wwd.globe.equatorialRadius;
-
-                if(distance < smallestCountryDistance) {
-                    smallestCountryDistance = distance;
-                    countryCode = countryData[i].code3;
-                }
-            }
-
-            var smallestStationDistance = 10e10;
-            var stationName;
-            for(i = 0; i < stationData.length; i++) {
-                //Determine the distance
-                var location1 = new WorldWind.Location(stationData[i].lat, stationData[i].lon);
-                var location2 = new WorldWind.Location(lat, lon);
-                var distance = WorldWind.Location.greatCircleDistance(location1, location2) * wwd.globe.equatorialRadius;
-
-                if(distance < smallestStationDistance) {
-                    smallestStationDistance = distance;
-                    stationName = stationData[i].stationName;
-                }
-            }
         }
 
         //Helper function for plotting the stack.
