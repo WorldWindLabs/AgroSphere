@@ -425,21 +425,22 @@
                                 <h3>Geo-Comparison Data</h3>
 
                                 <p>The Geo-Comparison Buttons allows you to visualise agricultural data on the
-                                    globe, allowing you to compare many countries with each other at the same time.
+                                    globe where you can compare countries' crop production data side by side.
                                     To use, first set the desired year that you want to be compared using the
                                     slider. Next is to select what crop you want to view. You can do this by
                                     either scrolling through the selections or typing in the desired crop
                                     in the search bar. Finally, click on the Geo-Comparison button and
-                                    the globe will be colourized.</p>
+                                    the globe will be colourized accordingly.</p>
                                 <img src="images/gif/geoComparison1.gif" class="img-responsive img-centered" alt="" height="280" width="600">
                                 <img src="images/gif/geoComparison2.gif" class="img-responsive img-centered" alt="" height="280" width="600">
                                 <h5>What the colours mean</h5>
-                                <p>To put things loosely, there are 2 main colours with shades in between.
+                                <p>There are 2 main colours with shades in between.
                                     These two colours are red and green. Red represents a low production value
                                     of a particular crop at a particular year. Green represents a high production
                                     value for that particular crop at a particular year for that particular country.
                                     Yellow and orange represents above average and below average productions
-                                    respectively. No colour means no data is avaliable.</p>
+                                    respectively. No colour means no data is avaliable. Black color means that the
+                                  colored country is the sole producer of the crop you have chosen.</p>
                                 <h6>Technical Details</h6>
                                 <p>The colours are generated based on a country's z-score. For instance a
                                     country that produces a crop that is siginficantly above the average will
@@ -476,33 +477,30 @@
                         <div class="col-lg-8 col-lg-offset-2">
                             <div class="modal-body">
                                 <h3>Historical Country and Weather Data</h3>
-                                <p>The main feature of AgroSphere is the ability to view agricultural data based
-                                    on country using an interactive globe. To view a country's data, first select
-                                    a flag. A menu should appear listing the type of data that is avaliable.
-                                    Select a data type, for example the agricultural data set. A collection of
+                                <p>The main feature of AgroSphere is the ability to view agricultural data by
+                                  country using an interactive globe. To view a country's data, first select
+                                    a flag. A menu should appear listing the types of data that are avaliable.
+                                    Select a data type, for example the agriculture production dataset. A collection of
                                     buttons and input text areas should then appear. A similar event will happen
-                                    when clicking on the yellow pins which represents weather stations.</p>
+                                    when clicking on the yellow pins which represent weather stations.</p>
                                 <img src="images/gif/countryFlags.gif" class="img-responsive img-centered" alt="" height="280" width="600">
-                                <h5>Searching through the data set</h5>
-                                <p>The data set can be filtered by typing the particular desired field. It can
+                                <h5>Searching through the data</h5>
+                                <p>The data can be filtered by typing in the particular desired field. It can
                                     also be filtered by sorting by name (alphabetical order) or by average
                                     (descending order).  Sorting by average means the field with the largest average
                                     production over the avaliable years.</p>
                                 <img src="images/gif/searchGraph.gif" class="img-responsive img-centered" alt="" height="280" width="600">
                                 <h5>Plotting graphs</h5>
-                                <p>It is possible to plot individual fields. There are 3 buttons associated with
-                                    plotting: plot, combine and add.</p>
-                                <p>Plot is simply plotting the data
-                                    on the given active tab.</p>
+                                <p>There are 3 buttons associated with plotting: plot, combine and add.</p>
+                                <p>'Plot Graph' is plotting the data on the given active tab.</p>
                                 <img src="images/gif/plotGraph.gif" class="img-responsive img-centered" alt="" height="280" width="600">
-                                <p>Add places the graph in the data-graphs tabs. This
-                                    allows users to view multiple graphs from multiple countries to be viewed
-                                    side by side.</p>
+                                <p>'Add Graph' places the graph in the data-graphs tabs. This
+                                    allows users to view multiple graphs from multiple countries side by side.</p>
                                 <img src="images/gif/addGraph.gif" class="img-responsive img-centered" alt="" height="280" width="600">
-                                <p>Combine graphs multiple data sets on the same graph on the same
+                                <p>'Combine Graph' graphs multiple data sets on the same graph on the same
                                     scale.</p>
                                 <img src="images/gif/combineGraph.gif" class="img-responsive img-centered" alt="" height="280" width="600">
-                                <p>To remove a graph from the plot button, simply press the hide button that will
+                                <p>To remove a graph from the plot button, press the hide button that will
                                     appear after plotting. To remove a graph from the data-graphs section,
                                     simply press the remove all graphs button.</p>
                                 <img src="images/gif/resizeGraph.gif" class="img-responsive img-centered" alt="" height="280" width="600">
@@ -510,9 +508,8 @@
                                 <h5>Plotting specified number of datasets</h5>
                                 <p>The Graph # of X button allows the user to see the top number of fields on
                                     a year by year basis. Additionally the percentange the top X contributes is
-                                    also shown. To modify the amount seen, simply type in the number of fields
-                                    wanted. Note that bad-values or the default value is 5. Once a number is chosen,
-                                    simply press the graph specified button.</p>
+                                    also shown. To modify the amount seen, type in the number of fields
+                                    wanted. Note that bad-values or the default value is 5. Once a number is chosen, press the graph specified button.</p>
                                 <img src="images/gif/plotStack.gif" class="img-responsive img-centered" alt="" height="280" width="600">
                                 <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Tab</button>
                             </div>
@@ -541,11 +538,11 @@
                                 <h3>Using Web Map Service (WMS) Layers</h3>
 
                                 <p>The Web Map Service layers we have available allow you to view a global image layer and see how it varies with time.
-                                    First, choose a layer that you want to see. Once clicked, a set of options
+                                    First, choose a layer that you want to see. Once it has been clicked, a set of options
                                     and controls will appear. First is the opacity slider. To change the opacity
                                     of the layer, simply slide it to the desired value. Next is the associated
                                     legend of the layer if avaliable which tells you the values of the colours.
-                                    Next is the time scale. Simply slide to the desired time that you want to
+                                    Next is the time scale. Slide to the desired time that you want to
                                     see the data type. For instance, slide to May 31st 2001 if you want to see
                                     data at that particular time.</p>
                                 <img src="images/gif/wmsLayer.gif" class="img-responsive img-centered" alt="" height="280" width="600">
