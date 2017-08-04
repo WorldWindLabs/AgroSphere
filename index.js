@@ -240,8 +240,7 @@ requirejs({paths:{
                                 ' Data (Fluxnet Account Required)</a></button>'
                             //Generate the station buttons
                             detailsHTML += generateAtmoButtons(atmoData,
-                                atmoDataMonthly, atmoDataPoint.stationName,
-                                agriDataPoint, ccode3);
+                                atmoDataMonthly, atmoDataPoint.stationName);
 
                             details.html(detailsHTML);
 
@@ -1908,7 +1907,7 @@ requirejs({paths:{
             var removeButton = $('#removeButton');
             removeButton.button();
             removeButton.on('click', function () {
-                //Just purge all the children of the graph
+                //Just purge all the children of the almighty graph
                 var almightyGraphDiv = $('#almightyGraph > div');
                 var i = 0;
                 for(i = 0; i < almightyGraphDiv.length; i++) {
@@ -1916,9 +1915,9 @@ requirejs({paths:{
                 }
             });
         }
-        
+
         //Generates the atmospheric button html
-        function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode3) {
+        function generateAtmoButtons(inputData, inputData2, stationName) {
             var atmoHTML = '<h4>Atmosphere Data</h4>';
             var dataPoint = findDataPointStation(inputData, stationName);
             var dataPoint2 = findDataPointStation(inputData2, stationName);
