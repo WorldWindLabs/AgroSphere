@@ -1777,25 +1777,34 @@ requirejs({paths:{
             });
         }
 
-
-        //Converts unixt time into a date
+        /**
+         * Converts unixt time into a date
+         *
+         * @param UNIX_timestamp
+         * @returns {data as a string}
+         */
         function timeConverter(UNIX_timestamp){
             var unixTime = new Date(UNIX_timestamp * 1000);
-            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul',
+                'Aug','Sep','Oct','Nov','Dec'];
             var year = unixTime.getFullYear();
             var month = months[unixTime.getMonth()];
             var date = unixTime.getDate();
             var hour = unixTime.getHours();
             var min = unixTime.getMinutes();
             var sec = unixTime.getSeconds();
-            var currentTime = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec + " (In Your Timezone)";
+            var currentTime = date + ' ' + month + ' ' + year + ' '
+                + hour + ':' + min + ':' + sec + " (In Your Timezone)";
             return currentTime;
         }
 
-
-        //Based on z-score get a colour
-        //Green means above mean, red means below, alpha is 1 by default
-        //Returns the configuration that should be used
+        /**
+         * Based on z-score get a colour
+         * Green means above mean, red means below, alpha is 1 by default
+         *
+         * @param zScore - country's z score
+         * @returns {{}}
+         */
         function getColour(zScore) {
             var configuration = {};
             configuration.attributes = new WorldWind.ShapeAttributes(null);
@@ -1825,9 +1834,14 @@ requirejs({paths:{
             return configuration;
         }
 
-        //Given a set of gradients and country pairs, colourize the countries
-        //based on their z scores
-        //Also needs the GEOJSON file to be accessed
+        /**
+         * Given a set of gradients and country pairs, colorize the countries
+         *
+         * @param valueCountryPair - country and value together
+         * @param geoJSONData - country borders
+         * @param dataName - name of data type
+         * @returns {colored countries as a layer}
+         */
         function colourizeCountries(valueCountryPair, geoJSONData, dataName) {
             //Isolate the gradients
             var i = 0;
@@ -1846,7 +1860,8 @@ requirejs({paths:{
             //Empty the legend segment
 
             //Loop through and determine the colour based on zscore
-            var countryLayers = new WorldWind.RenderableLayer('Geo Country Data');
+            var countryLayers = new WorldWind.RenderableLayer('' +
+                'Geo Country Data');
             var zScore;
             for (i = 0; i < valueCountryPair.length; i++) {
                 zScore = ss.zScore(valueCountryPair[i].value, mean, sd);
@@ -1857,33 +1872,40 @@ requirejs({paths:{
                 //Fire up the rendering
                 var j = 0;
                 for (j = 0; j < geoJSONData.features.length; j++) {
-                    if (geoJSONData.features[j].properties.code3 == valueCountryPair[i].code3) {
-                        var countryString = JSON.stringify(geoJSONData.features[j]);
+                    if (geoJSONData.features[j].properties.code3 ==
+                        valueCountryPair[i].code3) {
+                        var countryString = JSON.stringify(
+                            geoJSONData.features[j]);
                         var tempCallBack = function () {
                             return countryConfiguration;
                         }
-                        var countryStringJSON = new WorldWind.GeoJSONParser(countryString);
+                        var countryStringJSON = new WorldWind.GeoJSONParser(
+                            countryString);
                         countryStringJSON.load(null, tempCallBack, null);
                         var innerLayer = countryStringJSON.layer;
                         var k = 0;
                         for(k = 0; k < innerLayer.renderables.length; k++) {
-                            innerLayer.renderables[k].userProperties.country = valueCountryPair[i].code3;
+                            innerLayer.renderables[k].userProperties.country =
+                                valueCountryPair[i].code3;
                         }
                         countryLayers.addRenderable(innerLayer);
                         countryLayers.userObject = {dataType: dataName};
-                        //countryStringJSON.layer.displayName = valueCountryPair[i].code3;
-                        //countryLayers.addRenderable(countryStringJSON.layer);
                     }
                 }
             }
-
             //Returns a renderable layer
             return countryLayers;
         }
 
 
-        //Helps out with the regression function, given an array of time-values pairs,
-        //convert them to x-y pairs
+        //Helps out with the regression function, given an
+        // array of time-values pairs convert them to x-y pairs
+
+        /**
+         * 
+         * @param incomingData
+         * @returns {Array}
+         */
         function getXYPairs(incomingData) {
             var xyPairs = [];
             var i = 0;
@@ -1891,66 +1913,7 @@ requirejs({paths:{
                 xyPairs.push([parseFloat(incomingData[i].year),
                     parseFloat(incomingData[i].value)]);
             }
-
             return xyPairs;
-        }
-
-        //Given a set of data, finds the regression function
-        function getRegressionFunctionPlot(incomingData, htmlID, countryCode,
-                                           titleName) {
-            var regressionFunction;
-
-            //Filter out the data
-            var tempDataArray = filterOutBlanks(incomingData, 0);
-            incomingData = tempDataArray;
-
-            //Get the xy pairs
-            var xyPairs = getXYPairs(incomingData);
-
-            //Perform a linear regression
-            var regressionFunction = regression('linear', xyPairs);
-            var regressionFunction2 = regression('exponential', xyPairs);
-            //Retrieve the new y-values
-            //var regressionFunctionLine = ss.linearRegressionLine(regressionFunction);
-
-            var i = 0;
-            var newYValues = [];
-            var newYValues2 = [];
-            var startYear = 1960;
-            var endYear = 2050;
-            //Basically find the values based on projected model
-            for (i = 0; i < endYear - startYear; i++) {
-                newYValues.push((regressionFunction.equation[0]*(i + startYear)) + regressionFunction.equation[1]);
-                newYValues2.push((regressionFunction2.equation[0]*Math.exp(regressionFunction2.equation[1]*(i + startYear))));
-            }
-
-            //Format it it can be used by plotScatter function
-            var inputData = [];
-            var inputData2 = [];
-            var tempData;
-            var tempData2;
-            for (i = 0; i < endYear - startYear; i++) {
-                tempData = {};
-                tempData.year = i + startYear;
-                tempData.value = newYValues[i];
-                inputData.push(tempData);
-                tempData2 = {};
-                tempData2.year = i + startYear;
-                tempData2.value = newYValues2[i];
-                inputData2.push(tempData2);
-            }
-
-            //Assuming the previous title was made, simply add regression to the add
-
-            //Plot it
-            //Assuming the previous title was made, simply add regression to the add
-            var titleName1 = titleName;
-            var titleName2 = titleName;
-
-            titleName1 += 'linear regression ' + regressionFunction.r2.toPrecision(5);
-            titleName2 += 'exponential regression ' + regressionFunction2.r2.toPrecision(5);
-            plotScatter(titleName1, countryCode, inputData, htmlID, 1);
-            plotScatter(titleName2, countryCode, inputData2, htmlID, 1);
         }
 
         //Generate the button to remove the multigraphs and combine graphs
