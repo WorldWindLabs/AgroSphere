@@ -7,7 +7,7 @@
 var APIKEY = '26fb68df7323284ea4430d8e4d3c60b1';
 var geoMode = 0;
 requirejs.config({
-	waitSeconds: 0
+	waitSeconds: 180
 });
 
 requirejs({paths:{
@@ -491,7 +491,7 @@ requirejs({paths:{
         //Given the world window, layerName, number and the wmslayer config object,
         //Return the html to spawn a time control slider
         /**
-         * 
+         *
          *
          * @param wwd
          * @param layerName
