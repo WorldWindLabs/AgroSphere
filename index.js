@@ -2232,16 +2232,22 @@ requirejs({paths:{
             return dataHTML;
         }
 
-        //Helper function for plotting the stack.
-        //In short, plots the crop, percentage and atmo data on the same graph
+        /**
+         * Helps plot stack - plots crop, percentage, and atmo together
+         *
+         * @param inputData - data to input
+         * @param htmlID - id in html code
+         */
         function createSubPlot(inputData, htmlID) {
-            //In essence create subplots
+            //Create subplots
             var i = 0;
             var traces = [];
             var newLayout = {};
             var incAmounts = (0.5/(inputData.length)).toFixed(2);
-            newLayout['yaxis'] = {domain: [0, 0.5], title: 'Production In Tons'};
-            newLayout['yaxis2'] = {domain: [0, 0.5], side: 'right', title: 'Percent'};
+            newLayout['yaxis'] = {domain: [0, 0.5], title: 'Production In' +
+            ' Tons'};
+            newLayout['yaxis2'] = {domain: [0, 0.5], side: 'right', title:
+                'Percent'};
             for(i = 0; i < inputData.length; i++) {
                 var dataPoint = filterOutBlanks(inputData[i].timeValues, 0);
                 var j = 0;
@@ -2278,8 +2284,8 @@ requirejs({paths:{
                         plotSide = 'left';
                     break;
                 }
-                newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain - 0.01],
-                        title: yTitle, side: plotSide};
+                newLayout['yaxis' + (i + 3)] = {domain: [lowDomain, highDomain
+                    - 0.01], title: yTitle, side: plotSide};
             }
             var d3 = Plotly.d3;
             var gd3 = d3.select('#' + htmlID + '> div');
