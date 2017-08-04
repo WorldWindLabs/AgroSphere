@@ -40,10 +40,3 @@
 .extraSmallMargins {
   padding-bottom:20px
 }
-
-`iframe {
-  height: 432px;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}`
