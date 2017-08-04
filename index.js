@@ -2708,7 +2708,6 @@ requirejs({paths:{
                     var gd = $(multiGraph).children()[0];
                     Plotly.Plots.resize(gd);
                 }
-
                 setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglecomp").click(function () {
