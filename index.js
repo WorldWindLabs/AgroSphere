@@ -2637,8 +2637,8 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
+								$('#legend').hide();
+								$('#legendtext').hide();
                 setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglecountry").click(function () {
@@ -2650,8 +2650,8 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
+								$('#legend').hide();
+								$('#legendtext').hide();
                 setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglestation").click(function () {
@@ -2663,8 +2663,8 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
+								$('#legend').hide();
+								$('#legendtext').hide();
                 setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglegraphs").click(function () {
@@ -2676,10 +2676,8 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
-                //This is amazing but apparently you can't use the resize sensor
-                //unless the thing is present, go figure
+                $('#legend').hide();
+                $('#legendtext').hide();
                 var i = 0;
                 var j = 0;
                 var manyGraphs = $('#manyGraph > div');
@@ -2688,7 +2686,7 @@ requirejs({paths:{
                     if(manyGraphs[i].childNodes.length == 1) {
                         //Add the resize
                         console.log($(manyGraphs[i]).attr('id'));
-                        new ResizeSensor($('#' + $(manyGraphs[i]).attr('id')), 
+                        new ResizeSensor($('#' + $(manyGraphs[i]).attr('id')),
 								function(){
 									for(j = 0; j < manyGraphs.length; j++) {
 										var gd = $(manyGraphs[j]).children()[0];
@@ -2708,7 +2706,6 @@ requirejs({paths:{
                     var gd = $(multiGraph).children()[0];
                     Plotly.Plots.resize(gd);
                 }
-
                 setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglecomp").click(function () {
@@ -2720,8 +2717,8 @@ requirejs({paths:{
                 $("#station").hide();
                 $("#weather").hide();
                 $("#view").hide();
-				$('#legend').toggle();
-				$('#legendtext').toggle();
+								$('#legend').toggle();
+								$('#legendtext').toggle();
                 setTimeout(function() {checkTabs()}, 50);
             });
             $(".toggleweather").click(function () {
@@ -2733,8 +2730,8 @@ requirejs({paths:{
                 $("#station").hide();
                 $("#comp").hide();
                 $("#view").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
+								$('#legend').hide();
+								$('#legendtext').hide();
                 setTimeout(function() {checkTabs()}, 50);
             });
             $(".toggleview").click(function () {
@@ -2746,8 +2743,8 @@ requirejs({paths:{
                 $("#station").hide();
                 $("#comp").hide();
                 $("#weather").hide();
-				$('#legend').hide();
-				$('#legendtext').hide();
+								$('#legend').hide();
+								$('#legendtext').hide();
                 setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglewms").click(function () {
@@ -2759,7 +2756,7 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();$('#legend').hide();
-				$('#legendtext').hide();
+								$('#legendtext').hide();
                 setTimeout(function() {checkTabs()}, 50);
             });
             checkTabs();
