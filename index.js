@@ -320,33 +320,36 @@ requirejs({paths:{
 
         /**
          * This function generates the HTML first then supplies functionality
-         * Given a layerName and its layernumber, generate a layer control block
+         *Given a layerName and its layernumber, generate a layer control block
          *
          * @param wwd - world window
          * @param wmsConfig - object containing how layer should look
-         * @param wmsLayerCapabilities - object representing what the wms layer can do
+         * @param wmsLayerCapabilities - object representing what the wms
+         *        layer can do
          * @param layerName - name of layer
          * @param layerNumber - number of layer in list
          */
-        function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, layerName,
-                                      layerNumber) {
+        function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities,
+                                      layerName, layerNumber) {
             //Generate the div tags
             var layerControlHTML = '<div class="toggleLayers" id="funcLayer' +
                 layerNumber + '">';
 
-          layerControlHTML += '<span style="display:none">Layer Controls for ' +
+          layerControlHTML += '<span style="display:none">Layer Controls for '+
               layerName + '</span>';
 
             //Spawn opacity controller
-            layerControlHTML += generateOpacityControl(wwd, layerName, layerNumber);
+            layerControlHTML += generateOpacityControl(wwd, layerName,
+                layerNumber);
+
             //Spawn the legend
             layerControlHTML += generateLegend(wwd,
                 wmsLayerCapabilities, layerName, layerNumber);
 
             //Spawn the time if it has it
             if (typeof(wmsConfig.timeSequences) != 'undefined') {
-                layerControlHTML += generateTimeControl(wwd, layerName, layerNumber,
-                    wmsConfig);
+                layerControlHTML += generateTimeControl(wwd, layerName,
+                    layerNumber, wmsConfig);
             }
             layerControlHTML += '</div>';
             //Place the HTML somewhere
@@ -357,7 +360,8 @@ requirejs({paths:{
 
             //Check time again to add functionality
             if (typeof(wmsConfig.timeSequences) != 'undefined') {
-                giveTimeButtonFunctionality(wwd, layerName, layerNumber, wmsConfig);
+                giveTimeButtonFunctionality(wwd, layerName, layerNumber,
+                    wmsConfig);
             }
         }
 
@@ -368,9 +372,8 @@ requirejs({paths:{
          * @param layerName - name of layer to search for
          * @returns the correct layer object
          */
-                function getLayerFromName(wwd, layerName) {
+        function getLayerFromName(wwd, layerName) {
             var i = 0;
-
             for(i = 0; i < wwd.layers.length; i++) {
                 if(wwd.layers[i].displayName == layerName) {
                     return wwd.layers[i];
@@ -383,21 +386,23 @@ requirejs({paths:{
          * creates a legend for a layer given its name and number
          *
          * @param wwd - worldwindow
-         * @param wmsLayerCapabilities - object representing what the wms layer can do
+         * @param wmsLayerCapabilities - object representing what the wms layer
+         *                               can do
          * @param layerName - name of layer
          * @param layerNumber - where it should be generated among other layers
          * @returns {string containing HTML code to create a legend}
          */
-        function generateLegend(wwd, wmsLayerCapabilities, layerName, layerNumber) {
+        function generateLegend(wmsLayerCapabilities) {
 
             //Check if a legend exists for a given layer this
             var legendHTML = '<br><h5><b>Legend</b></h5>';
 
             //Be thorough on checking the existence
             if((wmsLayerCapabilities.styles
-                != null) && (wmsLayerCapabilities.styles[0].legendUrls[0]) != null) {
+                != null) && (wmsLayerCapabilities.styles[0].legendUrls[0])
+                != null) {
                 //Create the legend tag
-                var legendURL = wmsLayerCapabilities.styles[0].legendUrls[0].url;
+                var legendURL=wmsLayerCapabilities.styles[0].legendUrls[0].url;
                 legendHTML += '<div><img src="'+ legendURL +'"></div><br><br>';
             } else {
                 //Say it does not exist
@@ -411,7 +416,7 @@ requirejs({paths:{
          * Generates opacity control for a layer in HTML
          *
          * @param layerNumber - identifier to place layer
-         * @returns {string containing HTML code to create opacity slider for layer}
+         * @returns {string containing HTML to create opacity slider for layer}
          */
         function generateOpacityControl(layerNumber) {
             //Create the general box
@@ -421,22 +426,20 @@ requirejs({paths:{
             opacityHTML += '<div id="opacity_slider_' + layerNumber + '"></div>';
 
             //Create the output
-            opacityHTML += '<div id="opacity_amount_' + layerNumber + '">100%</div>';
+            opacityHTML += '<div id="opacity_amount_' +
+                layerNumber + '">100%</div>';
 
             return opacityHTML;
         }
 
-        //wwd is the world window
-        //layerName is the name of the layer we wish to give the opacity control to
-        //layerNumber gives us the id to use
-        //Given these 3 variables, give functionality to the slider created
-                /**
-                 *
-                 * @param wwd
-                 * @param layerName
-                 * @param layerNumber
-                 */
-                function giveOpacitySliderFunctionality(wwd, layerName, layerNumber) {
+        /**
+         * Gives layer opacity control given its name
+         *
+         * @param wwd - world window
+         * @param layerName - name of layer to give opacity control
+         * @param layerNumber - id of layer
+         */
+        function giveOpacitySliderFunctionality(wwd, layerName, layerNumber) {
             //Add functionality to the slider
             var sliderStringTemplate= "#opacity_slider_";
             var sliderString = sliderStringTemplate.concat(layerNumber);
@@ -460,8 +463,8 @@ requirejs({paths:{
 
             //Grab the layer and redraw
             slider.on("slidestop", function(event, ui) {
-                //Grabbing the layer is based on its name in addition to the entire
-                //wwd
+                //Grabbing the layer is based on its name in addition to
+                // the entire wwd
                 for(var i = 0; i  < wwd.layers.length; i++) {
                     var target_layer = wwd.layers[i];
                     if(target_layer.displayName == layerName) {
@@ -472,9 +475,9 @@ requirejs({paths:{
                             if (!(document.wwd_duplicate instanceof Array))
                                 document.wwd_duplicate.redraw();
                             else {
-                                document.wwd_duplicate.forEach(function (element,
-                                        index, array) {
-                                    element.redraw();
+                                document.wwd_duplicate.forEach(
+                                    function(element) {
+                                        element.redraw();
                                 });
                             }
                         }
@@ -487,6 +490,15 @@ requirejs({paths:{
 
         //Given the world window, layerName, number and the wmslayer config object,
         //Return the html to spawn a time control slider
+        /**
+         * 
+         *
+         * @param wwd
+         * @param layerName
+         * @param layerNumber
+         * @param wmsConfig
+         * @returns {string}
+         */
         function generateTimeControl(wwd, layerName, layerNumber, wmsConfig) {
             //Create the general box
             //Create the output
