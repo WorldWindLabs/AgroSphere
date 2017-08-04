@@ -1442,11 +1442,11 @@ requirejs({paths:{
         /**
          * Gives the data buttons functionality
          *
-         * @param detailsHTML
-         * @param inputData
-         * @param agriDef
-         * @param codeName
-         * @param mode
+         * @param detailsHTML - details for agriculture
+         * @param inputData - data inputted to use
+         * @param agriDef - definitions of agriculture
+         * @param codeName - country code name
+         * @param mode - type of data like agriculture/livestock/fert...
          */
         function giveDataButtonsFunctionality(detailsHTML, inputData,
                                               agriDef, codeName, mode) {
@@ -1470,28 +1470,30 @@ requirejs({paths:{
                             plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                                 dataPoint.dataValues[buttonNumber].timeValues,
                                 plotID, 0);
-                            /*getRegressionFunctionPlot(
-                                    dataPoint.dataValues[buttonNumber].timeValues, plotID,
-                                    dataPoint.code3, dataPoint.dataValues[buttonNumber].typeName);*/
                             selfHTML.button("option", "label", "Hide Graph");
                         } else {
                             plotHTML.html('');
                             selfHTML.button("option", "label", "Plot Graph");
                         }
-                        $('#messagePoint' + buttonNumber).html('Plotted graph!');
-                        //In short, create a temporary message indicating success
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('' +
+                            'Plotted graph!');
+                        //Create a temporary message indicating success
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     })
                     var combineButtonHTML = $('#combineButton' + i).button();
                     combineButtonHTML.click(function (event) {
                         var buttonID = this.id;
-                        var buttonNumber = buttonID.slice('combineButton'.length);
+                        var buttonNumber = buttonID.slice(
+                            'combineButton'.length);
                         //Add to the graph
                         plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                             dataPoint.dataValues[buttonNumber].timeValues,
                             'multiGraph', 1);
-                        $('#messagePoint' + buttonNumber).html('Combined graph! Please go to Data Graphs Tab');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('Combined' +
+                            ' graph! Please go to Data Graphs Tab');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
 
                     var addButtonHTML = $('#addButton' + i).button();
@@ -1506,7 +1508,8 @@ requirejs({paths:{
                         var graphNumber = manyGraphDivChildren.length;
 
                         //Generate the html
-                        var graphDiv = '<div id="subGraph' + graphNumber + '"></div>';
+                        var graphDiv = '<div id="subGraph' + graphNumber
+                            + '"></div>';
 
                         $('#manyGraph').append(graphDiv);
 
@@ -1514,25 +1517,32 @@ requirejs({paths:{
                         plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
                             dataPoint.dataValues[buttonNumber].timeValues,
                             'subGraph' + graphNumber, 0);
-                        $('#messagePoint' + buttonNumber).html('Added graph! Please go to Data Graphs Tab');
-                        setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 5000);
+                        $('#messagePoint' + buttonNumber).html('Added graph!' +
+                            ' Please go to Data Graphs Tab');
+                        setTimeout(function(){ $('#messagePoint'+
+                            buttonNumber).html('')}, 5000);
                     });
 
                     if(mode == 0) {
-                        var definitionHTML = $('#definitionNumber' + i).button();
+                        var definitionHTML = $('#definitionNumber'
+                            + i).button();
                         definitionHTML.click(function (event) {
                             //Grab id
                             var buttonID = this.id;
-                            var buttonNumber = buttonID.slice('definitionNumber'.length);
+                            var buttonNumber = buttonID.slice('' +
+                                'definitionNumber'.length);
 
                             //Grab titleName
-                            var cropName = $(this).text().slice('Get Definition for '.length);
+                            var cropName = $(this).text().slice('Get' +
+                                ' Definition for '.length);
 
                             //Do a CSV search
-                            var description = findCropDefinition(agriDef, cropName);
+                            var description = findCropDefinition(agriDef,
+                                cropName);
 
-                            $('#messagePoint' + buttonNumber).html(description);
-                            setTimeout(function(){ $('#messagePoint'+ buttonNumber).html('')}, 10000);
+                            $('#messagePoint' +buttonNumber).html(description);
+                            setTimeout(function(){ $('#messagePoint'+
+                                buttonNumber).html('')}, 10000);
 
                         });
                     }
@@ -1546,7 +1556,8 @@ requirejs({paths:{
                         //Compare with the list element
                         if(a.firstChild.innerText < b.firstChild.innerText) {
                             return -1;
-                        } else if(a.firstChild.innerText > b.firstChild.innerText) {
+                        } else if(a.firstChild.innerText >
+                            b.firstChild.innerText) {
                             return 1;
                         }
                         return 0;
@@ -1560,9 +1571,12 @@ requirejs({paths:{
                     }
                     $('#myUL > .layerTitle').remove();
                     for(i = 0; i < newList.length; i++) {
-                        $('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
+                        $('#myUL').append('<div class="layerTitle" id="'
+                            +$(newList[i]).attr('id')+'">' +
+                            $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode);
+                    giveDataButtonsFunctionality(detailsHTML, inputData,
+                        agriDef, codeName, mode);
                 });
                 $('#sortByAverage').off();
                 $('#sortByAverage').click(function() {
@@ -1570,11 +1584,15 @@ requirejs({paths:{
                     var newList = [];
                     divList.sort(function(a, b) {
                         //Get the buttons
-                        var buttonNumber1 = $(a).attr('id').slice('layerTitle'.length);
-                        var buttonNumber2 = $(b).attr('id').slice('layerTitle'.length);
-                        var data1 = dataPoint.dataValues[buttonNumber1].timeValues;
+                        var buttonNumber1 = $(a).attr('id').slice(
+                            'layerTitle'.length);
+                        var buttonNumber2 = $(b).attr('id').slice(
+                            'layerTitle'.length);
+                        var data1 =
+                            dataPoint.dataValues[buttonNumber1].timeValues;
                         data1 = filterOutBlanks(data1, 0);
-                        var data2 = dataPoint.dataValues[buttonNumber2].timeValues;
+                        var data2 =
+                            dataPoint.dataValues[buttonNumber2].timeValues;
                         data2 = filterOutBlanks(data2, 0);
                         //Got the number
                         var sum1 = 0;
@@ -1604,34 +1622,34 @@ requirejs({paths:{
                     }
                     $('#myUL > .layerTitle').remove();
                     for(i = 0; i < newList.length; i++) {
-                        $('#myUL').append('<div class="layerTitle" id="'+$(newList[i]).attr('id')+'">' + $(newList[i]).html() + '</div>');
+                        $('#myUL').append('<div class="layerTitle"' +
+                            ' id="'+$(newList[i]).attr('id')+'">' +
+                            $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData, agriDef, codeName, mode);
+                    giveDataButtonsFunctionality(detailsHTML, inputData,
+                        agriDef, codeName, mode);
                 });
 
                 //Assign functionality to the search bar
                 $('#searchinput').off();
                 $('#searchinput').keyup(function (event) {
                     //if (event.which == 13) {
-                        var input = $('#searchinput');
-                        var textValue = input.val().toUpperCase();
-
-                        //Iterate through the entire list and hide if it doesn't contain the
-                        //thing
-                        var i = 0;
-                        var layerTitles = $('div .layerTitle');
-                        var layerTitleList = $('div .layerTitle > li');
-                        for (i = 0; i < layerTitleList.length; i++) {
-                            if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                                $(layerTitles[i]).hide();
-                            } else if (textValue == '') {
-                                $(layerTitles[i]).show();
-                            } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
-                                $(layerTitles[i]).show();
-                            }
+                    var input = $('#searchinput');
+                    var textValue = input.val().toUpperCase();
+                    //Iterate through the entire list and hide if
+                    //value is not contained
+                    var i = 0;
+                    var layerTitles = $('div .layerTitle');
+                    var layerTitleList = $('div .layerTitle > li');
+                    for (i = 0; i < layerTitleList.length; i++) {
+                        if (!$(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                            $(layerTitles[i]).hide();
+                        } else if (textValue == '') {
+                            $(layerTitles[i]).show();
+                        } else if ($(layerTitleList[i]).html().toUpperCase().includes(textValue)) {
+                            $(layerTitles[i]).show();
                         }
-                   // }
-
+                    }
                 });
 
                 //Assign functionality to the allButton
