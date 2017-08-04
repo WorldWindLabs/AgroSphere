@@ -2676,10 +2676,8 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();
-								$('#legend').hide();
-								$('#legendtext').hide();
-                //This is amazing but apparently you can't use the resize sensor
-                //unless the thing is present, go figure
+                $('#legend').hide();
+                $('#legendtext').hide();
                 var i = 0;
                 var j = 0;
                 var manyGraphs = $('#manyGraph > div');
