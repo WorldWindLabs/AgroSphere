@@ -65,7 +65,7 @@ Finally, we showcased our app to professional web app developers from institutio
 ## How to Run and Develop AgroSphere
 
 1) Visit http://worldwind.arc.nasa.gov/AgroSphere to use the app on your webpage.
-2) Download or clone the repository in to local storage and run the index.html in a webserver using WebStorm, which has a built in webserver (https://blog.jetbrains.com/webstorm/2013/03/built-in-server-in-webstorm-6/), or by using MAMP (https://www.mamp.info/en/), a free, local server environment).
+2) Download or clone the repository in to local storage and run the index.html in a webserver using WebStorm, which has a built in webserver (https://blog.jetbrains.com/webstorm/2013/03/built-in-server-in-webstorm-6/), or by using MAMP (https://www.mamp.info/en/), a free, local server environment.
 
 ## Future Directions
 
