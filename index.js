@@ -170,27 +170,16 @@ requirejs({paths:{
                                     '<p>Country: ' + dataPoint.country + '</p>';
                             detailsHTML +=
                                     '<p>Country Code: ' + dataPoint.code3 + '</p>';
-                            //We have the country code, we can do whatever we want
-                            //like
-                            //Perhaps show everything? lol
-                            //What we need to do is generate a button which plots the graph
-
-
-                            detailsHTML += '<button class="btn-info"><a href="http://www.fao.org/faostat/en/#data/" target="_blank">Download Raw Agriculture Data</a></button>';
-
-                            //Generate the agri buttons
-
-
+                            detailsHTML += '<button class="btn-info"><a href="http://www.fao.org/faostat/en/#data/" ' +
+                                'target="_blank">Download Raw Agriculture Data</a></button>';
                             //Get the agriculture data
 							detailsHTML += generateCountryButtons();
 							detailsHTML += '<div id="buttonArea"></div>';
-                            //detailsHTML += generateAgriCultureButtons(agriData, dataPoint.code3);
                             details.html(detailsHTML);
 
                             //Give functionality for the buttons generated
 							giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, pestiData,
 									fertiData, yieldData, agriDef, dataPoint.code3);
-                            //giveAgriCultureButtonsFunctionality(detailsHTML, agriData, dataPoint.code3);
 
                             //fixed hover flags bug - now click instead of hover eventlistener
                             var otherTab = $("#layers");
@@ -276,9 +265,6 @@ requirejs({paths:{
                 }
             }
         };
-
-        wwd.addEventListener('click', handlePick);
-		wwd.addEventListener('touchend', handlePick);
         // Set up to handle clicks and taps.
         var handleClick = function (recognizer) {
             // Obtain the event location.
