@@ -11,16 +11,19 @@ requirejs.config({
 
 requirejs({paths:{
     "jquery":"https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min",
-    "jqueryui": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min",
-    "jquery-csv": "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/jquery.csv",
-    "simple-stats": "https://unpkg.com/simple-statistics@4.1.0/dist/simple-statistics.min",
+    "jqueryui": "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/" +
+        "jquery-ui.min",
+    "jquery-csv": "https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.3/" +
+        "jquery.csv",
+    "simple-stats": "https://unpkg.com/simple-statistics@4.1.0/dist/" +
+        "simple-statistics.min",
 	"regression": "src/regression/regression",
 	"resizejs" : "js/resizejs/src/ResizeSensor"
 }
 },['src/WorldWind',
         './LayerManager', 'src/formats/kml/KmlFile',
-        'src/formats/kml/controls/KmlTreeVisibility', './Pin', 'jquery', 'jqueryui', 'jquery-csv',
-        'simple-stats', 'regression', "resizejs"],
+        'src/formats/kml/controls/KmlTreeVisibility', './Pin', 'jquery',
+        'jqueryui', 'jquery-csv', 'simple-stats', 'regression', "resizejs"],
     function (ww,
               LayerManager, KmlFile, KmlTreeVisibility) {
         "use strict";
@@ -81,7 +84,8 @@ requirejs({paths:{
 		layerManager.synchronizeLayerList();
         //Generate regression comparison and the provide functionality
         generateGeoComparisonButton(agriData);
-        giveGeoComparisonFunctionality(agriData, geoJSONData, wwd, layerManager);
+        giveGeoComparisonFunctionality(agriData, geoJSONData, wwd,
+            layerManager);
 
 
         //Automatically zoom into Helsinki, Finland
@@ -98,18 +102,21 @@ requirejs({paths:{
 
 		//Generate WMS/WMTS Layers
 		loadWMTSLayers(wwd, layerManager);
-        var sunSimulationCheckBox = document.getElementById('stars-simulation');
+        var sunSimulationCheckBox = document.getElementById(
+            'stars-simulation');
         var doRunSimulation = false;
         var timeStamp = Date.now();
         var factor = 1;
 
-        sunSimulationCheckBox.addEventListener('change', onSunCheckBoxClick, false);
+        sunSimulationCheckBox.addEventListener('change', onSunCheckBoxClick,
+            false);
 
         function onSunCheckBoxClick() {
             doRunSimulation = this.checked;
             if (!doRunSimulation) {
                 starFieldLayer.time = new Date();
-                atmosphereLayer.lightLocation = WorldWind.SunPosition.getAsGeographicLocation(starFieldLayer.time);
+                atmosphereLayer.lightLocation =
+                    WorldWind.SunPosition.getAsGeographicLocation(starFieldLayer.time);
             }
             wwd.redraw();
         }
@@ -118,7 +125,8 @@ requirejs({paths:{
             if (stage === WorldWind.AFTER_REDRAW && doRunSimulation) {
                 timeStamp += (factor * 60 * 1000);
                 starFieldLayer.time = new Date(timeStamp);
-                atmosphereLayer.lightLocation = WorldWind.SunPosition.getAsGeographicLocation(starFieldLayer.time);
+                atmosphereLayer.lightLocation =
+                    WorldWind.SunPosition.getAsGeographicLocation(starFieldLayer.time);
                 wwd.redraw();
             }
         }
@@ -126,9 +134,6 @@ requirejs({paths:{
         //Handle a pick (only placemarks shall be)
         var highlightedItems = [];
         var handlePick = function(x,y) {
-
-            var redrawRequired = highlightedItems.length > 0; // must redraw if we de-highlight previously picked items
-
             // De-highlight any previously highlighted placemarks.
             for (var h = 0; h < highlightedItems.length; h++) {
                 highlightedItems[h].highlighted = false;
@@ -141,9 +146,11 @@ requirejs({paths:{
                 var i = 0;
                 for(i = 0; i < pickList.objects.length; i++) {
                     pickList.objects[i].userObject.highlighted = true;
-                    // Keep track of highlighted items in order to de-highlight them later.
+                    // Keep track of highlighted items in order to
+                    // de-highlight them later.
                     highlightedItems.push(pickList.objects[i].userObject);
-                    if(typeof(pickList.objects[i].userObject.type) != 'undefined'){
+                    if(typeof(pickList.objects[i].userObject.type) !=
+                        'undefined') {
                         //It's most likely a placemark
                         //"most likely"
                         //Grab the co-ordinates
@@ -162,19 +169,25 @@ requirejs({paths:{
                             detailsHTML +=
                                     '<p>Country: ' + dataPoint.country + '</p>';
                             detailsHTML +=
-                                    '<p>Country Code: ' + dataPoint.code3 + '</p>';
-                            detailsHTML += '<button class="btn-info"><a href="http://www.fao.org/faostat/en/#data/" ' +
-                                'target="_blank">Download Raw Agriculture Data</a></button>';
+                                    '<p>Country Code: ' + dataPoint.code3 +
+                                    '</p>';
+                            detailsHTML += '<button class="btn-info"><a ' +
+                                'href="http://www.fao.org/faostat/en/#data/" '+
+                                'target="_blank">Download Raw Agriculture ' +
+                                'Data</a></button>';
                             //Get the agriculture data
 							detailsHTML += generateCountryButtons();
 							detailsHTML += '<div id="buttonArea"></div>';
                             details.html(detailsHTML);
 
                             //Give functionality for the buttons generated
-							giveCountryButtonsFunctionality(agriData, priceData, liveData, emissionAgriData, pestiData,
-									fertiData, yieldData, agriDef, dataPoint.code3);
+							giveCountryButtonsFunctionality(agriData, priceData,
+                                liveData, emissionAgriData, pestiData,
+                                fertiData, yieldData, agriDef,
+                                dataPoint.code3);
 
-                            //fixed hover flags bug - now click instead of hover eventlistener
+                            //fixed hover flags bug - now click instead of
+                            // hover eventlistener
                             var otherTab = $("#layers");
                             var otherTab2 = $("#graphs");
                             var otherTab3 = $("#station");
@@ -202,24 +215,31 @@ requirejs({paths:{
 
 							$('.resizable').show();
 
-                        } else if(pickList.objects[i].userObject.type == 'Weather Station') {
+                        } else if(pickList.objects[i].userObject.type ==
+                            'Weather Station') {
 							var atmoDataPoint =
 								findDataPoint(csvData[1], placeLat, placeLon);
 
 							var countryData = csvData[0];
 							var ccode2 = atmoDataPoint.stationName.slice(0,2);
-							var ccode3 = findDataPointCountry(countryData, ccode2, 2).code3;
+							var ccode3 = findDataPointCountry(countryData,
+                                ccode2, 2).code3;
 
 							var agriDataPoint = findDataPointCountry(agriData, ccode3, 3);
 
 							var details = $('#station');
 							var detailsHTML = '<h4>Weather Station Detail</h4>';
 
-							detailsHTML += '<p>Station Name: ' + atmoDataPoint.stationName + '</p>';
-                            detailsHTML += '<button class="btn-info"><a href="https://fluxnet.fluxdata.org//data/download-data/" ' +
-                                'target="_blank">Download Raw Atmosphere Data (Fluxnet Account Required)</a></button>'
+							detailsHTML += '<p>Station Name: ' +
+                                atmoDataPoint.stationName + '</p>';
+                            detailsHTML += '<button class="btn-info">' +
+                                '<a href="https://fluxnet.fluxdata.org//' +
+                                'data/download-data/" ' +
+                                'target="_blank">Download Raw Atmosphere' +
+                                ' Data (Fluxnet Account Required)</a></button>'
 							//Generate the station buttons
-							detailsHTML += generateAtmoButtons(atmoData, atmoDataMonthly, atmoDataPoint.stationName,
+							detailsHTML += generateAtmoButtons(atmoData,
+                                atmoDataMonthly, atmoDataPoint.stationName,
                                 agriDataPoint, ccode3);
 
 							details.html(detailsHTML);
@@ -266,16 +286,20 @@ requirejs({paths:{
             var x = recognizer.clientX,
                 y = recognizer.clientY;
 
-            // Perform the pick. Must first convert from window coordinates to canvas coordinates, which are
-            // relative to the upper left corner of the canvas rather than the upper left corner of the page.
+            // Perform the pick. Must first convert from window coordinates
+            // to canvas coordinates, which are
+            // relative to the upper left corner of the canvas rather than
+            // the upper left corner of the page.
             var pickList = wwd.pick(wwd.canvasCoordinates(x, y));
-            // If only one thing is picked and it is the terrain, tell the world window to go to the picked location.
+            // If only one thing is picked and it is the terrain, tell the
+            // world window to go to the picked location.
 			var i = 0;
 			for(i = 0; i < pickList.objects.length; i++) {
 				if(pickList.objects[i].isTerrain) {
 
 					var position = pickList.objects[i].position;
-					wwd.goTo(new WorldWind.Location(position.latitude, position.longitude));
+					wwd.goTo(new WorldWind.Location(position.latitude,
+                        position.longitude));
 				}
 			}
 			handlePick(x,y);
