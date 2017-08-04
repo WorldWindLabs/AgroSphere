@@ -648,7 +648,7 @@ button a:hover {
   display:none;
   z-index: 1001;
   position:absolute;
-  bottom:10px;
+  bottom:30px;
   right:110px;
   width:35%;
 }
