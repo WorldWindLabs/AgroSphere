@@ -1897,15 +1897,18 @@ requirejs({paths:{
             return countryLayers;
         }
 
-        //Generate the button to remove the multigraphs and combine graphs
+        /**
+         * Generates remove button for graphs
+         */
         function generateRemoveButton() {
             //Generate the remove button for the graphs
-            var removeHTML = '<p><button class="btn-info" id="removeButton">Remove All Graphs</button></p>';
+            var removeHTML = '<p><button class="btn-info" ' +
+                'id="removeButton">Remove All Graphs</button></p>';
             $("#graphs").append(removeHTML);
             var removeButton = $('#removeButton');
             removeButton.button();
             removeButton.on('click', function () {
-                //Just purge all the children of the almighty graph
+                //Just purge all the children of the graph
                 var almightyGraphDiv = $('#almightyGraph > div');
                 var i = 0;
                 for(i = 0; i < almightyGraphDiv.length; i++) {
@@ -1913,8 +1916,7 @@ requirejs({paths:{
                 }
             });
         }
-
-
+        
         //Generates the atmospheric button html
         function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode3) {
             var atmoHTML = '<h4>Atmosphere Data</h4>';
