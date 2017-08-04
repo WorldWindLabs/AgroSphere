@@ -804,6 +804,7 @@ requirejs({paths:{
 
         /**
          * Loads CSV file in a different format (for FAO data)
+         *
          * @returns {Array of data sets from FAO}
          */
         function loadCSVDataArray() {
@@ -832,9 +833,13 @@ requirejs({paths:{
             return csvData;
         }
 
-        //Find a value given a name
-        //Returns 0 if it can't be found, else returns something
-        //This assumes we are working with convertArrayToDataSet
+        /**
+         * Find data array given name
+         *
+         * @param inputArray - array of country 3letter codes
+         * @param name - name of data
+         * @returns {data or 0 if data not available for country}
+         */
         function findDataBaseName(inputArray, name) {
             var i = 0;
             for(i = 0; i < inputArray.length; i++) {
@@ -852,6 +857,7 @@ requirejs({paths:{
         //year2 value..
         //year end value. This will return an array of objects containing the ids
         //and an array of year-value pairs
+
         function convertArrayToDataSet(csvData) {
             //Create the temporary object
             var objectList = [];
@@ -919,8 +925,9 @@ requirejs({paths:{
         //Preloads the wmts layers, could expand it to generalize for various address
         //and layer names
         function loadWMTSLayers(wwd, layerManager) {
-            var serviceWMTSAddress = "https://neowms.sci.gsfc.nasa.gov/wms/wms";
-            var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA", "MOD11C1_D_LSTNI", "MOD_143D_RR"];
+            var serviceWMTSAddress= "https://neowms.sci.gsfc.nasa.gov/wms/wms";
+            var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA",
+                "MOD11C1_D_LSTNI", "MOD_143D_RR"];
             var totalLayers = [];
             // Called asynchronously to parse and create the WMS layer
             var createWMTSLayer = function (xmlDom) {
