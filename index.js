@@ -34,7 +34,6 @@ requirejs({paths:{
 
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 		WorldWind.configuration.baseUrl = '';
-		console.time('First');
 		var regression = require("regression");
 		var ResizeSensor = require("resizejs");
         var wwd = new WorldWind.WorldWindow("canvasOne");
