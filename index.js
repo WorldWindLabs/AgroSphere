@@ -916,40 +916,49 @@ requirejs({paths:{
             return objectList;
         }
 
-        //Preloads the wmts layers, could expand it to generalize for various address
-        //and layer names
+        /**
+         * preloads WMTS layers
+         *
+         * @param wwd - worldwindow
+         * @param layerManager - layerManager from layerManager.js
+         */
         function loadWMTSLayers(wwd, layerManager) {
-            var serviceWMTSAddress = "https://neowms.sci.gsfc.nasa.gov/wms/wms";
-            var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA", "MOD11C1_D_LSTNI", "MOD_143D_RR"];
+            var serviceWMTSAddress ="https://neowms.sci.gsfc.nasa.gov/wms/wms";
+            var layerName = ["TRMM_3B43M", "MYD28M", "MOD11C1_D_LSTDA",
+                "MOD11C1_D_LSTNI", "MOD_143D_RR"];
             var totalLayers = [];
             // Called asynchronously to parse and create the WMS layer
             var createWMTSLayer = function (xmlDom) {
                 // Create a WmsCapabilities object from the XML DOM
                 var wms = new WorldWind.WmsCapabilities(xmlDom);
                 var i = 0;
-                // using for loop to add multiple layers to layer manager; SUCCESS!!!!
+                // using for loop to add multiple layers to layer manager
                 for (i = 0; i < layerName.length; i++) {
-                    // Retrieve a WmsLayerCapabilities object by the desired layer name
+                    // Retrieve a WmsLayerCapabilities object by
+                    // the desired layer name
                     var wmsLayerCapabilities = wms.getNamedLayer(layerName[i]);
 
-                    // Form a configuration object from the WmsLayerCapability object
+                    // Form a configuration object from the
+                    // WmsLayerCapability object
                     var wmsConfig = WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
-                    // Modify the configuration objects title property to a more user friendly title
+                    // Modify the configuration objects title property to a
+                    // more user friendly title
                     wmsConfig.title = wmsLayerCapabilities.title;
 
                     var wmsLayer;
-                    wmsLayer = new WorldWind.WmsTimeDimensionedLayer(wmsConfig);
+                    wmsLayer =new WorldWind.WmsTimeDimensionedLayer(wmsConfig);
                     wmsLayer.time = wmsConfig.timeSequences[0].startTime;
 
                     // disable layer by default
                     wmsLayer.enabled = false;
                     totalLayers.push(wmsLayer);
-                    // Add the layers to World Wind and update the layer manager
+                    // Add layers to World Wind and update the layer manager
                     wwd.addLayer(wmsLayer);
                     //Generate the html
                     var layerButtonsHTML =
-                            '<button class="btn-info wmsButton" id="layerToggle' + i
-                                    +'">' + wmsLayerCapabilities.title + '</button>';
+                            '<button class="btn-info wmsButton" ' +
+                            'id="layerToggle' + i +'">' +
+                            wmsLayerCapabilities.title + '</button>';
                     //Append html somehwere
                     $('#wms').append(layerButtonsHTML);
                     $('#layerToggle' + i).button();
@@ -958,7 +967,8 @@ requirejs({paths:{
                     $('#layerToggle' + i).click(function() {
                         var k = 0;
                         var buttonNumber = this.id.slice('layerToggle'.length);
-                        totalLayers[buttonNumber].enabled = !totalLayers[buttonNumber].enabled;
+                        totalLayers[buttonNumber].enabled =
+                            !totalLayers[buttonNumber].enabled;
                         var layerControlList = $('.toggleLayers');
                         var layerNumber = -1;
                         for(k = 0; k < layerControlList.length; k++) {
@@ -973,7 +983,8 @@ requirejs({paths:{
                         }
                     });
 
-                    generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities, wmsConfig.title, i);
+                    generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities,
+                        wmsConfig.title, i);
                     // layerManager.synchronizeLayerList();
 
                     //Readd layercontrols
@@ -981,12 +992,6 @@ requirejs({paths:{
                     layerManager.synchronizeLayerList();
                 }
             };
-
-            // Called if an error occurs during WMS Capabilities document retrieval
-            var logError = function (jqXhr, text, exception) {
-                console.log("There was a failure retrieving the capabilities document: " + text + " exception: " + exception);
-            };
-
             $.get(serviceWMTSAddress).done(createWMTSLayer).fail(logError);
         }
 
