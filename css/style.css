@@ -160,6 +160,13 @@ body {
 }
 
 /* mobile media queries for tab width*/
+
+/* ipad pro horizontal */
+@media only screen and (max-width: 1366px) {
+  .tab-content {
+        width:1300px;
+    }
+}
 /* ipad pro */
 @media only screen and (max-width: 1024px) {
     .tab-content {
@@ -245,8 +252,9 @@ li{
     cursor: pointer;
     z-index:1001;
 }
-@media only screen and (max-width: 414px) {
-    [data-tooltip] {
+@media only screen and (max-width: 1366px) {
+  [data-tooltip]:hover:before,
+  [data-tooltip]:hover:after  {
         display:none;
     }
 }
@@ -645,6 +653,12 @@ button a:hover {
   width:35%;
 }
 
+/* ipad pro horizontal */
+@media only screen and (max-width: 1366px) {
+    #legend {
+        width:80%
+    }
+}
 @media only screen and (max-width: 1024px) {
     #legend {
         width:70%
