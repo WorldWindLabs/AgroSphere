@@ -2047,9 +2047,9 @@ function generateDataButtons(inputData, codeName, mode) {
 				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Yield Datasets</button>';
 				break;
         }
+				dataHTML += '<br><button class="btn-info" id="toggleLegend">Toggle Graph Legend</button>';
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
         dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Amount</button>';
-				dataHTML += '<br><button class="btn-info" id="toggleLegend">Toggle Graph Legend</button>';
 		dataHTML += '<div id="allGraph"></div>';
 
         for(i = 0; i < dataPoint.dataValues.length; i++) {
