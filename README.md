@@ -54,7 +54,7 @@ For a guide on how this app may be used in the classroom, click the button below
 
 This is AgroSphere running on mobile. All of the functionalities of the app are available in your hands!
 
-<a href="https://www.youtube.com/watch?v=Fyn4-Hgkip0">
+<a href="https://www.youtube.com/embed/h66dFV3Qu5E">
 <img src="images/mobiledemo.png" />
 </a>
 
