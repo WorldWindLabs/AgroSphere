@@ -1916,51 +1916,77 @@ requirejs({paths:{
             });
         }
 
-        //Generates the atmospheric button html
+        /**
+         * Generates the atmospheric button html
+         *
+         * @param inputData - first data
+         * @param inputData2 - second point
+         * @param stationName - name of station
+         * @returns {html string of atmo buttons}
+         */
         function generateAtmoButtons(inputData, inputData2, stationName) {
             var atmoHTML = '<h4>Atmosphere Data</h4>';
             var dataPoint = findDataPointStation(inputData, stationName);
             var dataPoint2 = findDataPointStation(inputData2, stationName);
             atmoHTML += '<div id="allGraphStation"></div>';
-            atmoHTML += '<button class="btn-info" id="allButtonStation">Graph Crops and Weather</button>';
-            atmoHTML += '<button class="btn-info" id="toggleLegendStation" style="display:none">Toggle Graph Legend</button>';
+            atmoHTML += '<button class="btn-info" id="allButtonStation">' +
+                'Graph Crops and Weather</button>';
+            atmoHTML += '<button class="btn-info" id="toggleLegendStation"' +
+                ' style="display:none">Toggle Graph Legend</button>';
             if (dataPoint != 0) {
                 var i = 0;
                 //Yearly data
                 for (i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the remaining HTML
-                    atmoHTML += '<div class="layerTitle" id="layerTitle' + i + '">';
-                    atmoHTML += '<p>' + dataPoint.dataValues[i].typeName + '</p>';
-                    atmoHTML += '<div class="resizeGraph" id="graphWeatherPoint' + i + '"></div>';
+                    atmoHTML += '<div class="layerTitle" id="layerTitle'
+                        + i + '">';
+                    atmoHTML += '<p>' + dataPoint.dataValues[i].typeName
+                        + '</p>';
+                    atmoHTML += '<div class="resizeGraph" ' +
+                        'id="graphWeatherPoint' + i + '"></div>';
                     atmoHTML += '<div id="messagePoint' + i + '"></div>';
                     atmoHTML += '<button'
-                        + ' class="btn-info"' + ' id="plotWeatherButton' + i + '">Plot Graph</button>';
-                    atmoHTML += '<button class="btn-info" id="combineButton' + i + '">Combine Graph </button>';
-                    atmoHTML += '<button class="btn-info" id="addButton' + i + '">Add Graph</button>';
+                        + ' class="btn-info"' + ' id="plotWeatherButton'
+                        + i + '">Plot Graph</button>';
+                    atmoHTML += '<button class="btn-info" id="combineButton'
+                        + i + '">Combine Graph </button>';
+                    atmoHTML += '<button class="btn-info" id="addButton'
+                        + i + '">Add Graph</button>';
                     atmoHTML += '<br></div>';
                 }
                 //Monthly data
                 for(i = 0; i < dataPoint2.dataValues.length; i++) {
                     var offSetLength = dataPoint.dataValues.length + i;
-                    atmoHTML += '<div class="layerTitle" id="layerTitle' + offSetLength + '">';
-                    atmoHTML += '<p>' + dataPoint2.dataValues[i].typeName + '</p>';
-                    atmoHTML += '<div class="resizeGraph" id="graphWeatherPoint' + offSetLength + '"></div>';
-                    atmoHTML += '<div id="messagePoint' + offSetLength + '"></div>';
+                    atmoHTML += '<div class="layerTitle" id="layerTitle'
+                        + offSetLength + '">';
+                    atmoHTML += '<p>' + dataPoint2.dataValues[i].typeName
+                        + '</p>';
+                    atmoHTML += '<div class="resizeGraph" ' +
+                        'id="graphWeatherPoint' + offSetLength + '"></div>';
+                    atmoHTML += '<div id="messagePoint' + offSetLength
+                        + '"></div>';
                     atmoHTML += '<button'
-                        + ' class="btn-info"' + ' id="plotWeatherButton' + offSetLength + '">Plot Graph</button>';
-                    atmoHTML += '<button class="btn-info" id="combineButton' + offSetLength + '">Combine Graph </button>';
-                    atmoHTML += '<button class="btn-info" id="addButton' + offSetLength + '">Add Graph</button>';
+                        + ' class="btn-info"' + ' id="plotWeatherButton'
+                        + offSetLength + '">Plot Graph</button>';
+                    atmoHTML += '<button class="btn-info" id="combineButton'
+                        + offSetLength + '">Combine Graph </button>';
+                    atmoHTML += '<button class="btn-info" id="addButton'
+                        + offSetLength + '">Add Graph</button>';
                     atmoHTML += '<br></div>';
                 }
             }
             return atmoHTML;
         }
 
-        //Generates the buttons used by the country
-        //Each button should spawn its own data set
+        /**
+         * Generates the FAO statistics buttons used by the country
+         * Each button should spawn its own data set
+         *
+         * @returns {html string of buttons}
+         */
         function generateCountryButtons() {
             var countryHTML = '<h5><b>Available Datasets</b></h5>';
-          var isanEmptyDataset =
+
             countryHTML += '<button class="btn-info" id="spawnAgri">Show Ag. Production Data List</button>';
             countryHTML += '<button class="btn-info" id="spawnPrice">Show Price Data List</button>';
             countryHTML += '<button class="btn-info" id="spawnLive">Show Livestock Data List</button>';
