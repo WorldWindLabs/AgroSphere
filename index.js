@@ -1883,7 +1883,7 @@ function generateAtmoButtons(inputData, inputData2, stationName, agriData, ccode
 	var dataPoint2 = findDataPointStation(inputData2, stationName);
 	atmoHTML += '<div id="allGraphStation"></div>';
 	atmoHTML += '<button class="btn-info" id="allButtonStation">Graph Crops and Weather</button>';
-	atmoHTML += '<button class="btn-info" id="toggleLegendStation">Toggle Graph Legend</button>';
+	atmoHTML += '<button class="btn-info" id="toggleLegendStation" style="display:none">Toggle Graph Legend</button>';
     if (dataPoint != 0) {
         var i = 0;
 		//Yearly data
@@ -2047,7 +2047,7 @@ function generateDataButtons(inputData, codeName, mode) {
 				dataHTML += '<button class="btn-info" id="allButton">Graph Specified # of Yield Datasets</button>';
 				break;
         }
-				dataHTML += '<br><button class="btn-info" id="toggleLegend">Toggle Graph Legend</button>';
+				dataHTML += '<br><button class="btn-info" id="toggleLegend" style="display:none">Toggle Graph Legend</button>';
         dataHTML += '<br><button class="btn-info" id="sortByName">Sort by Name</button>';
         dataHTML += '<br><button class="btn-info" id="sortByAverage">Sort by Amount</button>';
 		dataHTML += '<div id="allGraph"></div>';
@@ -2695,5 +2695,11 @@ $(document).ready(function () {
   $('input:checkbox').click(function() {
       $(this).toggleClass('active');
   });
+	$('#allButton').click(function() {
+			$('#togglelegend').toggle();
+	});
+	$('#allButtonStation').click(function() {
+			$('#togglelegendstation').toggle();
+	});
 });
 });
