@@ -1968,8 +1968,6 @@ requirejs({paths:{
                     atmoHTML += '<button'
                         + ' class="btn-info"' + ' id="plotWeatherButton'
                         + offSetLength + '">Plot Graph</button>';
-                    atmoHTML += '<button class="btn-info" id="combineButton'
-                        + offSetLength + '">Combine Graph </button>';
                     atmoHTML += '<button class="btn-info" id="addButton'
                         + offSetLength + '">Add Graph</button>';
                     atmoHTML += '<br></div>';
