@@ -152,7 +152,6 @@ requirejs({paths:{
                     highlightedItems.push(pickList.objects[i].userObject);
                     if (typeof(pickList.objects[i].userObject.type) !=
                         'undefined') {
-						
                         //It's most likely a placemark
                         //"most likely"
                         //Grab the co-ordinates
@@ -219,7 +218,6 @@ requirejs({paths:{
 
                         } else if (pickList.objects[i].userObject.type ==
                             'Weather Station') {
-							
                             var atmoDataPoint =
                                 findDataPoint(csvData[1], placeLat, placeLon);
 
@@ -248,7 +246,7 @@ requirejs({paths:{
 
                             //Generate the plots
                             //Give functionality for buttons generated
-                            giveAtmoButtonsFunctionality(atmoData,
+                            giveAtmoButtonsFunctionality(detailsHTML, atmoData,
                                 atmoDataMonthly, atmoDataPoint.stationName,
                                 agriDataPoint);
 
@@ -1813,7 +1811,7 @@ requirejs({paths:{
             //Could use exponential decay function or something
             var red = 0;
             var green = 0;
-            
+            console.log(zScore);
             if (zScore < 0) {
                 red = 1;
                 green = Math.exp(1.5*zScore);
@@ -2342,7 +2340,7 @@ requirejs({paths:{
             var topPercentages = [];
             var numRanks = 5;
             var k = 0;
-            
+            console.log(inputData);
             //Array of top values
             var showDataValues = [];
             for(i = 0; i < inputData.dataValues[0].timeValues.length; i++) {
@@ -2451,13 +2449,13 @@ requirejs({paths:{
             var d3 = Plotly.d3;
             var size = 100;
             var ysize = 70;
-           
+            console.log(htmlID);
             var gd3 = d3.select('#' + htmlID).append('div').style({
                 width: size + '%', 'margin-left': ((100 - size)/2) + '%',
                 height: ysize + 'vh', 'margin-top': ((100 - size)/2) + 'vh'
             });
             var gd = gd3.node();
-            
+            console.log(gd);
             Plotly.plot(gd, traces, layout);
             new ResizeSensor($('#' + htmlID), function() {
                 Plotly.Plots.resize(gd);
@@ -2536,7 +2534,7 @@ requirejs({paths:{
                 var gd = gd3.node();
                 $(gd).css('min-width','300px');
                 $(gd).css('min-height', '300px');
-                
+                console.log(gd);
                 Plotly.plot(gd, [graph], layout);
             } else if(mode == 1) {
                 var gd3 = d3.select(plotID + '> div');
@@ -2551,7 +2549,7 @@ requirejs({paths:{
                 Plotly.update(gd, multiGraphUpdate);
                 Plotly.relayout(gd, dimensions);
             }
-           
+            console.log(plotHTML);
             if(!(htmlID.includes('sub') || htmlID.includes('multi'))){
                 new ResizeSensor(plotHTML, function() {
                     Plotly.Plots.resize(gd);
@@ -2653,7 +2651,7 @@ requirejs({paths:{
 				minWidth: 280
 			});
 		})();
-		
+
         //sidebar toggle functions
         $(document).ready(function () {
             checkTabs();
@@ -2668,7 +2666,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglecountry").click(function () {
                 $("#country").toggle();
@@ -2681,7 +2679,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglestation").click(function () {
                 $("#station").toggle();
@@ -2694,7 +2692,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglegraphs").click(function () {
                 $("#graphs").toggle();
@@ -2714,7 +2712,7 @@ requirejs({paths:{
                     //Assume 2 child nodes if resize exists
                     if(manyGraphs[i].childNodes.length == 1) {
                         //Add the resize
-                        
+                        console.log($(manyGraphs[i]).attr('id'));
                         new ResizeSensor($('#' + $(manyGraphs[i]).attr('id')),
 								function(){
 									for(j = 0; j < manyGraphs.length; j++) {
@@ -2735,7 +2733,7 @@ requirejs({paths:{
                     var gd = $(multiGraph).children()[0];
                     Plotly.Plots.resize(gd);
                 }
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglecomp").click(function () {
                 $("#comp").toggle();
@@ -2748,7 +2746,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').toggle();
 								$('#legendtext').toggle();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".toggleweather").click(function () {
                 $("#weather").toggle();
@@ -2761,7 +2759,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".toggleview").click(function () {
                 $("#view").toggle();
@@ -2774,7 +2772,7 @@ requirejs({paths:{
                 $("#weather").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglewms").click(function () {
                 $("#wms").toggle();
@@ -2786,40 +2784,36 @@ requirejs({paths:{
                 $("#weather").hide();
                 $("#view").hide();$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             checkTabs();
           /* highlighting correct button for geocomparison and wms layers */
-        $('.geoCompButton').click(function() {
-            if ($('.geoCompButton').hasClass('active')) {
-                var clickedButtonIsActive = $(this).hasClass('active');
-                $('.geoCompButton.active').removeClass('active');
-                if (!clickedButtonIsActive) {
-                    $(this).addClass('active');
-                }
-			} else {
-                  $(this).addClass('active');
-              }
-        });
-        $('.wmsButton').click(function() {
-            if ($('.wmsButton').hasClass('active')) {
-                var clickedButtonIsActive = $(this).hasClass('active');
-                $('.wmsButton.active').removeClass('active');
-				if (!clickedButtonIsActive) {
-                    $(this).addClass('active');
-                }
-            } else {
-                $(this).addClass('active');
-            }
-        });
-        $('input:checkbox').click(function() {
-            $(this).toggleClass('active');
-        });
-        $('#allButton').click(function() {
-            $('#toggleLegend').toggle();
-        });
-        $('#allButtonStation').click(function() {
-            $('#toggleLegendStation').toggle();
-        });
+	        $('.geoCompButton').click(function() {
+	            if ($('.geoCompButton').hasClass('active')) {
+	                var clickedButtonIsActive = $(this).hasClass('active');
+	                $('.geoCompButton.active').removeClass('active');
+	                if (!clickedButtonIsActive) {
+	                    $(this).addClass('active');
+	                }
+							}
+							else {
+	                $(this).addClass('active');
+	            }
+	        });
+	        $('.wmsButton').click(function() {
+	            if ($('.wmsButton').hasClass('active')) {
+	                var clickedButtonIsActive = $(this).hasClass('active');
+	                $('.wmsButton.active').removeClass('active');
+									if (!clickedButtonIsActive) {
+	                    $(this).addClass('active');
+	                }
+	            }
+							else {
+	                $(this).addClass('active');
+	            }
+	        });
+	        $('input:checkbox').click(function() {
+	            $(this).toggleClass('active');
+	        });
     });
 });
