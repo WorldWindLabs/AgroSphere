@@ -248,6 +248,7 @@ requirejs({paths:{
 
                             //Generate the plots
                             //Give functionality for buttons generated
+							
                             giveAtmoButtonsFunctionality(atmoData,
                                 atmoDataMonthly, atmoDataPoint.stationName,
                                 agriDataPoint);
