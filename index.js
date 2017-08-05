@@ -1932,7 +1932,7 @@ requirejs({paths:{
             atmoHTML += '<button class="btn-info" id="allButtonStation">' +
                 'Graph Crops and Weather</button>';
             atmoHTML += '<button class="btn-info" id="toggleLegendStation"' +
-                ' style="display:none">Toggle Graph Legend</button>';
+                '>Toggle Graph Legend</button>';
             if (dataPoint != 0) {
                 var i = 0;
                 //Yearly data
@@ -2191,7 +2191,7 @@ requirejs({paths:{
                         break;
                 }
                 dataHTML += '<br><button class="btn-info" id="toggleLegend"' +
-                    ' style="display:none">Toggle Graph Legend</button>';
+                    '>Toggle Graph Legend</button>';
                 dataHTML += '<br><button class="btn-info" id="sortByName">' +
                     'Sort by Name</button>';
                 dataHTML += '<br><button class="btn-info" id="sortByAverage">' +
@@ -2557,7 +2557,12 @@ requirejs({paths:{
             }
         }
 
-        //Checks if there is anything visible
+        /* Checks to see if each UI tab is visible,
+         * depending on which tab is active, highlight
+				 * the appropriate glyphicon. Also hides the resizable
+				 * class appropriately in order to disable the resizing
+				 * when tab is no longer active.
+				 */
         function checkTabs() {
             var allTabs = $('.tab-content > .tab-pane');
 
@@ -2624,7 +2629,9 @@ requirejs({paths:{
             });
         });
 
-		// sidebar functions
+		/* Setting height of resizable based on
+     * content of the active tab.
+		 */
 		var tabsFn = (function() {
 
 			function init() {
@@ -2652,7 +2659,9 @@ requirejs({paths:{
 			});
 		})();
 
-        //sidebar toggle functions
+        /* Making sure one tab is visible at one time
+				 * and that checkTabs is called.
+				 */
         $(document).ready(function () {
             checkTabs();
             $(".togglelayers").click(function () {
@@ -2787,7 +2796,8 @@ requirejs({paths:{
             setTimeout(function() {checkTabs()}, 50);
             });
             checkTabs();
-          /* highlighting correct button for geocomparison and wms layers */
+
+          /* Highlighting correct button for geocomparison and wms layers */
 	        $('.geoCompButton').click(function() {
 	            if ($('.geoCompButton').hasClass('active')) {
 	                var clickedButtonIsActive = $(this).hasClass('active');
@@ -2812,6 +2822,8 @@ requirejs({paths:{
 	                $(this).addClass('active');
 	            }
 	        });
+					/* Toggling green border CSS when Simulate Stars
+					checkbox is clicked and unclicked */
 	        $('input:checkbox').click(function() {
 	            $(this).toggleClass('active');
 	        });
