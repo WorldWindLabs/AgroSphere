@@ -2639,7 +2639,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglecountry").click(function () {
                 $("#country").toggle();
@@ -2652,7 +2652,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglestation").click(function () {
                 $("#station").toggle();
@@ -2665,7 +2665,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglegraphs").click(function () {
                 $("#graphs").toggle();
@@ -2706,7 +2706,7 @@ requirejs({paths:{
                     var gd = $(multiGraph).children()[0];
                     Plotly.Plots.resize(gd);
                 }
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglecomp").click(function () {
                 $("#comp").toggle();
@@ -2719,7 +2719,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').toggle();
 								$('#legendtext').toggle();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".toggleweather").click(function () {
                 $("#weather").toggle();
@@ -2732,7 +2732,7 @@ requirejs({paths:{
                 $("#view").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".toggleview").click(function () {
                 $("#view").toggle();
@@ -2745,7 +2745,7 @@ requirejs({paths:{
                 $("#weather").hide();
 								$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             $(".togglewms").click(function () {
                 $("#wms").toggle();
@@ -2757,40 +2757,42 @@ requirejs({paths:{
                 $("#weather").hide();
                 $("#view").hide();$('#legend').hide();
 								$('#legendtext').hide();
-                setTimeout(function() {checkTabs()}, 50);
+            setTimeout(function() {checkTabs()}, 50);
             });
             checkTabs();
           /* highlighting correct button for geocomparison and wms layers */
-        $('.geoCompButton').click(function() {
-            if ($('.geoCompButton').hasClass('active')) {
-                var clickedButtonIsActive = $(this).hasClass('active');
-                $('.geoCompButton.active').removeClass('active');
-                if (!clickedButtonIsActive) {
-                    $(this).addClass('active');
-                }
-			} else {
-                  $(this).addClass('active');
-              }
-        });
-        $('.wmsButton').click(function() {
-            if ($('.wmsButton').hasClass('active')) {
-                var clickedButtonIsActive = $(this).hasClass('active');
-                $('.wmsButton.active').removeClass('active');
-				if (!clickedButtonIsActive) {
-                    $(this).addClass('active');
-                }
-            } else {
-                $(this).addClass('active');
-            }
-        });
-        $('input:checkbox').click(function() {
-            $(this).toggleClass('active');
-        });
-        $('#allButton').click(function() {
-            $('#toggleLegend').toggle();
-        });
-        $('#allButtonStation').click(function() {
-            $('#toggleLegendStation').toggle();
-        });
+	        $('.geoCompButton').click(function() {
+	            if ($('.geoCompButton').hasClass('active')) {
+	                var clickedButtonIsActive = $(this).hasClass('active');
+	                $('.geoCompButton.active').removeClass('active');
+	                if (!clickedButtonIsActive) {
+	                    $(this).addClass('active');
+	                }
+							}
+							else {
+	                $(this).addClass('active');
+	            }
+	        });
+	        $('.wmsButton').click(function() {
+	            if ($('.wmsButton').hasClass('active')) {
+	                var clickedButtonIsActive = $(this).hasClass('active');
+	                $('.wmsButton.active').removeClass('active');
+									if (!clickedButtonIsActive) {
+	                    $(this).addClass('active');
+	                }
+	            }
+							else {
+	                $(this).addClass('active');
+	            }
+	        });
+	        $('input:checkbox').click(function() {
+	            $(this).toggleClass('active');
+	        });
+	        $('#allButton').click(function() {
+	            $('#toggleLegend').toggle();
+	        });
+	        $('#allButtonStation').click(function() {
+	            $('#toggleLegendStation').toggle();
+	        });
     });
 });
