@@ -1811,7 +1811,6 @@ requirejs({paths:{
             //Could use exponential decay function or something
             var red = 0;
             var green = 0;
-            console.log(zScore);
             if (zScore < 0) {
                 red = 1;
                 green = Math.exp(1.5*zScore);
@@ -2338,7 +2337,6 @@ requirejs({paths:{
             var topPercentages = [];
             var numRanks = 5;
             var k = 0;
-            console.log(inputData);
             //Array of top values
             var showDataValues = [];
             for(i = 0; i < inputData.dataValues[0].timeValues.length; i++) {
@@ -2447,13 +2445,11 @@ requirejs({paths:{
             var d3 = Plotly.d3;
             var size = 100;
             var ysize = 70;
-            console.log(htmlID);
             var gd3 = d3.select('#' + htmlID).append('div').style({
                 width: size + '%', 'margin-left': ((100 - size)/2) + '%',
                 height: ysize + 'vh', 'margin-top': ((100 - size)/2) + 'vh'
             });
             var gd = gd3.node();
-            console.log(gd);
             Plotly.plot(gd, traces, layout);
             new ResizeSensor($('#' + htmlID), function() {
                 Plotly.Plots.resize(gd);
@@ -2532,7 +2528,6 @@ requirejs({paths:{
                 var gd = gd3.node();
                 $(gd).css('min-width','300px');
                 $(gd).css('min-height', '300px');
-                console.log(gd);
                 Plotly.plot(gd, [graph], layout);
             } else if(mode == 1) {
                 var gd3 = d3.select(plotID + '> div');
@@ -2547,7 +2542,7 @@ requirejs({paths:{
                 Plotly.update(gd, multiGraphUpdate);
                 Plotly.relayout(gd, dimensions);
             }
-            console.log(plotHTML);
+
             if(!(htmlID.includes('sub') || htmlID.includes('multi'))){
                 new ResizeSensor(plotHTML, function() {
                     Plotly.Plots.resize(gd);
@@ -2621,7 +2616,7 @@ requirejs({paths:{
                 $('.glyphicon-eye-open').css('color','lightgreen');
             }
         }
-        
+
         $(function () {
             $(".draggable").draggable({
               containment:"window"
@@ -2723,7 +2718,6 @@ requirejs({paths:{
                     //Assume 2 child nodes if resize exists
                     if(manyGraphs[i].childNodes.length == 1) {
                         //Add the resize
-                        console.log($(manyGraphs[i]).attr('id'));
                         new ResizeSensor($('#' + $(manyGraphs[i]).attr('id')),
 								function() {
 									for(j = 0; j < manyGraphs.length; j++) {
