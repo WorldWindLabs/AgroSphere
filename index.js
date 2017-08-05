@@ -2618,12 +2618,39 @@ requirejs({paths:{
                 $('.glyphicon-eye-open').css('color','lightgreen');
             }
         }
-
         $(function () {
             $(".draggable").draggable({
               containment:"window"
             });
         });
+
+		// sidebar functions
+		var tabsFn = (function() {
+
+			function init() {
+				setHeight();
+			}
+
+			function setHeight() {
+				var $tabPane = $('.tab-pane'),
+					tabsHeight = $('.resizable').height();
+
+				$tabPane.css({
+					height: tabsHeight
+				});
+			}
+
+			$(init);
+
+			$( ".resizable" ).resizable({
+				stop:setHeight,
+				// animation removed - stops resizing from working
+				maxHeight: 800,
+				maxWidth: 1400,
+				minHeight: 250,
+				minWidth: 280
+			});
+		})();
 
         //sidebar toggle functions
         $(document).ready(function () {
