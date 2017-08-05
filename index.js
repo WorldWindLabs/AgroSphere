@@ -338,12 +338,10 @@ requirejs({paths:{
               layerName + '</span>';
 
             //Spawn opacity controller
-            layerControlHTML += generateOpacityControl(wwd, layerName,
-                layerNumber);
+            layerControlHTML += generateOpacityControl(layerNumber);
 
             //Spawn the legend
-            layerControlHTML += generateLegend(wwd,
-                wmsLayerCapabilities, layerName, layerNumber);
+            layerControlHTML += generateLegend(wmsLayerCapabilities);
 
             //Spawn the time if it has it
             if (typeof(wmsConfig.timeSequences) != 'undefined') {
