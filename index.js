@@ -405,7 +405,7 @@ requirejs({paths:{
                 legendHTML += '<div><img src="'+ legendURL +'"></div><br><br>';
             } else {
                 //Say it does not exist
-                legendHTML += '<div><p>A legend does not exist'  +
+                legendHTML += '<div><p>A legend does not exist '  +
                     'for this layer</p></div>';
             }
             return legendHTML;
@@ -2621,6 +2621,7 @@ requirejs({paths:{
                 $('.glyphicon-eye-open').css('color','lightgreen');
             }
         }
+        
         $(function () {
             $(".draggable").draggable({
               containment:"window"
@@ -2628,7 +2629,7 @@ requirejs({paths:{
         });
 
 		/* Setting height of resizable based on
-     * content of the active tab.
+         * content of the active tab.
 		 */
 		var tabsFn = (function() {
 
@@ -2671,10 +2672,11 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();
-								$('#legend').hide();
-								$('#legendtext').hide();
+                $('#legend').hide();
+                $('#legendtext').hide();
             setTimeout(function() {checkTabs()}, 50);
             });
+
             $(".togglecountry").click(function () {
                 $("#country").toggle();
                 $("#layers").hide();
@@ -2684,10 +2686,11 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();
-								$('#legend').hide();
-								$('#legendtext').hide();
+                $('#legend').hide();
+                $('#legendtext').hide();
             setTimeout(function() {checkTabs()}, 50);
             });
+
             $(".togglestation").click(function () {
                 $("#station").toggle();
                 $("#layers").hide();
@@ -2697,10 +2700,11 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();
-								$('#legend').hide();
-								$('#legendtext').hide();
+                $('#legend').hide();
+                $('#legendtext').hide();
             setTimeout(function() {checkTabs()}, 50);
             });
+
             $(".togglegraphs").click(function () {
                 $("#graphs").toggle();
                 $("#layers").hide();
@@ -2721,9 +2725,9 @@ requirejs({paths:{
                         //Add the resize
                         console.log($(manyGraphs[i]).attr('id'));
                         new ResizeSensor($('#' + $(manyGraphs[i]).attr('id')),
-								function(){
+								function() {
 									for(j = 0; j < manyGraphs.length; j++) {
-										var gd = $(manyGraphs[j]).children()[0];
+										var gd =$(manyGraphs[j]).children()[0];
 										Plotly.Plots.resize(gd);
 								}
                         });
@@ -2742,6 +2746,7 @@ requirejs({paths:{
                 }
             setTimeout(function() {checkTabs()}, 50);
             });
+
             $(".togglecomp").click(function () {
                 $("#comp").toggle();
                 $("#layers").hide();
@@ -2751,10 +2756,11 @@ requirejs({paths:{
                 $("#station").hide();
                 $("#weather").hide();
                 $("#view").hide();
-								$('#legend').toggle();
-								$('#legendtext').toggle();
+                $('#legend').toggle();
+                $('#legendtext').toggle();
             setTimeout(function() {checkTabs()}, 50);
             });
+
             $(".toggleweather").click(function () {
                 $("#weather").toggle();
                 $("#layers").hide();
@@ -2764,10 +2770,11 @@ requirejs({paths:{
                 $("#station").hide();
                 $("#comp").hide();
                 $("#view").hide();
-								$('#legend').hide();
-								$('#legendtext').hide();
+                $('#legend').hide();
+                $('#legendtext').hide();
             setTimeout(function() {checkTabs()}, 50);
             });
+
             $(".toggleview").click(function () {
                 $("#view").toggle();
                 $("#layers").hide();
@@ -2777,10 +2784,11 @@ requirejs({paths:{
                 $("#station").hide();
                 $("#comp").hide();
                 $("#weather").hide();
-								$('#legend').hide();
-								$('#legendtext').hide();
+                $('#legend').hide();
+                $('#legendtext').hide();
             setTimeout(function() {checkTabs()}, 50);
             });
+
             $(".togglewms").click(function () {
                 $("#wms").toggle();
                 $("#layers").hide();
@@ -2790,9 +2798,10 @@ requirejs({paths:{
                 $("#comp").hide();
                 $("#weather").hide();
                 $("#view").hide();$('#legend').hide();
-								$('#legendtext').hide();
+                $('#legendtext').hide();
             setTimeout(function() {checkTabs()}, 50);
             });
+
             checkTabs();
 
           /* Highlighting correct button for geocomparison and wms layers */
@@ -2808,20 +2817,22 @@ requirejs({paths:{
 	                $(this).addClass('active');
 	            }
 	        });
+
 	        $('.wmsButton').click(function() {
 	            if ($('.wmsButton').hasClass('active')) {
 	                var clickedButtonIsActive = $(this).hasClass('active');
 	                $('.wmsButton.active').removeClass('active');
-									if (!clickedButtonIsActive) {
+                    if (!clickedButtonIsActive) {
 	                    $(this).addClass('active');
 	                }
 	            }
-							else {
+                else {
 	                $(this).addClass('active');
 	            }
 	        });
-					/* Toggling green border CSS when Simulate Stars
-					checkbox is clicked and unclicked */
+
+            /* Toggling green border CSS when Simulate Stars
+				checkbox is clicked and unclicked */
 	        $('input:checkbox').click(function() {
 	            $(this).toggleClass('active');
 	        });
