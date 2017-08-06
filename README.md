@@ -28,7 +28,7 @@ _Screenshot comparing historical agricultural and weather data on a plot for Fin
 
 <img src="images/RM2.png" />
 
-_Screenshot showing Geo-Comparison potato production data displayed from multiple countries around the world._
+_Screenshot showing Geo-Comparison apple production data displayed from multiple countries around the world._
 
 <img src="images/RM3.png">
 
