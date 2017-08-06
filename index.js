@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 United States Government as represented by the
+ * Copyright (C) 2017 United States Government as represented by the
  * Administrator of the National Aeronautics and Space Administration.
  * All Rights Reserved.
  */
@@ -245,7 +245,7 @@ requirejs({paths:{
                             details.html(detailsHTML);
 
                             //Generate the plots
-                            //Give functionality for buttons generated							
+                            //Give functionality for buttons generated
                             giveAtmoButtonsFunctionality(atmoData,
                                 atmoDataMonthly, atmoDataPoint.stationName,
                                 agriDataPoint);
@@ -2643,7 +2643,9 @@ requirejs({paths:{
 
 			$( ".resizable" ).resizable({
 				stop:setHeight,
-				// animation removed - stops resizing from working
+				/* animation removed - stops resizing from working
+				 * minHeight and minWidth are set so the UI will not glitch out
+				 */
 				maxHeight: 800,
 				maxWidth: 1400,
 				minHeight: 250,
@@ -2796,7 +2798,7 @@ requirejs({paths:{
 
             checkTabs();
 
-          /* Highlighting correct button for geocomparison and wms layers */
+          /* Highlighting correct button using CSS for geocomparison and wms layers */
 	        $('.geoCompButton').click(function() {
 	            if ($('.geoCompButton').hasClass('active')) {
 	                var clickedButtonIsActive = $(this).hasClass('active');
