@@ -1177,7 +1177,7 @@ requirejs({paths:{
                             flagLayer = wwd.layers[l];
                         }
                     }
-
+					var allValues = [];
                     if((currentLayerName != buttonName) || (previousYear
                         != sliderValue)){
                         wwd.addLayer(countryLayer);
@@ -1186,6 +1186,8 @@ requirejs({paths:{
                         var m = 0;
                         //Go through the entire country flag placemarks
                         // and change the label
+						//Also push the values to compare later
+						console.log(agriData);
                         for(l = 0; l < flagLayer.renderables.length; l++) {
                             var code3 = flagLayer.renderables[l].userObject.code3;
                             var flagName = flagLayer.renderables[l].userObject.country + '- ' + code3;
@@ -1201,6 +1203,7 @@ requirejs({paths:{
                                                     if(agriData[j].dataValues[k].timeValues[m].value != '') {
                                                         flagName = flagLayer.renderables[l].userObject.country + '\n - ' + buttonName + '\n' +
                                                                 agriData[j].dataValues[k].timeValues[m].value;
+														allValues.push(agriData[j]);
                                                     }
                                                 }
                                             }
@@ -1210,6 +1213,7 @@ requirejs({paths:{
                             }
                             flagLayer.renderables[l].label = flagName;
                         }
+						//We have the values 
                     } else {
                         //Just go through the flag layer and relabel it
                         // to default
