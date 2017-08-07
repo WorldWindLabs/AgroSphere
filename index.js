@@ -1529,10 +1529,11 @@ requirejs({paths:{
                             var buttonNumber = buttonID.slice('' +
                                 'definitionNumber'.length);
 
-                            //Grab titleName
-                            var cropName = $(this).text().slice('Get' +
-                                ' Definition for '.length);
-
+							//Grab titleName
+							
+                            var cropName = $(this).text().slice(('Get' +
+                                ' Definition for ').length);
+							console.log(cropName);
                             //Do a CSV search
                             var description = findCropDefinition(agriDef,
                                 cropName);
@@ -2202,7 +2203,7 @@ requirejs({paths:{
                         var tempTitleName =
                             dataPoint.dataValues[i].typeName.slice(0,
                                 dataPoint.dataValues[i].typeName.length -
-                                '  Production In Tons'.length);
+                                ' Production in tonnes'.length);
                         dataHTML += '<button class="btn-info" ' +
                             'id="definitionNumber' + i + '">Get Definition for' +
                             ' ' + tempTitleName + '</button>';
