@@ -25,6 +25,9 @@
   color:#D3D3D3;
 }
 
+#technologies {
+  padding-bottom:20px
+}
 .modal-content {
   background:rgba(255,255,255,.95)
 }
@@ -35,4 +38,8 @@
 
 .extraSmallMargins {
   padding-bottom:20px
+}
+
+.smallerfontsize{
+  color: #777777
 }
