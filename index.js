@@ -1931,11 +1931,11 @@ requirejs({paths:{
             var atmoHTML = '<h4>Atmosphere Data</h4>';
             var dataPoint = findDataPointStation(inputData, stationName);
             var dataPoint2 = findDataPointStation(inputData2, stationName);
-            atmoHTML += '<div id="allGraphStation"></div>';
-            atmoHTML += '<button class="btn-info" id="allButtonStation">' +
-                'Graph Crops and Weather</button>';
-            atmoHTML += '<button class="btn-info" style="display:none" id="toggleLegendStation"' +
+						atmoHTML += '<button class="btn-info" style="display:none" id="toggleLegendStation"' +
                 '>Toggle Graph Legend</button>';
+						atmoHTML += '<button class="btn-info" id="allButtonStation">' +
+		            'Graph Crops and Weather</button>';
+            atmoHTML += '<div id="allGraphStation"></div>';
             if (dataPoint != 0) {
                 var i = 0;
                 //Yearly data
@@ -2192,12 +2192,12 @@ requirejs({paths:{
                         break;
                 }
                 dataHTML += '<br><button class="btn-info" style="display:none" id="toggleLegend"' +
-                    '>Toggle Graph Legend</button>';
-                dataHTML += '<br><button class="btn-info" id="sortByName">' +
+                    '>Toggle Graph Legend</button><br>';
+                dataHTML += '<div id="allGraph"></div>';
+								dataHTML += '<br><button class="btn-info" id="sortByName">' +
                     'Sort by Name</button>';
                 dataHTML += '<br><button class="btn-info" id="sortByAverage">' +
                     'Sort by Amount</button>';
-                dataHTML += '<div id="allGraph"></div>';
 
                 for (i = 0; i < dataPoint.dataValues.length; i++) {
                     //Generate the HTML to show for plots
