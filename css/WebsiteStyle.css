@@ -37,6 +37,6 @@
   padding-bottom:20px
 }
 
-.techlinks:active{
-  color: #313A7D;
+.techlinks{
+  color: #313A7D !important;
 }
