@@ -1213,7 +1213,7 @@ requirejs({paths:{
                             }
                             flagLayer.renderables[l].label = flagName;
                         }
-						//We have the values 
+						//We have the values
                     } else {
                         //Just go through the flag layer and relabel it
                         // to default
@@ -1417,6 +1417,7 @@ requirejs({paths:{
                     } else {
                         $('#allGraphStation').html('');
                     }
+										$('#toggleLegendStation').toggle();
                 });
                 var legendButtonHTML = $('#toggleLegendStation').button();
                 legendButtonHTML.off();
@@ -1534,7 +1535,7 @@ requirejs({paths:{
                                 'definitionNumber'.length);
 
 							//Grab titleName
-							
+
                             var cropName = $(this).text().slice(('Get' +
                                 ' Definition for ').length);
 							console.log(cropName);
@@ -1672,8 +1673,8 @@ requirejs({paths:{
                     } else {
                         $(this).addClass('plotted');
                         plotStack(dataPoint, 'allGraph', amount);
-
                     }
+										$('#toggleLegend').toggle();
                 });
                 var legendButtonHTML = $('#toggleLegend').button();
                 legendButtonHTML.off();
@@ -1933,7 +1934,7 @@ requirejs({paths:{
             atmoHTML += '<div id="allGraphStation"></div>';
             atmoHTML += '<button class="btn-info" id="allButtonStation">' +
                 'Graph Crops and Weather</button>';
-            atmoHTML += '<button class="btn-info" id="toggleLegendStation"' +
+            atmoHTML += '<button class="btn-info" style="display:none" id="toggleLegendStation"' +
                 '>Toggle Graph Legend</button>';
             if (dataPoint != 0) {
                 var i = 0;
@@ -2190,7 +2191,7 @@ requirejs({paths:{
                             'Graph Specified # of Yield Datasets</button>';
                         break;
                 }
-                dataHTML += '<br><button class="btn-info" id="toggleLegend"' +
+                dataHTML += '<br><button class="btn-info" style="display:none" id="toggleLegend"' +
                     '>Toggle Graph Legend</button>';
                 dataHTML += '<br><button class="btn-info" id="sortByName">' +
                     'Sort by Name</button>';
