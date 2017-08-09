@@ -68,10 +68,12 @@ body {
 #loading_modal figcaption{
   position:absolute;
   z-index: 1100;
-  margin-left: 49%;
+  margin-left: 45%;
   margin-top: 35%;
+  text-align:center;
+}
 
-}/* mobile media queries for loading screen text*/
+/* mobile media queries for loading screen text*/
 /* ipad pro and ipad */
 @media only screen and (max-width: 1024px) {
     #loading_modal figcaption {
