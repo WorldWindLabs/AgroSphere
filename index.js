@@ -1384,11 +1384,11 @@ requirejs({paths:{
                         setTimeout(function(){ $('#messagePoint'+
                             buttonNumber).html('')}, 5000);
                     });
-                    var combineButtonHTML = $('#combineButton' + i).button();
+                    var combineButtonHTML = $('#combineButtonStation' + i).button();
                     combineButtonHTML.click(function(event) {
                         var buttonID = this.id;
                         var buttonNumber = buttonID.slice(
-                            'combineButton'.length);
+                            'combineButtonStation'.length);
                         //Add to the graph
                         if(buttonNumber < offSetLength) {
                             plotScatter(dataPoint.dataValues[buttonNumber].typeName, dataPoint.code3,
@@ -1407,11 +1407,11 @@ requirejs({paths:{
                             buttonNumber).html('')}, 5000);
                     });
 
-                    var addButtonHTML = $('#addButton' + i).button();
+                    var addButtonHTML = $('#addButtonStation' + i).button();
                     addButtonHTML.click( function(event) {
                         //Grab id
                         var buttonID = this.id;
-                        var buttonNumber = buttonID.slice('addButton'.length);
+                        var buttonNumber = buttonID.slice('addButtonStation'.length);
 
                         //Check how many divs there are
                         var manyGraphDivChildren = $('#manyGraph > div');
@@ -1993,9 +1993,9 @@ requirejs({paths:{
                     atmoHTML += '<button'
                         + ' class="btn-info"' + ' id="plotWeatherButton'
                         + i + '">Plot Graph</button>';
-                    atmoHTML += '<button class="btn-info" id="combineButton'
+                    atmoHTML += '<button class="btn-info" id="combineButtonStation'
                         + i + '">Combine Graph </button>';
-                    atmoHTML += '<button class="btn-info" id="addButton'
+                    atmoHTML += '<button class="btn-info" id="addButtonStation'
                         + i + '">Add Graph</button>';
                     atmoHTML += '<br></div>';
                 }
