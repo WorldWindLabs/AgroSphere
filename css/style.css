@@ -77,19 +77,19 @@ body {
 /* ipad pro and ipad */
 @media only screen and (max-width: 1024px) {
     #loading_modal figcaption {
-        margin-left: 48%;
+        margin-left: 43%;
     }
 }
 /* iphone 6plus, nexus 5x, nexus 6p, iphone 6, galaxy s5 */
 @media only screen and (max-width: 414px) {
     #loading_modal figcaption {
-        margin-left: 44%;
+        margin-left: 32%;
     }
 }
 /* galaxy 5s, iphone 5 */
 @media only screen and (max-width: 360px) {
     #loading_modal figcaption {
-        margin-left: 42%;
+        margin-left: 30%;
     }
 }
 
