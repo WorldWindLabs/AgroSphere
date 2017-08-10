@@ -1204,7 +1204,7 @@ requirejs({paths:{
                                                     if(agriData[j].dataValues[k].timeValues[m].value != '') {
                                                         flagName = flagLayer.renderables[l].userObject.country + '\n - ' + buttonName + '\n' +
                                                                 agriData[j].dataValues[k].timeValues[m].value;
-														allValues.push({code3: agriData[j].code3, 
+														allValues.push({code3: agriData[j].code3,
 														value: agriData[j].dataValues[k].timeValues[m].value,
 														lat: flagLayer.renderables[l].position.latitude,
 														lon: flagLayer.renderables[l].position.longitude});
@@ -1217,20 +1217,20 @@ requirejs({paths:{
                             }
                             flagLayer.renderables[l].label = flagName;
                         }
-						//We have the values 
-						
+						//We have the values
+
 						allValues.sort(function(a,b) {
 							return b.value - a.value;
 						});
 						//get the top 10
 						var travelCountries = allValues.slice(0, 10);
 						console.log(travelCountries);
-						
+
 						//Create the button that travels
 						var travelButtonHTML = '<button class="btn-info"' +
-						'id="travelButton">' + 
+						'id="travelButton">' +
 						'Travel to Top 10 countries</button>';
-						
+
 						$('#travelArea').html(travelButtonHTML);
 						$('#travelButton').button();
 						$('#travelButton').off();
@@ -1246,7 +1246,7 @@ requirejs({paths:{
 											travelCountries[index].lat,
 											travelCountries[index].lon),
 											function() {
-												travelTo(travelCountries, 
+												travelTo(travelCountries,
 												index + 1)
 											});
 									}, 3000);
