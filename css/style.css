@@ -68,14 +68,14 @@ body {
 #loading_modal figcaption{
   position:absolute;
   z-index: 1100;
-  margin-left: 45%;
+  margin-left: 45.5%;
   margin-top: 35%;
   text-align:center;
 }
 
 /* mobile media queries for loading screen text*/
 
-@media only screen and (max-width: 1920px) {
+@media only screen and (min-width:1441px and max-width: 1920px) {
     #loading_modal figcaption {
         margin-left: 47%;
     }
