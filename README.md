@@ -44,7 +44,7 @@ For a guide on how this app may be used in the classroom, click the button below
 * Dynamically visualize various types of agriculture and climate data, such as rainfall, crop production and prices, and much more, from hundreds of countries across the globe.
 * Graph agriculture data from 1961-2014 and climate data from 1989-2014 to view them simultaneously.
 * Adjust time and opacity of image layers displayed on the globe and compare the given visual data with plotted agriculture and climate data.
-* Explore the Geo-Comparison Agriculture data visualized on the globe for hundreds crop production datasets. Juxtapose data between any number of colors using a simple color scheme legend created using standard deviation formulas.
+* Explore the Geo-Comparison Agriculture data visualized on the globe for hundreds of crop production datasets. Juxtapose data between any number of colors using a simple color scheme legend created using standard deviation formulas.
 * Search for current weather data for any city around the globe. Results include temperature, sunrise/sunset, 
 * Load in any number of spatiotemporal geographically-accurate data from multiple sources, using data formats such as GeoJSON, WMS, and CSV.
 * Use the location Search tool in the View Options tab to immediately visit any desired location.
