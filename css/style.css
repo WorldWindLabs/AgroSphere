@@ -74,6 +74,12 @@ body {
 }
 
 /* mobile media queries for loading screen text*/
+
+@media only screen and (max-width: 1920px) {
+    #loading_modal figcaption {
+        margin-left: 47%;
+    }
+}
 /* ipad pro and ipad */
 @media only screen and (max-width: 1024px) {
     #loading_modal figcaption {
