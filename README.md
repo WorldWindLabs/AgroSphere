@@ -64,7 +64,7 @@ This is AgroSphere running on mobile. All of the functionalities of the app are 
 
 We discussed our web app and work-in-progress with Martin C. Heller from the Center for Sustainable Systems at University of Michigan. He offered us critiques from a researcher's point of view.
 We also tested our app on NASA interns from the STEM Teacher and Researcher (STAR) program to receive suggestions from an educational perspective.
-Finally, we showcased our app to professional web app developers from institutions such as the University of Pennsylvania.
+In addition, an alumni from the University of Pennsylvania commented on the app's user interface design and changes were made accordingly. Finally, the app was tested with members of the educational institutes that each intern was affiliated with.
 
 ## How to Run and Develop AgroSphere
 
@@ -75,7 +75,7 @@ Finally, we showcased our app to professional web app developers from institutio
 
 You are welcome to add more climate and agriculture data using our built-in CSV reading functionality and the WebWorldWind Placemarks feature. For example, drought and flood data can be added and displayed on our app to examine how agriculture has been affected by those particular disasters.
 
-#### Updated as of 8/3/17
+#### Updated as of 8/12/17
 
 ***
 
