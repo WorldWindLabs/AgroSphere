@@ -56,7 +56,7 @@ For a guide on how this app may be used in the classroom, click the button below
 
 <img src="images/mobilelive.jpg"/>
 
-This is AgroSphere running on mobile. All of the functionalities of the app are available in your hands!
+This is AgroSphere running on mobile. All of the functionalities of the app are available in your hands! (PLEASE run the app on WiFi only and not on your data plan because this app will consume a significant amount of data and it will be slow to load.)
 
 <a href="https://www.youtube.com/watch?v=Fyn4-Hgkip0">
 <img src="images/mobiledemo.png" />
