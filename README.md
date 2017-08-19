@@ -63,6 +63,13 @@ This is AgroSphere running on mobile. All of the functionalities of the app are 
 <img src="images/mobiledemo.png" />
 </a>
 
+## Data Sources Used
+
+<a href="https://fluxnet.fluxdata.org/data/" target="_blank">Climate Data,</a>
+<a href="http://www.fao.org/faostat/en/#data/" target="_blank">Agriculture Data,</a>
+<a href="https://github.com/johan/world.geo.json" target="_blank">GeoJSON Border Data,</a>
+and <a href="https://developers.google.com/public-data/docs/canonical/countries_csv" target="_blank">Country Coordinates.</a>
+
 ## Outreach
 
 We discussed our web app and work-in-progress with Martin C. Heller from the Center for Sustainable Systems at University of Michigan. He offered us critiques from a researcher's point of view.
