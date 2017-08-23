@@ -889,7 +889,7 @@ requirejs(['./src/WorldWind',
 		 * @param {WorldWindow} wwd - the world window for the globe.
 		 * @param {String} layerName - the name of the layer ro search for
 		 * @param {Number} layerNumber - the div to refer to
-		 * @param {Object} the configuration of the layer
+		 * @param {Object} wmsConfig configuration of the layer
 		 */
         //Provides basic functionality for the time slider
         function giveTimeButtonFunctionality(wwd, layerName, layerNumber,
@@ -943,7 +943,7 @@ requirejs(['./src/WorldWind',
          *
          * @param {WorldWindow} wwd - world window of the globe
          * @param {String} layerName - name of layer to search for
-         * @returns the correct layer object, 0 otherwise
+         * @returns {Layer} the correct layer object, 0 otherwise
          */
         function getLayerFromName(wwd, layerName) {
             var i = 0;
@@ -994,9 +994,9 @@ requirejs(['./src/WorldWind',
         }
 		
 		/**
-		 * @param {Array of DataArray}. Contains an array of DataArray to be
+		 * @param {Array<DataArray>}. Contains an array of DataArray to be
 		 * used to generated the HTML of the country tab.
-		 * @return Returns the HTML to be displayed
+		 * @return {String} Returns the HTML to be displayed
 		 */
 		function generateCountryButtons(buttonDataArray) {
             var countryHTML = '<h5><b>Available Datasets</b></h5>';
@@ -1011,7 +1011,7 @@ requirejs(['./src/WorldWind',
 		}
 		
 		/**
-		 * @param {Array of DataArray} Contains the details of what needs to
+		 * @param {Array<DataArray>} Contains the details of what needs to
 		 * shown for the HTML.
 		 * @param {string} The 3-letter code of the country that is being viewed
 		 */
@@ -1129,9 +1129,10 @@ requirejs(['./src/WorldWind',
         }
 		
 		/**
-		 * @param {DataArray} Contains the data to provide the HTML for
-		 * @param {string} Contains the code of the country for data search
-		 * @param {mode} The mode to determine what to display
+		 * @param {DataArray} inputData contains the data to provide the HTML for
+		 * @param {string} countryCode the ISO code of the country for search
+		 * @param {number} mode is to determine what to display
+		 * @returns {String} the html for data buttons
 		 */
         function generateDataButtons(inputData, 
 			countryCode, mode) {
@@ -1199,10 +1200,10 @@ requirejs(['./src/WorldWind',
         }
 		
 		/**
-		 * @param {string} The id to search for sorting function
-		 * @param {DataArray} The data to use for plotting
-		 * @param {string} The 3-letter code to identify the data
-		 * @param {integer} A number finding out what HTML element to modify
+		 * @param {string} detailsHTML is the HTML that contains the buttons
+		 * @param {DataArray} inputData is the data to use for plotting
+		 * @param {string} countryCode is the 3-letter code to identify the data
+		 * @param {integer} mode the number finding out what HTML element to modify
 		 */
 		function giveDataButtonsFunctionality(detailsHTML, inputData,
 			countryCode, mode) {
@@ -1458,13 +1459,18 @@ requirejs(['./src/WorldWind',
 			}
 		}
 		
+		/**
+		 * Generates the buttons for the station.
+		 * @param {DataArray} yearlyData data containing yearly precip/temp
+		 * @param {String} stationCode is the name of the station used for search 
+		 * @returns {String} the html for the buttons
+		 */
 		function generateStationButtons(yearlyData, stationCode) {
             //Based on the input data, generate the buttons/html
             //Mode dictates what to call the title or search bar
 			var dataHTML = '';
             //Find the appropiate data point to use for the buttons
             var dataPoint = (yearlyData.search(stationCode, 'code3'))[0];
-			
             if (dataPoint != 0) {
 				dataHTML += '<ul id="myUL">';
 				dataHTML += '<button class="btn-info"id="allButtonStation">' +
@@ -1498,7 +1504,15 @@ requirejs(['./src/WorldWind',
             }
             return dataHTML;
 		}
-		
+		/**
+		 * @param {Array<DataArray>} buttonDataArray contains an array of data
+		 * to generate the buttons and their functionality.
+		 * @param {DataArray} stationData contains the data of the weather
+		 * station locations
+		 * @param {Number} placeLat the latitude of the station clicked.
+		 * @param {Number} placeLon the longitude of the station clicked.
+		 * @param {DataArray} countryData contains the code of all the countries
+		 */
 		function generateStationTab(buttonDataArray, stationData, placeLat, 
 				placeLon, countryData) {
 			//Slow but usable
@@ -1538,7 +1552,12 @@ requirejs(['./src/WorldWind',
 		}
 		
 		/**
-		 *
+		 * Gives the recently generated station buttons functionality.
+		 * @param {DataArray} atmoData contains the atmospheric data of all 
+		 * stations. 
+		 * @param {String} stationName is the name of the selected station
+		 * @param {String} countryCode is the country that the station is 
+		 * associated with
 		 */
 		function giveStationButtonsFunctionality(atmoData, stationName, 
 			countryCode) {
@@ -1658,10 +1677,12 @@ requirejs(['./src/WorldWind',
 		}
 		
 		/**
-		 * @param {Array of DataArray} Tbe data to be used for tab generation
-		 * @param {DataArray} The country location to determine what has been clicked
-		 * @param {Integer} The latitude of the click
-		 * @param {Integer} The longitide of the click
+		 * @param {Array<DataArray>} buttonDataArray 
+		 * is an array of data to be used for tab generation
+		 * @param {DataArray} countryData contains the country location to 
+		 * determine what has been clicked
+		 * @param {Number} placeLat The latitude of the click
+		 * @param {Number} placeLon  longitide of the click
 		 */
 		
 		function generateCountryTab(buttonDataArray, countryData, placeLat, placeLon) {
@@ -1703,10 +1724,12 @@ requirejs(['./src/WorldWind',
 		}
 		/**
 		 * Gives funcitonality to the geoComparison tab
-		 * @param {DataArray} The data to be placed on the geo comparison
-		 * @param {Array} The array containing the geoJSONData of borderStyle
-		 * @param {WorldWindow} The WorldWind interface
-		 * @param {LayerManager} The layer manager to modify after creating borders
+		 * @param {DataArray} agriData the data to be placed on the geo comparison
+		 * @param {Array<Object>} geoJSONData the array containing the 
+		 * geoJSONData of borderStyle
+		 * @param {WorldWindow} wwd, The WorldWind interface
+		 * @param {LayerManager} layerManager, the layer manager to modify 
+		 * after creating borders
 		 */
 		function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd,
                                                 layerManager) {
@@ -1919,9 +1942,10 @@ requirejs(['./src/WorldWind',
             });
         }
 		/**
-		 * @param {DataArray} The array which acts a subgraph for the current
+		 * @param {DataArray} subData The array which acts a subgraph for the current
 		 * plot.
-		 * @param {String} The string containing the ID of the graph placement
+		 * @param {String} htmlID The string containing the ID of the 
+		 * graph placement
 		 */
         function createSubPlot(subData, htmlID) {
             //Create subplots
@@ -2003,9 +2027,9 @@ requirejs(['./src/WorldWind',
 		
 		/**
 		 * The stack is the top X produced.
-		 * @param {DataArray} The data to be used
-		 * @param {String} The ID of the graph to be placed
-		 * @param {Integer} The amount of the top that is being looked at
+		 * @param {DataArray} inputData the data to be used
+		 * @param {String} htmlID the ID of the graph to be placed
+		 * @param {Number} amount the amount of the top that is being looked at
 		 */
         function plotStack(inputData, htmlID, amount) {
             var i = 0;
@@ -2160,7 +2184,8 @@ requirejs(['./src/WorldWind',
         /**
          * Generates the html for geo location comparison
          *
-         * @param {DataArray} Contains titles to show what data can be displayed
+         * @param {DataArray} data contains titles to show what data can 
+		 * be displayed
          */
         function generateGeoComparisonButton(data) {
             var count = 4;
@@ -2203,8 +2228,8 @@ requirejs(['./src/WorldWind',
         /**
          * Converts unixt time into a date
          *
-         * @param UNIX_timestamp
-         * @returns {data as a string}
+         * @param {UNIX_timestamp} The timestamp to be converted
+         * @returns {String} String of the date
          */
         function timeConverter(UNIX_timestamp){
             var unixTime = new Date(UNIX_timestamp * 1000);
@@ -2222,7 +2247,7 @@ requirejs(['./src/WorldWind',
         }
 		/**
          * Loads CSV file in a different format (for FAO data)
-         * @returns {Array of data sets from FAO}
+         * @returns {Array<Objects>} Object parameters determined by CSV headers
          */
         function loadCSVDataArray() {
             var csvList = ['csvdata/FAOcrops.csv', 'csvdata/Atmo.csv',
@@ -2250,6 +2275,11 @@ requirejs(['./src/WorldWind',
             return csvData;
         }
 		
+		/**
+		 * loads the file for geoJson
+		 * @param {string} fileName the location of the file 
+		 * @returns {Array<Object>} loads the data. header based on format
+		 */ 
 		function loadFile(fileName) {
 			var output;
 			var request = $.ajax({
@@ -2262,12 +2292,14 @@ requirejs(['./src/WorldWind',
 			return output;
 		}
 
-        //Find a value given a name
-        //Returns 0 if it can't be found, else returns something
-        //This assumes we are working with convertArrayToDataSet
+        //
 		/**
-		 * @param {Array} The array to find the code in
-		 * @param {String} The code that is being checked
+		 * Find a value given a name
+         * Returns 0 if it can't be found, else returns something
+         * This assumes we are working with convertArrayToDataSet
+		 * @param {Array<Object>} inputArray array to find the code in
+		 * @param {String} name code that is being checked
+		 * @returns {Object} the object that matches the name
 		 */
         function findDataBaseName(inputArray, name) {
             var i = 0;
@@ -2283,10 +2315,10 @@ requirejs(['./src/WorldWind',
         /**
          * Given a csv data array, convert the segment into objects
          *
-         * @param csvData - in the format of id, paramatertype, year1 value,
+         * @param {Array<Object>} csvData - in the format of id, paramatertype, 
+		 * year1 value,
          * year2 value...
-         * @returns {Array of objects containing the ids and an array of year-
-         *          value pairs}
+         * @returns {Array<Object>}
          */
         function convertArrayToDataSet(csvData) {
 			/*This is a very tricky object that was created. Basically it is 
@@ -2371,8 +2403,9 @@ requirejs(['./src/WorldWind',
 		
 		/**
 		 * Creates columns for a geoJSON load
-		 * @param {Array of DataValues} Contains the details of each data point 
+		 * @param {Array<DataValues>} allValues contains the details of each data point 
 		 * plotted for a particular geoJSON load
+		 * @returns {RenderableLayer} the coloumn layer generated
 		 */
 		function createColumns(allValues) {
 			var i = 0;
@@ -2485,8 +2518,10 @@ requirejs(['./src/WorldWind',
          * Based on z-score get a colour
          * Green means above mean, red means below, alpha is 1 by default
          *
-         * @param zScore - country's z score
-         * @returns {{}}
+         * @param {Number} zScore - country's z score to determine colour
+		 * @param {Number} mode - determines whether to return as color or 
+		 * config file
+         * @returns {}
          */
         function getColour(zScore, mode) {
             var configuration = {};
@@ -2523,10 +2558,10 @@ requirejs(['./src/WorldWind',
         /**
          * Given a set of gradients and country pairs, colorize the countries
          *
-         * @param valueCountryPair - country and value together
-         * @param geoJSONData - country borders
-         * @param dataName - name of data type
-         * @returns {colored countries as a layer}
+         * @param {Array} valueCountryPair - country and value together
+         * @param {Array<Object>} geoJSONData - country borders
+         * @param {string} dataName - name of data type
+         * @returns {RenderableLayer} Colourized border shapes
          */
         function colourizeCountries(valueCountryPair, geoJSONData, dataName) {
             //Isolate the gradients

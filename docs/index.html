@@ -1705,7 +1705,7 @@ can do
   <p>Simply provides functionality to the time control button.</p>
 
 
-  <div class='pre p1 fill-light mt0'>giveTimeButtonFunctionality(wwd: WorldWindow, layerName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, layerNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, wmsConfig: any, the: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+  <div class='pre p1 fill-light mt0'>giveTimeButtonFunctionality(wwd: WorldWindow, layerName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, layerNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, wmsConfig: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
   
   
 
@@ -1749,15 +1749,7 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wmsConfig</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>the</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+            <span class='code bold'>wmsConfig</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
 	    configuration of the layer
 
           </div>
@@ -1801,7 +1793,7 @@ can do
   <p>Searches for a layer given name and returns the layer object</p>
 
 
-  <div class='pre p1 fill-light mt0'>getLayerFromName(wwd: WorldWindow, layerName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): any</div>
+  <div class='pre p1 fill-light mt0'>getLayerFromName(wwd: WorldWindow, layerName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): Layer</div>
   
   
 
@@ -1842,7 +1834,7 @@ can do
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>any</code>:
+      <code>Layer</code>:
         the correct layer object, 0 otherwise
 
       
@@ -1926,7 +1918,7 @@ buttons every time it is called for wmts layers</p>
 
   
 
-  <div class='pre p1 fill-light mt0'>generateCountryButtons(buttonDataArray: any): any</div>
+  <div class='pre p1 fill-light mt0'>generateCountryButtons(buttonDataArray: any): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
   
   
 
@@ -1957,7 +1949,7 @@ buttons every time it is called for wmts layers</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code>any</code>:
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
         Returns the HTML to be displayed
 
       
@@ -1993,7 +1985,7 @@ buttons every time it is called for wmts layers</p>
 
   
 
-  <div class='pre p1 fill-light mt0'>giveCountryButtonsFunctionality(buttonDataArray: any, countryCode: any, The: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  <div class='pre p1 fill-light mt0'>giveCountryButtonsFunctionality(buttonDataArray: any, countryCode: any, Contains: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;DataArray>, The: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
   
   
 
@@ -2020,6 +2012,16 @@ buttons every time it is called for wmts layers</p>
           <div>
             <span class='code bold'>countryCode</span> <code class='quiet'>(any)</code>
 	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>Contains</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;DataArray>)</code>
+	    the details of what needs to
+shown for the HTML.
+
           </div>
           
         </div>
