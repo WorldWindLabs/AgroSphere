@@ -69,6 +69,7 @@ requirejs({paths:{
         var pestiData = convertArrayToDataSet(csvMultiData[6]);
         var fertiData = convertArrayToDataSet(csvMultiData[7]);
         var yieldData = convertArrayToDataSet(csvMultiData[8]);
+		var refugeeData = convertArrayToDataSet(csvMultiData[9]);
         var agriDef = csvData[2];
         //Generate the placemark layers
         generatePlacemarkLayer(wwd, csvData);
@@ -184,7 +185,7 @@ requirejs({paths:{
                             //Give functionality for the buttons generated
                             giveCountryButtonsFunctionality(agriData, priceData,
                                 liveData, emissionAgriData, pestiData,
-                                fertiData, yieldData, agriDef,
+                                fertiData, yieldData, refugeeData, agriDef,
                                 dataPoint.code3);
 
                             //fixed hover flags bug - now click instead of
@@ -247,7 +248,9 @@ requirejs({paths:{
                             //Generate the plots
                             //Give functionality for buttons generated
                             giveAtmoButtonsFunctionality(atmoData,
-                                atmoDataMonthly, atmoDataPoint.stationName,
+                                atmoDataMonthly, refugeeData,
+								atmoDataPoint.stationName,
+								ccode3,
                                 agriDataPoint);
 
                             var otherTab = $("#layers");
@@ -808,7 +811,7 @@ requirejs({paths:{
                 'csvdata/prices2.csv', 'csvdata/livestock.csv',
                 'csvdata/emissionAll.csv', 'csvdata/Monthly_AvgData1.csv',
                 'csvdata/pesti.csv', 'csvdata/ferti.csv',
-                'csvdata/yield.csv'];
+                'csvdata/yield.csv', 'csvdata/refugeeout.csv'];
 
             //Find the file
             var csvString = "";
@@ -828,6 +831,18 @@ requirejs({paths:{
             }
             return csvData;
         }
+		
+		function loadFile(fileName) {
+			var output;
+			var request = $.ajax({
+				async: false,
+				url: fileName,
+				success: function(file_content) {
+					output = $.csv.toArrays(file_content);
+				}
+			})
+			return output;
+		}
 
         //Find a value given a name
         //Returns 0 if it can't be found, else returns something
@@ -1112,7 +1127,21 @@ requirejs({paths:{
                 max: 2014,
                 step:1
             });
-
+			var fileButton = $('#fileButton').button();
+			var fileInput = $('#fileInput');
+			fileButton.on('click', function() {
+				fileInput.click();
+			})
+			fileInput.on('change', function() {
+				var dataName = this.files[0];
+				var rawData = loadFile(window.URL.createObjectURL(this.files[0]));
+				var newData = convertArrayToDataSet(rawData);
+				//console.log(newData);
+				$('#comp').html('');
+				generateGeoComparisonButton(newData);
+				giveGeoComparisonFunctionality(newData, geoJSONData, wwd, 
+						layerManager);
+			})
             sliderHTML.on('slide', function(event, ui) {
                 //Capture the year div
                 var sliderValueDiv = $('#geoSlideValue');
@@ -1156,7 +1185,7 @@ requirejs({paths:{
                         }
                     }
 
-                    //Got all the data, colour it
+                    //Got all the data, it
                     countryData = filterOutBlanks(countryData, 0);
 
                     var countryLayer = colourizeCountries(countryData,
@@ -1172,10 +1201,14 @@ requirejs({paths:{
                                 wwd.layers[l].userObject.dataType;
                             var previousYear = wwd.layers[l].userObject.year;
                             wwd.removeLayer(wwd.layers[l]);
+							l--;
                         } else if(wwd.layers[l].displayName ==
                             'Country Placemarks') {
                             flagLayer = wwd.layers[l];
-                        }
+                        } else if(wwd.layers[l].displayName == 'Col') {
+							wwd.removeLayer(wwd.layers[l]);
+							l--;
+						}
                     }
 					console.log(countryData);
 					var allValues = [];
@@ -1222,6 +1255,8 @@ requirejs({paths:{
 						allValues.sort(function(a,b) {
 							return b.value - a.value;
 						});
+						wwd.addLayer(createColumns(allValues));
+						layerManager.synchronizeLayerList();
 						//get the top 10
 						var travelCountries = allValues.slice(0, 10);
 						console.log(travelCountries);
@@ -1301,6 +1336,8 @@ requirejs({paths:{
             var i = 0;
             var j = 0;
             var comparisonHTML = '';
+			comparisonHTML += '<button class="btn-info" id="fileButton">Open File</button>';
+			comparisonHTML += '<input id="fileInput" type="file" name="name" style="display: none;" />';
             //Also implement the slider
             comparisonHTML += '<p><div id="geoSlider"></div><div ' +
                 'id="geoSlideValue">Year Select: 2014</div></p><br>';
@@ -1341,11 +1378,11 @@ requirejs({paths:{
          * @param stationName - name of station
          * @param agriDataPoint - agriculture data to check
          */
-        function giveAtmoButtonsFunctionality(inputData, inputData2,
-                                                stationName, agriDataPoint) {
+        function giveAtmoButtonsFunctionality(inputData, inputData2, refugeeData
+                                                , stationName, ccode3, 
+												agriDataPoint) {
             var dataPoint = findDataPointStation(inputData, stationName);
             var dataPoint2 = findDataPointStation(inputData2, stationName);
-
             var offSetLength = dataPoint.dataValues.length;
             if(dataPoint != 0) {
                 var i = 0;
@@ -1459,7 +1496,7 @@ requirejs({paths:{
                     } else {
                         $('#allGraphStation').html('');
                     }
-										$('#toggleLegendStation').toggle();
+					$('#toggleLegendStation').toggle();
                 });
                 var legendButtonHTML = $('#toggleLegendStation').button();
                 legendButtonHTML.off();
@@ -1492,8 +1529,9 @@ requirejs({paths:{
          * @param codeName - country code name
          * @param mode - type of data like agriculture/livestock/fert...
          */
-        function giveDataButtonsFunctionality(detailsHTML, inputData,
-                                              agriDef, codeName, mode) {
+        function giveDataButtonsFunctionality(detailsHTML, inputData, 
+												refugeeData,
+												agriDef, codeName, mode) {
             //Do a search for all the buttons based on the data
             var dataPoint = findDataPointCountry(inputData, codeName, 3);
             //Check for existing data point
@@ -1620,7 +1658,8 @@ requirejs({paths:{
                             +$(newList[i]).attr('id')+'">' +
                             $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData,
+                    giveDataButtonsFunctionality(detailsHTML, inputData, 
+						refugeeData,
                         agriDef, codeName, mode);
                 });
                 $('#sortByAverage').off();
@@ -1671,7 +1710,8 @@ requirejs({paths:{
                             ' id="'+$(newList[i]).attr('id')+'">' +
                             $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData,
+                    giveDataButtonsFunctionality(detailsHTML, inputData, 
+						refugeeData,
                         agriDef, codeName, mode);
                 });
 
@@ -1715,8 +1755,13 @@ requirejs({paths:{
                     } else {
                         $(this).addClass('plotted');
                         plotStack(dataPoint, 'allGraph', amount);
+						if((mode == 0) || (mode == 6)){
+							var refugeePoint = findDataPointCountry(refugeeData,
+									codeName, 3);
+							createSubPlot(refugeePoint.dataValues, 'allGraph');
+						}
                     }
-										$('#toggleLegend').toggle();
+				$('#toggleLegend').toggle();
                 });
                 var legendButtonHTML = $('#toggleLegend').button();
                 legendButtonHTML.off();
@@ -1843,6 +1888,79 @@ requirejs({paths:{
             return currentTime;
         }
 
+		function createColumns(allValues) {
+			var i = 0;
+			var polyLayer = new WorldWind.RenderableLayer();
+			polyLayer.displayName = 'Col';
+			
+			var tempValues = [];
+			for(i = 0; i < allValues.length; i++) {
+				tempValues.push(allValues[i].value);
+			}
+			tempValues = tempValues.sort(function(a,b) {
+				if(a < b) {
+					return -1;
+				}
+				if(a > b) {
+					return 1;
+				}
+				if(a == b) {
+					return 0;
+				}
+			});
+			console.log(tempValues);
+			var mean = ss.mean(tempValues);
+			var sd = ss.standardDeviation(tempValues);
+			
+			for(i = 0; i < allValues.length; i++) {
+				//Get the co-ordinates
+				var boundaries = [];
+				var zScore = ((tempValues.indexOf(allValues[i].value) + 1) / 
+						allValues.length);
+				
+				boundaries.push(new WorldWind.Position(
+						allValues[i].lat + 1, allValues[i].lon, Math.pow(10, 
+						zScore + 4.5)));
+				boundaries.push(new WorldWind.Position(
+						allValues[i].lat + 1, allValues[i].lon + 0.5, Math.pow(10, 
+						zScore + 4.5)));
+				boundaries.push(new WorldWind.Position(
+						allValues[i].lat + 1.5, allValues[i].lon + 0.5, Math.pow(10, 
+						zScore + 4.5)));
+				boundaries.push(new WorldWind.Position(
+						allValues[i].lat + 1.5, allValues[i].lon, Math.pow(10, 
+						zScore + 4.5)));
+				console.log(ss.zScore(allValues[i].value, mean,sd), allValues[i].code3);
+				//Create a temporary polygon
+				var polygon = new WorldWind.Polygon(boundaries, null);
+				var polygonAttributes = new WorldWind.ShapeAttributes(null);
+				polygon.altitudeMode = WorldWind.ABSOLUTE;
+				polygon.extrude = true;
+				polygonAttributes.drawInterior = true;
+				polygonAttributes.drawOutline = true;
+				polygonAttributes.outlineColor = WorldWind.Color.BLUE;
+				polygonAttributes.interiorColor = WorldWind.Color.WHITE;
+				polygonAttributes.drawVerticals = polygon.extrude;
+				polygonAttributes.applyLighting = true;
+				polygon.attributes = polygonAttributes;
+				var highlightAttributes = new WorldWind.ShapeAttributes(polygonAttributes);
+				highlightAttributes.outlineColor = WorldWind.Color.RED;
+				polygon.highlightAttributes = highlightAttributes;
+
+				polyLayer.addRenderable(polygon);
+				
+				//Add the geo text
+				var geoText = new WorldWind.GeographicText(boundaries[0], 
+						'' + allValues[i].value);
+				var geoTextAttr = new WorldWind.TextAttributes(null);
+				geoTextAttr.color = WorldWind.Color.CYAN;
+				geoTextAttr.depthTest = false;
+				geoText.attributes = geoTextAttr;
+				polyLayer.addRenderable(geoText);
+			}
+			return polyLayer;
+		}		
+
         /**
          * Based on z-score get a colour
          * Green means above mean, red means below, alpha is 1 by default
@@ -1866,7 +1984,7 @@ requirejs({paths:{
             } else if (zScore > 0) {
                 green = 1;
                 red = Math.exp(-1.5 * zScore);
-            } else if(isNan(zScore)) {
+            } else if(isNaN(zScore)) {
                 red = 0;
                 green = 0;
             }
@@ -1893,52 +2011,54 @@ requirejs({paths:{
             for (i = 0; i < valueCountryPair.length; i++) {
                 values.push(valueCountryPair[i].value);
             }
-            //Find mean, and sd
-            var mean = ss.mean(values);
-            var sd = ss.standardDeviation(values);
+			if(values.length != 0) {
+				//Find mean, and sd
+				var mean = ss.mean(values);
+				var sd = ss.standardDeviation(values);
 
-            //Generate the legend for the thing
-            var legendAmounts = 7;
-            var legendOffset = -3;
+				//Generate the legend for the thing
+				var legendAmounts = 7;
+				var legendOffset = -3;
 
-            //Empty the legend segment
+				//Empty the legend segment
 
-            //Loop through and determine the colour based on zscore
-            var countryLayers = new WorldWind.RenderableLayer('' +
-                'Geo Country Data');
-            var zScore;
-            for (i = 0; i < valueCountryPair.length; i++) {
-                zScore = ss.zScore(valueCountryPair[i].value, mean, sd);
-                //Get the colour
-                var countryConfiguration;
-                countryConfiguration = getColour(zScore);
-                countryConfiguration.name = 'haha';
-                //Fire up the rendering
-                var j = 0;
-                for (j = 0; j < geoJSONData.features.length; j++) {
-                    if (geoJSONData.features[j].properties.code3 ==
-                        valueCountryPair[i].code3) {
-                        var countryString = JSON.stringify(
-                            geoJSONData.features[j]);
-                        var tempCallBack = function () {
-                            return countryConfiguration;
-                        }
-                        var countryStringJSON = new WorldWind.GeoJSONParser(
-                            countryString);
-                        countryStringJSON.load(null, tempCallBack, null);
-                        var innerLayer = countryStringJSON.layer;
-                        var k = 0;
-                        for(k = 0; k < innerLayer.renderables.length; k++) {
-                            innerLayer.renderables[k].userProperties.country =
-                                valueCountryPair[i].code3;
-                        }
-                        countryLayers.addRenderable(innerLayer);
-                        countryLayers.userObject = {dataType: dataName};
-                    }
-                }
-            }
-            //Returns a renderable layer
-            return countryLayers;
+				//Loop through and determine the colour based on zscore
+				var countryLayers = new WorldWind.RenderableLayer('' +
+					'Geo Country Data');
+				var zScore;
+				for (i = 0; i < valueCountryPair.length; i++) {
+					zScore = ss.zScore(valueCountryPair[i].value, mean, sd);
+					//Get the colour
+					var countryConfiguration;
+					countryConfiguration = getColour(zScore);
+					countryConfiguration.name = 'haha';
+					//Fire up the rendering
+					var j = 0;
+					for (j = 0; j < geoJSONData.features.length; j++) {
+						if (geoJSONData.features[j].properties.code3 ==
+							valueCountryPair[i].code3) {
+							var countryString = JSON.stringify(
+								geoJSONData.features[j]);
+							var tempCallBack = function () {
+								return countryConfiguration;
+							}
+							var countryStringJSON = new WorldWind.GeoJSONParser(
+								countryString);
+							countryStringJSON.load(null, tempCallBack, null);
+							var innerLayer = countryStringJSON.layer;
+							var k = 0;
+							for(k = 0; k < innerLayer.renderables.length; k++) {
+								innerLayer.renderables[k].userProperties.country =
+									valueCountryPair[i].code3;
+							}
+							countryLayers.addRenderable(innerLayer);
+							countryLayers.userObject = {dataType: dataName};
+						}
+					}
+				}
+				//Returns a renderable layer
+				return countryLayers;
+			}
         }
 
         /**
@@ -2062,7 +2182,7 @@ requirejs({paths:{
          */
         function giveCountryButtonsFunctionality(agriData, priceData, liveData,
                 emissionAgriData, pestiData, fertiData,
-                yieldData, agriDef, codeName) {
+                yieldData, refugeeData, agriDef, codeName) {
             var buttonAreaHTML = $('#buttonArea');
             var agriButtons = $('#spawnAgri').button();
             var priceButtons = $('#spawnPrice').button();
@@ -2077,19 +2197,22 @@ requirejs({paths:{
                 //Generate agri culture buttons
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(agriData, codeName,0));
-                giveDataButtonsFunctionality(buttonAreaHTML, agriData, agriDef,
+                giveDataButtonsFunctionality(buttonAreaHTML, agriData, 
+					refugeeData , agriDef,
                     codeName, 0);
             });
             priceButtons.on('click', function() {
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(priceData,codeName,1));
                 giveDataButtonsFunctionality(buttonAreaHTML, priceData, agriDef,
+					refugeeData, 
                     codeName, 1);
             });
             liveButtons.on('click', function() {
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(liveData, codeName,2));
                 giveDataButtonsFunctionality(buttonAreaHTML, liveData, agriDef,
+					refugeeData,
                     codeName, 2);
             });
             emissionAgriButtons.on('click', function(){
@@ -2097,24 +2220,28 @@ requirejs({paths:{
                 buttonAreaHTML.html(generateDataButtons(emissionAgriData,
                     codeName, 3));
                 giveDataButtonsFunctionality(buttonAreaHTML, emissionAgriData,
+					refugeeData,
                     agriDef, codeName, 3);
             });
             pestiButtons.on('click', function() {
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(pestiData,codeName,4));
                 giveDataButtonsFunctionality(buttonAreaHTML, pestiData,agriDef,
+					refugeeData,
                     codeName, 4);
             });
             fertiButtons.on('click', function() {
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(fertiData,codeName,5));
                 giveDataButtonsFunctionality(buttonAreaHTML, fertiData,
+					refugeeData, 
                     agriDef, codeName, 5);
             });
             yieldButtons.on('click', function() {
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(yieldData,codeName,6));
                 giveDataButtonsFunctionality(buttonAreaHTML, yieldData,
+					refugeeData, 
                     agriDef, codeName, 6);
             });
         }
@@ -2287,8 +2414,7 @@ requirejs({paths:{
             var traces = [];
             var newLayout = {};
             var incAmounts = (0.5/(inputData.length)).toFixed(2);
-            newLayout['yaxis'] = {domain: [0, 0.5], title: 'Production In' +
-            ' Tons'};
+            newLayout['yaxis'] = {domain: [0, 0.5], title: 'See side for units'};
             newLayout['yaxis2'] = {domain: [0, 0.5], side: 'right', title:
                 'Percent'};
             for(i = 0; i < inputData.length; i++) {
