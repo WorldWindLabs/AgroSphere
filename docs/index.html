@@ -1,0 +1,2879 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+  <link href='assets/split.css' type='text/css' rel='stylesheet' />
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'></h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#generatelayercontrol'
+                  class="">
+                  generateLayerControl
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getlayerfromname'
+                  class="">
+                  getLayerFromName
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generatelegend'
+                  class="">
+                  generateLegend
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generateopacitycontrol'
+                  class="">
+                  generateOpacityControl
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#giveopacitysliderfunctionality'
+                  class="">
+                  giveOpacitySliderFunctionality
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generatetimecontrol'
+                  class="">
+                  generateTimeControl
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loadcsvdata'
+                  class="">
+                  loadCSVData
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#finddatapoint'
+                  class="">
+                  findDataPoint
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#finddatapointstation'
+                  class="">
+                  findDataPointStation
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#findcropdefinition'
+                  class="">
+                  findCropDefinition
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#finddatapointcountry'
+                  class="">
+                  findDataPointCountry
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loadcsvdataarray'
+                  class="">
+                  loadCSVDataArray
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#convertarraytodataset'
+                  class="">
+                  convertArrayToDataSet
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loadwmtslayers'
+                  class="">
+                  loadWMTSLayers
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#setlayercontrols'
+                  class="">
+                  setLayerControls
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#loadgeojsondata'
+                  class="">
+                  loadGEOJsonData
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#filteroutblanks'
+                  class="">
+                  filterOutBlanks
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#givegeocomparisonfunctionality'
+                  class="">
+                  giveGeoComparisonFunctionality
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generategeocomparisonbutton'
+                  class="">
+                  generateGeoComparisonButton
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#giveatmobuttonsfunctionality'
+                  class="">
+                  giveAtmoButtonsFunctionality
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#givedatabuttonsfunctionality'
+                  class="">
+                  giveDataButtonsFunctionality
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generateweatherhtml'
+                  class="">
+                  generateWeatherHTML
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#giveweatherbuttonfunctionality'
+                  class="">
+                  giveWeatherButtonFunctionality
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#timeconverter'
+                  class="">
+                  timeConverter
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getcolour'
+                  class="">
+                  getColour
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#colourizecountries'
+                  class="">
+                  colourizeCountries
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generateremovebutton'
+                  class="">
+                  generateRemoveButton
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generateatmobuttons'
+                  class="">
+                  generateAtmoButtons
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generatecountrybuttons'
+                  class="">
+                  generateCountryButtons
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#givecountrybuttonsfunctionality'
+                  class="">
+                  giveCountryButtonsFunctionality
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generatedatabuttons'
+                  class="">
+                  generateDataButtons
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#createsubplot'
+                  class="">
+                  createSubPlot
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#plotstack'
+                  class="">
+                  plotStack
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#plotscatter'
+                  class="">
+                  plotScatter
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='http://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generatelayercontrol'>
+      generateLayerControl
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function generates the HTML first then supplies functionality
+Given a layerName and its layernumber, generate a layer control block</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateLayerControl(wwd: any, wmsConfig: any, wmsLayerCapabilities: any, layerName: any, layerNumber: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
+	    world window
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wmsConfig</span> <code class='quiet'>(any)</code>
+	    object containing how layer should look
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wmsLayerCapabilities</span> <code class='quiet'>(any)</code>
+	    object representing what the wms
+layer can do
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
+	    name of layer
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
+	    number of layer in list
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getlayerfromname'>
+      getLayerFromName
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Searches for a layer given name and returns the layer object</p>
+
+
+  <div class='pre p1 fill-light mt0'>getLayerFromName(wwd: any, layerName: any): any</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
+	    world window
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
+	    name of layer to search for
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        the correct layer object
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generatelegend'>
+      generateLegend
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>creates a legend for a layer given its name and number</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateLegend(wmsLayerCapabilities: any, wwd: any, layerName: any, layerNumber: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wmsLayerCapabilities</span> <code class='quiet'>(any)</code>
+	    object representing what the wms layer
+can do
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
+	    worldwindow
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
+	    name of layer
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
+	    where it should be generated among other layers
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generateopacitycontrol'>
+      generateOpacityControl
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates opacity control for a layer in HTML</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateOpacityControl(layerNumber: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
+	    identifier to place layer
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='giveopacitysliderfunctionality'>
+      giveOpacitySliderFunctionality
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gives layer opacity control given its name</p>
+
+
+  <div class='pre p1 fill-light mt0'>giveOpacitySliderFunctionality(wwd: any, layerName: any, layerNumber: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
+	    world window
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
+	    name of layer to give opacity control
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
+	    id of layer
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generatetimecontrol'>
+      generateTimeControl
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates time HTML control for specified layer</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateTimeControl(layerName: any, layerNumber: any, wmsConfig: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
+	    name of layer to give time control
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
+	    number id for layer
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wmsConfig</span> <code class='quiet'>(any)</code>
+	    WMS configuration for layer control
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loadcsvdata'>
+      loadCSVData
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Loads all CSV Files</p>
+
+
+  <div class='pre p1 fill-light mt0'>loadCSVData()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='finddatapoint'>
+      findDataPoint
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get data given latitude and longitude of a location</p>
+
+
+  <div class='pre p1 fill-light mt0'>findDataPoint(dataSet: any, lat: any, lon: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>dataSet</span> <code class='quiet'>(any)</code>
+	    data to get from location
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lat</span> <code class='quiet'>(any)</code>
+	    latitude value of location
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lon</span> <code class='quiet'>(any)</code>
+	    longitude value of location
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='finddatapointstation'>
+      findDataPointStation
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Find data given name of station</p>
+
+
+  <div class='pre p1 fill-light mt0'>findDataPointStation(dataSet: any, stationName: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>dataSet</span> <code class='quiet'>(any)</code>
+	    type of data to get for
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>stationName</span> <code class='quiet'>(any)</code>
+	    name of station to get data for
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='findcropdefinition'>
+      findCropDefinition
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get definition of crop given name</p>
+
+
+  <div class='pre p1 fill-light mt0'>findCropDefinition(dataSet: any, cropName: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>dataSet</span> <code class='quiet'>(any)</code>
+	    data from which to search
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>cropName</span> <code class='quiet'>(any)</code>
+	    name of crop to get definition for
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='finddatapointcountry'>
+      findDataPointCountry
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>find all data for a country given its code</p>
+
+
+  <div class='pre p1 fill-light mt0'>findDataPointCountry(dataSet: any, countryCode: any, codeNumber: any): any</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>dataSet</span> <code class='quiet'>(any)</code>
+	    all the data to get
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>countryCode</span> <code class='quiet'>(any)</code>
+	    country's 2 or 3 letter code
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>codeNumber</span> <code class='quiet'>(any)</code>
+	    number of code
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loadcsvdataarray'>
+      loadCSVDataArray
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Loads CSV file in a different format (for FAO data)</p>
+
+
+  <div class='pre p1 fill-light mt0'>loadCSVDataArray()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='convertarraytodataset'>
+      convertArrayToDataSet
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Given a csv data array, convert the segment into objects</p>
+
+
+  <div class='pre p1 fill-light mt0'>convertArrayToDataSet(csvData: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>csvData</span> <code class='quiet'>(any)</code>
+	    in the format of id, paramatertype, year1 value,
+year2 value...
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loadwmtslayers'>
+      loadWMTSLayers
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>preloads WMTS layers</p>
+
+
+  <div class='pre p1 fill-light mt0'>loadWMTSLayers(wwd: any, layerManager: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
+	    worldwindow
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerManager</span> <code class='quiet'>(any)</code>
+	    layerManager from layerManager.js
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='setlayercontrols'>
+      setLayerControls
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Refreshes the control or the functionality of the layerManager
+buttons every time it is called for wmts layers</p>
+
+
+  <div class='pre p1 fill-light mt0'>setLayerControls()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='loadgeojsondata'>
+      loadGEOJsonData
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>hardcoded link: loads appropriate geoJSON data</p>
+
+
+  <div class='pre p1 fill-light mt0'>loadGEOJsonData()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='filteroutblanks'>
+      filterOutBlanks
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>filters out nonexistent values in an array</p>
+
+
+  <div class='pre p1 fill-light mt0'>filterOutBlanks(inputData: any, mode: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData</span> <code class='quiet'>(any)</code>
+	    array to be filtered
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>mode</span> <code class='quiet'>(any)</code>
+	    1 mode means set value to 0 in case of blank
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='givegeocomparisonfunctionality'>
+      giveGeoComparisonFunctionality
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Makes GeoComparison buttons work</p>
+
+
+  <div class='pre p1 fill-light mt0'>giveGeoComparisonFunctionality(agriData: any, geoJSONData: any, wwd: any, layerManager: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>agriData</span> <code class='quiet'>(any)</code>
+	    data for comparisons
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>geoJSONData</span> <code class='quiet'>(any)</code>
+	    borders to color in
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
+	    world window
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>layerManager</span> <code class='quiet'>(any)</code>
+	    manage layers - comparison is a layer
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generategeocomparisonbutton'>
+      generateGeoComparisonButton
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates the html for geo location comparison</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateGeoComparisonButton(agriData: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>agriData</span> <code class='quiet'>(any)</code>
+	    agriculture data to compare by
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='giveatmobuttonsfunctionality'>
+      giveAtmoButtonsFunctionality
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gives the button functionality for weather station</p>
+
+
+  <div class='pre p1 fill-light mt0'>giveAtmoButtonsFunctionality(inputData: any, inputData2: any, refugeeData: any, stationName: any, ccode3: any, agriDataPoint: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData</span> <code class='quiet'>(any)</code>
+	    first data type
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData2</span> <code class='quiet'>(any)</code>
+	    second data type
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>refugeeData</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>stationName</span> <code class='quiet'>(any)</code>
+	    name of station
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>ccode3</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>agriDataPoint</span> <code class='quiet'>(any)</code>
+	    agriculture data to check
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='givedatabuttonsfunctionality'>
+      giveDataButtonsFunctionality
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gives the data buttons functionality</p>
+
+
+  <div class='pre p1 fill-light mt0'>giveDataButtonsFunctionality(detailsHTML: any, inputData: any, refugeeData: any, agriDef: any, codeName: any, mode: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>detailsHTML</span> <code class='quiet'>(any)</code>
+	    details for agriculture
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData</span> <code class='quiet'>(any)</code>
+	    data inputted to use
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>refugeeData</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>agriDef</span> <code class='quiet'>(any)</code>
+	    definitions of agriculture
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>codeName</span> <code class='quiet'>(any)</code>
+	    country code name
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>mode</span> <code class='quiet'>(any)</code>
+	    type of data like agriculture/livestock/fert...
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generateweatherhtml'>
+      generateWeatherHTML
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates the html for the weather search</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateWeatherHTML(countryData: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>countryData</span> <code class='quiet'>(any)</code>
+	    country name for search
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='giveweatherbuttonfunctionality'>
+      giveWeatherButtonFunctionality
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Weather search functionality</p>
+
+
+  <div class='pre p1 fill-light mt0'>giveWeatherButtonFunctionality()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='timeconverter'>
+      timeConverter
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Converts unixt time into a date</p>
+
+
+  <div class='pre p1 fill-light mt0'>timeConverter(UNIX_timestamp: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>UNIX_timestamp</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getcolour'>
+      getColour
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Based on z-score get a colour
+Green means above mean, red means below, alpha is 1 by default</p>
+
+
+  <div class='pre p1 fill-light mt0'>getColour(zScore: any): {}</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>zScore</span> <code class='quiet'>(any)</code>
+	    country's z score
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>{}</code>:
+        
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='colourizecountries'>
+      colourizeCountries
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Given a set of gradients and country pairs, colorize the countries</p>
+
+
+  <div class='pre p1 fill-light mt0'>colourizeCountries(valueCountryPair: any, geoJSONData: any, dataName: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>valueCountryPair</span> <code class='quiet'>(any)</code>
+	    country and value together
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>geoJSONData</span> <code class='quiet'>(any)</code>
+	    country borders
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>dataName</span> <code class='quiet'>(any)</code>
+	    name of data type
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generateremovebutton'>
+      generateRemoveButton
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates remove button for graphs</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateRemoveButton()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generateatmobuttons'>
+      generateAtmoButtons
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates the atmospheric button html</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateAtmoButtons(inputData: any, inputData2: any, stationName: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData</span> <code class='quiet'>(any)</code>
+	    first data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData2</span> <code class='quiet'>(any)</code>
+	    second point
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>stationName</span> <code class='quiet'>(any)</code>
+	    name of station
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generatecountrybuttons'>
+      generateCountryButtons
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Generates the FAO statistics buttons used by the country
+Each button should spawn its own data set</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateCountryButtons()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='givecountrybuttonsfunctionality'>
+      giveCountryButtonsFunctionality
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Gives buttons for country data functionality</p>
+
+
+  <div class='pre p1 fill-light mt0'>giveCountryButtonsFunctionality(agriData: any, priceData: any, liveData: any, emissionAgriData: any, pestiData: any, fertiData: any, yieldData: any, refugeeData: any, agriDef: any, codeName: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>agriData</span> <code class='quiet'>(any)</code>
+	    agriculture
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>priceData</span> <code class='quiet'>(any)</code>
+	    price
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>liveData</span> <code class='quiet'>(any)</code>
+	    livestock
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>emissionAgriData</span> <code class='quiet'>(any)</code>
+	    emissions
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>pestiData</span> <code class='quiet'>(any)</code>
+	    pesticides
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fertiData</span> <code class='quiet'>(any)</code>
+	    fertilizer
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>yieldData</span> <code class='quiet'>(any)</code>
+	    yield
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>refugeeData</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>agriDef</span> <code class='quiet'>(any)</code>
+	    agriculture definitions
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>codeName</span> <code class='quiet'>(any)</code>
+	    country 3 letter code
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generatedatabuttons'>
+      generateDataButtons
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Creates data buttons</p>
+
+
+  <div class='pre p1 fill-light mt0'>generateDataButtons(inputData: any, codeName: any, mode: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData</span> <code class='quiet'>(any)</code>
+	    data
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>codeName</span> <code class='quiet'>(any)</code>
+	    3 letter code
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>mode</span> <code class='quiet'>(any)</code>
+	    which type of data
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='createsubplot'>
+      createSubPlot
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Helps plot stack - plots crop, percentage, and atmosphere together</p>
+
+
+  <div class='pre p1 fill-light mt0'>createSubPlot(inputData: any, htmlID: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData</span> <code class='quiet'>(any)</code>
+	    data to input
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>htmlID</span> <code class='quiet'>(any)</code>
+	    id in html code
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='plotstack'>
+      plotStack
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Plots a stacked bar given all the set of data</p>
+
+
+  <div class='pre p1 fill-light mt0'>plotStack(inputData: any, htmlID: any, amount: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData</span> <code class='quiet'>(any)</code>
+	    data to be used
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>htmlID</span> <code class='quiet'>(any)</code>
+	    id in html code
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>(any)</code>
+	    how many of top types are wanted
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='plotscatter'>
+      plotScatter
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Creates a scatter plot based on the input data
+It is assumed that the input data is an array of timeValue pair</p>
+
+
+  <div class='pre p1 fill-light mt0'>plotScatter(titleName: any, secondName: any, inputData: any, htmlID: any, mode: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>titleName</span> <code class='quiet'>(any)</code>
+	    title of plot
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>secondName</span> <code class='quiet'>(any)</code>
+	    other name
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inputData</span> <code class='quiet'>(any)</code>
+	    data to be used
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>htmlID</span> <code class='quiet'>(any)</code>
+	    id in html file
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>mode</span> <code class='quiet'>(any)</code>
+	    0 = individual plot, otherwise it is a type
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
