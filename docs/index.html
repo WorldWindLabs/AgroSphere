@@ -115,6 +115,16 @@
               
                 
                 <li><a
+                  href='#tabsfn'
+                  class="">
+                  tabsFn
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#givewmstlayersfunctionality'
                   class="">
                   giveWMSTLayersFunctionality
@@ -439,7 +449,7 @@
   <p>Loads all CSV Files</p>
 
 
-  <div class='pre p1 fill-light mt0'>loadCSVData(csvAddress: any)</div>
+  <div class='pre p1 fill-light mt0'>loadCSVData(csvAddress: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
   
   
 
@@ -456,8 +466,9 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>csvAddress</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>csvAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    contains the address of the csvFile
+
           </div>
           
         </div>
@@ -467,6 +478,15 @@
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
+        The object fields are based on the
+headings in the csv file.
+
+      
+    
   
 
   
@@ -499,7 +519,7 @@
   <p>Loads weather stations CSV Data Array into Array of Weather Stations</p>
 
 
-  <div class='pre p1 fill-light mt0'>loadWeatherStation(csvData: any, a: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</div>
+  <div class='pre p1 fill-light mt0'>loadWeatherStation(csvData: DataArray): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;GlobalDataPoint></div>
   
   
 
@@ -516,16 +536,9 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>csvData</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>a</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
-	    string containing the address of the csv file.
+            <span class='code bold'>csvData</span> <code class='quiet'>(DataArray)</code>
+	    contains the weather station location and
+details.
 
           </div>
           
@@ -536,6 +549,15 @@
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;GlobalDataPoint></code>:
+        A datastructure that maps a value
+to a location.
+
+      
+    
   
 
   
@@ -568,7 +590,7 @@
   <p>Loads the weather station layer</p>
 
 
-  <div class='pre p1 fill-light mt0'>loadWeatherLayer(wwd: any, weatherDataArray: any, null: WorldWindow)</div>
+  <div class='pre p1 fill-light mt0'>loadWeatherLayer(wwd: WorldWindow, weatherDataArray: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;DataLayer>)</div>
   
   
 
@@ -585,24 +607,18 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>wwd</span> <code class='quiet'>(WorldWindow)</code>
+	    is the  world window of the globe
+
           </div>
           
         </div>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>weatherDataArray</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>null</span> <code class='quiet'>(WorldWindow)</code>
-	    , the world window of the globe
+            <span class='code bold'>weatherDataArray</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;DataLayer>)</code>
+	    is
+an array containing the WMS Layers that needs to be loaded
 
           </div>
           
@@ -645,7 +661,7 @@
   <p>Loads country CSV Data Array into Array of Countries</p>
 
 
-  <div class='pre p1 fill-light mt0'>loadCountries(countryDataArray: any, The: DataArray)</div>
+  <div class='pre p1 fill-light mt0'>loadCountries(countryDataArray: DataArray): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
   
   
 
@@ -662,17 +678,9 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>countryDataArray</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>The</span> <code class='quiet'>(DataArray)</code>
-	    DataArray that contains data of where the
-countries are located (centre-based).
+            <span class='code bold'>countryDataArray</span> <code class='quiet'>(DataArray)</code>
+	    DataArray that contains data of
+where the countries are located (centre-based).
 
           </div>
           
@@ -683,6 +691,15 @@ countries are located (centre-based).
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>:
+        temp is an array containing all
+countries
+
+      
+    
   
 
   
@@ -715,7 +732,7 @@ countries are located (centre-based).
   <p>Loads the country layer</p>
 
 
-  <div class='pre p1 fill-light mt0'>loadCountryLayer(wwd: any, countryDataArray: any, The: WorldWindow, The: DataArray)</div>
+  <div class='pre p1 fill-light mt0'>loadCountryLayer(wwd: WorldWindow, countryDataArray: DataArray): DataLayer</div>
   
   
 
@@ -732,24 +749,8 @@ countries are located (centre-based).
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>countryDataArray</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>The</span> <code class='quiet'>(WorldWindow)</code>
-	    window to draw the things on.
+            <span class='code bold'>wwd</span> <code class='quiet'>(WorldWindow)</code>
+	    is the window to draw the things on.
 
           </div>
           
@@ -757,8 +758,9 @@ countries are located (centre-based).
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>The</span> <code class='quiet'>(DataArray)</code>
-	    data array containing where the flags need to be placed
+            <span class='code bold'>countryDataArray</span> <code class='quiet'>(DataArray)</code>
+	    is
+the data array containing where the flags need to be placed
 
           </div>
           
@@ -769,6 +771,15 @@ countries are located (centre-based).
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>DataLayer</code>:
+        an object containing the layer and other details
+such as configuration of the layer
+
+      
+    
   
 
   
@@ -801,7 +812,7 @@ countries are located (centre-based).
   <p>hardcoded link: loads appropriate geoJSON data</p>
 
 
-  <div class='pre p1 fill-light mt0'>loadGEOJsonData(geoJSONAddress: any, The: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  <div class='pre p1 fill-light mt0'>loadGEOJsonData(geoJSONAddress: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
   
   
 
@@ -818,15 +829,7 @@ countries are located (centre-based).
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>geoJSONAddress</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>The</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>geoJSONAddress</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    address where the geoJSON file is at.
 
           </div>
@@ -838,6 +841,15 @@ countries are located (centre-based).
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+        contains details of the country borders in object
+format.
+
+      
+    
   
 
   
@@ -870,7 +882,7 @@ countries are located (centre-based).
   <p>Generates the html for the weather search</p>
 
 
-  <div class='pre p1 fill-light mt0'>generateWeatherHTML(countryDataArray: any, array: DataArray)</div>
+  <div class='pre p1 fill-light mt0'>generateWeatherHTML(countryDataArray: DataArray)</div>
   
   
 
@@ -887,17 +899,9 @@ countries are located (centre-based).
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>countryDataArray</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>array</span> <code class='quiet'>(DataArray)</code>
-	    of data containing the country codes to be
-loaded onto the HTML
+            <span class='code bold'>countryDataArray</span> <code class='quiet'>(DataArray)</code>
+	    of data containing the country
+codes to be loaded onto the HTML
 
           </div>
           
@@ -937,7 +941,7 @@ loaded onto the HTML
   </div>
   
 
-  <p>Provides functionality to the weather button.</p>
+  <p>Provides functionality to the weather button. (Hardcoded API Key)</p>
 
 
   <div class='pre p1 fill-light mt0'>giveWeatherButtonFunctionality()</div>
@@ -1024,6 +1028,53 @@ readjusting graphs.</p>
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='tabsfn'>
+      tabsFn
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Lets the resizable tab to resizable</p>
+
+
+  <div class='pre p1 fill-light mt0'>tabsFn</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='givewmstlayersfunctionality'>
       giveWMSTLayersFunctionality
     </h3>
@@ -1037,7 +1088,7 @@ the part which lets the controls to be visible and turning on the
 the layer on and off</p>
 
 
-  <div class='pre p1 fill-light mt0'>giveWMSTLayersFunctionality(layerNumber: any, layer: any, A: integer, The: layer)</div>
+  <div class='pre p1 fill-light mt0'>giveWMSTLayersFunctionality(layerNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, layer: Layer)</div>
   
   
 
@@ -1054,24 +1105,8 @@ the layer on and off</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>layer</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>A</span> <code class='quiet'>(integer)</code>
-	    number that shows which layer is associated
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    shows which layer is associated
 
           </div>
           
@@ -1079,8 +1114,8 @@ the layer on and off</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>The</span> <code class='quiet'>(layer)</code>
-	    layer that will be toggled on and off
+            <span class='code bold'>layer</span> <code class='quiet'>(Layer)</code>
+	    The layer that will be toggled on and off
 
           </div>
           
@@ -1123,7 +1158,7 @@ the layer on and off</p>
   <p>preloads WMST layers</p>
 
 
-  <div class='pre p1 fill-light mt0'>loadWMSTLayers(wwd: WorldWind, layerManager: LayerManager, layerPoint: LayerPoint, layerNumber: any)</div>
+  <div class='pre p1 fill-light mt0'>loadWMSTLayers(wwd: WorldWind, layerManager: LayerManager, layerPoint: LayerPoint, layerNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): WmtsLayer</div>
   
   
 
@@ -1167,8 +1202,10 @@ the layer on and off</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    the number of the layer
+inserted for control purposes
+
           </div>
           
         </div>
@@ -1178,6 +1215,14 @@ the layer on and off</p>
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>WmtsLayer</code>:
+        The WMST Layer that has just been loaded
+
+      
+    
   
 
   
@@ -1211,7 +1256,7 @@ the layer on and off</p>
 Given a layerName and its layernumber, generate a layer control block</p>
 
 
-  <div class='pre p1 fill-light mt0'>generateLayerControl(wwd: any, wmsConfig: any, wmsLayerCapabilities: any, layerName: any, layerNumber: any)</div>
+  <div class='pre p1 fill-light mt0'>generateLayerControl(wwd: WorldWindow, wmsConfig: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, wmsLayerCapabilities: WmsLayerCapabilities, layerName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, layerNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</div>
   
   
 
@@ -1228,7 +1273,7 @@ Given a layerName and its layernumber, generate a layer control block</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>wwd</span> <code class='quiet'>(WorldWindow)</code>
 	    world window
 
           </div>
@@ -1237,7 +1282,7 @@ Given a layerName and its layernumber, generate a layer control block</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wmsConfig</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>wmsConfig</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
 	    object containing how layer should look
 
           </div>
@@ -1246,9 +1291,8 @@ Given a layerName and its layernumber, generate a layer control block</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wmsLayerCapabilities</span> <code class='quiet'>(any)</code>
-	    object representing what the wms
-layer can do
+            <span class='code bold'>wmsLayerCapabilities</span> <code class='quiet'>(WmsLayerCapabilities)</code>
+	    object representing what the wmslayer can do
 
           </div>
           
@@ -1256,7 +1300,7 @@ layer can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>layerName</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
 	    name of layer
 
           </div>
@@ -1265,7 +1309,7 @@ layer can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
 	    number of layer in list
 
           </div>
@@ -1306,10 +1350,10 @@ layer can do
   </div>
   
 
-  <p>creates a legend for a layer given its name and number</p>
+  <p>Creates a legend for a layer given its name and number</p>
 
 
-  <div class='pre p1 fill-light mt0'>generateLegend(wmsLayerCapabilities: any)</div>
+  <div class='pre p1 fill-light mt0'>generateLegend(wmsLayerCapabilities: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
   
   
 
@@ -1326,7 +1370,7 @@ layer can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wmsLayerCapabilities</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>wmsLayerCapabilities</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
 	    object representing what the wms layer
 can do
 
@@ -1339,6 +1383,14 @@ can do
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        contains the HTML to generate
+
+      
+    
   
 
   
@@ -1371,7 +1423,7 @@ can do
   <p>Generates opacity control for a layer in HTML</p>
 
 
-  <div class='pre p1 fill-light mt0'>generateOpacityControl(layerNumber: any)</div>
+  <div class='pre p1 fill-light mt0'>generateOpacityControl(layerNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
   
   
 
@@ -1388,7 +1440,7 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
 	    identifier to place layer
 
           </div>
@@ -1400,6 +1452,14 @@ can do
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        contains the HTML for opacity control
+
+      
+    
   
 
   
@@ -1432,7 +1492,7 @@ can do
   <p>Gives layer opacity control given its name</p>
 
 
-  <div class='pre p1 fill-light mt0'>giveOpacitySliderFunctionality(wwd: any, layerName: any, layerNumber: any)</div>
+  <div class='pre p1 fill-light mt0'>giveOpacitySliderFunctionality(wwd: WorldWindow, layerName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, layerNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</div>
   
   
 
@@ -1449,7 +1509,7 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>wwd</span> <code class='quiet'>(WorldWindow)</code>
 	    world window
 
           </div>
@@ -1458,7 +1518,7 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>layerName</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
 	    name of layer to give opacity control
 
           </div>
@@ -1467,7 +1527,7 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
 	    id of layer
 
           </div>
@@ -1558,7 +1618,7 @@ can do
   <p>Generates time HTML control for specified layer</p>
 
 
-  <div class='pre p1 fill-light mt0'>generateTimeControl(layerName: any, layerNumber: any, wmsConfig: any)</div>
+  <div class='pre p1 fill-light mt0'>generateTimeControl(layerName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, layerNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, wmsConfig: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
   
   
 
@@ -1575,7 +1635,7 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>layerName</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
 	    name of layer to give time control
 
           </div>
@@ -1584,7 +1644,7 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
 	    number id for layer
 
           </div>
@@ -1593,7 +1653,7 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wmsConfig</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>wmsConfig</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
 	    WMS configuration for layer control
 
           </div>
@@ -1605,6 +1665,14 @@ can do
 
   
 
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        contains the HTML of the time control
+
+      
+    
   
 
   
@@ -1637,7 +1705,7 @@ can do
   <p>Simply provides functionality to the time control button.</p>
 
 
-  <div class='pre p1 fill-light mt0'>giveTimeButtonFunctionality(wwd: any, layerName: any, layerNumber: any, wmsConfig: any)</div>
+  <div class='pre p1 fill-light mt0'>giveTimeButtonFunctionality(wwd: WorldWindow, layerName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, layerNumber: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, wmsConfig: any, the: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
   
   
 
@@ -1654,24 +1722,27 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>wwd</span> <code class='quiet'>(WorldWindow)</code>
+	    the world window for the globe.
+
           </div>
           
         </div>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>layerName</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+	    the name of the layer ro search for
+
           </div>
           
         </div>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerNumber</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>layerNumber</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+	    the div to refer to
+
           </div>
           
         </div>
@@ -1680,6 +1751,15 @@ can do
           <div>
             <span class='code bold'>wmsConfig</span> <code class='quiet'>(any)</code>
 	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>the</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+	    configuration of the layer
+
           </div>
           
         </div>
@@ -1721,7 +1801,7 @@ can do
   <p>Searches for a layer given name and returns the layer object</p>
 
 
-  <div class='pre p1 fill-light mt0'>getLayerFromName(wwd: any, layerName: any): any</div>
+  <div class='pre p1 fill-light mt0'>getLayerFromName(wwd: WorldWindow, layerName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): any</div>
   
   
 
@@ -1738,8 +1818,8 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>wwd</span> <code class='quiet'>(any)</code>
-	    world window
+            <span class='code bold'>wwd</span> <code class='quiet'>(WorldWindow)</code>
+	    world window of the globe
 
           </div>
           
@@ -1747,7 +1827,7 @@ can do
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>layerName</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>layerName</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
 	    name of layer to search for
 
           </div>
@@ -1763,7 +1843,7 @@ can do
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code>any</code>:
-        the correct layer object
+        the correct layer object, 0 otherwise
 
       
     

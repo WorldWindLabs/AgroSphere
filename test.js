@@ -264,7 +264,9 @@ requirejs(['./src/WorldWind',
 		////////////////////////////////////////////////////////////////////////
         /**
          * Loads all CSV Files
-         * @returns {Array of CSV data}
+		 * @param {String} csvAddress contains the address of the csvFile
+         * @returns {Array<Object>} The object fields are based on the 
+		 * headings in the csv file.
          */
 		function loadCSVData(csvAddress){
 			//Find the file
@@ -285,8 +287,10 @@ requirejs(['./src/WorldWind',
 		
 		/**
 		 * Loads weather stations CSV Data Array into Array of Weather Stations
-		 * @param {String} a string containing the address of the csv file.
-		 * @returns {Array of Weather}
+		 * @param {DataArray} csvData contains the weather station location and 
+		 * details.
+		 * @returns {Array<GlobalDataPoint>} A datastructure that maps a value
+		 * to a location.
 		 */
 		
 		function loadWeatherStation(csvData) {
@@ -303,8 +307,9 @@ requirejs(['./src/WorldWind',
 		
 		/**
 		 * Loads the weather station layer
-		 * @param {WorldWindow}, the world window of the globe
-		 * @param {Array of DataLayers} An array containing the WMS Layers
+		 * @param {WorldWindow} wwd is the  world window of the globe
+		 * @param {Array<DataLayer>} weatherDataArray is 
+		 * an array containing the WMS Layers that needs to be loaded
 		 */
 		 
 		function loadWeatherLayer(wwd, weatherDataArray) {
@@ -317,9 +322,10 @@ requirejs(['./src/WorldWind',
 		
 		/**
          * Loads country CSV Data Array into Array of Countries
-		 * @param {DataArray} The DataArray that contains data of where the
-		 * countries are located (centre-based).
-         * @returns {Array of Countries}
+		 * @param {DataArray} countryDataArray DataArray that contains data of 
+		 * where the countries are located (centre-based).
+         * @returns {Array} temp is an array containing all 
+		 * countries
          */
 		 
 		function loadCountries(countryDataArray) {
@@ -339,8 +345,11 @@ requirejs(['./src/WorldWind',
 		}
 		/**
 		 * Loads the country layer
-		 * @param {WorldWindow} The window to draw the things on.
-		 * @param {DataArray} The data array containing where the flags need to be placed
+		 * @param {WorldWindow} wwd is the window to draw the things on.
+		 * @param {DataArray} countryDataArray is 
+		 * the data array containing where the flags need to be placed
+		 * @returns {DataLayer} an object containing the layer and other details
+		 * such as configuration of the layer
 		 */
 		function loadCountryLayer(wwd, countryDataArray) {
 			var countryLayer = new DataLayer('Countries');
@@ -351,8 +360,9 @@ requirejs(['./src/WorldWind',
 		}
         /**
          * hardcoded link: loads appropriate geoJSON data
-		 * @param {string} The address where the geoJSON file is at.
-         * @returns {geoJSON data}
+		 * @param {string} geoJSONAddress address where the geoJSON file is at.
+         * @returns {Object} contains details of the country borders in object
+		 * format.
          */
         function loadGEOJsonData(geoJSONAddress) {
             //Load GEOJSON
@@ -384,8 +394,8 @@ requirejs(['./src/WorldWind',
 		
         /**
          * Generates the html for the weather search
-         * @param {DataArray} array of data containing the country codes to be
-		 * loaded onto the HTML
+         * @param {DataArray} countryDataArray of data containing the country 
+		 * codes to be loaded onto the HTML
          */
         function generateWeatherHTML(countryDataArray) {
 			var countryData = loadCountries(countryDataArray);
@@ -407,11 +417,9 @@ requirejs(['./src/WorldWind',
 			weatherHTML += '<div id="searchDetails"></div>'
             $('#weather').append(weatherHTML);
         }
-
-
-        //Provides functionality for the weather button search
+		
         /**
-         * Provides functionality to the weather button.
+         * Provides functionality to the weather button. (Hardcoded API Key)
          */
         function giveWeatherButtonFunctionality() {
 			var APIKEY = '26fb68df7323284ea4430d8e4d3c60b1';
@@ -470,13 +478,6 @@ requirejs(['./src/WorldWind',
             });
         }
 	
-	
-        /* Checks to see if each UI tab is visible,
-         * depending on which tab is active, highlight
-				 * the appropriate glyphicon. Also hides the resizable
-				 * class appropriately in order to disable the resizing
-				 * when tab is no longer active.
-				 */
 		/**
 		 * Checks if the tab should be displayed. Also adds sensors to create 
 		 * readjusting graphs.
@@ -548,8 +549,8 @@ requirejs(['./src/WorldWind',
             });
         });
 
-		/* Setting height of resizable based on
-         * content of the active tab.
+		/**
+		 * Lets the resizable tab to resizable
 		 */
 		var tabsFn = (function() {
 
@@ -584,8 +585,8 @@ requirejs(['./src/WorldWind',
 		 * Gives functionality to the WMST buttons associated with the layers
 		 * the part which lets the controls to be visible and turning on the 
 		 * the layer on and off
-		 * @param {integer} A number that shows which layer is associated
-		 * @param {layer} The layer that will be toggled on and off
+		 * @param {number} layerNumber shows which layer is associated
+		 * @param {Layer} layer The layer that will be toggled on and off
 		 */
 		function giveWMSTLayersFunctionality(layerNumber, layer) {				
 			$('#layerToggle' + layerNumber).click(function() {
@@ -615,8 +616,9 @@ requirejs(['./src/WorldWind',
          * @param {LayerManager} layerManager - layerManager from layerManager.js
 		 * @param {LayerPoint} layerPoint - 
 		 * The layer itself with other details to display
-		 * @layerNumber {integer} layerNumber - the number of the layer 
+		 * @param {number} layerNumber - the number of the layer 
 		 * inserted for control purposes
+		 * @returns {WmtsLayer} The WMST Layer that has just been loaded
          */
         function loadWMSTLayers(wwd, layerManager, layerPoint, layerNumber) {
             // Called asynchronously to parse and create the WMS layer
@@ -673,14 +675,14 @@ requirejs(['./src/WorldWind',
         }		
         /**
          * This function generates the HTML first then supplies functionality
-         *Given a layerName and its layernumber, generate a layer control block
+         * Given a layerName and its layernumber, generate a layer control block
          *
-         * @param wwd - world window
-         * @param wmsConfig - object containing how layer should look
-         * @param wmsLayerCapabilities - object representing what the wms
-         *        layer can do
-         * @param layerName - name of layer
-         * @param layerNumber - number of layer in list
+         * @param {WorldWindow} wwd - world window
+         * @param {Object} wmsConfig - object containing how layer should look
+         * @param {WmsLayerCapabilities} wmsLayerCapabilities - 
+		 * object representing what the wmslayer can do
+         * @param {String} layerName - name of layer
+         * @param {Number} layerNumber - number of layer in list
          */
         function generateLayerControl(wwd, wmsConfig, wmsLayerCapabilities,
                                       layerName, layerNumber) {
@@ -717,11 +719,11 @@ requirejs(['./src/WorldWind',
         }
 
         /**
-         * creates a legend for a layer given its name and number
+         * Creates a legend for a layer given its name and number
          *
-         * @param wmsLayerCapabilities - object representing what the wms layer
-         *                               can do
-         * @returns {string containing HTML code to create a legend}
+         * @param {Object} wmsLayerCapabilities - object representing what the wms layer
+		 * can do
+         * @returns {String} contains the HTML to generate 
          */
         function generateLegend(wmsLayerCapabilities) {
 
@@ -746,8 +748,8 @@ requirejs(['./src/WorldWind',
         /**
          * Generates opacity control for a layer in HTML
          *
-         * @param layerNumber - identifier to place layer
-         * @returns {string containing HTML to create opacity slider for layer}
+         * @param {Number} layerNumber - identifier to place layer
+         * @returns {String} contains the HTML for opacity control
          */
         function generateOpacityControl(layerNumber) {
             //Create the general box
@@ -766,9 +768,9 @@ requirejs(['./src/WorldWind',
         /**
          * Gives layer opacity control given its name
          *
-         * @param wwd - world window
-         * @param layerName - name of layer to give opacity control
-         * @param layerNumber - id of layer
+         * @param {WorldWindow} wwd - world window
+         * @param {String} layerName - name of layer to give opacity control
+         * @param {Number} layerNumber - id of layer
          */
         function giveOpacitySliderFunctionality(wwd, layerName, layerNumber) {
             //Add functionality to the slider
@@ -841,10 +843,10 @@ requirejs(['./src/WorldWind',
         /**
          * Generates time HTML control for specified layer
          *
-         * @param layerName - name of layer to give time control
-         * @param layerNumber - number id for layer
-         * @param wmsConfig - WMS configuration for layer control
-         * @returns {string containing HTML code for time control}
+         * @param {String} layerName - name of layer to give time control
+         * @param {Number} layerNumber - number id for layer
+         * @param {Object} wmsConfig - WMS configuration for layer control
+         * @returns {String} contains the HTML of the time control
          */
         function generateTimeControl(layerName, layerNumber, wmsConfig) {
             //Create the general box
@@ -884,6 +886,10 @@ requirejs(['./src/WorldWind',
         }
 		/**
 		 * Simply provides functionality to the time control button.
+		 * @param {WorldWindow} wwd - the world window for the globe.
+		 * @param {String} layerName - the name of the layer ro search for
+		 * @param {Number} layerNumber - the div to refer to
+		 * @param {Object} the configuration of the layer
 		 */
         //Provides basic functionality for the time slider
         function giveTimeButtonFunctionality(wwd, layerName, layerNumber,
@@ -935,9 +941,9 @@ requirejs(['./src/WorldWind',
         /**
          * Searches for a layer given name and returns the layer object
          *
-         * @param wwd - world window
-         * @param layerName - name of layer to search for
-         * @returns the correct layer object
+         * @param {WorldWindow} wwd - world window of the globe
+         * @param {String} layerName - name of layer to search for
+         * @returns the correct layer object, 0 otherwise
          */
         function getLayerFromName(wwd, layerName) {
             var i = 0;
