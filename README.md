@@ -59,6 +59,9 @@ For a guide on how this app may be used in the classroom, click the button below
 This is AgroSphere running on mobile. All of the functionalities of the app are available in your hands!
 **(PLEASE run the app on WiFi only and not on your data plan because this app will consume a significant amount of data and it will be slow to load.)**
 
+Expected load time for PC: ~15 seconds.
+Expected load time for mobile phone: ~ 1 minute.
+
 <a href="https://www.youtube.com/watch?v=6Js36zha2Ps">
 <img src="images/mobiledemo.png" />
 </a>
@@ -67,6 +70,7 @@ This is AgroSphere running on mobile. All of the functionalities of the app are 
 
 <a href="https://fluxnet.fluxdata.org/data/" target="_blank">Climate Data,</a>
 <a href="http://www.fao.org/faostat/en/#data/" target="_blank">Agriculture Data,</a>
+<a href="http://popstats.unhcr.org/en/asylum_seekers" target="_blank">Refguee Data,</a>
 <a href="https://github.com/johan/world.geo.json" target="_blank">GeoJSON Border Data,</a>
 and <a href="https://developers.google.com/public-data/docs/canonical/countries_csv" target="_blank">Country Coordinates.</a>
 
@@ -85,7 +89,7 @@ In addition, an alumni from the University of Pennsylvania commented on the app'
 
 You are welcome to add more climate and agriculture data using our built-in CSV reading functionality and the WebWorldWind Placemarks feature. For example, drought and flood data can be added and displayed on our app to examine how agriculture has been affected by those particular disasters.
 
-#### Updated as of 8/12/17
+#### Updated as of 8/23/17
 
 ***
 
