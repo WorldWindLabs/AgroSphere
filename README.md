@@ -1,6 +1,8 @@
 <img src="images/nasalogo.png" height="100"/>
 
 # <a href="https://worldwind.arc.nasa.gov/agrosphere/">AgroSphere</a>
+(The a and s in agrosphere are not capitalized! Otherwise, the link will not work!)
+
 ## <a href="https://worldwind.arc.nasa.gov/agrosphere/about.html">Link to Our Website</a>
 
 ### NASA World Wind is a free, open-source API that provides the tools to create interactive - 
@@ -44,7 +46,7 @@ For a guide on how this app may be used in the classroom, click the button below
 * Dynamically visualize various types of agriculture and climate data, such as rainfall, crop production and prices, and much more, from hundreds of countries across the globe.
 * Graph agriculture data from 1961-2014 and climate data from 1989-2014 to view them simultaneously.
 * Adjust time and opacity of image layers displayed on the globe and compare the given visual data with plotted agriculture and climate data.
-* Explore the Geo-Comparison Agriculture data visualized on the globe for hundreds crop production datasets. Juxtapose data between any number of colors using a simple color scheme legend created using standard deviation formulas.
+* Explore the Geo-Comparison Agriculture data visualized on the globe for hundreds of crop production datasets. Juxtapose data between any number of colors using a simple color scheme legend created using standard deviation formulas.
 * Search for current weather data for any city around the globe. Results include temperature, sunrise/sunset, 
 * Load in any number of spatiotemporal geographically-accurate data from multiple sources, using data formats such as GeoJSON, WMS, and CSV.
 * Use the location Search tool in the View Options tab to immediately visit any desired location.
@@ -55,16 +57,24 @@ For a guide on how this app may be used in the classroom, click the button below
 <img src="images/mobilelive.jpg"/>
 
 This is AgroSphere running on mobile. All of the functionalities of the app are available in your hands!
+**(PLEASE run the app on WiFi only and not on your data plan because this app will consume a significant amount of data and it will be slow to load.)**
 
-<a href="https://www.youtube.com/watch?v=Fyn4-Hgkip0">
+<a href="https://www.youtube.com/watch?v=6Js36zha2Ps">
 <img src="images/mobiledemo.png" />
 </a>
+
+## Data Sources Used
+
+<a href="https://fluxnet.fluxdata.org/data/" target="_blank">Climate Data,</a>
+<a href="http://www.fao.org/faostat/en/#data/" target="_blank">Agriculture Data,</a>
+<a href="https://github.com/johan/world.geo.json" target="_blank">GeoJSON Border Data,</a>
+and <a href="https://developers.google.com/public-data/docs/canonical/countries_csv" target="_blank">Country Coordinates.</a>
 
 ## Outreach
 
 We discussed our web app and work-in-progress with Martin C. Heller from the Center for Sustainable Systems at University of Michigan. He offered us critiques from a researcher's point of view.
 We also tested our app on NASA interns from the STEM Teacher and Researcher (STAR) program to receive suggestions from an educational perspective.
-Finally, we showcased our app to professional web app developers from institutions such as the University of Pennsylvania.
+In addition, an alumni from the University of Pennsylvania commented on the app's user interface design and changes were made accordingly. Finally, the app was tested with members of the educational institutes that each intern was affiliated with.
 
 ## How to Run and Develop AgroSphere
 
@@ -75,7 +85,7 @@ Finally, we showcased our app to professional web app developers from institutio
 
 You are welcome to add more climate and agriculture data using our built-in CSV reading functionality and the WebWorldWind Placemarks feature. For example, drought and flood data can be added and displayed on our app to examine how agriculture has been affected by those particular disasters.
 
-#### Updated as of 8/3/17
+#### Updated as of 8/12/17
 
 ***
 

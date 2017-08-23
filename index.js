@@ -1171,6 +1171,8 @@ requirejs({paths:{
                     var k = 0;
                     var l = 0;
                     for(j = 0; j < agriData.length; j++) {
+											  var tempButton = $('#geoCompType' + j);
++												tempButton.removeClass('active');
                         for(k = 0; k < agriData[j].dataValues.length; k++) {
                             if(agriData[j].dataValues[k].typeName ==
                                 buttonName) {
