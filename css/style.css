@@ -169,11 +169,13 @@ body {
 
 /* mobile media queries for tab width*/
 /* ipad pro */
+/* ipad pro media queries commented out 
 @media only screen and (max-width: 1024px) {
     .tab-content {
         width:950px;
     }
 }
+*/
 /* ipad */
 @media only screen and (max-width: 768px) {
     .tab-content {
@@ -655,6 +657,7 @@ button a:hover {
 }
 
 /* ipad pro horizontal */
+/* commenting out media queries
 @media only screen and (max-width: 1366px) {
     #legend {
         width:80%
@@ -671,7 +674,7 @@ button a:hover {
         width:65%;
     }
 }
-
+*/
 
 #legendtext {
   display:none;
