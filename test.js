@@ -19,7 +19,7 @@ requirejs.config({
 	}
 });
 requirejs(['./src/WorldWind',
-        './LayerManager', 'src/countries/DataLayer', 
+        './LayerManager', 'src/countries/DataLayer',
 		'src/countries/GlobalDataPoint',
 		'src/array/DataArray',
 		'src/customlayer/LayerPoint',
@@ -34,41 +34,41 @@ requirejs(['./src/WorldWind',
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 		WorldWind.configuration.baseUrl = '';
         var wwd = new WorldWind.WorldWindow("canvasOne");
-		
+
 		//Loading the files (raw data)
-		var countryData = 
+		var countryData =
 			new DataArray(loadCSVData('csvdata/countries.csv'), {});
-		var stationData = 
+		var stationData =
 			new DataArray(loadCSVData('csvdata/weatherstations.csv') , {});
 		var agriDef = new DataArray(loadCSVData('csvdata/cropAcros.csv'));
-		
+
 		var csvMultiData = loadCSVDataArray();
-		var agriData = new DataArray(convertArrayToDataSet(csvMultiData[0]), 
+		var agriData = new DataArray(convertArrayToDataSet(csvMultiData[0]),
 			{HTML_ID: 'agri', HTML_Label: 'Ag. Production Data List',
-			 definitions: agriDef, searchName: 'crop production', 
+			 definitions: agriDef, searchName: 'crop production',
 			 units: ' Production in tonnes'});
         var atmoData = new DataArray(convertArrayToDataSet(csvMultiData[1]),
 			{HTML_ID: 'atmo', HTML_Label: ' Crops'});
         var priceData = new DataArray(convertArrayToDataSet(csvMultiData[2]),
-			{HTML_ID: 'price', HTML_Label: 'Price Data List', 
+			{HTML_ID: 'price', HTML_Label: 'Price Data List',
 				searchName: 'prices'});
         var liveData = new DataArray(convertArrayToDataSet(csvMultiData[3]),
-			{HTML_ID: 'live', HTML_Label: 'Livestock Data List', 
+			{HTML_ID: 'live', HTML_Label: 'Livestock Data List',
 				searchName: 'livestock'});
         var emissionAgriData = new DataArray(
 			convertArrayToDataSet(csvMultiData[4]),
-			{HTML_ID: 'emission', HTML_Label: 'Emission Data List', 
+			{HTML_ID: 'emission', HTML_Label: 'Emission Data List',
 				searchName: 'emission output type'});
         var atmoDataMonthly = new DataArray(convertArrayToDataSet(csvMultiData[5]),
 			{HTML_ID: 'atmoMonth', HTML_Label: 'Monthly Atmo List'});
         var pestiData = new DataArray(convertArrayToDataSet(csvMultiData[6]),
-			{HTML_ID: 'pesti', HTML_Label: 'Pesticide Data List', 
+			{HTML_ID: 'pesti', HTML_Label: 'Pesticide Data List',
 				searchName: 'crop production'});
         var fertiData = new DataArray(convertArrayToDataSet(csvMultiData[7]),
 			{HTML_ID: 'ferti', HTML_Label: 'Fertilizer Data List',
 				 searchName: 'fertiliser use'});
         var yieldData = new DataArray(convertArrayToDataSet(csvMultiData[8]),
-			{HTML_ID: 'yield', HTML_Label: 'Yield Data List', 
+			{HTML_ID: 'yield', HTML_Label: 'Yield Data List',
 				 searchName: 'yield output'});
 		var refugeeData = new DataArray(convertArrayToDataSet(csvMultiData[9]));
 		agriData.options.subData = [refugeeData.values];
@@ -77,7 +77,7 @@ requirejs(['./src/WorldWind',
 			pestiData, fertiData, yieldData];
 		var stationButtonArray = [atmoData, atmoDataMonthly];
 		var geoJSONData = loadGEOJsonData('./geo/data/countries.geojson');
-		
+
         var layers = [
             {layer: new WorldWind.BMNGLayer(), enabled: false},
             {layer: new WorldWind.BMNGLandsatLayer(), enabled: false},
@@ -92,31 +92,31 @@ requirejs(['./src/WorldWind',
         for (var l = 0; l < layers.length; l++) {
             layers[l].layer.enabled = layers[l].enabled;
             wwd.addLayer(layers[l].layer);
-			
+
         }
 
         // Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(wwd);
-		
+
 		////////////////////////////////////////////////////////////////////////
 		//Layer Loading
 		////////////////////////////////////////////////////////////////////////
 		loadCountryLayer(wwd, countryData);
 		loadWeatherLayer(wwd, stationData);
-		
-		var rainfallLayer = 
+
+		var rainfallLayer =
 			new LayerPoint("https://neowms.sci.gsfc.nasa.gov/wms/wms",
 			"TRMM_3B43M" );
-		var seaSurfaceLayer = 
+		var seaSurfaceLayer =
 			new LayerPoint("https://neowms.sci.gsfc.nasa.gov/wms/wms",
 			"MYD28M");
-		var landSurfaceDay = 
+		var landSurfaceDay =
 			new LayerPoint("https://neowms.sci.gsfc.nasa.gov/wms/wms",
 			"MOD11C1_D_LSTDA");
-		var landSurfaceNight = 
+		var landSurfaceNight =
 			new LayerPoint("https://neowms.sci.gsfc.nasa.gov/wms/wms",
 			"MOD11C1_D_LSTNI");
-		var trueColour = 
+		var trueColour =
 			new LayerPoint("https://neowms.sci.gsfc.nasa.gov/wms/wms",
 			"MOD_143D_RR");
 		var WMSTLayerArray = [];
@@ -132,7 +132,7 @@ requirejs(['./src/WorldWind',
 				loadWMSTLayers(wwd, layerManager, WMSTLayerArray[i], i));
 		}
 		layerManager.synchronizeLayerList();
-		
+
 		var starFieldLayer = new WorldWind.StarFieldLayer();
         var atmosphereLayer = new WorldWind.AtmosphereLayer();
 
@@ -167,7 +167,7 @@ requirejs(['./src/WorldWind',
                 wwd.redraw();
             }
         }
-		
+
 		////////////////////////////////////////////////////////////////////////
 		//Event Listening
 		////////////////////////////////////////////////////////////////////////
@@ -201,11 +201,11 @@ requirejs(['./src/WorldWind',
 
                         //Find the country
                         if (pickList.objects[i].userObject.type == 'Countries') {
-							generateCountryTab(countryButtonDataArray, 
+							generateCountryTab(countryButtonDataArray,
 									countryData, placeLat, placeLon);
                         } else if (pickList.objects[i].userObject.type ==
                             'Weather Station') {
-							generateStationTab(stationButtonArray, stationData, 
+							generateStationTab(stationButtonArray, stationData,
 								placeLat, placeLon, countryData);
                         }
                     }
@@ -242,7 +242,7 @@ requirejs(['./src/WorldWind',
         // Listen for taps on mobile devices.
         var tapRecognizer = new WorldWind.TapRecognizer(wwd, handleClick);
 
-		
+
 		////////////////////////////////////////////////////////////////////////
 		//Tab Generations
 		////////////////////////////////////////////////////////////////////////
@@ -253,19 +253,19 @@ requirejs(['./src/WorldWind',
         generateGeoComparisonButton(agriData);
         giveGeoComparisonFunctionality(agriData, geoJSONData, wwd,
             layerManager);
-			
+
 		generateRemoveButton();
-		
+
 		//Initiate with a hardcoded link
 		generateCountryTab(countryButtonDataArray, countryData, 64,26);
-		
+
 		////////////////////////////////////////////////////////////////////////
 		// Helper Functions
 		////////////////////////////////////////////////////////////////////////
         /**
          * Loads all CSV Files
 		 * @param {String} csvAddress contains the address of the csvFile
-         * @returns {Array<Object>} The object fields are based on the 
+         * @returns {Array<Object>} The object fields are based on the
 		 * headings in the csv file.
          */
 		function loadCSVData(csvAddress){
@@ -284,59 +284,60 @@ requirejs(['./src/WorldWind',
 			});
 			return csvData;
 		}
-		
+
 		/**
 		 * Loads weather stations CSV Data Array into Array of Weather Stations
-		 * @param {DataArray} csvData contains the weather station location and 
+		 * @param {DataArray} csvData contains the weather station location and
 		 * details.
 		 * @returns {Array<GlobalDataPoint>} A datastructure that maps a value
 		 * to a location.
 		 */
-		
+
 		function loadWeatherStation(csvData) {
 			var i = 0;
 			var temp = [];
 			for(i = 0; i < csvData.values.length; i++) {
 				temp.push(new GlobalDataPoint(csvData.values[i].stationName,
-					csvData.values[i].lat, csvData.values[i].lon, {icon_code: 
-					'push-pin-yellow',
+					csvData.values[i].lat, csvData.values[i].lon, {icon_code:
+					'',
 					type: 'Weather Station'}));
 			}
 			return temp;
 		}
-		
+
 		/**
 		 * Loads the weather station layer
 		 * @param {WorldWindow} wwd is the  world window of the globe
-		 * @param {Array<DataLayer>} weatherDataArray is 
+		 * @param {Array<DataLayer>} weatherDataArray is
 		 * an array containing the WMS Layers that needs to be loaded
 		 */
-		 
+
 		function loadWeatherLayer(wwd, weatherDataArray) {
 			var weatherLayer = new DataLayer('Weather Station');
 			var weatherData = loadWeatherStation(weatherDataArray);
-			weatherLayer.loadFlags(weatherData, 'images/pushpins/', '.png',
+			weatherLayer.loadFlags(weatherData, 'images/sun', '.png',
 				null, null);
+			console.log(weatherLayer);
 			wwd.addLayer(weatherLayer.layer);
 		}
-		
+
 		/**
          * Loads country CSV Data Array into Array of Countries
-		 * @param {DataArray} countryDataArray DataArray that contains data of 
+		 * @param {DataArray} countryDataArray DataArray that contains data of
 		 * where the countries are located (centre-based).
-         * @returns {Array} temp is an array containing all 
+         * @returns {Array} temp is an array containing all
 		 * countries
          */
-		 
+
 		function loadCountries(countryDataArray) {
 			var i = 0;
 			var temp = [];
 			for(i = 0; i < countryDataArray.values.length; i++) {
 				temp.push(new GlobalDataPoint(countryDataArray.values[i].country,
-					countryDataArray.values[i].lat, 
-					countryDataArray.values[i].lon, {code_2: 
-						countryDataArray.values[i].code2, 
-						code_3: countryDataArray.values[i].code3, 
+					countryDataArray.values[i].lat,
+					countryDataArray.values[i].lon, {code_2:
+						countryDataArray.values[i].code2,
+						code_3: countryDataArray.values[i].code3,
 						icon_code: countryDataArray.values[i].iconCode,
 						name: countryDataArray.values[i].country,
 						type: 'Country'}));
@@ -346,7 +347,7 @@ requirejs(['./src/WorldWind',
 		/**
 		 * Loads the country layer
 		 * @param {WorldWindow} wwd is the window to draw the things on.
-		 * @param {DataArray} countryDataArray is 
+		 * @param {DataArray} countryDataArray is
 		 * the data array containing where the flags need to be placed
 		 * @returns {DataLayer} an object containing the layer and other details
 		 * such as configuration of the layer
@@ -390,11 +391,11 @@ requirejs(['./src/WorldWind',
             }
             return data;
         }
-		
-		
+
+
         /**
          * Generates the html for the weather search
-         * @param {DataArray} countryDataArray of data containing the country 
+         * @param {DataArray} countryDataArray of data containing the country
 		 * codes to be loaded onto the HTML
          */
         function generateWeatherHTML(countryDataArray) {
@@ -417,7 +418,7 @@ requirejs(['./src/WorldWind',
 			weatherHTML += '<div id="searchDetails"></div>'
             $('#weather').append(weatherHTML);
         }
-		
+
         /**
          * Provides functionality to the weather button. (Hardcoded API Key)
          */
@@ -477,9 +478,9 @@ requirejs(['./src/WorldWind',
                 })
             });
         }
-	
+
 		/**
-		 * Checks if the tab should be displayed. Also adds sensors to create 
+		 * Checks if the tab should be displayed. Also adds sensors to create
 		 * readjusting graphs.
 		 */
         function checkTabs() {
@@ -580,15 +581,15 @@ requirejs(['./src/WorldWind',
 				minWidth: 280
 			});
 		})();
-		
+
 		/**
 		 * Gives functionality to the WMST buttons associated with the layers
-		 * the part which lets the controls to be visible and turning on the 
+		 * the part which lets the controls to be visible and turning on the
 		 * the layer on and off
 		 * @param {number} layerNumber shows which layer is associated
 		 * @param {Layer} layer The layer that will be toggled on and off
 		 */
-		function giveWMSTLayersFunctionality(layerNumber, layer) {				
+		function giveWMSTLayersFunctionality(layerNumber, layer) {
 			$('#layerToggle' + layerNumber).click(function() {
 				var buttonNumber = this.id.slice('layerToggle'.length);
 				layer.enabled =
@@ -607,16 +608,16 @@ requirejs(['./src/WorldWind',
 					$(layerControlList[k]).toggle();
 				}
 			});
-		} 
-		 
+		}
+
 		/**
          * preloads WMST layers
          *
          * @param {WorldWind} wwd - worldwindow
          * @param {LayerManager} layerManager - layerManager from layerManager.js
-		 * @param {LayerPoint} layerPoint - 
+		 * @param {LayerPoint} layerPoint -
 		 * The layer itself with other details to display
-		 * @param {number} layerNumber - the number of the layer 
+		 * @param {number} layerNumber - the number of the layer
 		 * inserted for control purposes
 		 * @returns {WmtsLayer} The WMST Layer that has just been loaded
          */
@@ -633,7 +634,7 @@ requirejs(['./src/WorldWind',
 
 				// Form a configuration object from the
 				// WmsLayerCapability object
-				var wmsConfig = 
+				var wmsConfig =
 					WorldWind.WmsLayer.formLayerConfiguration(wmsLayerCapabilities);
 				// Modify the configuration objects title property to a
 				// more user friendly title
@@ -672,14 +673,14 @@ requirejs(['./src/WorldWind',
                     " document: " + text + " exception: " + exception);
             };
             $.get(layerPoint.address).done(createWMTSLayer).fail(logError);
-        }		
+        }
         /**
          * This function generates the HTML first then supplies functionality
          * Given a layerName and its layernumber, generate a layer control block
          *
          * @param {WorldWindow} wwd - world window
          * @param {Object} wmsConfig - object containing how layer should look
-         * @param {WmsLayerCapabilities} wmsLayerCapabilities - 
+         * @param {WmsLayerCapabilities} wmsLayerCapabilities -
 		 * object representing what the wmslayer can do
          * @param {String} layerName - name of layer
          * @param {Number} layerNumber - number of layer in list
@@ -723,7 +724,7 @@ requirejs(['./src/WorldWind',
          *
          * @param {Object} wmsLayerCapabilities - object representing what the wms layer
 		 * can do
-         * @returns {String} contains the HTML to generate 
+         * @returns {String} contains the HTML to generate
          */
         function generateLegend(wmsLayerCapabilities) {
 
@@ -839,7 +840,7 @@ requirejs(['./src/WorldWind',
                 }
             });
         }
-		
+
         /**
          * Generates time HTML control for specified layer
          *
@@ -937,7 +938,7 @@ requirejs(['./src/WorldWind',
                         wmsConfig.timeSequences[segmentNumber].getTimeForScale(timeNumber);
             });
         }
-		
+
         /**
          * Searches for a layer given name and returns the layer object
          *
@@ -992,7 +993,7 @@ requirejs(['./src/WorldWind',
                 });
             }
         }
-		
+
 		/**
 		 * @param {Array<DataArray>}. Contains an array of DataArray to be
 		 * used to generated the HTML of the country tab.
@@ -1003,13 +1004,13 @@ requirejs(['./src/WorldWind',
 			var i = 0;
 			for(i = 0; i < buttonDataArray.length; i++) {
 				countryHTML += '<button class="btn-info" id="spawn' +
-				buttonDataArray[i].options.HTML_ID + '" >' + 
-				'Show ' + buttonDataArray[i].options.HTML_Label  + 
-				'</button>'; 
+				buttonDataArray[i].options.HTML_ID + '" >' +
+				'Show ' + buttonDataArray[i].options.HTML_Label  +
+				'</button>';
 			}
             return countryHTML;
 		}
-		
+
 		/**
 		 * @param {Array<DataArray>} Contains the details of what needs to
 		 * shown for the HTML.
@@ -1020,22 +1021,22 @@ requirejs(['./src/WorldWind',
 			var buttonNames = [];
 			var i = 0;
 			for(i = 0; i < buttonDataArray.length; i++) {
-				var tempButton = $('#spawn' + 
+				var tempButton = $('#spawn' +
 					buttonDataArray[i].options.HTML_ID).button();
 				buttonNames.push('spawn' + buttonDataArray[i].options.HTML_ID);
 				tempButton.on('click', function() {
 					buttonAreaHTML.html('');
 					var idNumber = buttonNames.indexOf(this.id);
 					buttonAreaHTML.html(
-						generateDataButtons(buttonDataArray[idNumber], 
+						generateDataButtons(buttonDataArray[idNumber],
 						countryCode, idNumber));
-					giveDataButtonsFunctionality(buttonAreaHTML, 
+					giveDataButtonsFunctionality(buttonAreaHTML,
 						buttonDataArray[idNumber],
 						countryCode, idNumber);
 				});
 			}
         }
-		
+
 		/**
 		 * @param {string} The name of the title for the graph.
 		 * @param {secondName} The other part of the title.
@@ -1043,7 +1044,7 @@ requirejs(['./src/WorldWind',
 		 * @param {string} The ID to place the graph
 		 * @param {integer} Determine whether to accomodate for a subplot or not
 		 */
-		
+
         function plotScatter(titleName, secondName, inputData, htmlID, mode) {
             //Filter the input data, we may get some blanks
             var filteredData = (new DataArray(inputData)).filterBlanks('', {mode: 0});
@@ -1127,14 +1128,14 @@ requirejs(['./src/WorldWind',
                 });
             }
         }
-		
+
 		/**
 		 * @param {DataArray} inputData contains the data to provide the HTML for
 		 * @param {string} countryCode the ISO code of the country for search
 		 * @param {number} mode is to determine what to display
 		 * @returns {String} the html for data buttons
 		 */
-        function generateDataButtons(inputData, 
+        function generateDataButtons(inputData,
 			countryCode, mode) {
             //Based on the input data, generate the buttons/html
             //Mode dictates what to call the title or search bar
@@ -1142,11 +1143,11 @@ requirejs(['./src/WorldWind',
 			dataHTML += '<h4>' + inputData.options.HTML_Label + '</h4>' +
 						'<input type="text" class="form-control" id="' +
 						'searchinput" placeholder="Search for datasets.."' +
-						' title="Search for datasets..">';				
+						' title="Search for datasets..">';
 			dataHTML += '<input type="text" class="form-control"' +
 				' id="amount" placeholder="How many of the biggest ' +
-				inputData.options.searchName 
-				+ '" title="Search for datasets..">';			
+				inputData.options.searchName
+				+ '" title="Search for datasets..">';
             //Find the appropiate data point to use for the buttons
             var dataPoint = (inputData.search(countryCode, 'code3'))[0];
 			console.log(dataPoint);
@@ -1154,7 +1155,7 @@ requirejs(['./src/WorldWind',
             if (dataPoint != 0) {
 				dataHTML += '<ul id="myUL">';
 				dataHTML += '<button class="btn-info"id="allButton">' +
-								'Graph Specified # top of ' + 
+								'Graph Specified # top of ' +
 								inputData.options.HTML_Label + '</button>';
                 var i = 0;
                 dataHTML += '<br><button class="btn-info" style="display:none" id="toggleLegend"' +
@@ -1198,7 +1199,7 @@ requirejs(['./src/WorldWind',
             }
             return dataHTML;
         }
-		
+
 		/**
 		 * @param {string} detailsHTML is the HTML that contains the buttons
 		 * @param {DataArray} inputData is the data to use for plotting
@@ -1277,7 +1278,7 @@ requirejs(['./src/WorldWind',
                         setTimeout(function(){ $('#messagePoint'+
                             buttonNumber).html('')}, 5000);
                     });
-			
+
                     if(inputData.options.definitions) {
                         var definitionHTML = $('#definitionNumber'
                             + i).button();
@@ -1292,7 +1293,7 @@ requirejs(['./src/WorldWind',
                                 ' Definition for ').length);
 							console.log(cropName);
                             //Do a CSV search
-                            var description = 
+                            var description =
 								(inputData.options.definitions.search(cropName,'Item'))[0].Description;
 
                             $('#messagePoint' +buttonNumber).html(description);
@@ -1330,7 +1331,7 @@ requirejs(['./src/WorldWind',
                             +$(newList[i]).attr('id')+'">' +
                             $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData, 
+                    giveDataButtonsFunctionality(detailsHTML, inputData,
 						countryCode, mode);
                 });
                 $('#sortByAverage').off();
@@ -1381,7 +1382,7 @@ requirejs(['./src/WorldWind',
                             ' id="'+$(newList[i]).attr('id')+'">' +
                             $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData, 
+                    giveDataButtonsFunctionality(detailsHTML, inputData,
 						countryCode, mode);
                 });
 
@@ -1406,7 +1407,7 @@ requirejs(['./src/WorldWind',
                         }
                     }
                 });
-				
+
                 //Assign functionality to the allButton
                 var allButtonHTML = $('#allButton').button();
                 //Remember in the case of regiving functionality, gotta remove
@@ -1432,10 +1433,10 @@ requirejs(['./src/WorldWind',
 								subDataPointArray.push(
 								(new DataArray(inputData.options.subData[j]).search(countryCode, 'code3'))[0]);
 							}
-							
+
 							createSubPlot(subDataPointArray, 'allGraph');
 						}
-						
+
                     }
 					$('#toggleLegend').toggle();
                 });
@@ -1458,11 +1459,11 @@ requirejs(['./src/WorldWind',
                 });
 			}
 		}
-		
+
 		/**
 		 * Generates the buttons for the station.
 		 * @param {DataArray} yearlyData data containing yearly precip/temp
-		 * @param {String} stationCode is the name of the station used for search 
+		 * @param {String} stationCode is the name of the station used for search
 		 * @returns {String} the html for the buttons
 		 */
 		function generateStationButtons(yearlyData, stationCode) {
@@ -1474,7 +1475,7 @@ requirejs(['./src/WorldWind',
             if (dataPoint != 0) {
 				dataHTML += '<ul id="myUL">';
 				dataHTML += '<button class="btn-info"id="allButtonStation">' +
-								'Graph Specified # top of ' + 
+								'Graph Specified # top of ' +
 								yearlyData.options.HTML_Label + '</button>';
 				dataHTML += '<div id="allGraphStation"></div>';
                 var i = 0;
@@ -1513,7 +1514,7 @@ requirejs(['./src/WorldWind',
 		 * @param {Number} placeLon the longitude of the station clicked.
 		 * @param {DataArray} countryData contains the code of all the countries
 		 */
-		function generateStationTab(buttonDataArray, stationData, placeLat, 
+		function generateStationTab(buttonDataArray, stationData, placeLat,
 				placeLon, countryData) {
 			//Slow but usable
 			var inLat = stationData.search(placeLat, 'lat');
@@ -1541,25 +1542,25 @@ requirejs(['./src/WorldWind',
 				'target="_blank">Download Raw Atmosphere' +
 				' Data (Fluxnet Account Required)</a></button>';
 			detailsHTML += generateStationButtons(buttonDataArray[0], dataPoint.stationName);
-			details.html(detailsHTML);	
-			
+			details.html(detailsHTML);
+
 			//2 letter code
 			var ccode2 = dataPoint.stationName.slice(0,2);
 			var ccode3 = (countryData.search(ccode2, 'code2'))[0].code3
-			
+
 			giveStationButtonsFunctionality(buttonDataArray[0], dataPoint.stationName, ccode3);
 			displayTab('station');
 		}
-		
+
 		/**
 		 * Gives the recently generated station buttons functionality.
-		 * @param {DataArray} atmoData contains the atmospheric data of all 
-		 * stations. 
+		 * @param {DataArray} atmoData contains the atmospheric data of all
+		 * stations.
 		 * @param {String} stationName is the name of the selected station
-		 * @param {String} countryCode is the country that the station is 
+		 * @param {String} countryCode is the country that the station is
 		 * associated with
 		 */
-		function giveStationButtonsFunctionality(atmoData, stationName, 
+		function giveStationButtonsFunctionality(atmoData, stationName,
 			countryCode) {
 			var atmoDataPoint = (atmoData.search(stationName, 'code3'))[0];
 			console.log(atmoDataPoint);
@@ -1596,7 +1597,7 @@ requirejs(['./src/WorldWind',
                         var buttonNumber = buttonID.slice(
                             'combineButtonStation'.length);
                         //Add to the graph
-                        plotScatter(atmoDataPoint.dataValues[buttonNumber].typeName, 
+                        plotScatter(atmoDataPoint.dataValues[buttonNumber].typeName,
 									atmoDataPoint.code3,
                                     atmoDataPoint.dataValues[buttonNumber].timeValues,
                                     'multiGraph', 1);
@@ -1675,16 +1676,16 @@ requirejs(['./src/WorldWind',
                 });
 			}
 		}
-		
+
 		/**
-		 * @param {Array<DataArray>} buttonDataArray 
+		 * @param {Array<DataArray>} buttonDataArray
 		 * is an array of data to be used for tab generation
-		 * @param {DataArray} countryData contains the country location to 
+		 * @param {DataArray} countryData contains the country location to
 		 * determine what has been clicked
 		 * @param {Number} placeLat The latitude of the click
 		 * @param {Number} placeLon  longitide of the click
 		 */
-		
+
 		function generateCountryTab(buttonDataArray, countryData, placeLat, placeLon) {
 			//Slow but usable
 			console.log(countryData);
@@ -1702,7 +1703,7 @@ requirejs(['./src/WorldWind',
 					}
 				}
 			}
-			
+
 			var details = $("#country");
 			var detailsHTML = '<h4>Country Details</h4>';
 
@@ -1718,17 +1719,17 @@ requirejs(['./src/WorldWind',
 			//Get the agriculture data
 			detailsHTML += generateCountryButtons(buttonDataArray);
 			detailsHTML += '<div id="buttonArea"></div>';
-			details.html(detailsHTML);		
+			details.html(detailsHTML);
 			giveCountryButtonsFunctionality(buttonDataArray, dataPoint.code3);
 			displayTab('country');
 		}
 		/**
 		 * Gives funcitonality to the geoComparison tab
 		 * @param {DataArray} agriData the data to be placed on the geo comparison
-		 * @param {Array<Object>} geoJSONData the array containing the 
+		 * @param {Array<Object>} geoJSONData the array containing the
 		 * geoJSONData of borderStyle
 		 * @param {WorldWindow} wwd, The WorldWind interface
-		 * @param {LayerManager} layerManager, the layer manager to modify 
+		 * @param {LayerManager} layerManager, the layer manager to modify
 		 * after creating borders
 		 */
 		function giveGeoComparisonFunctionality(agriData, geoJSONData, wwd,
@@ -1754,7 +1755,7 @@ requirejs(['./src/WorldWind',
 				//console.log(newData);
 				$('#comp').html('');
 				generateGeoComparisonButton(newData);
-				giveGeoComparisonFunctionality(newData, geoJSONData, wwd, 
+				giveGeoComparisonFunctionality(newData, geoJSONData, wwd,
 						layerManager);
 			})
             sliderHTML.on('slide', function(event, ui) {
@@ -1826,7 +1827,7 @@ requirejs(['./src/WorldWind',
 							l--;
 						}
                     }
-					
+
 					var allValues = [];
                     if((currentLayerName != buttonName) || (previousYear
                         != sliderValue)){
@@ -1870,7 +1871,7 @@ requirejs(['./src/WorldWind',
 						allValues.sort(function(a,b) {
 							return b.value - a.value;
 						});
-						
+
 						wwd.addLayer(createColumns(allValues));
 						layerManager.synchronizeLayerList();
 						//get the top 10
@@ -1944,7 +1945,7 @@ requirejs(['./src/WorldWind',
 		/**
 		 * @param {DataArray} subData The array which acts a subgraph for the current
 		 * plot.
-		 * @param {String} htmlID The string containing the ID of the 
+		 * @param {String} htmlID The string containing the ID of the
 		 * graph placement
 		 */
         function createSubPlot(subData, htmlID) {
@@ -1960,7 +1961,7 @@ requirejs(['./src/WorldWind',
 					totalLength += subData[i].dataValues.length;
 				}
 			}
-			
+
             var incAmounts = (0.5/(totalLength + 1)).toFixed(2);
             newLayout['yaxis'] = {domain: [0, 0.5], title: ''};
             newLayout['yaxis2'] = {domain: [0, 0.5], side: 'right', title:
@@ -1999,9 +2000,9 @@ requirejs(['./src/WorldWind',
 						if(totalCount % 2) {
 							plotSide = 'left';
 						} else {
-							plotSide = 'right'; 
+							plotSide = 'right';
 						}
-						
+
 						newLayout['yaxis' + (totalCount)] = {domain: [lowDomain, highDomain
 							- 0.01], title: yTitle, side: plotSide};
 						}
@@ -2024,7 +2025,7 @@ requirejs(['./src/WorldWind',
                 Plotly.Plots.resize(gd);
             });
         }
-		
+
 		/**
 		 * The stack is the top X produced.
 		 * @param {DataArray} inputData the data to be used
@@ -2036,7 +2037,7 @@ requirejs(['./src/WorldWind',
             var filteredDataSet = [];
             for(i = 0; i < inputData.dataValues.length; i++) {
 				var tempData = ((new DataArray(inputData.dataValues[i].timeValues)).filterBlanks('', {mode: 1, value: 0}));
-				
+
                 filteredDataSet.push(tempData);
             }
             var xValuesSet = [];
@@ -2069,7 +2070,7 @@ requirejs(['./src/WorldWind',
                 var tempValue = 0;
                 for(j = 0; j < filteredDataSet.length; j++) {
                     tempAmounts.push(parseFloat(filteredDataSet[j][i].value));
-					
+
                     tempValue += parseFloat(filteredDataSet[j][i].value);
                 }
                 totalAmounts.push(tempValue);
@@ -2179,12 +2180,12 @@ requirejs(['./src/WorldWind',
             new ResizeSensor($('#' + htmlID), function() {
                 Plotly.Plots.resize(gd);
             });
-        }		
+        }
 
         /**
          * Generates the html for geo location comparison
          *
-         * @param {DataArray} data contains titles to show what data can 
+         * @param {DataArray} data contains titles to show what data can
 		 * be displayed
          */
         function generateGeoComparisonButton(data) {
@@ -2274,12 +2275,12 @@ requirejs(['./src/WorldWind',
             }
             return csvData;
         }
-		
+
 		/**
 		 * loads the file for geoJson
-		 * @param {string} fileName the location of the file 
+		 * @param {string} fileName the location of the file
 		 * @returns {Array<Object>} loads the data. header based on format
-		 */ 
+		 */
 		function loadFile(fileName) {
 			var output;
 			var request = $.ajax({
@@ -2315,31 +2316,31 @@ requirejs(['./src/WorldWind',
         /**
          * Given a csv data array, convert the segment into objects
          *
-         * @param {Array<Object>} csvData - in the format of id, paramatertype, 
+         * @param {Array<Object>} csvData - in the format of id, paramatertype,
 		 * year1 value,
          * year2 value...
          * @returns {Array<Object>}
          */
         function convertArrayToDataSet(csvData) {
-			/*This is a very tricky object that was created. Basically it is 
+			/*This is a very tricky object that was created. Basically it is
 			an array of what I like to call a dataset. A dataset is an array
-			containing the country name associated and other details. 
+			containing the country name associated and other details.
 			It also contains an array of what I like to call dataValues.
 			DataValues contains the name of the data (e.g. apple production),
 			and another array containing something known as timeValues.
 			Time values simply contain a value and the time associated with it.
-			
+
 			Visualised example of a one-sample array of the return value.
-			[{code3: 'FIN', startTime: 1941, endTime: 2014, 
-				dataValue: [{typeName: 'apple production', 
-					timeValue: [{year: 1941, value: 1000}, 
-						{year: 1942, value: 1001}]}, 
-					typeName: 'banana production', 
-						timeValue: [{year: 1944, value: 2020}, 
+			[{code3: 'FIN', startTime: 1941, endTime: 2014,
+				dataValue: [{typeName: 'apple production',
+					timeValue: [{year: 1941, value: 1000},
+						{year: 1942, value: 1001}]},
+					typeName: 'banana production',
+						timeValue: [{year: 1944, value: 2020},
 						{year: 1946, value: 1997}]]}]
 			*/
-			
-			
+
+
             //Create the temporary object
             var objectList = [];
             var i = 0;
@@ -2400,10 +2401,10 @@ requirejs(['./src/WorldWind',
             }
             return objectList;
         }
-		
+
 		/**
 		 * Creates columns for a geoJSON load
-		 * @param {Array<DataValues>} allValues contains the details of each data point 
+		 * @param {Array<DataValues>} allValues contains the details of each data point
 		 * plotted for a particular geoJSON load
 		 * @returns {RenderableLayer} the coloumn layer generated
 		 */
@@ -2411,7 +2412,7 @@ requirejs(['./src/WorldWind',
 			var i = 0;
 			var polyLayer = new WorldWind.RenderableLayer();
 			polyLayer.displayName = 'Col';
-			
+
 			var tempValues = [];
 			for(i = 0; i < allValues.length; i++) {
 				tempValues.push(allValues[i].value);
@@ -2427,28 +2428,28 @@ requirejs(['./src/WorldWind',
 					return 0;
 				}
 			});
-			
+
 			var mean = ss.mean(tempValues);
 			var sd = ss.standardDeviation(tempValues);
-			
+
 			for(i = 0; i < allValues.length; i++) {
 				//Get the co-ordinates
 				var boundaries = [];
-				var rank = ((tempValues.indexOf(allValues[i].value) + 1) / 
+				var rank = ((tempValues.indexOf(allValues[i].value) + 1) /
 						allValues.length) * 1.5;
-				
+
 				var zScore = ss.zScore(allValues[i].value, mean, sd);
 				boundaries.push(new WorldWind.Position(
-						parseFloat(allValues[i].lat) + 1, parseFloat(allValues[i].lon), Math.pow(10, 
+						parseFloat(allValues[i].lat) + 1, parseFloat(allValues[i].lon), Math.pow(10,
 						rank + 4.5)));
 				boundaries.push(new WorldWind.Position(
-						parseFloat(allValues[i].lat) + 1,  parseFloat(allValues[i].lon) + 0.5, Math.pow(10, 
+						parseFloat(allValues[i].lat) + 1,  parseFloat(allValues[i].lon) + 0.5, Math.pow(10,
 						rank + 4.5)));
 				boundaries.push(new WorldWind.Position(
-						parseFloat(allValues[i].lat) + 1.5,  parseFloat(allValues[i].lon) + 0.5, Math.pow(10, 
+						parseFloat(allValues[i].lat) + 1.5,  parseFloat(allValues[i].lon) + 0.5, Math.pow(10,
 						rank + 4.5)));
 				boundaries.push(new WorldWind.Position(
-						parseFloat(allValues[i].lat) + 1.5, parseFloat(allValues[i].lon), Math.pow(10, 
+						parseFloat(allValues[i].lat) + 1.5, parseFloat(allValues[i].lon), Math.pow(10,
 						rank + 4.5)));
 				console.log(boundaries);
 				//Create a temporary polygon
@@ -2468,9 +2469,9 @@ requirejs(['./src/WorldWind',
 				polygon.highlightAttributes = highlightAttributes;
 
 				polyLayer.addRenderable(polygon);
-				
+
 				//Add the geo text
-				var geoText = new WorldWind.GeographicText(boundaries[0], 
+				var geoText = new WorldWind.GeographicText(boundaries[0],
 						'' + allValues[i].value);
 				var geoTextAttr = new WorldWind.TextAttributes(null);
 				geoTextAttr.color = WorldWind.Color.CYAN;
@@ -2484,7 +2485,7 @@ requirejs(['./src/WorldWind',
 		 * Displays the desired tab and hides the rest
 		 *@param {string} tabName, the name of the tab to show
 		 */
-		
+
 		function displayTab(tabName) {
 			var otherTab = $("#layers");
 			var otherTab2 = $("#graphs");
@@ -2493,8 +2494,8 @@ requirejs(['./src/WorldWind',
 			var otherTab5 = $("#wms");
 			var otherTab6 = $("#weather");
 			var otherTab7 = $("#view");
-			var allTabs = [$("#layers"), $("#graphs"), $("#station"), 
-				$("#comp"), $("#wms"), $("#weather"), $("#view"), 
+			var allTabs = [$("#layers"), $("#graphs"), $("#station"),
+				$("#comp"), $("#wms"), $("#weather"), $("#view"),
 				$('#country')];
 			var i = 0;
 			for(i = 0; i < allTabs.length; i++) {
@@ -2511,15 +2512,15 @@ requirejs(['./src/WorldWind',
 			$('.glyphicon-eye-open').css('color', 'white');
 			$('.glyphicon-flag').css('color', 'lightgreen');
 
-			$('.resizable').show();			
+			$('.resizable').show();
 		}
-		
+
         /**
          * Based on z-score get a colour
          * Green means above mean, red means below, alpha is 1 by default
          *
          * @param {Number} zScore - country's z score to determine colour
-		 * @param {Number} mode - determines whether to return as color or 
+		 * @param {Number} mode - determines whether to return as color or
 		 * config file
          * @returns {}
          */
