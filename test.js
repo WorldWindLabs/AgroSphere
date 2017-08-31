@@ -2558,7 +2558,7 @@ requirejs(['./src/WorldWind',
         /**
          * Given a set of gradients and country pairs, colorize the countries
          *
-         * @param {Array} valueCountryPair - country and value together
+         * @param {Array} 	valueCountryPair - country and value together
          * @param {Array<Object>} geoJSONData - country borders
          * @param {string} dataName - name of data type
          * @returns {RenderableLayer} Colourized border shapes
