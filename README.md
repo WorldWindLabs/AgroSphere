@@ -87,9 +87,11 @@ In addition, an alumni from the University of Pennsylvania commented on the app'
 
 ## Future Directions
 
-You are welcome to add more climate and agriculture data using our built-in CSV reading functionality and the WebWorldWind Placemarks feature. For example, drought and flood data can be added and displayed on our app to examine how agriculture has been affected by those particular disasters.
+We are currently in the process of adding more data to the application, as well as a more detailed statistical analysis feature with regression models for possible future predictions of shifts in agriculture or climate.
 
-#### Updated as of 8/23/17
+You are also welcome to add more climate and agriculture data using our built-in CSV reading functionality and the WebWorldWind Placemarks feature. For example, drought and flood data can be added and displayed on our app to examine how agriculture has been affected by those particular disasters.
+
+#### Updated as of 8/31/17
 
 ***
 
