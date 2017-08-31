@@ -667,7 +667,7 @@ requirejs({paths:{
                                 country: csvData[i][j].country};
                     } else if(dataTypes[i] == 'Weather Station') {
                         placemarkAttributes.imageSource =
-                            'images/pushpins/push-pin-yellow.png';
+                            'images/sun.png';
                     }
 
                     placemark.attributes = placemarkAttributes;
@@ -831,7 +831,7 @@ requirejs({paths:{
             }
             return csvData;
         }
-		
+
 		function loadFile(fileName) {
 			var output;
 			var request = $.ajax({
@@ -1139,7 +1139,7 @@ requirejs({paths:{
 				//console.log(newData);
 				$('#comp').html('');
 				generateGeoComparisonButton(newData);
-				giveGeoComparisonFunctionality(newData, geoJSONData, wwd, 
+				giveGeoComparisonFunctionality(newData, geoJSONData, wwd,
 						layerManager);
 			})
             sliderHTML.on('slide', function(event, ui) {
@@ -1381,7 +1381,7 @@ requirejs({paths:{
          * @param agriDataPoint - agriculture data to check
          */
         function giveAtmoButtonsFunctionality(inputData, inputData2, refugeeData
-                                                , stationName, ccode3, 
+                                                , stationName, ccode3,
 												agriDataPoint) {
             var dataPoint = findDataPointStation(inputData, stationName);
             var dataPoint2 = findDataPointStation(inputData2, stationName);
@@ -1531,7 +1531,7 @@ requirejs({paths:{
          * @param codeName - country code name
          * @param mode - type of data like agriculture/livestock/fert...
          */
-        function giveDataButtonsFunctionality(detailsHTML, inputData, 
+        function giveDataButtonsFunctionality(detailsHTML, inputData,
 												refugeeData,
 												agriDef, codeName, mode) {
             //Do a search for all the buttons based on the data
@@ -1660,7 +1660,7 @@ requirejs({paths:{
                             +$(newList[i]).attr('id')+'">' +
                             $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData, 
+                    giveDataButtonsFunctionality(detailsHTML, inputData,
 						refugeeData,
                         agriDef, codeName, mode);
                 });
@@ -1712,7 +1712,7 @@ requirejs({paths:{
                             ' id="'+$(newList[i]).attr('id')+'">' +
                             $(newList[i]).html() + '</div>');
                     }
-                    giveDataButtonsFunctionality(detailsHTML, inputData, 
+                    giveDataButtonsFunctionality(detailsHTML, inputData,
 						refugeeData,
                         agriDef, codeName, mode);
                 });
@@ -1894,7 +1894,7 @@ requirejs({paths:{
 			var i = 0;
 			var polyLayer = new WorldWind.RenderableLayer();
 			polyLayer.displayName = 'Col';
-			
+
 			var tempValues = [];
 			for(i = 0; i < allValues.length; i++) {
 				tempValues.push(allValues[i].value);
@@ -1913,24 +1913,24 @@ requirejs({paths:{
 			console.log(tempValues);
 			var mean = ss.mean(tempValues);
 			var sd = ss.standardDeviation(tempValues);
-			
+
 			for(i = 0; i < allValues.length; i++) {
 				//Get the co-ordinates
 				var boundaries = [];
-				var zScore = ((tempValues.indexOf(allValues[i].value) + 1) / 
+				var zScore = ((tempValues.indexOf(allValues[i].value) + 1) /
 						allValues.length);
-				
+
 				boundaries.push(new WorldWind.Position(
-						allValues[i].lat + 1, allValues[i].lon, Math.pow(10, 
+						allValues[i].lat + 1, allValues[i].lon, Math.pow(10,
 						zScore + 4.5)));
 				boundaries.push(new WorldWind.Position(
-						allValues[i].lat + 1, allValues[i].lon + 0.5, Math.pow(10, 
+						allValues[i].lat + 1, allValues[i].lon + 0.5, Math.pow(10,
 						zScore + 4.5)));
 				boundaries.push(new WorldWind.Position(
-						allValues[i].lat + 1.5, allValues[i].lon + 0.5, Math.pow(10, 
+						allValues[i].lat + 1.5, allValues[i].lon + 0.5, Math.pow(10,
 						zScore + 4.5)));
 				boundaries.push(new WorldWind.Position(
-						allValues[i].lat + 1.5, allValues[i].lon, Math.pow(10, 
+						allValues[i].lat + 1.5, allValues[i].lon, Math.pow(10,
 						zScore + 4.5)));
 				console.log(ss.zScore(allValues[i].value, mean,sd), allValues[i].code3);
 				//Create a temporary polygon
@@ -1950,9 +1950,9 @@ requirejs({paths:{
 				polygon.highlightAttributes = highlightAttributes;
 
 				polyLayer.addRenderable(polygon);
-				
+
 				//Add the geo text
-				var geoText = new WorldWind.GeographicText(boundaries[0], 
+				var geoText = new WorldWind.GeographicText(boundaries[0],
 						'' + allValues[i].value);
 				var geoTextAttr = new WorldWind.TextAttributes(null);
 				geoTextAttr.color = WorldWind.Color.CYAN;
@@ -1961,7 +1961,7 @@ requirejs({paths:{
 				polyLayer.addRenderable(geoText);
 			}
 			return polyLayer;
-		}		
+		}
 
         /**
          * Based on z-score get a colour
@@ -2199,7 +2199,7 @@ requirejs({paths:{
                 //Generate agri culture buttons
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(agriData, codeName,0));
-                giveDataButtonsFunctionality(buttonAreaHTML, agriData, 
+                giveDataButtonsFunctionality(buttonAreaHTML, agriData,
 					refugeeData , agriDef,
                     codeName, 0);
             });
@@ -2207,7 +2207,7 @@ requirejs({paths:{
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(priceData,codeName,1));
                 giveDataButtonsFunctionality(buttonAreaHTML, priceData, agriDef,
-					refugeeData, 
+					refugeeData,
                     codeName, 1);
             });
             liveButtons.on('click', function() {
@@ -2236,14 +2236,14 @@ requirejs({paths:{
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(fertiData,codeName,5));
                 giveDataButtonsFunctionality(buttonAreaHTML, fertiData,
-					refugeeData, 
+					refugeeData,
                     agriDef, codeName, 5);
             });
             yieldButtons.on('click', function() {
                 buttonAreaHTML.html('');
                 buttonAreaHTML.html(generateDataButtons(yieldData,codeName,6));
                 giveDataButtonsFunctionality(buttonAreaHTML, yieldData,
-					refugeeData, 
+					refugeeData,
                     agriDef, codeName, 6);
             });
         }
