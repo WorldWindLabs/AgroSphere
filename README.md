@@ -3,6 +3,10 @@
 # <a href="https://worldwind.arc.nasa.gov/agrosphere/">AgroSphere</a>
 (The a and s in agrosphere are not capitalized! Otherwise, the link will not work!)
 
+#### Expected load time for Desktops and Laptops: INITIAL LOAD: ~20 seconds. SUBSEQUENT LOADS: 10 to 15 seconds.
+
+#### Expected load time for mobile phone: INITIAL LOAD 40 seconds to 1 minute. SUBSEQUENT LOADS: 20 to 25 seconds.
+
 ## <a href="https://worldwind.arc.nasa.gov/agrosphere/about.html">Link to Our Website</a>
 
 ### NASA World Wind is a free, open-source API that provides the tools to create interactive - 
@@ -16,8 +20,6 @@ climate change on agriculture using a large collection of global agriculture and
 <a href="https://www.youtube.com/watch?v=h66dFV3Qu5E&t=102s">
 <img src="images/videotutorial.png"/>
 </a>
-
-Please use Google Chrome, Safari, or Mozilla Firefox to load the application.
 
 ## Introduction
 
@@ -58,9 +60,6 @@ For a guide on how this app may be used in the classroom, click the button below
 
 This is AgroSphere running on mobile. All of the functionalities of the app are available in your hands!
 **(PLEASE run the app on WiFi only and not on your data plan because this app will consume a significant amount of data and it will be slow to load.)**
-
-Expected load time for PC: ~15 seconds.
-Expected load time for mobile phone: ~ 1 minute.
 
 <a href="https://www.youtube.com/watch?v=6Js36zha2Ps">
 <img src="images/mobiledemo.png" />
