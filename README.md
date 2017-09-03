@@ -3,9 +3,13 @@
 # <a href="https://worldwind.arc.nasa.gov/agrosphere/">AgroSphere</a>
 (The a and s in agrosphere are not capitalized! Otherwise, the link will not work!)
 
-#### Expected load time for Desktops and Laptops: INITIAL LOAD: ~20 seconds. SUBSEQUENT LOADS: 10 to 15 seconds.
+#### Expected load time for Desktops and Laptops:
+##### INITIAL LOAD: ~20 seconds.
+##### SUBSEQUENT LOADS: 10 to 15 seconds.
 
-#### Expected load time for mobile phone: INITIAL LOAD 40 seconds to 1 minute. SUBSEQUENT LOADS: 20 to 25 seconds.
+#### Expected load time for mobile phone:
+##### INITIAL LOAD 40 seconds to 1 minute.
+##### SUBSEQUENT LOADS: 20 to 25 seconds.
 
 ## <a href="https://worldwind.arc.nasa.gov/agrosphere/about.html">Link to Our Website</a>
 
