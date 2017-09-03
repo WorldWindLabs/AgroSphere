@@ -68,7 +68,7 @@ body {
 #loading_modal figcaption{
   position:absolute;
   z-index: 1100;
-  margin-left: 45.5%;
+  margin-left: 46.5%;
   margin-top: 35%;
   text-align:center;
 }
@@ -77,7 +77,12 @@ body {
 
 @media only screen and (min-width:1441px and max-width: 1920px) {
     #loading_modal figcaption {
-        margin-left: 47%;
+        margin-left: 49%;
+    }
+}
+@media only screen and (min-width:1440px) {
+    #loading_modal figcaption {
+        margin-left: 45.5%;
     }
 }
 /* ipad pro and ipad */
@@ -169,7 +174,7 @@ body {
 
 /* mobile media queries for tab width*/
 /* ipad pro */
-/* ipad pro media queries commented out 
+/* ipad pro media queries commented out
 @media only screen and (max-width: 1024px) {
     .tab-content {
         width:950px;
