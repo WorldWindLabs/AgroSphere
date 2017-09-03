@@ -8,7 +8,7 @@
 ##### SUBSEQUENT LOADS: 10 to 15 seconds.
 
 #### Expected load time for mobile phone:
-##### INITIAL LOAD 40 seconds to 1 minute.
+##### INITIAL LOAD: 40 seconds to 1 minute.
 ##### SUBSEQUENT LOADS: 20 to 25 seconds.
 
 ## <a href="https://worldwind.arc.nasa.gov/agrosphere/about.html">Link to Our Website</a>
@@ -94,7 +94,7 @@ We are currently in the process of adding more data to the application, as well 
 
 You are also welcome to add more climate and agriculture data using our built-in CSV reading functionality and the WebWorldWind Placemarks feature. For example, drought and flood data can be added and displayed on our app to examine how agriculture has been affected by those particular disasters.
 
-#### Updated as of 8/31/17
+#### Updated as of 9/3/17
 
 ***
 
