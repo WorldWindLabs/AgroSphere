@@ -96,7 +96,7 @@ We are currently in the process of adding more data to the application, as well 
 
 You are also welcome to add more climate and agriculture data using our built-in CSV reading functionality and the WebWorldWind Placemarks feature. For example, drought and flood data can be added and displayed on our app to examine how agriculture has been affected by those particular disasters.
 
-#### Updated as of 9/3/17
+#### Updated as of October 11, 2017
 
 ***
 
