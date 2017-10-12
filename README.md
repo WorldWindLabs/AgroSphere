@@ -13,7 +13,7 @@
 
 ## <a href="https://worldwind.arc.nasa.gov/agrosphere/about.html">Link to Our Website</a>
 
-### NASA World Wind is a free, open-source API that provides the tools to create interactive - 
+### NASA World Wind is a free, open-source API that provides the tools to create interactive
 
 visualizations of the world in 4D, such as satellite tracking and seismic history. The NASA
 World Wind 2017 Intern team has designed an educational web app that visualizes the effects of
@@ -21,11 +21,13 @@ climate change on agriculture using a large collection of global agriculture and
 
 ## Video Tutorial
 
-<a href="https://www.youtube.com/watch?v=h66dFV3Qu5E&t=102s">
+<a href="https://www.youtube.com/watch?v=h66dFV3Qu5E">
 <img src="images/videotutorial.png"/>
 </a>
 
 ## Introduction
+
+AgroSphere is an educational web platform to visualize the effects of climate on agriculture. It contains various types of agriculture data, such as agricultural production, yield, livestock output, fertilizer usage, which can all be compared to climate data such as temperature, precipitation, and carbon dioxide emissions. It is best suited for middle and high school students, and allows users to expolore the data in an easy to use, interactive format. 
 
 The World Wind intern team utilized technologies including HTML5, CSS, and JavaScript to develop our application, incorporating and analyzing spatial data for agriculture and atmosphere. Data in various file formats are organized, analyzed and visualized on the globe. Users can click on the respective weather and nation placemarks for statistical information. This includes details specific to that country’s history for atmosphere and agriculture and for a specified timeframe. Users can also control each dataset on the globe by adjusting opacity, time and other options for comparing crop production versus climate. This web app is intended for use in classrooms by teachers and students, as well as citizens of the world. Children and adults alike will be able to learn about climate issues by visually experiencing the data according to their interests. Users will learn about the effects of weather over time on agriculture, the impact to national economies and much more.
 
