@@ -48,6 +48,11 @@ _Screenshot showing Geo-Comparison apple production data displayed from multiple
 
 For a guide on how this app may be used in the classroom, click the button below. This lesson plan focuses on the use of the app in a larger unit on climate change. It is based on 90-minute classes.
 <a href="AgroSphere_LessonPlan.pdf" target="_blank">Link to the Lesson Plan</a>
+
+## Abstract
+
+Attached is the project abstract of AgroSphere.
+<a href="AgroSphere_Abstract.docx">Download Abstract</a>
                     
 ## Features of AgroSphere
 
