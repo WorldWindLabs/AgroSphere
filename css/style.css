@@ -801,6 +801,7 @@ button:focus, .list-group-item:focus, .btn:focus {
   bottom: 30px;
   right: 110px;
   width: 35%;
+  box-shadow: 2px 2px 2px black;
 }
 
 
