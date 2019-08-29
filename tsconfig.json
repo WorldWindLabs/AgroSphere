@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "moduleResolution": "node",
+      "baseUrl": ".",
+      "target": "es6",
+      "lib": [
+        "dom",
+        "esnext",
+        "es2017"
+      ]
+    }
+  }
+  

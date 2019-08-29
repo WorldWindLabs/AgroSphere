@@ -1,0 +1,25 @@
+{
+  "name": "@johnnguyen1997/agrospherev2",
+  "version": "1.0.0",
+  "description": "AgroSphere revamp",
+  "scripts": {
+    "build": "vue-cli-service build --mode development",
+    "serve": "vue-cli-service serve"
+  },
+  "author": "John Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^5.8.2",
+    "@nasaworldwind/worldwind": "^0.9.0",
+    "vue": "^2.5.21",
+    "vue-class-component": "^6.3.2",
+    "vue-property-decorator": "^7.2.0",
+    "vuetify": "^1.5.14"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-typescript": "^3.7.0",
+    "@vue/cli-service": "^3.0.5",
+    "typescript": "^3.4.5",
+    "vue-template-compiler": "^2.5.17"
+  }
+}
